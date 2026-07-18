@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/handouts"
+public_folder: "/assets/handouts"
+
+collections:
+  - name: "resources"
+    label: "Resources"
+    files:
+      - file: "data/resources.json"
+        label: "Resource Library"
+        name: "resource_library"
+        fields:
+          - label: "Resources"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Audience", name: "audience", widget: "list" }
+              - { label: "Topics", name: "topics", widget: "list" }
+              - { label: "Type", name: "type", widget: "string" }
+              - { label: "File", name: "file", widget: "file" }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false }
