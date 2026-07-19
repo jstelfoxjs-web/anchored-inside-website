@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260719-2">
 </head>
 <body class="home-page">
 <header class="site-header" data-sticky-header>
@@ -55,51 +55,53 @@
     </div>
   </section>
 
-  <section class="section section-soft seasons-showcase reveal-section">
-    <div class="container-wide">
-      <div class="section-heading centered-heading seasons-heading">
-        <div class="eyebrow">Support for every season</div>
-        <h2>Therapy that meets <em>you</em> where you are.</h2>
-        <div class="seasons-ornament" aria-hidden="true"><span></span><b>⚓</b><span></span></div>
-      </div>
-      <div class="audience-grid audience-grid-editorial">
-        <a class="audience-card audience-card-children editorial-card" href="services.html#children" aria-label="Learn about therapy for children">
-          <div class="audience-image-wrap"><img src="assets/images/service-children.png" alt="Young child dressed as a superhero"></div>
-          <div class="audience-card-body">
-            <div class="audience-meta-line"><span class="audience-image-number">01</span><span class="audience-kicker">Play & attachment</span></div>
-            <h3>Children</h3>
-            <p>Play-based and attachment-focused therapy that helps children build safety, emotional language, confidence, and regulation.</p>
-            <span class="audience-link">Learn more <span class="audience-arrow" aria-hidden="true">→</span></span>
-          </div>
-        </a>
-        <a class="audience-card audience-card-teens editorial-card" href="services.html#teens" aria-label="Learn about therapy for teens">
-          <div class="audience-image-wrap"><img src="assets/images/service-teens.png" alt="Teen balancing on a skateboard outdoors"></div>
-          <div class="audience-card-body">
-            <div class="audience-meta-line"><span class="audience-image-number">02</span><span class="audience-kicker">Identity & resilience</span></div>
-            <h3>Teens</h3>
-            <p>A supportive space for identity, anxiety, relationships, emotional intensity, self-trust, and finding their voice.</p>
-            <span class="audience-link">Learn more <span class="audience-arrow" aria-hidden="true">→</span></span>
-          </div>
-        </a>
-        <a class="audience-card audience-card-adults editorial-card" href="services.html#adults" aria-label="Learn about therapy for adults">
-          <div class="audience-image-wrap"><img src="assets/images/service-adults.png" alt="Adult sitting quietly beside a calm lake"></div>
-          <div class="audience-card-body">
-            <div class="audience-meta-line"><span class="audience-image-number">03</span><span class="audience-kicker">Healing & growth</span></div>
-            <h3>Adults</h3>
-            <p>Trauma-informed therapy for anxiety, grief, relationships, life transitions, patterns of disconnection, and personal growth.</p>
-            <span class="audience-link">Learn more <span class="audience-arrow" aria-hidden="true">→</span></span>
-          </div>
-        </a>
-        <a class="audience-card audience-card-families editorial-card" href="services.html#families" aria-label="Learn about therapy for parents and families">
-          <div class="audience-image-wrap"><img src="assets/images/service-families.png" alt="Parent holding a young child at sunset"></div>
-          <div class="audience-card-body">
-            <div class="audience-meta-line"><span class="audience-image-number">04</span><span class="audience-kicker">Connection & repair</span></div>
-            <h3>Parents <em>&</em><br>Families</h3>
-            <p>Practical, values-based support for connection, co-regulation, boundaries, repair, and responding intentionally.</p>
-            <span class="audience-link">Learn more <span class="audience-arrow" aria-hidden="true">→</span></span>
-          </div>
-        </a>
-      </div>
+  <section class="season-editorial" aria-labelledby="season-title">
+    <div class="season-editorial__heading">
+      <div class="season-editorial__eyebrow">Support for every season</div>
+      <h2 id="season-title">Therapy that meets <em>you</em> where you are.</h2>
+      <div class="season-editorial__ornament" aria-hidden="true"><span></span><b>⚓</b><span></span></div>
+    </div>
+
+    <div class="season-panels">
+      <a class="season-panel season-panel--children" href="services.html#children" aria-label="Learn about therapy for children">
+        <div class="season-panel__image"><img src="assets/images/service-children.png" alt="Young child dressed as a superhero"></div>
+        <div class="season-panel__content">
+          <div class="season-panel__meta"><span class="season-panel__number">01</span><span class="season-panel__label">Play &amp; attachment</span></div>
+          <h3>Children</h3>
+          <p>Play-based and attachment-focused therapy that helps children build safety, emotional language, confidence, and regulation.</p>
+          <span class="season-panel__link">Learn more <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+
+      <a class="season-panel season-panel--teens" href="services.html#teens" aria-label="Learn about therapy for teens">
+        <div class="season-panel__image"><img src="assets/images/service-teens.png" alt="Teen balancing on a skateboard outdoors"></div>
+        <div class="season-panel__content">
+          <div class="season-panel__meta"><span class="season-panel__number">02</span><span class="season-panel__label">Identity &amp; resilience</span></div>
+          <h3>Teens</h3>
+          <p>A supportive space for identity, anxiety, relationships, emotional intensity, self-trust, and finding their voice.</p>
+          <span class="season-panel__link">Learn more <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+
+      <a class="season-panel season-panel--adults" href="services.html#adults" aria-label="Learn about therapy for adults">
+        <div class="season-panel__image"><img src="assets/images/service-adults.png" alt="Adult sitting quietly beside a calm lake"></div>
+        <div class="season-panel__content">
+          <div class="season-panel__meta"><span class="season-panel__number">03</span><span class="season-panel__label">Healing &amp; growth</span></div>
+          <h3>Adults</h3>
+          <p>Trauma-informed therapy for anxiety, grief, relationships, life transitions, patterns of disconnection, and personal growth.</p>
+          <span class="season-panel__link">Learn more <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+
+      <a class="season-panel season-panel--families" href="services.html#families" aria-label="Learn about therapy for parents and families">
+        <div class="season-panel__image"><img src="assets/images/service-families.png" alt="Parent holding a young child at sunset"></div>
+        <div class="season-panel__content">
+          <div class="season-panel__meta"><span class="season-panel__number">04</span><span class="season-panel__label">Connection &amp; repair</span></div>
+          <h3>Parents &amp;<br>Families</h3>
+          <p>Practical, values-based support for connection, co-regulation, boundaries, repair, and responding intentionally.</p>
+          <span class="season-panel__link">Learn more <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
     </div>
   </section>
 
