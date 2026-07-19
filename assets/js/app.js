@@ -262,3 +262,23 @@ document.querySelectorAll('[data-topic-shortcut]').forEach(button => {
     toolkitJumpToLibrary();
   });
 });
+
+// Subtle entrance motion for the Toolbox. Respects reduced-motion preferences.
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  const observeReveals = () => document.querySelectorAll('.reveal-section,.editorial-card,.resource-card').forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i % 4, 3) * 70}ms`;
+    revealObserver.observe(el);
+  });
+  observeReveals();
+  new MutationObserver(observeReveals).observe(document.getElementById('resource-grid') || document.body, { childList: true });
+} else {
+  document.querySelectorAll('.reveal-section,.editorial-card,.resource-card').forEach(el => el.classList.add('is-visible'));
+}
