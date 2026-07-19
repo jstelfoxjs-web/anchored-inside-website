@@ -49,7 +49,7 @@ p{margin:.2em 0 1em}
 .path::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,39,45,.9),rgba(10,39,45,.06));z-index:0}
 .path>*{position:relative;z-index:1}
 .path.parents{background-image:url("../handouts/anchoring-family.jpeg")}
-.path.individuals{background-image:url("../images/homepage-hero-coast.jpg")}
+.path.individuals{background-image:url("../images/homepage-hero-crisp.svg")}
 .path.teens{background-image:url("../handouts/upstairs-downstairs-brain.jpeg")}
 .path.professionals{background-image:url("../handouts/structure.jpeg")}
 .split-quote{background:var(--ocean-deep);color:#fff;padding:52px;border-radius:34px}
@@ -219,7 +219,7 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
   background-image:
     linear-gradient(90deg,rgba(7,28,34,.73) 0%,rgba(7,28,34,.59) 45%,rgba(7,28,34,.36) 72%,rgba(7,28,34,.45) 100%),
     linear-gradient(0deg,rgba(6,24,30,.42),rgba(6,24,30,.04) 48%),
-    url("../images/homepage-hero-coast.jpg");
+    url("../images/homepage-hero-crisp.svg");
   background-size:cover;
   background-position:center 56%;
   overflow:hidden;
@@ -290,7 +290,7 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
     background-image:
       linear-gradient(90deg,rgba(6,28,34,.84),rgba(6,28,34,.55)),
       linear-gradient(0deg,rgba(6,24,30,.38),rgba(6,24,30,.05)),
-      url("../images/homepage-hero-coast.jpg");
+      url("../images/homepage-hero-crisp.svg");
   }
   .home-page .hero-layout{padding:150px 0 58px}
   .home-page .hero-message h1{font-size:clamp(2.65rem,13vw,3.75rem);line-height:1.02}
