@@ -99,3 +99,54 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
  .logo{height:52px;max-width:230px}
  .hero{min-height:650px;background:linear-gradient(rgba(247,241,233,.9),rgba(247,241,233,.94)),url("../images/hero-coast.jpg") center/cover}
 }
+
+
+/* Homepage polish */
+.hero-lead{font-size:1.2rem;max-width:650px;color:#2d4d53}
+.practice-details{display:flex;flex-wrap:wrap;gap:.55rem 1.2rem;margin:1.35rem 0 0;color:var(--ocean-deep);font-weight:700;font-size:.92rem}
+.practice-details span{display:flex;align-items:center;gap:.45rem}
+.practice-details span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--clay)}
+.intro-section p{font-size:1.06rem;color:#38565c;max-width:670px}
+.home-photo img{aspect-ratio:5/4}
+.text-link{display:inline-flex;align-items:center;gap:.45rem;color:var(--ocean-deep);font-weight:800;text-decoration:none;border-bottom:1px solid rgba(21,63,72,.28);padding-bottom:.18rem}
+.text-link:hover{border-bottom-color:var(--ocean-deep)}
+.section-heading{max-width:760px;margin-bottom:40px}
+.section-heading p{font-size:1.08rem;color:var(--muted)}
+.centered-heading{text-align:center;margin-left:auto;margin-right:auto}
+.audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.audience-card{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:22px;padding:28px;min-height:285px}
+.audience-card h3{font-size:2rem}
+.audience-card p{color:#526b70}
+.audience-number{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.35rem;color:var(--clay);font-weight:600;margin-bottom:28px}
+.center-action{text-align:center;margin-top:32px}
+.approach-grid{align-items:stretch}
+.approach-grid>div{display:flex;flex-direction:column;justify-content:center}
+.light-eyebrow{color:#b9ddd7}
+.btn-light{background:#fff;color:var(--ocean-deep)}
+.resource-feature p{font-size:1.08rem;color:#d8e8e5;max-width:640px}
+.resource-preview{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.preview-card{min-height:150px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);border-radius:20px;padding:24px;display:flex;align-items:flex-end;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.6rem;font-weight:600}
+.final-cta{padding-top:80px;padding-bottom:80px}
+.cta-panel{background:linear-gradient(135deg,var(--sand-soft),var(--foam));border:1px solid var(--line);border-radius:34px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.cta-panel h2{font-size:clamp(2.4rem,4.6vw,4.2rem)}
+.cta-panel p{max-width:720px;color:#4f696e}
+.btn:hover{transform:translateY(-1px)}
+.btn{transition:transform .2s ease,box-shadow .2s ease}
+.btn-primary:hover{box-shadow:0 10px 25px rgba(21,63,72,.22)}
+@media(max-width:1050px){.audience-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:920px){.cta-panel{grid-template-columns:1fr}.resource-preview{margin-top:10px}}
+@media(max-width:640px){
+ .practice-details{display:grid;gap:.45rem}
+ .audience-grid{grid-template-columns:1fr}
+ .audience-card{min-height:auto}
+ .resource-preview{grid-template-columns:1fr}
+ .preview-card{min-height:110px}
+ .cta-panel{padding:30px 24px}
+ .hero-copy{padding:66px 0}
+}
+
+/* Jessica portrait and homepage details */
+.portrait-photo img{aspect-ratio:4/5;object-position:center 32%}
+.signature-line{margin-top:1.35rem;padding-left:1rem;border-left:3px solid var(--sand);color:var(--ocean-deep)!important}
+.inline-links{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.15rem}
+@media(max-width:640px){.inline-links{display:grid;gap:.8rem}}
