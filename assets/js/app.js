@@ -165,3 +165,30 @@ function updateStickyHeader() {
 }
 updateStickyHeader();
 window.addEventListener('scroll', updateStickyHeader, { passive: true });
+
+
+// Ocean Toolkit shortcut controls
+function toolkitJumpToLibrary() {
+  document.getElementById('library')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.querySelectorAll('[data-audience-shortcut]').forEach(button => {
+  button.addEventListener('click', () => {
+    setAudience(button.dataset.audienceShortcut);
+    toolkitJumpToLibrary();
+  });
+});
+document.querySelectorAll('[data-topic-shortcut]').forEach(button => {
+  button.addEventListener('click', () => {
+    const selected = button.dataset.topicShortcut;
+    const optionExists = topic && [...topic.options].some(option => option.value === selected);
+    if (optionExists) {
+      topic.value = selected;
+      if (search) search.value = '';
+    } else {
+      if (topic) topic.value = 'all';
+      if (search) search.value = selected;
+    }
+    render(resources);
+    toolkitJumpToLibrary();
+  });
+});

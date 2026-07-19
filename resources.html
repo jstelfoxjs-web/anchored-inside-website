@@ -28,9 +28,10 @@
 </header>
 
 <main>
-  <section class="toolkit-hero">
+  <section class="toolkit-hero ocean-toolkit-hero">
+    <div class="toolkit-hero-overlay"></div>
     <div class="container toolkit-hero-grid">
-      <div>
+      <div class="toolkit-hero-copy">
         <div class="eyebrow">Anchored Inside</div>
         <h1>The Toolkit</h1>
         <p class="toolkit-lead">Practical tools for healing, growth, and connection.</p>
@@ -45,37 +46,95 @@
         <div class="popular-searches" aria-label="Popular searches">
           <span>Popular:</span>
           <button type="button" data-search="parenting">Parenting</button>
-          <button type="button" data-search="regulation">Regulation</button>
+          <button type="button" data-search="anxiety">Anxiety</button>
+          <button type="button" data-search="trauma">Trauma</button>
           <button type="button" data-search="attachment">Attachment</button>
           <button type="button" data-search="communication">Communication</button>
+          <button type="button" data-search="regulation">Emotion Regulation</button>
         </div>
+      </div>
+    </div>
+    <div class="hero-wave" aria-hidden="true"></div>
+  </section>
+
+  <section class="toolkit-journeys section">
+    <div class="container">
+      <div class="centered-heading">
+        <h2>Explore by Journey</h2>
+        <span class="wave-mark" aria-hidden="true">〜</span>
+      </div>
+      <div class="journey-grid journey-grid-six" aria-label="Browse by journey">
+        <button class="journey-card journey-sprout" type="button" data-topic="all">
+          <span class="journey-art" aria-hidden="true">◡</span>
+          <span><strong>Beginning Therapy</strong><small>Tools for getting started.</small><b>→</b></span>
+        </button>
+        <button class="journey-card journey-wave" type="button" data-topic="regulation">
+          <span class="journey-art" aria-hidden="true">≈</span>
+          <span><strong>Navigating Anxiety</strong><small>Find calm and build confidence.</small><b>→</b></span>
+        </button>
+        <button class="journey-card journey-stones" type="button" data-topic="regulation">
+          <span class="journey-art" aria-hidden="true">●</span>
+          <span><strong>Building Emotional Resilience</strong><small>Strengthen skills for daily life.</small><b>→</b></span>
+        </button>
+        <button class="journey-card journey-leaf" type="button" data-topic="parenting">
+          <span class="journey-art" aria-hidden="true">⌇</span>
+          <span><strong>Parenting with Connection</strong><small>Support your child and your relationship.</small><b>→</b></span>
+        </button>
+        <button class="journey-card journey-sun" type="button" data-topic="trauma">
+          <span class="journey-art" aria-hidden="true">☼</span>
+          <span><strong>Healing from Trauma</strong><small>Gentle tools for healing and safety.</small><b>→</b></span>
+        </button>
+        <button class="journey-card journey-shell" type="button" data-topic="self-compassion">
+          <span class="journey-art" aria-hidden="true">◔</span>
+          <span><strong>Cultivating Self-Compassion</strong><small>Be kind to yourself every day.</small><b>→</b></span>
+        </button>
       </div>
     </div>
   </section>
 
-  <section class="toolkit-explore section">
-    <div class="container">
-      <div class="section-heading toolkit-heading-row">
-        <div>
-          <div class="eyebrow">Find a starting point</div>
-          <h2>Explore the Toolkit</h2>
-          <p>Choose a path below or scroll down to browse every available resource.</p>
+  <section class="toolkit-browse-band">
+    <div class="container browse-band-grid">
+      <div class="browse-column">
+        <h3>Browse by Audience</h3>
+        <div class="browse-link-grid">
+          <button type="button" data-audience-shortcut="teens">Children</button>
+          <button type="button" data-audience-shortcut="parents">Parents</button>
+          <button type="button" data-audience-shortcut="teens">Teens</button>
+          <button type="button" data-audience-shortcut="families">Couples</button>
+          <button type="button" data-audience-shortcut="individuals">Adults</button>
+          <button type="button" data-audience-shortcut="all">Professionals</button>
         </div>
+        <button class="small-pill" type="button" data-audience-shortcut="all">View All</button>
       </div>
+      <div class="browse-column browse-topics">
+        <h3>Browse by Topic</h3>
+        <div class="topic-cloud">
+          <button type="button" data-topic-shortcut="anxiety">Anxiety</button><button type="button" data-topic-shortcut="trauma">Trauma</button><button type="button" data-topic-shortcut="attachment">Attachment</button><button type="button" data-topic-shortcut="regulation">Emotion Regulation</button><button type="button" data-topic-shortcut="self-compassion">Self-Compassion</button><button type="button" data-topic-shortcut="parenting">Parenting</button><button type="button" data-topic-shortcut="connection">Relationships</button><button type="button" data-topic-shortcut="boundaries">Boundaries</button><button type="button" data-topic-shortcut="grief">Grief</button><button type="button" data-topic-shortcut="mindfulness">Mindfulness</button><button type="button" data-topic-shortcut="dbt">DBT Skills</button><button type="button" data-topic-shortcut="act">ACT Skills</button><button type="button" data-topic-shortcut="parts">Parts Work</button><button type="button" data-topic-shortcut="play">Play Therapy</button><button type="button" data-topic-shortcut="communication">Communication</button>
+        </div>
+        <a href="#library" class="text-link">View All Topics</a>
+      </div>
+      <div class="browse-column">
+        <h3>Resource Types</h3>
+        <div class="resource-type-list">
+          <span>▧ Handouts</span><span>◌ Guided Practices</span><span>▤ Worksheets</span><span>♧ Parenting Guides</span><span>✿ Activities</span><span>♡ Relationship Exercises</span><span>▱ Psychoeducation</span><span>▥ Infographics</span>
+        </div>
+        <a href="#library" class="text-link">View All Types</a>
+      </div>
+    </div>
+  </section>
 
-      <div class="journey-grid" aria-label="Browse by journey">
-        <button class="journey-card" type="button" data-topic="all">
-          <span class="journey-icon">✦</span><span><strong>Start Here</strong><small>See the full collection</small></span>
-        </button>
-        <button class="journey-card" type="button" data-topic="regulation">
-          <span class="journey-icon">≈</span><span><strong>Find More Steadiness</strong><small>Regulation and nervous system tools</small></span>
-        </button>
-        <button class="journey-card" type="button" data-topic="parenting">
-          <span class="journey-icon">⌂</span><span><strong>Parent with Connection</strong><small>Practical parenting support</small></span>
-        </button>
-        <button class="journey-card" type="button" data-topic="attachment">
-          <span class="journey-icon">∞</span><span><strong>Strengthen Connection</strong><small>Attachment and relationship tools</small></span>
-        </button>
+  <section class="featured-collections section">
+    <div class="container">
+      <div class="centered-heading">
+        <h2>Featured Collections</h2>
+        <span class="wave-mark" aria-hidden="true">〜</span>
+      </div>
+      <div class="collection-grid">
+        <button type="button" class="collection-card collection-stones" data-topic="all"><span>Featured</span><strong>Starting Therapy</strong><small>A thoughtful place to begin.</small></button>
+        <button type="button" class="collection-card collection-calm" data-topic="regulation"><span>Featured</span><strong>Emotional Regulation</strong><small>Build awareness and manage big feelings.</small></button>
+        <button type="button" class="collection-card collection-parent" data-topic="parenting"><span>Featured</span><strong>Parenting Toolkit</strong><small>Connection-based resources for every stage.</small></button>
+        <button type="button" class="collection-card collection-play" data-topic="play"><span>Featured</span><strong>Play Therapy Activities</strong><small>Engaging tools for children and families.</small></button>
+        <button type="button" class="collection-card collection-compassion" data-topic="self-compassion"><span>Featured</span><strong>Self-Compassion</strong><small>Be gentler with yourself and grow resilience.</small></button>
       </div>
     </div>
   </section>
@@ -83,67 +142,23 @@
   <section class="toolkit-library section section-soft" id="library">
     <div class="container">
       <div class="library-header">
-        <div>
-          <div class="eyebrow">Browse all tools</div>
-          <h2>Build your toolkit.</h2>
-        </div>
+        <div><div class="eyebrow">Browse all tools</div><h2>Build your toolkit.</h2></div>
         <strong id="resource-count" aria-live="polite"></strong>
       </div>
-
       <div class="toolkit-layout">
         <aside class="toolkit-filters" aria-label="Resource filters">
-          <div class="filter-group">
-            <div class="filter-label">Audience</div>
-            <div class="filter-chips" id="audience-chips">
-              <button type="button" class="filter-chip active" data-audience="all">Everyone</button>
-              <button type="button" class="filter-chip" data-audience="parents">Parents</button>
-              <button type="button" class="filter-chip" data-audience="individuals">Adults</button>
-              <button type="button" class="filter-chip" data-audience="teens">Teens</button>
-              <button type="button" class="filter-chip" data-audience="families">Families</button>
-            </div>
-          </div>
-          <div class="filter-group">
-            <label class="filter-label" for="topic-filter">Topic</label>
-            <select id="topic-filter" class="field">
-              <option value="all">All topics</option>
-            </select>
-          </div>
+          <div class="filter-group"><div class="filter-label">Audience</div><div class="filter-chips" id="audience-chips"><button type="button" class="filter-chip active" data-audience="all">Everyone</button><button type="button" class="filter-chip" data-audience="parents">Parents</button><button type="button" class="filter-chip" data-audience="individuals">Adults</button><button type="button" class="filter-chip" data-audience="teens">Teens</button><button type="button" class="filter-chip" data-audience="families">Families</button></div></div>
+          <div class="filter-group"><label class="filter-label" for="topic-filter">Topic</label><select id="topic-filter" class="field"><option value="all">All topics</option></select></div>
           <button class="clear-filters" id="clear-filters" type="button">Clear filters</button>
         </aside>
-
-        <div>
-          <div id="active-filter-note" class="active-filter-note" hidden></div>
-          <div id="resource-grid" class="resource-grid toolkit-resource-grid"></div>
-          <div id="resource-empty" class="resource-empty" hidden>
-            <h3>No tools found</h3>
-            <p>Try a broader search or clear your filters.</p>
-            <button class="btn btn-primary" type="button" data-clear-all>View all tools</button>
-          </div>
-        </div>
+        <div><div id="active-filter-note" class="active-filter-note" hidden></div><div id="resource-grid" class="resource-grid toolkit-resource-grid"></div><div id="resource-empty" class="resource-empty" hidden><h3>No tools found</h3><p>Try a broader search or clear your filters.</p><button class="btn btn-primary" type="button" data-clear-all>View all tools</button></div></div>
       </div>
     </div>
   </section>
 
-  <section class="toolkit-note section">
-    <div class="container toolkit-note-panel">
-      <div>
-        <div class="eyebrow">A gentle note</div>
-        <h2>Tools can support the work. They do not have to replace support.</h2>
-      </div>
-      <p>These resources are educational and are not a substitute for individualized mental health care, diagnosis, or crisis support. Choose what feels useful, move at your own pace, and reach out for professional support when needed.</p>
-    </div>
-  </section>
+  <section class="toolkit-note section"><div class="container toolkit-note-panel"><div><div class="eyebrow">A gentle note</div><h2>Tools can support the work. They do not have to replace support.</h2></div><p>These resources are educational and are not a substitute for individualized mental health care, diagnosis, or crisis support. Choose what feels useful, move at your own pace, and reach out for professional support when needed.</p></div></section>
 
-  <div class="modal" id="resource-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-card toolkit-modal-card">
-      <button class="modal-close" aria-label="Close preview">×</button>
-      <div class="modal-heading">
-        <div class="eyebrow">Toolkit preview</div>
-        <h2 id="modal-title"></h2>
-      </div>
-      <img id="modal-image" alt="">
-    </div>
-  </div>
+  <div class="modal" id="resource-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-card toolkit-modal-card"><button class="modal-close" aria-label="Close preview">×</button><div class="modal-heading"><div class="eyebrow">Toolkit preview</div><h2 id="modal-title"></h2></div><img id="modal-image" alt=""></div></div>
 </main>
 
 <footer>
