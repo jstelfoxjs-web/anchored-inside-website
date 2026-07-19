@@ -950,3 +950,19 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
 @media(prefers-reduced-motion:reduce){
   .home-page .site-header,.home-page .nav-wrap,.home-page .logo,.home-page .nav a{transition:none!important}
 }
+
+/* Remove faint horizontal seam from the blended homepage header */
+.home-page .site-header,
+.home-page .site-header.is-scrolled{
+  border:0 !important;
+  border-bottom:0 !important;
+  outline:0 !important;
+}
+.home-page .site-header:not(.is-scrolled){
+  box-shadow:none !important;
+}
+.home-page .site-header::before,
+.home-page .site-header::after{
+  content:none !important;
+  display:none !important;
+}
