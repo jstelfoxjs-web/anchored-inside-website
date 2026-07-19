@@ -1969,3 +1969,104 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
   .season-panel h3{font-size:55px}
   .season-panel p{font-size:15px;max-width:31ch}
 }
+
+/* ============================================================
+   Calm compact service panels — July 2026
+   Reduces visual density while preserving the editorial layout.
+   ============================================================ */
+.season-editorial{
+  padding:38px 30px 40px;
+}
+.season-editorial__heading{
+  margin-bottom:22px;
+}
+.season-panels{
+  box-shadow:0 12px 28px rgba(39,43,38,.055);
+}
+.season-panel{
+  min-height:640px;
+  transform:none;
+}
+.season-panel__image{
+  height:285px;
+  flex-basis:285px;
+}
+.season-panel__content{
+  min-height:355px;
+  padding:24px 31px 25px;
+}
+.season-panel__content::before{
+  top:-50px;
+  height:76px;
+  border-radius:50% 50% 0 0 / 82% 82% 0 0;
+}
+.season-panel__meta{
+  min-height:31px;
+  margin-bottom:18px;
+}
+.season-panel__number{
+  flex-basis:54px;
+  font-size:37px;
+  line-height:.9;
+}
+.season-panel__label{
+  padding-left:13px;
+  font-size:9.2px;
+  line-height:1.25;
+  letter-spacing:.16em;
+}
+.season-panel h3{
+  margin-bottom:17px;
+  font-size:clamp(44px,2.85vw,58px);
+  line-height:.9;
+  letter-spacing:-.03em;
+}
+.season-panel p{
+  max-width:29ch;
+  font-size:14.25px;
+  line-height:1.57;
+  letter-spacing:-.004em;
+}
+.season-panel__link{
+  width:154px;
+  padding-bottom:6px;
+  font-size:9.4px;
+  letter-spacing:.15em;
+}
+.season-panel__link i{
+  font-size:18px;
+}
+/* Keep the art direction, but make it nearly background texture. */
+.season-panel--teens .season-panel__content::after{
+  opacity:.045;
+  width:250px;
+  height:250px;
+  right:-72px;
+  bottom:-44px;
+}
+.season-panel--adults .season-panel__content::after,
+.season-panel--families .season-panel__content::after{
+  display:none;
+}
+.season-panel:hover,.season-panel:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(34,43,41,.09);
+}
+.season-panel:hover .season-panel__image img,
+.season-panel:focus-visible .season-panel__image img{
+  transform:scale(1.018);
+}
+
+@media(max-width:1180px){
+  .season-panel{min-height:620px}
+  .season-panel__image{height:275px;flex-basis:275px}
+  .season-panel__content{min-height:345px;padding:24px 29px 25px}
+}
+@media(max-width:680px){
+  .season-editorial{padding:42px 14px 26px}
+  .season-panel{min-height:580px}
+  .season-panel__image{height:255px;flex-basis:255px}
+  .season-panel__content{min-height:325px;padding:23px 25px 24px}
+  .season-panel h3{font-size:48px}
+  .season-panel p{font-size:14px;max-width:32ch}
+}
