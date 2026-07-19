@@ -2357,3 +2357,80 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 .approaches-section{background:#e8e1d4}.approaches-editorial-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:3.5rem;background:rgba(23,63,67,.16);border:1px solid rgba(23,63,67,.16)}.approaches-editorial-grid article{background:#e8e1d4;padding:clamp(2.2rem,4vw,4rem);min-height:285px}.approaches-editorial-grid h3{font-size:clamp(2rem,3vw,3.15rem);line-height:1;margin:0 0 1.1rem}.approaches-editorial-grid p{max-width:48ch;font-size:.94rem;line-height:1.75;margin:0}.approaches-editorial-grid article>span{margin-bottom:1.3rem}
 @media(max-width:900px){.about-jess-hero__grid,.about-editorial-grid,.beyond-panel{grid-template-columns:1fr}.about-jess-hero__image,.about-jess-hero__image img{min-height:62vw}.about-section-label{position:static}.about-section-label h2{max-width:13ch}.credentials-grid,.support-grid{grid-template-columns:1fr 1fr}.credentials-grid .credential-card{min-height:230px}}
 @media(max-width:620px){.about-jess-hero{padding-top:7rem}.about-jess-hero__copy h1{font-size:3.65rem}.about-jess-hero__image,.about-jess-hero__image img{min-height:95vw}.credentials-grid,.support-grid,.approaches-editorial-grid{grid-template-columns:1fr}.credential-card,.support-card,.approaches-editorial-grid article{min-height:0}.about-editorial-grid{gap:2.2rem}.beyond-panel{padding:3.25rem 24px}}
+
+/* 2026 About Jess editorial organization refinement */
+.about-page .about-jess-hero__copy > p{display:none!important}
+.about-page .about-jess-hero__copy h1{margin-bottom:0!important}
+.about-page .about-story-section,
+.about-page .about-practice-section{padding-block:clamp(4.5rem,7vw,7.5rem)}
+.about-page .about-journey-section{padding-block:clamp(4.5rem,7vw,7.5rem)}
+.about-content-panel{
+  width:min(1180px,100%);
+  margin-inline:auto;
+  padding:clamp(2.4rem,5vw,5.25rem);
+  border:1px solid rgba(23,63,67,.14);
+  background:rgba(255,255,255,.66);
+  box-shadow:0 24px 70px rgba(27,49,49,.07);
+}
+.about-journey-panel{background:#f7f1e7}
+.about-practice-panel{background:#f4f7f4}
+.about-panel-heading{
+  display:grid;
+  grid-template-columns:minmax(180px,.42fr) minmax(0,1fr);
+  gap:clamp(2rem,6vw,7rem);
+  align-items:end;
+  padding-bottom:clamp(2rem,3vw,3.25rem);
+  margin-bottom:clamp(2rem,4vw,4rem);
+  border-bottom:1px solid rgba(23,63,67,.16);
+}
+.about-panel-heading h2{
+  margin:0;
+  max-width:12ch;
+  font-size:clamp(2.8rem,5vw,5.3rem);
+  line-height:.94;
+  letter-spacing:-.035em;
+}
+.about-story-columns{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  gap:clamp(2.5rem,6vw,7rem);
+}
+.about-story-lead p:first-child{
+  margin-top:0;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(1.65rem,2.4vw,2.25rem);
+  line-height:1.35;
+  color:#173f43;
+}
+.about-story-columns p,
+.about-long-copy--contained p{
+  max-width:62ch;
+  font-size:1rem;
+  line-height:1.9;
+  color:#53696e;
+}
+.about-story-detail{
+  padding-left:clamp(1.5rem,3vw,3rem);
+  border-left:1px solid rgba(23,63,67,.16);
+}
+.about-long-copy--contained{
+  width:min(760px,100%);
+  margin-left:auto;
+}
+.about-long-copy--contained .about-pullquote{
+  margin-top:2.6rem;
+  padding:1.8rem 0 0;
+  border-top:1px solid rgba(23,63,67,.18);
+}
+@media(max-width:900px){
+  .about-panel-heading,
+  .about-story-columns{grid-template-columns:1fr}
+  .about-panel-heading{gap:1rem}
+  .about-panel-heading h2{max-width:13ch}
+  .about-story-detail{padding-left:0;padding-top:2rem;border-left:0;border-top:1px solid rgba(23,63,67,.16)}
+  .about-long-copy--contained{width:100%;margin-left:0}
+}
+@media(max-width:620px){
+  .about-content-panel{padding:2.25rem 1.4rem}
+  .about-panel-heading h2{font-size:2.85rem}
+}
