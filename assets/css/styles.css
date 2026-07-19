@@ -875,3 +875,78 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
   .home-page .hero-editorial{min-height:672px}
   .home-page .hero-layout{padding-top:72px}
 }
+
+
+/* Subtle homepage header: transparent over hero, cream after scrolling */
+.home-page .site-header{
+  position:fixed;
+  inset:0 0 auto;
+  z-index:80;
+  background:linear-gradient(180deg,rgba(8,31,37,.34),rgba(8,31,37,0));
+  border-bottom:1px solid transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  transition:background-color .42s ease,background .42s ease,border-color .42s ease,box-shadow .42s ease,backdrop-filter .42s ease;
+}
+.home-page .nav-wrap{
+  width:min(1240px,calc(100% - 48px));
+  min-height:104px;
+  transition:min-height .42s ease;
+}
+.home-page .home-brand{position:relative;display:flex;align-items:center;min-width:220px}
+.home-page .logo{
+  height:78px;
+  width:auto;
+  object-fit:contain;
+  transition:opacity .32s ease,height .42s ease,transform .42s ease;
+}
+.home-page .logo-dark{position:absolute;left:0;opacity:0;pointer-events:none}
+.home-page .logo-light{opacity:1;filter:drop-shadow(0 2px 10px rgba(0,0,0,.18))}
+.home-page .nav a:not(.btn){
+  color:#fff;
+  text-shadow:0 1px 10px rgba(0,0,0,.3);
+  transition:color .32s ease,opacity .2s ease,text-shadow .32s ease;
+}
+.home-page .nav a:not(.btn):hover{color:#fff;opacity:.78}
+.home-page .site-header.is-scrolled{
+  background:rgba(255,253,249,.91);
+  border-bottom-color:rgba(27,55,61,.09);
+  box-shadow:0 7px 24px rgba(22,42,46,.07);
+  backdrop-filter:blur(13px) saturate(115%);
+  -webkit-backdrop-filter:blur(13px) saturate(115%);
+}
+.home-page .site-header.is-scrolled .nav-wrap{min-height:78px}
+.home-page .site-header.is-scrolled .logo{height:58px}
+.home-page .site-header.is-scrolled .logo-light{opacity:0;transform:translateY(-2px)}
+.home-page .site-header.is-scrolled .logo-dark{display:block;opacity:1;transform:translateY(0)}
+.home-page .site-header.is-scrolled .nav a:not(.btn){color:var(--ink);text-shadow:none}
+.home-page .site-header.is-scrolled .nav a:not(.btn):hover{color:var(--ocean-deep);opacity:1}
+.home-page .hero-editorial{min-height:100svh}
+
+@media(max-width:920px){
+  .home-page .nav-wrap{width:min(100% - 34px,1240px);min-height:90px}
+  .home-page .home-brand{min-width:175px}
+  .home-page .logo{height:64px}
+  .home-page .nav-toggle{
+    color:#fff;
+    background:rgba(10,40,47,.22);
+    border-color:rgba(255,255,255,.42);
+    backdrop-filter:blur(8px);
+  }
+  .home-page .nav{top:78px;background:rgba(255,253,249,.97);border-color:rgba(27,55,61,.1);box-shadow:0 14px 35px rgba(10,36,42,.14)}
+  .home-page .nav a{color:var(--ink)!important;text-shadow:none!important}
+  .home-page .site-header.is-scrolled .nav-wrap{min-height:72px}
+  .home-page .site-header.is-scrolled .logo{height:52px}
+  .home-page .site-header.is-scrolled .nav-toggle{color:var(--ink);background:rgba(255,255,255,.78);border-color:var(--line)}
+}
+@media(max-width:640px){
+  .home-page .nav-wrap{width:calc(100% - 28px);min-height:82px}
+  .home-page .home-brand{min-width:150px}
+  .home-page .logo{height:56px}
+  .home-page .site-header.is-scrolled .nav-wrap{min-height:68px}
+  .home-page .site-header.is-scrolled .logo{height:48px}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-page .site-header,.home-page .nav-wrap,.home-page .logo,.home-page .nav a{transition:none!important}
+}
