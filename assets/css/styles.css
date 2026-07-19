@@ -49,7 +49,7 @@ p{margin:.2em 0 1em}
 .path::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,39,45,.9),rgba(10,39,45,.06));z-index:0}
 .path>*{position:relative;z-index:1}
 .path.parents{background-image:url("../handouts/anchoring-family.jpeg")}
-.path.individuals{background-image:url("../images/homepage-hero-coast.jpg")}
+.path.individuals{background-image:url("../images/homepage-hero-crisp.svg")}
 .path.teens{background-image:url("../handouts/upstairs-downstairs-brain.jpeg")}
 .path.professionals{background-image:url("../handouts/structure.jpeg")}
 .split-quote{background:var(--ocean-deep);color:#fff;padding:52px;border-radius:34px}
@@ -219,7 +219,7 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
   background-image:
     linear-gradient(90deg,rgba(7,28,34,.73) 0%,rgba(7,28,34,.59) 45%,rgba(7,28,34,.36) 72%,rgba(7,28,34,.45) 100%),
     linear-gradient(0deg,rgba(6,24,30,.42),rgba(6,24,30,.04) 48%),
-    url("../images/homepage-hero-coast.jpg");
+    url("../images/homepage-hero-crisp.svg");
   background-size:cover;
   background-position:center 56%;
   overflow:hidden;
@@ -290,7 +290,7 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
     background-image:
       linear-gradient(90deg,rgba(6,28,34,.84),rgba(6,28,34,.55)),
       linear-gradient(0deg,rgba(6,24,30,.38),rgba(6,24,30,.05)),
-      url("../images/homepage-hero-coast.jpg");
+      url("../images/homepage-hero-crisp.svg");
   }
   .home-page .hero-layout{padding:150px 0 58px}
   .home-page .hero-message h1{font-size:clamp(2.65rem,13vw,3.75rem);line-height:1.02}
@@ -3319,4 +3319,145 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
   .about-page .about-beyond-gallery-v5__summit{
     aspect-ratio:16 / 10;
   }
+}
+
+/* Services — full-width image hero */
+.services-editorial-page .services-image-hero{
+  position:relative;
+  min-height:clamp(560px,72vh,820px);
+  overflow:hidden;
+  background:#173f43;
+}
+.services-editorial-page .services-image-hero>img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 52%;
+  display:block;
+}
+.services-editorial-page .services-image-hero__shade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(10,31,34,.68) 0%,rgba(10,31,34,.34) 48%,rgba(10,31,34,.06) 80%);
+}
+.services-editorial-page .services-image-hero__content{
+  position:relative;
+  z-index:1;
+  min-height:clamp(560px,72vh,820px);
+  display:flex;
+  align-items:flex-end;
+  padding-bottom:clamp(3.5rem,7vw,7rem);
+}
+.services-editorial-page .services-image-hero__copy{
+  max-width:820px;
+  color:#f7f0e5;
+}
+.services-editorial-page .services-image-hero .eyebrow{
+  color:#f7f0e5;
+  margin-bottom:1rem;
+}
+.services-editorial-page .services-image-hero h1{
+  color:inherit;
+  max-width:12ch;
+  margin:0;
+  font-size:clamp(3.4rem,6.3vw,6.6rem);
+  line-height:.92;
+  letter-spacing:-.04em;
+  text-wrap:balance;
+}
+.services-editorial-page .services-image-hero p{
+  max-width:650px;
+  margin:1.5rem 0 0;
+  color:rgba(247,240,229,.92);
+  font-size:1.05rem;
+  line-height:1.8;
+}
+@media(max-width:620px){
+  .services-editorial-page .services-image-hero,
+  .services-editorial-page .services-image-hero__content{min-height:620px}
+  .services-editorial-page .services-image-hero>img{object-position:58% center}
+  .services-editorial-page .services-image-hero__shade{background:linear-gradient(0deg,rgba(10,31,34,.76) 0%,rgba(10,31,34,.26) 70%,rgba(10,31,34,.08) 100%)}
+  .services-editorial-page .services-image-hero h1{font-size:clamp(3rem,14vw,4.25rem);max-width:10ch}
+  .services-editorial-page .services-image-hero p{font-size:.98rem;line-height:1.7}
+}
+
+/* About editorial design restored in build 22; cache-busted via about.html. */
+
+/* ABOUT JESS — VALUES / REAL-LIFE SECTION (REFERENCE MATCH) */
+.about-page .about-beyond-reflection{
+  grid-column:1 / -1;
+  justify-self:stretch;
+  width:100%;
+  max-width:none;
+  margin:clamp(1.5rem,3vw,3rem) 0 0;
+  padding:clamp(3.75rem,7vw,7rem) 0 clamp(4.75rem,8vw,7.5rem);
+  border-top:0;
+  text-align:center;
+}
+.about-page .about-beyond-reflection__lead{
+  width:min(100%,1060px);
+  max-width:none;
+  margin:0 auto clamp(3.8rem,6vw,5.25rem);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2.7rem,4.15vw,4rem);
+  font-weight:500;
+  line-height:1.08;
+  letter-spacing:-.025em;
+  color:var(--about-ink);
+}
+.about-page .about-beyond-reflection__values{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  width:min(100%,1200px);
+  margin:0 auto clamp(4.1rem,6.5vw,5.5rem);
+  padding:0;
+  list-style:none;
+  border-top:1px solid rgba(20,69,74,.16);
+  border-bottom:1px solid rgba(20,69,74,.16);
+}
+.about-page .about-beyond-reflection__values li{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:118px;
+  padding:1.5rem 1.35rem;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(.83rem,1.05vw,1rem);
+  font-weight:600;
+  line-height:1.35;
+  letter-spacing:.065em;
+  text-align:center;
+  text-transform:uppercase;
+  color:#315d61;
+}
+.about-page .about-beyond-reflection__values li + li{border-left:1px solid rgba(20,69,74,.16)}
+.about-page .about-beyond-reflection__body{
+  width:min(100%,980px);
+  max-width:none;
+  margin:0 auto;
+}
+.about-page .about-beyond-reflection__body p{
+  margin:0 auto clamp(1.75rem,3vw,2.4rem);
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(1.02rem,1.35vw,1.22rem);
+  font-weight:400;
+  line-height:1.82;
+  color:var(--about-copy);
+}
+.about-page .about-beyond-reflection__body p:last-child{margin-bottom:0}
+@media(max-width:900px){
+  .about-page .about-beyond-reflection__lead{width:min(100%,760px)}
+  .about-page .about-beyond-reflection__values{grid-template-columns:1fr 1fr}
+  .about-page .about-beyond-reflection__values li:nth-child(odd){border-left:0}
+  .about-page .about-beyond-reflection__values li:nth-child(n+3){border-top:1px solid rgba(20,69,74,.16)}
+}
+@media(max-width:520px){
+  .about-page .about-beyond-reflection{padding-top:3rem;text-align:center}
+  .about-page .about-beyond-reflection__lead{font-size:clamp(2.15rem,10vw,2.75rem);margin-bottom:2.75rem}
+  .about-page .about-beyond-reflection__values{grid-template-columns:1fr;margin-bottom:3rem}
+  .about-page .about-beyond-reflection__values li{justify-content:center;min-height:72px;padding:1rem;border-left:0!important}
+  .about-page .about-beyond-reflection__values li + li{border-top:1px solid rgba(20,69,74,.16)}
+  .about-page .about-beyond-reflection__body{width:100%}
 }
