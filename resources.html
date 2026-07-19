@@ -10,6 +10,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    (function () {
+      try {
+        var expires = Number(localStorage.getItem('anchoredToolboxAccessUntil') || 0);
+        if (expires > Date.now()) document.documentElement.classList.add('toolbox-authorized');
+        else document.documentElement.classList.add('toolbox-locked');
+      } catch (e) { document.documentElement.classList.add('toolbox-locked'); }
+    }());
+  </script>
 </head>
 <body class="toolkit-page toolkit-clean-page">
 <header class="site-header">
@@ -21,6 +30,24 @@
     </nav>
   </div>
 </header>
+<section class="toolbox-access-gate" id="toolbox-access-gate" aria-labelledby="toolbox-access-title">
+  <div class="toolbox-access-card">
+    <div class="toolbox-access-mark" aria-hidden="true">⚓</div>
+    <div class="eyebrow">Anchored Inside</div>
+    <h1 id="toolbox-access-title">Enter The Toolbox</h1>
+    <p>This resource library is reserved for people who have received access from Anchored Inside.</p>
+    <form id="toolbox-access-form" novalidate>
+      <label for="toolbox-password">Password</label>
+      <div class="toolbox-password-row">
+        <input id="toolbox-password" name="password" type="password" autocomplete="current-password" required autofocus>
+        <button id="toolbox-password-toggle" class="toolbox-password-toggle" type="button" aria-label="Show password">Show</button>
+      </div>
+      <p class="toolbox-access-error" id="toolbox-access-error" role="alert" aria-live="polite"></p>
+      <button class="btn btn-primary toolbox-access-submit" type="submit">Access Toolbox</button>
+    </form>
+    <a class="toolbox-access-back" href="index.html">← Return home</a>
+  </div>
+</section>
 <main>
   <section class="clean-toolkit-hero">
     <div class="container clean-toolkit-grid">
@@ -83,5 +110,66 @@
   </div>
 </main>
 <footer><div class="container"><div class="footer-grid"><div><img class="footer-logo" src="assets/images/anchored-inside-logo-white.png" alt="Anchored Inside"><p>A grounded place to return to what is steady, connected, and true.</p></div><div><strong>Explore</strong><div class="footer-links"><a href="about.html">About Jessica</a><a href="philosophy.html">Philosophy</a><a href="services.html">Services</a><a href="resources.html">The Toolbox</a></div></div><div><strong>Important</strong><div class="footer-links"><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy</a><a href="/admin/">Admin</a></div></div></div><div class="footer-bottom">© 2026 Anchored Inside Counseling Services.</div></div></footer>
+<script>
+(function () {
+  var expectedHash = '3156e3388a9ea511be254fd75f3d98f10067fd7421774deedcc74a4798bc9095';
+  var form = document.getElementById('toolbox-access-form');
+  var input = document.getElementById('toolbox-password');
+  var error = document.getElementById('toolbox-access-error');
+  var toggle = document.getElementById('toolbox-password-toggle');
+
+  function bytesToHex(buffer) {
+    return Array.prototype.map.call(new Uint8Array(buffer), function (byte) {
+      return byte.toString(16).padStart(2, '0');
+    }).join('');
+  }
+
+  async function hashPassword(value) {
+    var data = new TextEncoder().encode(value);
+    return bytesToHex(await crypto.subtle.digest('SHA-256', data));
+  }
+
+  function unlockToolbox() {
+    try {
+      localStorage.setItem('anchoredToolboxAccessUntil', String(Date.now() + 30 * 24 * 60 * 60 * 1000));
+    } catch (e) {}
+    document.documentElement.classList.remove('toolbox-locked');
+    document.documentElement.classList.add('toolbox-authorized');
+    window.scrollTo(0, 0);
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var showing = input.type === 'text';
+      input.type = showing ? 'password' : 'text';
+      toggle.textContent = showing ? 'Show' : 'Hide';
+      toggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+      input.focus();
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      error.textContent = '';
+      try {
+        var enteredHash = await hashPassword(input.value);
+        if (enteredHash === expectedHash) {
+          unlockToolbox();
+        } else {
+          error.textContent = 'That password is not correct. Please try again.';
+          input.value = '';
+          input.focus();
+          form.classList.remove('is-shaking');
+          void form.offsetWidth;
+          form.classList.add('is-shaking');
+        }
+      } catch (e) {
+        error.textContent = 'Your browser could not verify the password. Please try another browser.';
+      }
+    });
+  }
+}());
+</script>
 <script src="assets/js/app.js"></script>
 </body></html>
