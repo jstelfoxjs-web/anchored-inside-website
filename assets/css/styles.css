@@ -612,3 +612,20 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
   }
   .toolkit-clean-page .clean-toolkit-grid{padding-top:44px;padding-bottom:48px}
 }
+
+
+/* Toolbox hero search feedback */
+.hero-search-status {
+  margin-top: 14px;
+  color: var(--ink-muted, #53676d);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.hero-search-status a {
+  color: var(--deep-teal, #123f49);
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+.clean-search-card {
+  padding-bottom: 2rem;
+}

@@ -13,8 +13,10 @@ const count = document.getElementById('resource-count');
 const emptyState = document.getElementById('resource-empty');
 const activeFilterNote = document.getElementById('active-filter-note');
 const clearFiltersButton = document.getElementById('clear-filters');
+const heroSearchStatus = document.getElementById('hero-search-status');
 let activeAudience = 'all';
 let resources = [];
+const embeddedResources = [{"title":"Oh, the Places You Will Go","audience":["parents"],"topics":["attachment","independence"],"type":"Visual handout","description":"A reflective parenting message about being a secure base while children grow toward independence.","file":"assets/handouts/places-you-will-go.jpeg","featured":true},{"title":"Three Types of Engagement","audience":["parents"],"topics":["parenting","connection"],"type":"Visual handout","description":"A quick guide to playful, structured, and calming engagement.","file":"assets/handouts/three-types-engagement.jpeg","featured":true},{"title":"Positive Engagement: Redos & Compromise","audience":["parents"],"topics":["parenting","repair"],"type":"Visual handout","description":"Practical ways to support respectful re-dos, repair, and collaborative compromise.","file":"assets/handouts/positive-engagement-redos.jpeg","featured":false},{"title":"Positive Engagement: Sharing Choice","audience":["parents"],"topics":["parenting","choice"],"type":"Visual handout","description":"Developmentally appropriate choices and collaborative problem-solving.","file":"assets/handouts/positive-engagement-sharing-choice.jpeg","featured":false},{"title":"Positive Engagement: Giving Voice","audience":["parents"],"topics":["communication","connection"],"type":"Visual handout","description":"Open-ended questions, emotional reflection, and family rituals that support voice.","file":"assets/handouts/positive-engagement-giving-voice.jpeg","featured":false},{"title":"Structure & Predictability","audience":["parents"],"topics":["parenting","routines"],"type":"Visual handout","description":"Transitions, sequencing, routines, clear instructions, and visual supports.","file":"assets/handouts/structure.jpeg","featured":true},{"title":"Upstairs and Downstairs Brain","audience":["parents","individuals","teens"],"topics":["nervous-system","regulation"],"type":"Psychoeducation","description":"A simple visual for understanding survival responses and higher-order thinking.","file":"assets/handouts/upstairs-downstairs-brain.jpeg","featured":true},{"title":"S.O.O.T.H.E. Technique","audience":["parents"],"topics":["co-regulation","parenting"],"type":"Skill guide","description":"A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.","file":"assets/handouts/soothe-technique.jpeg","featured":true},{"title":"Anchor Below Your Child","audience":["parents"],"topics":["co-regulation","attachment"],"type":"Visual handout","description":"A reminder to regulate your own body and tone before guiding a distressed child.","file":"assets/handouts/anchor-below-child.jpeg","featured":true},{"title":"Anchoring the Family","audience":["parents","families"],"topics":["attachment","family-values"],"type":"Visual handout","description":"Ideas for secure attachment, family rituals, shared values, and belonging.","file":"assets/handouts/anchoring-family.jpeg","featured":true}];
 
 const titleCase = value => value
   .replaceAll('-', ' ')
@@ -22,15 +24,25 @@ const titleCase = value => value
 
 async function loadResources() {
   if (!resourceGrid) return;
-  try {
-    const response = await fetch('data/resources.json');
-    if (!response.ok) throw new Error('Unable to load resources.');
-    resources = await response.json();
-    populateTopics(resources);
-    render(resources);
-  } catch (error) {
-    resourceGrid.innerHTML = '<div class="resource-empty"><h3>The Toolkit could not load.</h3><p>Please refresh the page and try again.</p></div>';
-    console.error(error);
+
+  // Use the embedded copy immediately so search works in local previews,
+  // GitHub Desktop previews, and deployed versions of the site.
+  resources = embeddedResources;
+  populateTopics(resources);
+  render(resources);
+
+  // Refresh from the JSON file when the site is served over HTTP/HTTPS.
+  // Browsers commonly block fetch() from file:// pages, so failure here is harmless.
+  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+    try {
+      const response = await fetch('data/resources.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error('Unable to load resources.');
+      resources = await response.json();
+      populateTopics(resources);
+      render(resources);
+    } catch (error) {
+      console.warn('Using embedded Toolbox resources.', error);
+    }
   }
 }
 
@@ -59,17 +71,35 @@ function clearFilters() {
 function render(items) {
   const query = (search?.value || '').toLowerCase().trim();
   const selectedTopic = topic?.value || 'all';
+  const searchAliases = {
+    trauma: ['trauma', 'nervous-system', 'regulation', 'co-regulation', 'attachment', 'safety'],
+    anxiety: ['anxiety', 'regulation', 'nervous-system', 'grounding', 'calming', 'soothe'],
+    stress: ['stress', 'regulation', 'nervous-system', 'calming', 'soothe'],
+    emotions: ['emotion', 'regulation', 'co-regulation', 'communication'],
+    relationship: ['relationship', 'connection', 'attachment', 'communication', 'repair'],
+    relationships: ['relationship', 'connection', 'attachment', 'communication', 'repair'],
+    child: ['child', 'children', 'parenting', 'parents', 'teens'],
+    children: ['child', 'children', 'parenting', 'parents', 'teens'],
+    coping: ['coping', 'regulation', 'soothe', 'nervous-system'],
+    grounding: ['grounding', 'regulation', 'nervous-system', 'soothe']
+  };
+  const queryTerms = query ? (searchAliases[query] || [query]) : [];
   const filtered = items.filter(item => {
     const searchableText = [item.title, item.description, item.type, ...item.audience, ...item.topics]
       .join(' ')
       .toLowerCase();
-    const matchesSearch = !query || searchableText.includes(query);
+    const matchesSearch = !query || queryTerms.some(term => searchableText.includes(term));
     const matchesAudience = activeAudience === 'all' || item.audience.includes(activeAudience);
     const matchesTopic = selectedTopic === 'all' || item.topics.includes(selectedTopic);
     return matchesSearch && matchesAudience && matchesTopic;
   });
 
   if (count) count.textContent = `${filtered.length} tool${filtered.length === 1 ? '' : 's'}`;
+  if (heroSearchStatus) {
+    heroSearchStatus.innerHTML = query
+      ? `${filtered.length} tool${filtered.length === 1 ? '' : 's'} found. <a href="#library">View results</a>`
+      : 'Start typing to search all tools.';
+  }
   if (emptyState) emptyState.hidden = filtered.length !== 0;
   resourceGrid.hidden = filtered.length === 0;
 
@@ -106,6 +136,13 @@ function render(items) {
 }
 
 search?.addEventListener('input', () => render(resources));
+search?.addEventListener('keydown', event => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    render(resources);
+    document.getElementById('library')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
 topic?.addEventListener('input', () => render(resources));
 document.querySelectorAll('[data-audience]').forEach(button => {
   button.addEventListener('click', () => setAudience(button.dataset.audience));
