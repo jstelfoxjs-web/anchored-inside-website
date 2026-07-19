@@ -16,7 +16,7 @@ const clearFiltersButton = document.getElementById('clear-filters');
 const heroSearchStatus = document.getElementById('hero-search-status');
 let activeAudience = 'all';
 let resources = [];
-const embeddedResources = [{"title":"Oh, the Places You Will Go","audience":["parents"],"topics":["attachment","independence"],"type":"Visual handout","description":"A reflective parenting message about being a secure base while children grow toward independence.","file":"assets/handouts/places-you-will-go.jpeg","featured":true},{"title":"Three Types of Engagement","audience":["parents"],"topics":["parenting","connection"],"type":"Visual handout","description":"A quick guide to playful, structured, and calming engagement.","file":"assets/handouts/three-types-engagement.jpeg","featured":true},{"title":"Positive Engagement: Redos & Compromise","audience":["parents"],"topics":["parenting","repair"],"type":"Visual handout","description":"Practical ways to support respectful re-dos, repair, and collaborative compromise.","file":"assets/handouts/positive-engagement-redos.jpeg","featured":false},{"title":"Positive Engagement: Sharing Choice","audience":["parents"],"topics":["parenting","choice"],"type":"Visual handout","description":"Developmentally appropriate choices and collaborative problem-solving.","file":"assets/handouts/positive-engagement-sharing-choice.jpeg","featured":false},{"title":"Positive Engagement: Giving Voice","audience":["parents"],"topics":["communication","connection"],"type":"Visual handout","description":"Open-ended questions, emotional reflection, and family rituals that support voice.","file":"assets/handouts/positive-engagement-giving-voice.jpeg","featured":false},{"title":"Structure & Predictability","audience":["parents"],"topics":["parenting","routines"],"type":"Visual handout","description":"Transitions, sequencing, routines, clear instructions, and visual supports.","file":"assets/handouts/structure.jpeg","featured":true},{"title":"Upstairs and Downstairs Brain","audience":["parents","individuals","teens"],"topics":["nervous-system","regulation"],"type":"Psychoeducation","description":"A simple visual for understanding survival responses and higher-order thinking.","file":"assets/handouts/upstairs-downstairs-brain.jpeg","featured":true},{"title":"S.O.O.T.H.E. Technique","audience":["parents"],"topics":["co-regulation","parenting"],"type":"Skill guide","description":"A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.","file":"assets/handouts/soothe-technique.jpeg","featured":true},{"title":"Anchor Below Your Child","audience":["parents"],"topics":["co-regulation","attachment"],"type":"Visual handout","description":"A reminder to regulate your own body and tone before guiding a distressed child.","file":"assets/handouts/anchor-below-child.jpeg","featured":true},{"title":"Anchoring the Family","audience":["parents","families"],"topics":["attachment","family-values"],"type":"Visual handout","description":"Ideas for secure attachment, family rituals, shared values, and belonging.","file":"assets/handouts/anchoring-family.jpeg","featured":true}];
+const embeddedResources = [{"title":"What to Do When Your Nervous System Is Fried","audience":["individuals","teens","parents"],"topics":["nervous-system-regulation","nervous-system","regulation","grounding","stress","burnout"],"type":"Visual handout","description":"A practical visual menu of simple sensory, movement, connection, rest, and grounding ideas for moments of overwhelm or nervous-system overload.","file":"assets/handouts/when-your-nervous-system-is-fried.pdf","preview":"assets/handouts/when-your-nervous-system-is-fried.png","keywords":["overwhelmed","fried","dysregulated","polyvagal","coping","calm","self-care","sensory","burnout","stress relief"],"featured":true},{"title":"Oh, the Places You Will Go","audience":["parents"],"topics":["attachment","independence"],"type":"Visual handout","description":"A reflective parenting message about being a secure base while children grow toward independence.","file":"assets/handouts/places-you-will-go.jpeg","featured":true},{"title":"Three Types of Engagement","audience":["parents"],"topics":["parenting","connection"],"type":"Visual handout","description":"A quick guide to playful, structured, and calming engagement.","file":"assets/handouts/three-types-engagement.jpeg","featured":true},{"title":"Positive Engagement: Redos & Compromise","audience":["parents"],"topics":["parenting","repair"],"type":"Visual handout","description":"Practical ways to support respectful re-dos, repair, and collaborative compromise.","file":"assets/handouts/positive-engagement-redos.jpeg","featured":false},{"title":"Positive Engagement: Sharing Choice","audience":["parents"],"topics":["parenting","choice"],"type":"Visual handout","description":"Developmentally appropriate choices and collaborative problem-solving.","file":"assets/handouts/positive-engagement-sharing-choice.jpeg","featured":false},{"title":"Positive Engagement: Giving Voice","audience":["parents"],"topics":["communication","connection"],"type":"Visual handout","description":"Open-ended questions, emotional reflection, and family rituals that support voice.","file":"assets/handouts/positive-engagement-giving-voice.jpeg","featured":false},{"title":"Structure & Predictability","audience":["parents"],"topics":["parenting","routines"],"type":"Visual handout","description":"Transitions, sequencing, routines, clear instructions, and visual supports.","file":"assets/handouts/structure.jpeg","featured":true},{"title":"Upstairs and Downstairs Brain","audience":["parents","individuals","teens"],"topics":["nervous-system","regulation"],"type":"Psychoeducation","description":"A simple visual for understanding survival responses and higher-order thinking.","file":"assets/handouts/upstairs-downstairs-brain.jpeg","featured":true},{"title":"S.O.O.T.H.E. Technique","audience":["parents"],"topics":["co-regulation","parenting"],"type":"Skill guide","description":"A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.","file":"assets/handouts/soothe-technique.jpeg","featured":true},{"title":"Anchor Below Your Child","audience":["parents"],"topics":["co-regulation","attachment"],"type":"Visual handout","description":"A reminder to regulate your own body and tone before guiding a distressed child.","file":"assets/handouts/anchor-below-child.jpeg","featured":true},{"title":"Anchoring the Family","audience":["parents","families"],"topics":["attachment","family-values"],"type":"Visual handout","description":"Ideas for secure attachment, family rituals, shared values, and belonging.","file":"assets/handouts/anchoring-family.jpeg","featured":true}];
 
 const titleCase = value => value
   .replaceAll('-', ' ')
@@ -85,9 +85,14 @@ function render(items) {
   };
   const queryTerms = query ? (searchAliases[query] || [query]) : [];
   const filtered = items.filter(item => {
-    const searchableText = [item.title, item.description, item.type, ...item.audience, ...item.topics]
-      .join(' ')
-      .toLowerCase();
+    const searchableText = [
+      item.title,
+      item.description,
+      item.type,
+      ...(item.audience || []),
+      ...(item.topics || []),
+      ...(item.keywords || [])
+    ].join(' ').toLowerCase();
     const matchesSearch = !query || queryTerms.some(term => searchableText.includes(term));
     const matchesAudience = activeAudience === 'all' || item.audience.includes(activeAudience);
     const matchesTopic = selectedTopic === 'all' || item.topics.includes(selectedTopic);
@@ -114,7 +119,7 @@ function render(items) {
 
   resourceGrid.innerHTML = filtered.map(item => `
     <article class="card resource-card">
-      <img src="${item.file}" alt="Preview of ${item.title}" loading="lazy">
+      <img src="${item.preview || item.file}" alt="Preview of ${item.title}" loading="lazy">
       <div class="resource-body">
         <div class="resource-type-row">
           <span class="resource-type">${item.type}</span>
@@ -127,7 +132,7 @@ function render(items) {
           ${item.topics.slice(0, 3).map(value => `<span class="tag">${titleCase(value)}</span>`).join('')}
         </div>
         <div class="resource-actions">
-          <button class="btn btn-primary" type="button" data-view="${item.file}" data-title="${item.title}">Preview</button>
+          <button class="btn btn-primary" type="button" data-view="${item.preview || item.file}" data-title="${item.title}">Preview</button>
           <a class="btn btn-secondary" href="${item.file}" download>Download</a>
         </div>
       </div>
