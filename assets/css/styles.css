@@ -712,3 +712,49 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
 @media(max-width:900px){.toolkit-note-editorial{grid-template-columns:1px 1fr;gap:26px}.note-kicker{display:none}.note-mark{display:none}.clean-toolkit-grid{padding-top:60px}.toolkit-filters{position:static}}
 @media(max-width:680px){.toolkit-clean-page .clean-toolkit-hero{min-height:auto;background-position:62% center}.toolkit-clean-page .clean-toolkit-grid{min-height:auto;padding:68px 0}.toolkit-clean-page .clean-search-card{border-radius:2px}.toolkit-note{padding:82px 0}.note-copy h2{font-size:3.2rem}.clean-featured,.clean-library{padding-top:76px}}
 @media(prefers-reduced-motion:reduce){.reveal-section,.editorial-card,.resource-card{opacity:1;transform:none}.editorial-card,.resource-card,.editorial-card img,.resource-card img{transition:none!important}}
+
+
+/* =========================================================
+   SITE-WIDE TYPOGRAPHY SYSTEM
+   Matches the refined editorial typography used in The Toolbox.
+   ========================================================= */
+:root{
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+html{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+body,button,input,textarea,select{font-family:var(--font-sans)}
+
+h1,h2,h3,h4,h5,h6,
+.serif,.quote,.hero-title,.page-title,.section-title,.resource-title,
+.about-copy blockquote strong,.audience-number,.preview-card,
+.approach-list span,.toolkit-lead,.toolkit-search-panel label,
+.journey-icon,.journey-card strong,.collection-card strong,
+.clean-toolkit-lead,.clean-search-card h2,.editorial-card strong,
+.note-mark{
+  font-family:var(--font-display);
+  font-weight:500;
+  letter-spacing:-.018em;
+}
+
+h1{font-weight:500;letter-spacing:-.035em}
+h2{font-weight:500;letter-spacing:-.027em}
+h3,h4,h5,h6{font-weight:600;letter-spacing:-.015em}
+
+nav,.nav-links,.btn,.button,button,.eyebrow,.kicker,.label,
+.tag,.chip,.filter-pill,.resource-meta,.footer-nav{
+  font-family:var(--font-sans);
+}
+
+/* Refined editorial italics for emphasized display copy. */
+.hero-copy em,.quote em,blockquote em,.editorial-emphasis{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+}
