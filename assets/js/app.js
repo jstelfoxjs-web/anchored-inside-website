@@ -16,7 +16,7 @@ const clearFiltersButton = document.getElementById('clear-filters');
 const heroSearchStatus = document.getElementById('hero-search-status');
 let activeAudience = 'all';
 let resources = [];
-const embeddedResources = [{"title":"What to Do When Your Nervous System Is Fried","audience":["individuals","teens","parents"],"topics":["nervous-system-regulation","nervous-system","regulation","grounding","stress","burnout"],"type":"Visual handout","description":"A practical visual menu of simple sensory, movement, connection, rest, and grounding ideas for moments of overwhelm or nervous-system overload.","file":"assets/handouts/when-your-nervous-system-is-fried.pdf","preview":"assets/handouts/when-your-nervous-system-is-fried.png","keywords":["overwhelmed","fried","dysregulated","polyvagal","coping","calm","self-care","sensory","burnout","stress relief"],"featured":true},{"title":"Oh, the Places You Will Go","audience":["parents"],"topics":["attachment","independence"],"type":"Visual handout","description":"A reflective parenting message about being a secure base while children grow toward independence.","file":"assets/handouts/places-you-will-go.jpeg","featured":true},{"title":"Three Types of Engagement","audience":["parents"],"topics":["parenting","connection"],"type":"Visual handout","description":"A quick guide to playful, structured, and calming engagement.","file":"assets/handouts/three-types-engagement.jpeg","featured":true},{"title":"Positive Engagement: Redos & Compromise","audience":["parents"],"topics":["parenting","repair"],"type":"Visual handout","description":"Practical ways to support respectful re-dos, repair, and collaborative compromise.","file":"assets/handouts/positive-engagement-redos.jpeg","featured":false},{"title":"Positive Engagement: Sharing Choice","audience":["parents"],"topics":["parenting","choice"],"type":"Visual handout","description":"Developmentally appropriate choices and collaborative problem-solving.","file":"assets/handouts/positive-engagement-sharing-choice.jpeg","featured":false},{"title":"Positive Engagement: Giving Voice","audience":["parents"],"topics":["communication","connection"],"type":"Visual handout","description":"Open-ended questions, emotional reflection, and family rituals that support voice.","file":"assets/handouts/positive-engagement-giving-voice.jpeg","featured":false},{"title":"Structure & Predictability","audience":["parents"],"topics":["parenting","routines"],"type":"Visual handout","description":"Transitions, sequencing, routines, clear instructions, and visual supports.","file":"assets/handouts/structure.jpeg","featured":true},{"title":"Upstairs and Downstairs Brain","audience":["parents","individuals","teens"],"topics":["nervous-system","regulation"],"type":"Psychoeducation","description":"A simple visual for understanding survival responses and higher-order thinking.","file":"assets/handouts/upstairs-downstairs-brain.jpeg","featured":true},{"title":"S.O.O.T.H.E. Technique","audience":["parents"],"topics":["co-regulation","parenting"],"type":"Skill guide","description":"A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.","file":"assets/handouts/soothe-technique.jpeg","featured":true},{"title":"Anchor Below Your Child","audience":["parents"],"topics":["co-regulation","attachment"],"type":"Visual handout","description":"A reminder to regulate your own body and tone before guiding a distressed child.","file":"assets/handouts/anchor-below-child.jpeg","featured":true},{"title":"Anchoring the Family","audience":["parents","families"],"topics":["attachment","family-values"],"type":"Visual handout","description":"Ideas for secure attachment, family rituals, shared values, and belonging.","file":"assets/handouts/anchoring-family.jpeg","featured":true}];
+const embeddedResources = [{"title":"What to Do When Your Nervous System Is Fried","audience":["individuals","teens","parents"],"topics":["nervous-system-regulation","nervous-system","regulation","grounding","stress","burnout"],"type":"Visual handout","description":"A practical visual menu of simple sensory, movement, connection, rest, and grounding ideas for moments of overwhelm or nervous-system overload.","file":"assets/handouts/when-your-nervous-system-is-fried.pdf","preview":"assets/handouts/when-your-nervous-system-is-fried.png","keywords":["overwhelmed","fried","dysregulated","polyvagal","coping","calm","self-care","sensory","burnout","stress relief"],"featured":true},{"title":"Parts Work for Parenting: Our Struggles Have Stories","audience":["parents","individuals"],"topics":["parenting","parts-work","internal-family-systems","attachment","childhood-wounds","self-compassion","emotional-regulation","generational-patterns"],"type":"Reflective handout","description":"Explore how protector and exile parts shaped by childhood experiences can show up in parenting, then practice five steps for responding with greater awareness, compassion, and intention.","file":"assets/handouts/parts-work-for-parenting.pdf","preview":"assets/handouts/parts-work-for-parenting.png","keywords":["IFS","internal family systems","protector parts","exiles","parent triggers","reactive parenting","cycle breaking","generational trauma","healing the parent within","parent consciously","pause button","oxygen mask","childhood adaptations"],"featured":true},{"title":"Oh, the Places You Will Go","audience":["parents"],"topics":["attachment","independence"],"type":"Visual handout","description":"A reflective parenting message about being a secure base while children grow toward independence.","file":"assets/handouts/places-you-will-go.jpeg","featured":true},{"title":"Three Types of Engagement","audience":["parents"],"topics":["parenting","connection"],"type":"Visual handout","description":"A quick guide to playful, structured, and calming engagement.","file":"assets/handouts/three-types-engagement.jpeg","featured":true},{"title":"Positive Engagement: Redos & Compromise","audience":["parents"],"topics":["parenting","repair"],"type":"Visual handout","description":"Practical ways to support respectful re-dos, repair, and collaborative compromise.","file":"assets/handouts/positive-engagement-redos.jpeg","featured":false},{"title":"Positive Engagement: Sharing Choice","audience":["parents"],"topics":["parenting","choice"],"type":"Visual handout","description":"Developmentally appropriate choices and collaborative problem-solving.","file":"assets/handouts/positive-engagement-sharing-choice.jpeg","featured":false},{"title":"Positive Engagement: Giving Voice","audience":["parents"],"topics":["communication","connection"],"type":"Visual handout","description":"Open-ended questions, emotional reflection, and family rituals that support voice.","file":"assets/handouts/positive-engagement-giving-voice.jpeg","featured":false},{"title":"Structure & Predictability","audience":["parents"],"topics":["parenting","routines"],"type":"Visual handout","description":"Transitions, sequencing, routines, clear instructions, and visual supports.","file":"assets/handouts/structure.jpeg","featured":true},{"title":"Upstairs and Downstairs Brain","audience":["parents","individuals","teens"],"topics":["nervous-system","regulation"],"type":"Psychoeducation","description":"A simple visual for understanding survival responses and higher-order thinking.","file":"assets/handouts/upstairs-downstairs-brain.jpeg","featured":true},{"title":"S.O.O.T.H.E. Technique","audience":["parents"],"topics":["co-regulation","parenting"],"type":"Skill guide","description":"A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.","file":"assets/handouts/soothe-technique.jpeg","featured":true},{"title":"Anchor Below Your Child","audience":["parents"],"topics":["co-regulation","attachment"],"type":"Visual handout","description":"A reminder to regulate your own body and tone before guiding a distressed child.","file":"assets/handouts/anchor-below-child.jpeg","featured":true},{"title":"Anchoring the Family","audience":["parents","families"],"topics":["attachment","family-values"],"type":"Visual handout","description":"Ideas for secure attachment, family rituals, shared values, and belonging.","file":"assets/handouts/anchoring-family.jpeg","featured":true}];
 
 const titleCase = value => value
   .replaceAll('-', ' ')
@@ -118,7 +118,7 @@ function render(items) {
   }
 
   resourceGrid.innerHTML = filtered.map(item => `
-    <article class="card resource-card">
+    <article class="card resource-card resource-card-open" tabindex="0" role="button" aria-label="Open ${item.title}" data-resource-file="${item.file}" data-resource-title="${item.title}" data-resource-type="${item.type}">
       <img src="${item.preview || item.file}" alt="Preview of ${item.title}" loading="lazy">
       <div class="resource-body">
         <div class="resource-type-row">
@@ -132,8 +132,8 @@ function render(items) {
           ${item.topics.slice(0, 3).map(value => `<span class="tag">${titleCase(value)}</span>`).join('')}
         </div>
         <div class="resource-actions">
-          <button class="btn btn-primary" type="button" data-view="${item.preview || item.file}" data-title="${item.title}">Preview</button>
-          <a class="btn btn-secondary" href="${item.file}" download>Download</a>
+          <span class="open-resource-label">Open full handout <span aria-hidden="true">→</span></span>
+          <a class="btn btn-secondary resource-download" href="${item.file}" download>Download</a>
         </div>
       </div>
     </article>
@@ -179,26 +179,54 @@ document.addEventListener('click', event => {
 loadResources();
 
 const modal = document.getElementById('resource-modal');
+let lastFocusedResource = null;
+
+function openResource(card) {
+  if (!modal || !card) return;
+  const file = card.dataset.resourceFile;
+  const title = card.dataset.resourceTitle;
+  const viewer = document.getElementById('modal-viewer');
+  const download = document.getElementById('modal-download');
+  const isPdf = /\.pdf(?:$|[?#])/i.test(file);
+
+  lastFocusedResource = card;
+  document.getElementById('modal-title').textContent = title;
+  download.href = file;
+  download.setAttribute('download', '');
+  viewer.innerHTML = isPdf
+    ? `<iframe class="resource-pdf" src="${file}#view=FitH&toolbar=1&navpanes=0" title="${title}"></iframe>`
+    : `<img class="resource-full-image" src="${file}" alt="${title}">`;
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  modal.querySelector('.modal-close')?.focus();
+}
+
 document.addEventListener('click', event => {
-  const button = event.target.closest('[data-view]');
-  if (button && modal) {
-    const image = document.getElementById('modal-image');
-    image.src = button.dataset.view;
-    image.alt = button.dataset.title;
-    document.getElementById('modal-title').textContent = button.dataset.title;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    modal.querySelector('.modal-close')?.focus();
-  }
+  if (event.target.closest('.resource-download')) return;
+  const card = event.target.closest('[data-resource-file]');
+  if (card) openResource(card);
   if (event.target.matches('.modal-close') || event.target === modal) closeModal();
 });
+
 document.addEventListener('keydown', event => {
+  const card = event.target.closest?.('[data-resource-file]');
+  if (card && (event.key === 'Enter' || event.key === ' ')) {
+    event.preventDefault();
+    openResource(card);
+  }
   if (event.key === 'Escape') closeModal();
 });
+
 function closeModal() {
-  if (!modal) return;
+  if (!modal || !modal.classList.contains('open')) return;
   modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  const viewer = document.getElementById('modal-viewer');
+  if (viewer) viewer.innerHTML = '';
+  lastFocusedResource?.focus();
 }
 
 const stickyHeader = document.querySelector('[data-sticky-header]');
