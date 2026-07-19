@@ -561,3 +561,54 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
 .clean-featured{padding-top:18px}.clean-featured-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.editorial-card{appearance:none;text-align:left;padding:0;border:1px solid rgba(18,64,73,.13);border-radius:13px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 6px 16px rgba(30,55,58,.035);transition:transform .25s ease,box-shadow .25s ease}.editorial-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(30,55,58,.09)}.editorial-card img{display:block;width:100%;aspect-ratio:1.9/1;object-fit:cover}.editorial-card-body{display:block;padding:18px 18px 20px}.editorial-card small{display:inline-block;text-transform:uppercase;letter-spacing:.08em;font-size:.62rem;font-style:normal;background:#dfe9e2;border-radius:999px;padding:4px 9px;color:#193e42;margin-bottom:10px}.editorial-card strong{display:block;font:500 1.48rem/1.05 'Cormorant Garamond',serif;color:var(--ink);margin-bottom:8px}.editorial-card em{display:block;font:400 .88rem/1.55 Inter,sans-serif;color:#344e53}.browse-all-link{display:flex;justify-content:center;gap:14px;margin-top:24px;color:var(--ink);text-decoration:none;font-weight:500}.clean-library{margin-top:12px}
 @media(max-width:1050px){.clean-toolkit-grid{grid-template-columns:1fr;gap:28px}.clean-search-card{max-width:700px}.clean-hero-vase{opacity:.2;right:-70px}.audience-row{grid-template-columns:repeat(3,1fr);row-gap:14px}.audience-row button:nth-child(3){border-right:0}.clean-featured-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.clean-toolkit-grid{padding-top:38px;min-height:auto}.clean-toolkit-copy h1{font-size:4.2rem}.clean-toolkit-lead br{display:none}.clean-search-card{padding:22px}.clean-hero-vase{display:none}.audience-row{grid-template-columns:repeat(2,1fr)}.audience-row button{border-right:0;padding-left:0}.topic-row{gap:16px 22px}.clean-featured-grid{grid-template-columns:1fr}}
+
+/* Full-width coastal background for The Toolkit hero */
+.toolkit-clean-page .clean-toolkit-hero{
+  position:relative;
+  overflow:hidden;
+  min-height:560px;
+  border-bottom:1px solid rgba(18,64,73,.08);
+  background:
+    linear-gradient(90deg,rgba(250,247,241,.94) 0%,rgba(250,247,241,.84) 39%,rgba(250,247,241,.46) 70%,rgba(250,247,241,.24) 100%),
+    url("../images/philosophy-coast.jpg") center 56%/cover no-repeat;
+}
+.toolkit-clean-page .clean-toolkit-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(247,244,238,.16));
+}
+.toolkit-clean-page .clean-toolkit-grid{
+  position:relative;
+  z-index:1;
+  min-height:560px;
+  grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr);
+  gap:72px;
+  padding-top:72px;
+  padding-bottom:72px;
+}
+.toolkit-clean-page .clean-toolkit-copy{max-width:650px}
+.toolkit-clean-page .clean-search-card{
+  justify-self:end;
+  width:min(100%,560px);
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 22px 60px rgba(31,63,67,.14);
+}
+.toolkit-clean-page .clean-hero-vase{display:none!important}
+@media(max-width:1050px){
+  .toolkit-clean-page .clean-toolkit-hero{background-position:42% center}
+  .toolkit-clean-page .clean-toolkit-grid{grid-template-columns:1fr;gap:30px;min-height:auto}
+  .toolkit-clean-page .clean-search-card{justify-self:start;max-width:700px}
+}
+@media(max-width:680px){
+  .toolkit-clean-page .clean-toolkit-hero{
+    min-height:auto;
+    background:
+      linear-gradient(180deg,rgba(250,247,241,.94) 0%,rgba(250,247,241,.82) 58%,rgba(250,247,241,.72) 100%),
+      url("../images/philosophy-coast.jpg") 40% center/cover no-repeat;
+  }
+  .toolkit-clean-page .clean-toolkit-grid{padding-top:44px;padding-bottom:48px}
+}
