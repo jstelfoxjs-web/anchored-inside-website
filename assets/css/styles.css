@@ -274,3 +274,83 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
  .btn-hero-primary,.btn-hero-secondary{width:100%;min-width:0}
  .hero-note{margin-top:2.2rem;align-items:flex-start;text-align:left;padding:1rem}
 }
+
+
+/* Refined editorial hero spacing — July 2026 */
+.home-page .nav-wrap{
+  width:min(1320px,calc(100% - 72px));
+  min-height:132px;
+}
+.home-page .logo{
+  height:118px;
+  width:auto;
+}
+.home-page .hero{
+  min-height:100svh;
+  align-items:start;
+  background-position:center 48%;
+}
+.home-page .hero-copy{
+  width:min(1320px,calc(100% - 72px));
+  max-width:none;
+  margin-inline:auto;
+  padding:300px 0 110px;
+}
+.home-page .hero-copy > *{
+  max-width:720px;
+}
+.home-page .hero .eyebrow{
+  margin-bottom:1.15rem;
+  font-size:.8rem;
+  letter-spacing:.22em;
+}
+.home-page .hero h1{
+  max-width:760px;
+  font-size:clamp(4.3rem,6.3vw,6.7rem);
+  line-height:.94;
+  letter-spacing:-.03em;
+  margin:0 0 1.4rem;
+}
+.home-page .hero-lead,
+.home-page .hero-copy p{
+  max-width:690px;
+  font-size:clamp(1.08rem,1.35vw,1.3rem);
+  line-height:1.58;
+  margin-bottom:1.45rem;
+}
+.home-page .practice-details{
+  max-width:none;
+  margin-top:.35rem;
+  margin-bottom:1.8rem;
+  gap:.7rem 1.3rem;
+}
+.home-page .actions{
+  margin-top:0;
+  gap:1rem;
+}
+.btn-hero-primary,.btn-hero-secondary{
+  min-width:225px;
+  padding:1rem 1.65rem;
+}
+.hero-note{display:none!important}
+
+@media(max-width:1100px){
+  .home-page .nav-wrap,
+  .home-page .hero-copy{width:min(100% - 48px,1320px)}
+  .home-page .hero-copy{padding-top:250px}
+  .home-page .hero h1{font-size:clamp(4rem,8vw,6rem)}
+}
+@media(max-width:920px){
+  .home-page .nav-wrap{min-height:104px}
+  .home-page .logo{height:84px}
+  .home-page .hero-copy{padding:190px 0 80px}
+}
+@media(max-width:640px){
+  .home-page .nav-wrap,
+  .home-page .hero-copy{width:min(100% - 30px,1320px)}
+  .home-page .hero{min-height:780px;background-position:64% center}
+  .home-page .hero-copy{padding:145px 0 58px}
+  .home-page .hero .eyebrow{font-size:.68rem;margin-bottom:.8rem}
+  .home-page .hero h1{font-size:clamp(3.45rem,17vw,4.7rem);line-height:.94;margin-bottom:1rem}
+  .home-page .practice-details{margin-bottom:1.35rem}
+}
