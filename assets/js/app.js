@@ -56,3 +56,12 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 function closeModal(){if(!modal)return;modal.classList.remove('open');document.body.style.overflow='';}
+
+// Compact Anchored Inside ribbon after the hero begins to scroll.
+const stickyHeader=document.querySelector('[data-sticky-header]');
+function updateStickyHeader(){
+  stickyHeader?.classList.toggle('is-scrolled',window.scrollY>70);
+}
+updateStickyHeader();
+window.addEventListener('scroll',updateStickyHeader,{passive:true});
+

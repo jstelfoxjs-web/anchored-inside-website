@@ -152,205 +152,148 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
 @media(max-width:640px){.inline-links{display:grid;gap:.8rem}}
 
 
-/* Dark coastal homepage hero */
+/* Clean editorial homepage hero — rewritten from scratch */
+.home-page{padding-top:0}
 .home-page .site-header{
- position:absolute;
- inset:0 0 auto;
- z-index:50;
- background:transparent;
- border-bottom:0;
- backdrop-filter:none;
+  position:fixed;
+  inset:0 0 auto;
+  z-index:80;
+  background:transparent;
+  border:0;
+  backdrop-filter:none;
+  transition:background .25s ease,box-shadow .25s ease,backdrop-filter .25s ease;
 }
-.home-page .nav-wrap{min-height:112px}
-.home-page .logo{height:92px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.18))}
-.home-page .nav a:not(.btn){color:#fff;font-weight:500;font-size:1rem;text-shadow:0 1px 12px rgba(0,0,0,.28)}
-.home-page .nav a:not(.btn):hover{opacity:.8}
-.btn-header{background:#93b9df;color:#102f36;padding:1rem 1.7rem;min-width:142px;font-size:1rem;text-transform:uppercase;letter-spacing:.03em}
-.home-page .hero{
- min-height:100svh;
- position:relative;
- display:grid;
- align-items:center;
- color:#fff;
- background-image:
-  linear-gradient(90deg,rgba(9,31,37,.78) 0%,rgba(9,31,37,.64) 46%,rgba(9,31,37,.43) 72%,rgba(9,31,37,.52) 100%),
-  linear-gradient(0deg,rgba(7,27,33,.32),rgba(7,27,33,.08)),
-  url("../images/hero-coast.jpg");
- background-position:center;
- background-size:cover;
- overflow:hidden;
-}
-.home-page .hero::after{
- content:"";
- position:absolute;
- inset:auto 0 0;
- height:26%;
- background:linear-gradient(0deg,rgba(7,27,33,.5),transparent);
- pointer-events:none;
-}
-.home-page .hero-copy{
- position:relative;
- z-index:2;
- max-width:900px;
- padding:190px 0 64px;
- margin-left:0;
-}
-.home-page .hero .eyebrow{color:#a9cfee;text-shadow:0 1px 12px rgba(0,0,0,.28)}
-.home-page .hero h1{
- max-width:900px;
- color:#fff;
- font-size:clamp(4.2rem,8.2vw,8.3rem);
- line-height:.88;
- letter-spacing:-.035em;
- text-shadow:0 3px 28px rgba(0,0,0,.34);
- margin:.15em 0 .22em;
-}
-.home-page .hero-lead,
-.home-page .hero-copy p{
- color:rgba(255,255,255,.96);
- font-size:clamp(1.08rem,1.55vw,1.35rem);
- line-height:1.55;
- max-width:730px;
- text-shadow:0 2px 16px rgba(0,0,0,.38);
-}
-.home-page .practice-details{
- color:#fff;
- font-weight:500;
- gap:.75rem 1.4rem;
- margin-top:1.45rem;
- text-shadow:0 2px 12px rgba(0,0,0,.35);
-}
-.home-page .practice-details span::before{background:#93b9df;width:8px;height:8px}
-.home-page .actions{margin-top:1.7rem;gap:1rem}
-.btn-hero-primary,.btn-hero-secondary{
- min-width:210px;
- padding:1rem 1.55rem;
- border:1.5px solid #a9cfee;
- color:#fff;
- text-transform:uppercase;
- letter-spacing:.035em;
- font-size:.92rem;
-}
-.btn-hero-primary{background:#8fb7df;border-color:#8fb7df;color:#102f36}
-.btn-hero-secondary{background:rgba(11,43,50,.22);border-color:rgba(255,255,255,.9);backdrop-filter:blur(4px)}
-.btn-hero-primary:hover,.btn-hero-secondary:hover{box-shadow:0 12px 30px rgba(0,0,0,.18)}
-.hero-note{
- margin-top:3.2rem;
- width:min(860px,100%);
- display:flex;
- align-items:center;
- justify-content:center;
- gap:1.2rem;
- padding:1.25rem 1.5rem;
- background:rgba(9,43,50,.78);
- border:1px solid rgba(255,255,255,.08);
- backdrop-filter:blur(7px);
- text-align:center;
- box-shadow:0 18px 45px rgba(0,0,0,.12);
-}
-.hero-note p{margin:0!important;font-size:1.05rem!important;line-height:1.45!important;max-width:none!important}
-.hero-note-anchor{font-size:2rem;color:#93b9df}
-@media(max-width:920px){
- .home-page .site-header{position:absolute}
- .home-page .nav-toggle{display:block;color:#fff;background:rgba(10,40,46,.58);border-color:rgba(255,255,255,.36)}
- .home-page .nav{background:rgba(14,48,56,.97);border-color:rgba(255,255,255,.15)}
- .home-page .nav a{color:#fff!important}
- .home-page .hero-copy{padding-top:160px}
-}
-@media(max-width:640px){
- .home-page .nav-wrap{min-height:88px}
- .home-page .logo{height:68px;max-width:220px}
- .home-page .hero{
-  min-height:880px;
-  background-image:
-   linear-gradient(90deg,rgba(8,31,37,.82),rgba(8,31,37,.58)),
-   linear-gradient(0deg,rgba(7,27,33,.45),rgba(7,27,33,.05)),
-   url("../images/hero-coast.jpg");
-  background-position:62% center;
- }
- .home-page .hero-copy{padding:140px 0 46px}
- .home-page .hero h1{font-size:clamp(3.8rem,18vw,5.3rem);line-height:.94}
- .home-page .hero-lead,.home-page .hero-copy p{font-size:1rem}
- .btn-hero-primary,.btn-hero-secondary{width:100%;min-width:0}
- .hero-note{margin-top:2.2rem;align-items:flex-start;text-align:left;padding:1rem}
-}
-
-
-/* Refined editorial hero spacing — July 2026 */
 .home-page .nav-wrap{
-  width:min(1320px,calc(100% - 72px));
-  min-height:132px;
+  width:min(1340px,calc(100% - 72px));
+  min-height:150px;
+  transition:min-height .25s ease;
 }
+.brand{display:flex;align-items:center;text-decoration:none;color:#fff}
 .home-page .logo{
-  height:118px;
+  height:126px;
   width:auto;
+  filter:drop-shadow(0 2px 10px rgba(0,0,0,.25));
+  transition:opacity .2s ease,height .25s ease;
 }
-.home-page .hero{
-  min-height:100svh;
-  align-items:start;
-  background-position:center 48%;
+.sticky-brand{
+  display:none;
+  color:#fff;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.6rem;
+  font-weight:600;
+  letter-spacing:.03em;
 }
-.home-page .hero-copy{
-  width:min(1320px,calc(100% - 72px));
-  max-width:none;
-  margin-inline:auto;
-  padding:300px 0 110px;
+.home-page .nav{gap:1.45rem}
+.home-page .nav a:not(.btn){
+  color:#fff;
+  font-size:1.02rem;
+  font-weight:600;
+  text-shadow:0 2px 12px rgba(0,0,0,.34);
 }
-.home-page .hero-copy > *{
-  max-width:720px;
+.home-page .nav a:not(.btn):hover{opacity:.78}
+.btn-header{
+  min-width:150px;
+  padding:1.05rem 1.8rem;
+  background:#93b9df;
+  color:#102f36;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  font-size:1rem;
 }
-.home-page .hero .eyebrow{
-  margin-bottom:1.15rem;
-  font-size:.8rem;
-  letter-spacing:.22em;
+.home-page .site-header.is-scrolled{
+  background:rgba(12,43,50,.94);
+  box-shadow:0 8px 30px rgba(5,24,29,.18);
+  backdrop-filter:blur(14px);
 }
-.home-page .hero h1{
-  max-width:760px;
-  font-size:clamp(4.3rem,6.3vw,6.7rem);
-  line-height:.94;
-  letter-spacing:-.03em;
-  margin:0 0 1.4rem;
-}
-.home-page .hero-lead,
-.home-page .hero-copy p{
-  max-width:690px;
-  font-size:clamp(1.08rem,1.35vw,1.3rem);
-  line-height:1.58;
-  margin-bottom:1.45rem;
-}
-.home-page .practice-details{
-  max-width:none;
-  margin-top:.35rem;
-  margin-bottom:1.8rem;
-  gap:.7rem 1.3rem;
-}
-.home-page .actions{
-  margin-top:0;
-  gap:1rem;
-}
-.btn-hero-primary,.btn-hero-secondary{
-  min-width:225px;
-  padding:1rem 1.65rem;
-}
-.hero-note{display:none!important}
+.home-page .site-header.is-scrolled .nav-wrap{min-height:76px}
+.home-page .site-header.is-scrolled .logo{display:none}
+.home-page .site-header.is-scrolled .sticky-brand{display:block}
+.home-page .site-header.is-scrolled .nav a:not(.btn){text-shadow:none}
 
-@media(max-width:1100px){
-  .home-page .nav-wrap,
-  .home-page .hero-copy{width:min(100% - 48px,1320px)}
-  .home-page .hero-copy{padding-top:250px}
-  .home-page .hero h1{font-size:clamp(4rem,8vw,6rem)}
+.home-page .hero-editorial{
+  min-height:100svh;
+  position:relative;
+  display:grid;
+  align-items:start;
+  color:#fff;
+  background-image:
+    linear-gradient(90deg,rgba(7,28,34,.73) 0%,rgba(7,28,34,.59) 45%,rgba(7,28,34,.36) 72%,rgba(7,28,34,.45) 100%),
+    linear-gradient(0deg,rgba(6,24,30,.42),rgba(6,24,30,.04) 48%),
+    url("../images/philosophy-coast.jpg");
+  background-size:cover;
+  background-position:center 56%;
+  overflow:hidden;
+}
+.home-page .hero-layout{
+  width:min(1480px,calc(100% - 72px));
+  padding:285px 0 100px;
+}
+.hero-message{max-width:735px}
+.home-page .hero-message h1{
+  margin:0;
+  max-width:735px;
+  color:#fff;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(3.2rem,4.4vw,4.85rem);
+  font-weight:600;
+  line-height:1.02;
+  letter-spacing:-.025em;
+  text-shadow:0 3px 24px rgba(0,0,0,.35);
+}
+.meet-jess-link{
+  display:inline-block;
+  margin-top:1.25rem;
+  color:#fff;
+  font-size:1.08rem;
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.72);
+  padding-bottom:.15rem;
+}
+.meet-jess-link:hover{border-color:#93b9df;color:#c7e0f5}
+.btn-hero-outline{
+  display:flex;
+  width:290px;
+  margin-top:3.3rem;
+  padding:1rem 1.6rem;
+  color:#93b9df;
+  background:rgba(9,35,42,.16);
+  border:2px solid #93b9df;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-size:1rem;
+  backdrop-filter:blur(2px);
+}
+.btn-hero-outline:hover{background:#93b9df;color:#102f36}
+
+@media(max-width:1050px){
+  .home-page .nav-wrap,.home-page .hero-layout{width:min(100% - 48px,1340px)}
+  .home-page .nav{gap:.9rem}
+  .home-page .nav a:not(.btn){font-size:.92rem}
+  .home-page .hero-layout{padding-top:245px}
 }
 @media(max-width:920px){
-  .home-page .nav-wrap{min-height:104px}
-  .home-page .logo{height:84px}
-  .home-page .hero-copy{padding:190px 0 80px}
+  .home-page .nav-wrap{min-height:105px}
+  .home-page .logo{height:88px}
+  .home-page .nav-toggle{display:block;color:#fff;background:rgba(10,40,47,.66);border-color:rgba(255,255,255,.35)}
+  .home-page .nav{top:88px;background:rgba(11,43,50,.98);border-color:rgba(255,255,255,.14)}
+  .home-page .nav a{color:#fff!important}
+  .home-page .site-header.is-scrolled .nav{top:68px}
+  .home-page .hero-layout{padding:205px 0 80px}
+  .home-page .hero-message h1{font-size:clamp(3rem,7vw,4.2rem)}
 }
 @media(max-width:640px){
-  .home-page .nav-wrap,
-  .home-page .hero-copy{width:min(100% - 30px,1320px)}
-  .home-page .hero{min-height:780px;background-position:64% center}
-  .home-page .hero-copy{padding:145px 0 58px}
-  .home-page .hero .eyebrow{font-size:.68rem;margin-bottom:.8rem}
-  .home-page .hero h1{font-size:clamp(3.45rem,17vw,4.7rem);line-height:.94;margin-bottom:1rem}
-  .home-page .practice-details{margin-bottom:1.35rem}
+  .home-page .nav-wrap,.home-page .hero-layout{width:min(100% - 30px,1340px)}
+  .home-page .hero-editorial{
+    min-height:760px;
+    background-position:38% center;
+    background-image:
+      linear-gradient(90deg,rgba(6,28,34,.84),rgba(6,28,34,.55)),
+      linear-gradient(0deg,rgba(6,24,30,.38),rgba(6,24,30,.05)),
+      url("../images/philosophy-coast.jpg");
+  }
+  .home-page .hero-layout{padding:150px 0 58px}
+  .home-page .hero-message h1{font-size:clamp(2.65rem,13vw,3.75rem);line-height:1.02}
+  .btn-hero-outline{width:100%;margin-top:2.35rem}
+  .home-page .site-header.is-scrolled .sticky-brand{font-size:1.35rem}
 }

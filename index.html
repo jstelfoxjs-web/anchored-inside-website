@@ -12,9 +12,12 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body class="home-page">
-<header class="site-header">
+<header class="site-header" data-sticky-header>
   <div class="container nav-wrap">
-    <a href="index.html" aria-label="Anchored Inside home"><img class="logo" src="assets/images/anchored-inside-logo-white.png" alt="Anchored Inside Counseling Services"></a>
+    <a class="brand" href="index.html" aria-label="Anchored Inside home">
+      <img class="logo" src="assets/images/anchored-inside-logo-white.png" alt="Anchored Inside Counseling Services">
+      <span class="sticky-brand">Anchored Inside</span>
+    </a>
     <button class="nav-toggle" aria-expanded="false" aria-label="Open navigation">Menu</button>
     <nav class="nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
@@ -28,19 +31,12 @@
 </header>
 
 <main>
-  <section class="hero">
-    <div class="container hero-copy">
-      <div class="eyebrow">Anchored Inside Counseling Services</div>
-      <h1>Return to what anchors you.</h1>
-      <p class="hero-lead">Therapy offers a place to slow down, understand what is happening beneath the surface, and reconnect with the steadiness, wisdom, and resilience already within you.</p>
-      <div class="practice-details" aria-label="Practice details">
-        <span>Jessica Prosser, LPC</span>
-        <span>In person in Scottsdale</span>
-        <span>Telehealth available</span>
-      </div>
-      <div class="actions">
-        <a class="btn btn-hero-primary" href="https://care.headway.co/providers/jessica-prosser-2" target="_blank" rel="noopener">Let’s get started</a>
-        <a class="btn btn-hero-secondary" href="about.html">Meet Jessica</a>
+  <section class="hero hero-editorial" aria-labelledby="hero-title">
+    <div class="container hero-layout">
+      <div class="hero-message">
+        <h1 id="hero-title">Therapy isn’t about becoming someone new. It’s about learning to return to who you’ve always been beneath the weight of what happened to you.</h1>
+        <a class="meet-jess-link" href="about.html">Meet Jess</a>
+        <a class="btn btn-hero-outline" href="https://care.headway.co/providers/jessica-prosser-2" target="_blank" rel="noopener">Let’s get started</a>
       </div>
     </div>
   </section>
