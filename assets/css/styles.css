@@ -825,3 +825,53 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
  .audience-link{margin-top:24px}
 }
 @media(prefers-reduced-motion:reduce){.audience-card,.audience-card::after,.audience-arrow{transition:none}}
+
+
+/* Homepage header aligned with the cream navigation ribbon used sitewide */
+.home-page .site-header{
+  position:sticky;
+  inset:auto;
+  top:0;
+  z-index:80;
+  background:rgba(255,253,249,.94);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+  box-shadow:none;
+}
+.home-page .nav-wrap{
+  width:min(1180px,calc(100% - 40px));
+  min-height:88px;
+}
+.home-page .logo{
+  height:66px;
+  width:auto;
+  filter:none;
+}
+.home-page .nav{gap:1.1rem}
+.home-page .nav a:not(.btn){
+  color:var(--ink);
+  font-size:.94rem;
+  font-weight:700;
+  text-shadow:none;
+}
+.home-page .nav a:not(.btn):hover{opacity:1;color:var(--ocean-deep)}
+.home-page .site-header.is-scrolled{
+  background:rgba(255,253,249,.94);
+  box-shadow:none;
+  backdrop-filter:blur(14px);
+}
+.home-page .site-header.is-scrolled .nav-wrap{min-height:88px}
+.home-page .site-header.is-scrolled .logo{display:block}
+.home-page .hero-editorial{min-height:calc(100svh - 88px)}
+@media(max-width:920px){
+  .home-page .nav-wrap{width:min(1180px,calc(100% - 40px));min-height:88px}
+  .home-page .logo{height:66px}
+  .home-page .nav-toggle{display:block;color:var(--ink);background:#fff;border-color:var(--line)}
+  .home-page .nav{top:78px;background:#fff;border-color:var(--line)}
+  .home-page .nav a{color:var(--ink)!important}
+}
+@media(max-width:640px){
+  .home-page .nav-wrap{width:min(1180px,calc(100% - 40px))}
+  .home-page .hero-editorial{min-height:672px}
+  .home-page .hero-layout{padding-top:72px}
+}
