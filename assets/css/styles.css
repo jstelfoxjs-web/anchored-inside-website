@@ -3148,3 +3148,83 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
     min-height:0;
   }
 }
+
+
+/* About Jess — isolated Beyond Therapy reflection layout */
+.about-page .about-beyond-reflection{
+  grid-column:1 / -1;
+  width:min(100%, 940px);
+  margin:0 auto;
+  padding:clamp(2.75rem,5vw,4.75rem) 0 0;
+  border-top:1px solid rgba(20,69,74,.18);
+  text-align:center;
+}
+.about-page .about-beyond-reflection__lead{
+  width:min(100%, 720px);
+  margin:0 auto clamp(2rem,3.5vw,3rem);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2rem,3.2vw,3rem);
+  font-weight:500;
+  line-height:1.18;
+  letter-spacing:-.02em;
+  color:var(--about-ink);
+}
+.about-page .about-beyond-reflection__values{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  width:100%;
+  margin:0 0 clamp(2.25rem,4vw,3.5rem);
+  padding:0;
+  list-style:none;
+  border-top:1px solid rgba(20,69,74,.18);
+  border-bottom:1px solid rgba(20,69,74,.18);
+}
+.about-page .about-beyond-reflection__values li{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  min-height:92px;
+  padding:1.25rem 1rem;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(.78rem,.95vw,.9rem);
+  font-weight:600;
+  line-height:1.45;
+  letter-spacing:.065em;
+  text-transform:uppercase;
+  color:#315d61;
+}
+.about-page .about-beyond-reflection__values li + li{
+  border-left:1px solid rgba(20,69,74,.18);
+}
+.about-page .about-beyond-reflection__body{
+  width:min(100%, 735px);
+  margin:0 auto;
+}
+.about-page .about-beyond-reflection__body p{
+  margin:0 0 1.2rem;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(1rem,1.15vw,1.08rem);
+  line-height:1.82;
+  color:var(--about-copy);
+}
+.about-page .about-beyond-reflection__body p:last-child{margin-bottom:0}
+
+@media(max-width:760px){
+  .about-page .about-beyond-reflection__values{grid-template-columns:1fr 1fr}
+  .about-page .about-beyond-reflection__values li:nth-child(odd){border-left:0}
+  .about-page .about-beyond-reflection__values li:nth-child(n+3){border-top:1px solid rgba(20,69,74,.18)}
+}
+@media(max-width:480px){
+  .about-page .about-beyond-reflection{text-align:left}
+  .about-page .about-beyond-reflection__lead,
+  .about-page .about-beyond-reflection__body{margin-left:0;margin-right:0}
+  .about-page .about-beyond-reflection__values{grid-template-columns:1fr}
+  .about-page .about-beyond-reflection__values li{
+    justify-content:flex-start;
+    min-height:0;
+    padding:1rem 0;
+    border-left:0!important;
+  }
+  .about-page .about-beyond-reflection__values li + li{border-top:1px solid rgba(20,69,74,.18)}
+}
