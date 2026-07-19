@@ -3461,3 +3461,6 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
   .about-page .about-beyond-reflection__values li + li{border-top:1px solid rgba(20,69,74,.16)}
   .about-page .about-beyond-reflection__body{width:100%}
 }
+
+/* Services hero label intentionally removed */
+.services-editorial-page .services-image-hero__copy > .eyebrow { display: none !important; }
