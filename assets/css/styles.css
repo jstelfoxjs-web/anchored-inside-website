@@ -1216,3 +1216,65 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
   .audience-image-wrap{height:310px}
   .audience-card-body{min-height:390px;padding:28px 25px 24px}
 }
+
+/* 2026 art-directed seasons showcase */
+.seasons-showcase{padding:76px 0 94px;background:linear-gradient(180deg,#fbf8f2 0%,#f7f2ea 100%);overflow:hidden}
+.container-wide{width:min(1760px,calc(100% - 48px));margin-inline:auto}
+.seasons-heading{max-width:1160px;margin:0 auto 32px}
+.seasons-heading .eyebrow{font-family:"Manrope",sans-serif;font-size:.82rem;letter-spacing:.42em;font-weight:600;color:#536b5a;margin-bottom:14px}
+.seasons-heading h2{font-family:"Cormorant Garamond",serif;font-size:clamp(3.4rem,5.4vw,6.2rem);font-weight:500;line-height:.92;letter-spacing:-.035em;color:#111;margin:0}
+.seasons-heading h2 em{font-weight:400;font-style:italic}
+.seasons-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px;color:#607466}
+.seasons-ornament span{display:block;width:76px;height:1px;background:currentColor;opacity:.55}
+.seasons-ornament b{font-size:1.55rem;font-weight:400;line-height:1}
+
+.seasons-showcase .audience-grid-editorial{margin-top:26px;border:0;box-shadow:0 28px 70px rgba(36,48,44,.11);background:transparent;isolation:isolate}
+.seasons-showcase .audience-grid-editorial .audience-card{min-height:790px;border-right:1px solid rgba(16,34,35,.1);background:#f9f4ec;transform:translateZ(0)}
+.seasons-showcase .audience-grid-editorial .audience-card:last-child{border-right:0}
+.seasons-showcase .audience-image-wrap{height:390px;background:#e3e8e5}
+.seasons-showcase .audience-image-wrap:after{display:none}
+.seasons-showcase .audience-image-wrap img{filter:saturate(.9) contrast(.98)}
+.seasons-showcase .audience-card-body{min-height:400px;padding:32px 36px 30px;background:#fbf7f0;overflow:hidden}
+.seasons-showcase .audience-card-body:before{content:"";position:absolute;left:-7%;right:-7%;top:-56px;height:92px;background:inherit;border-radius:50% 50% 0 0/100% 100% 0 0;z-index:0}
+.seasons-showcase .audience-card-body>*{position:relative;z-index:1}
+.seasons-showcase .audience-meta-line{display:flex;align-items:center;gap:18px;margin-bottom:30px}
+.seasons-showcase .audience-image-number{position:static;color:#6c7f68;text-shadow:none;font-size:2.8rem;line-height:.8;letter-spacing:-.03em;min-width:58px}
+.seasons-showcase .audience-kicker{margin:0;padding-left:18px;border-left:1px solid currentColor;font-size:.64rem;letter-spacing:.19em;white-space:nowrap}
+.seasons-showcase .audience-kicker:before{display:none}
+.seasons-showcase .audience-grid-editorial h3{font-size:clamp(3.2rem,3.4vw,4.7rem);line-height:.82;color:#101817;margin-bottom:22px}
+.seasons-showcase .audience-grid-editorial p{font-size:.96rem;line-height:1.72;color:#1e2e2f;max-width:29ch}
+.seasons-showcase .audience-grid-editorial .audience-link{justify-content:flex-start;width:auto;align-self:flex-start;gap:28px;margin-top:auto;padding:0 0 5px;border-top:0;border-bottom:1px solid currentColor;color:#1b2928;font-size:.68rem;letter-spacing:.17em}
+.seasons-showcase .audience-arrow{margin-left:10px}
+
+.seasons-showcase .audience-card-teens{background:#31566b;color:#fff}
+.seasons-showcase .audience-card-teens .audience-card-body{background:#31566b;color:#fff}
+.seasons-showcase .audience-card-teens .audience-card-body:after{content:"";position:absolute;inset:12% -20% -8% 36%;width:auto;height:auto;border:0;border-radius:0;opacity:.15;background:repeating-radial-gradient(ellipse at 85% 55%,transparent 0 16px,rgba(255,255,255,.42) 17px 18px)}
+.seasons-showcase .audience-card-teens .audience-image-number,.seasons-showcase .audience-card-teens .audience-kicker,.seasons-showcase .audience-card-teens h3,.seasons-showcase .audience-card-teens p,.seasons-showcase .audience-card-teens .audience-link{color:#fff}
+.seasons-showcase .audience-card-teens .audience-image-wrap{background:#31566b}
+.seasons-showcase .audience-card-adults .audience-card-body:after{content:"";position:absolute;width:310px;height:310px;right:-150px;bottom:8px;border:0;border-radius:50%;opacity:.17;background:repeating-conic-gradient(from 0deg,transparent 0 6deg,#b5764c 6.3deg 6.8deg)}
+.seasons-showcase .audience-card-families .audience-card-body:after{content:"";position:absolute;width:220px;height:300px;right:-70px;bottom:-20px;border:0;border-radius:0;opacity:.2;background:linear-gradient(65deg,transparent 48%,#7d765f 49% 50%,transparent 51%),linear-gradient(110deg,transparent 48%,#7d765f 49% 50%,transparent 51%);transform:rotate(-8deg)}
+.seasons-showcase .audience-card-children .audience-card-body:after{content:"";position:absolute;width:150px;height:280px;left:-44px;top:-140px;border:0;border-radius:0;opacity:.16;background:repeating-linear-gradient(72deg,transparent 0 18px,#617f72 19px 20px,transparent 21px 34px)}
+.seasons-showcase .audience-card-adults .audience-image-number,.seasons-showcase .audience-card-adults .audience-kicker,.seasons-showcase .audience-card-adults .audience-link{color:#9b5d38}
+.seasons-showcase .audience-card-families .audience-image-number,.seasons-showcase .audience-card-families .audience-kicker{color:#6b624b}
+.seasons-showcase .audience-card:hover{transform:translateY(-10px);box-shadow:0 34px 70px rgba(25,40,39,.19)}
+.seasons-showcase .audience-card:hover .audience-image-wrap img{transform:scale(1.045)}
+.seasons-showcase .audience-card:focus-visible{outline:3px solid rgba(63,103,109,.42);outline-offset:5px}
+
+@media(max-width:1100px){
+  .container-wide{width:min(1100px,calc(100% - 32px))}
+  .seasons-showcase .audience-grid-editorial{grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(17,45,47,.13)}
+  .seasons-showcase .audience-grid-editorial .audience-card{min-height:740px;border:0}
+}
+@media(max-width:680px){
+  .seasons-showcase{padding:58px 0 72px}
+  .container-wide{width:min(100% - 24px,620px)}
+  .seasons-heading h2{font-size:clamp(3rem,14vw,4.35rem)}
+  .seasons-heading .eyebrow{font-size:.7rem;letter-spacing:.29em}
+  .seasons-ornament span{width:54px}
+  .seasons-showcase .audience-grid-editorial{grid-template-columns:1fr;gap:20px;background:transparent;box-shadow:none}
+  .seasons-showcase .audience-grid-editorial .audience-card{min-height:0;box-shadow:0 18px 42px rgba(27,43,42,.11)}
+  .seasons-showcase .audience-image-wrap{height:330px}
+  .seasons-showcase .audience-card-body{min-height:390px;padding:30px 27px 26px}
+  .seasons-showcase .audience-grid-editorial h3{font-size:3.65rem}
+}
+@media(prefers-reduced-motion:reduce){.seasons-showcase .audience-card,.seasons-showcase .audience-image-wrap img{transition:none}}
