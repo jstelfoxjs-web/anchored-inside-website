@@ -1,26 +1,161 @@
-<!doctype html><html lang='en'><head><title>Resource Hub | Anchored Inside</title><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="assets/images/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css"></head><body><header class="site-header"><div class="container nav-wrap">
-<a href="index.html"><img class="logo" src="assets/images/anchored-inside-logo.png" alt="Anchored Inside Counseling Services"></a>
-<button class="nav-toggle" aria-expanded="false">Menu</button>
-<nav class="nav">
-<a href="index.html">Home</a><a href="about.html">About</a><a href="philosophy.html">Philosophy</a>
-<a href="services.html">Services</a><a href="resources.html">Resource Hub</a>
-<a class="btn btn-primary" href="contact.html">Connect</a>
-</nav></div></header><main>
-<section class="page-hero"><div class="container"><div class="eyebrow">Resource Hub</div><h1>Read, reflect, and practice.</h1><p>Browse educational tools for parents, teens, individuals, and helping professionals.</p>
-<div class="resource-controls"><input id="resource-search" class="field" type="search" placeholder="Search resources…">
-<select id="audience-filter" class="field"><option value="all">All audiences</option><option value="parents">Parents</option><option value="individuals">Individuals</option><option value="teens">Teens</option><option value="families">Families</option></select>
-<select id="topic-filter" class="field"><option value="all">All topics</option><option value="attachment">Attachment</option><option value="parenting">Parenting</option><option value="co-regulation">Co-regulation</option><option value="nervous-system">Nervous system</option><option value="communication">Communication</option></select></div><strong id="resource-count"></strong></div></section>
-<section class="section"><div class="container"><div id="resource-grid" class="resource-grid"></div></div></section>
-<div class="modal" id="resource-modal"><div class="modal-card"><button class="modal-close">×</button><h2 id="modal-title" style="font-size:2rem;padding-right:55px"></h2><img id="modal-image" alt=""></div></div>
-</main><footer><div class="container"><div class="footer-grid">
-<div><img class="footer-logo" src="assets/images/anchored-inside-logo-white.png" alt="Anchored Inside"><p>A grounded place to return to what is steady, connected, and true.</p></div>
-<div><strong>Explore</strong><div class="footer-links"><a href="about.html">About Jessica</a><a href="philosophy.html">Philosophy</a><a href="services.html">Services</a><a href="resources.html">Resource Hub</a></div></div>
-<div><strong>Important</strong><div class="footer-links"><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy</a><a href="/admin/">Admin</a></div></div>
-</div><div class="footer-bottom">© 2026 Anchored Inside Counseling Services.</div></div></footer>
-<script src="assets/js/app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <title>The Toolkit | Anchored Inside</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore therapist-created handouts, visual guides, and practical tools for healing, growth, parenting, and connection.">
+  <link rel="icon" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="toolkit-page">
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="index.html"><img class="logo" src="assets/images/anchored-inside-logo.png" alt="Anchored Inside Counseling Services"></a>
+    <button class="nav-toggle" aria-expanded="false">Menu</button>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="services.html">Services</a>
+      <a href="resources.html" aria-current="page">The Toolkit</a>
+      <a class="btn btn-primary" href="contact.html">Connect</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="toolkit-hero">
+    <div class="container toolkit-hero-grid">
+      <div>
+        <div class="eyebrow">Anchored Inside</div>
+        <h1>The Toolkit</h1>
+        <p class="toolkit-lead">Practical tools for healing, growth, and connection.</p>
+        <p class="toolkit-intro">Browse therapist-created handouts, visual guides, and skill-building resources designed to support children, teens, adults, parents, couples, and helping professionals.</p>
+      </div>
+      <div class="toolkit-search-panel">
+        <label for="resource-search">What would feel helpful today?</label>
+        <div class="toolkit-search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="resource-search" type="search" placeholder="Search anxiety, parenting, regulation…" autocomplete="off">
+        </div>
+        <div class="popular-searches" aria-label="Popular searches">
+          <span>Popular:</span>
+          <button type="button" data-search="parenting">Parenting</button>
+          <button type="button" data-search="regulation">Regulation</button>
+          <button type="button" data-search="attachment">Attachment</button>
+          <button type="button" data-search="communication">Communication</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolkit-explore section">
+    <div class="container">
+      <div class="section-heading toolkit-heading-row">
+        <div>
+          <div class="eyebrow">Find a starting point</div>
+          <h2>Explore the Toolkit</h2>
+          <p>Choose a path below or scroll down to browse every available resource.</p>
+        </div>
+      </div>
+
+      <div class="journey-grid" aria-label="Browse by journey">
+        <button class="journey-card" type="button" data-topic="all">
+          <span class="journey-icon">✦</span><span><strong>Start Here</strong><small>See the full collection</small></span>
+        </button>
+        <button class="journey-card" type="button" data-topic="regulation">
+          <span class="journey-icon">≈</span><span><strong>Find More Steadiness</strong><small>Regulation and nervous system tools</small></span>
+        </button>
+        <button class="journey-card" type="button" data-topic="parenting">
+          <span class="journey-icon">⌂</span><span><strong>Parent with Connection</strong><small>Practical parenting support</small></span>
+        </button>
+        <button class="journey-card" type="button" data-topic="attachment">
+          <span class="journey-icon">∞</span><span><strong>Strengthen Connection</strong><small>Attachment and relationship tools</small></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolkit-library section section-soft" id="library">
+    <div class="container">
+      <div class="library-header">
+        <div>
+          <div class="eyebrow">Browse all tools</div>
+          <h2>Build your toolkit.</h2>
+        </div>
+        <strong id="resource-count" aria-live="polite"></strong>
+      </div>
+
+      <div class="toolkit-layout">
+        <aside class="toolkit-filters" aria-label="Resource filters">
+          <div class="filter-group">
+            <div class="filter-label">Audience</div>
+            <div class="filter-chips" id="audience-chips">
+              <button type="button" class="filter-chip active" data-audience="all">Everyone</button>
+              <button type="button" class="filter-chip" data-audience="parents">Parents</button>
+              <button type="button" class="filter-chip" data-audience="individuals">Adults</button>
+              <button type="button" class="filter-chip" data-audience="teens">Teens</button>
+              <button type="button" class="filter-chip" data-audience="families">Families</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="topic-filter">Topic</label>
+            <select id="topic-filter" class="field">
+              <option value="all">All topics</option>
+            </select>
+          </div>
+          <button class="clear-filters" id="clear-filters" type="button">Clear filters</button>
+        </aside>
+
+        <div>
+          <div id="active-filter-note" class="active-filter-note" hidden></div>
+          <div id="resource-grid" class="resource-grid toolkit-resource-grid"></div>
+          <div id="resource-empty" class="resource-empty" hidden>
+            <h3>No tools found</h3>
+            <p>Try a broader search or clear your filters.</p>
+            <button class="btn btn-primary" type="button" data-clear-all>View all tools</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolkit-note section">
+    <div class="container toolkit-note-panel">
+      <div>
+        <div class="eyebrow">A gentle note</div>
+        <h2>Tools can support the work. They do not have to replace support.</h2>
+      </div>
+      <p>These resources are educational and are not a substitute for individualized mental health care, diagnosis, or crisis support. Choose what feels useful, move at your own pace, and reach out for professional support when needed.</p>
+    </div>
+  </section>
+
+  <div class="modal" id="resource-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card toolkit-modal-card">
+      <button class="modal-close" aria-label="Close preview">×</button>
+      <div class="modal-heading">
+        <div class="eyebrow">Toolkit preview</div>
+        <h2 id="modal-title"></h2>
+      </div>
+      <img id="modal-image" alt="">
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><img class="footer-logo" src="assets/images/anchored-inside-logo-white.png" alt="Anchored Inside"><p>A grounded place to return to what is steady, connected, and true.</p></div>
+      <div><strong>Explore</strong><div class="footer-links"><a href="about.html">About Jessica</a><a href="philosophy.html">Philosophy</a><a href="services.html">Services</a><a href="resources.html">The Toolkit</a></div></div>
+      <div><strong>Important</strong><div class="footer-links"><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy</a><a href="/admin/">Admin</a></div></div>
+    </div>
+    <div class="footer-bottom">© 2026 Anchored Inside Counseling Services.</div>
+  </div>
+</footer>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
