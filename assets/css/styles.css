@@ -2915,3 +2915,153 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
     grid-column:1;
   }
 }
+
+/* About Jess — consolidated editorial system (July 2026) */
+.about-page{
+  --about-ink:#183f43;
+  --about-copy:#586f73;
+  --about-cream:#f7f2e9;
+  --about-warm:#e8e0d3;
+  --about-line:rgba(24,63,67,.16);
+}
+.about-page main{overflow:hidden}
+.about-page .site-header{background:rgba(250,248,244,.96);border-bottom:1px solid rgba(24,63,67,.08)}
+.about-page .section{padding-block:clamp(5rem,8vw,8.5rem)}
+
+.about-page .about-hero-full,
+.about-page .about-hero-full__content{min-height:clamp(620px,78vh,880px)}
+.about-page .about-hero-full>img{object-position:center 48%}
+.about-page .about-hero-full__shade{background:linear-gradient(90deg,rgba(8,28,31,.7) 0%,rgba(8,28,31,.32) 48%,rgba(8,28,31,.08) 78%)}
+.about-page .about-hero-full__content{align-items:flex-end;padding-bottom:clamp(4rem,7vw,7rem)}
+.about-page .about-hero-full h1{font-size:clamp(4rem,7vw,7.3rem);max-width:9ch;font-weight:500}
+
+.about-page .about-story-editorial{background:#fbf9f5}
+.about-page .about-story-editorial__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(360px,.82fr);
+  gap:clamp(4rem,8vw,9rem);
+  align-items:start;
+}
+.about-page .about-story-editorial__copy{max-width:670px;padding-top:clamp(.5rem,2vw,1.5rem)}
+.about-page .about-story-editorial__copy h2,
+.about-page .about-learning-copy h2,
+.about-page .about-experience-wrap h2,
+.about-page .about-beyond-editorial__intro h2{
+  font-size:clamp(3.1rem,5vw,5.35rem);
+  line-height:.98;
+  letter-spacing:-.035em;
+  color:var(--about-ink);
+  margin:.65rem 0 1.65rem;
+}
+.about-page .about-story-editorial__copy p,
+.about-page .about-learning-copy p,
+.about-page .about-experience-copy p,
+.about-page .about-beyond-editorial__copy p{
+  font-size:clamp(1rem,1.15vw,1.1rem);
+  line-height:1.82;
+  color:var(--about-copy);
+}
+.about-page .about-story-editorial__copy p{margin:0 0 1.25rem}
+.about-page .about-story-editorial__image{
+  width:100%;
+  height:clamp(520px,56vw,760px);
+  min-height:0;
+  margin:clamp(6rem,10vw,10rem) 0 0;
+  overflow:hidden;
+}
+.about-page .about-story-editorial__image img{width:100%;height:100%;min-height:0;object-fit:cover;display:block}
+.about-page .about-story-editorial__copy p:first-of-type::first-letter{font-size:5.25rem;line-height:.76;padding:.12rem .65rem 0 0}
+
+.about-page .about-learning-section{background:var(--about-warm)}
+.about-page .about-learning-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(320px,.72fr);
+  gap:clamp(4rem,8vw,8rem);
+  align-items:start;
+}
+.about-page .about-learning-copy{max-width:740px}
+.about-page .about-learning-copy p{margin:0 0 1.25rem}
+.about-page .credentials-card{
+  position:static;
+  margin:0;
+  background:rgba(250,247,241,.88);
+  border:1px solid var(--about-line);
+  padding:clamp(2rem,3vw,3rem);
+  box-shadow:none;
+}
+.about-page .credentials-card__item{padding:1.35rem 0}
+.about-page .credentials-card__item strong{font-size:1.38rem}
+.about-page .about-pullquote{margin-top:2.5rem;padding:1.5rem 0 1.5rem 1.5rem;font-size:clamp(1.75rem,2.6vw,2.45rem)}
+
+.about-page .about-experience-section{background:#fbf9f5}
+.about-page .about-experience-wrap{max-width:1180px}
+.about-page .about-experience-wrap h2{max-width:13ch}
+.about-page .about-experience-copy{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(2rem,4vw,4rem);
+  margin:3rem 0 2rem;
+  padding-top:2rem;
+  border-top:1px solid var(--about-line);
+}
+.about-page .about-experience-copy p{margin:0}
+
+.about-page .about-beyond-editorial{background:var(--about-cream)}
+.about-page .about-beyond-editorial__inner{
+  display:grid;
+  grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);
+  column-gap:clamp(4rem,8vw,8rem);
+  row-gap:clamp(3rem,5vw,5rem);
+  align-items:start;
+}
+.about-page .about-beyond-editorial__intro{max-width:500px;padding-top:.5rem}
+.about-page .about-beyond-editorial__lead{font-size:clamp(1.55rem,2.3vw,2.15rem);line-height:1.35}
+.about-page .about-beyond-gallery{display:grid;grid-template-columns:1.18fr .82fr;gap:clamp(1rem,2vw,1.5rem);align-items:end}
+.about-page .about-beyond-gallery__wide{height:clamp(380px,39vw,565px)}
+.about-page .about-beyond-gallery__portrait{height:clamp(380px,39vw,565px)}
+.about-page .about-beyond-editorial__copy{
+  grid-column:2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(1.5rem,3vw,3rem);
+  max-width:850px;
+  padding-top:2rem;
+  border-top:1px solid var(--about-line);
+}
+.about-page .about-beyond-editorial__belief{grid-column:1/-1;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:clamp(1.7rem,2.5vw,2.3rem)!important;line-height:1.3!important;color:var(--about-ink)!important}
+.about-page .about-beyond-values{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:.7rem 2rem;padding:1.5rem 0;border-top:1px solid var(--about-line);border-bottom:1px solid var(--about-line)}
+.about-page .about-beyond-values span{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.35rem,2vw,1.75rem);color:var(--about-ink)}
+.about-page .final-cta{padding-block:clamp(4rem,7vw,6rem);background:#fbf9f5}
+.about-page .about-cta-panel{border-radius:8px;box-shadow:none}
+
+@media(max-width:900px){
+  .about-page .about-hero-full,.about-page .about-hero-full__content{min-height:72vw}
+  .about-page .about-story-editorial__grid,
+  .about-page .about-learning-grid,
+  .about-page .about-beyond-editorial__inner{grid-template-columns:1fr}
+  .about-page .about-story-editorial__copy{max-width:760px}
+  .about-page .about-story-editorial__image{height:min(82vw,720px);margin-top:1rem}
+  .about-page .credentials-card{max-width:680px}
+  .about-page .about-experience-copy{grid-template-columns:1fr;max-width:760px}
+  .about-page .about-beyond-editorial__intro{max-width:720px}
+  .about-page .about-beyond-editorial__copy{grid-column:1;max-width:none}
+}
+@media(max-width:620px){
+  .about-page .section{padding-block:4.5rem}
+  .about-page .about-hero-full,.about-page .about-hero-full__content{min-height:76svh}
+  .about-page .about-hero-full>img{object-position:58% center}
+  .about-page .about-hero-full__shade{background:linear-gradient(0deg,rgba(8,28,31,.72),rgba(8,28,31,.08) 68%)}
+  .about-page .about-hero-full h1{font-size:clamp(3.45rem,16vw,5rem)}
+  .about-page .about-story-editorial__grid{gap:2.5rem}
+  .about-page .about-story-editorial__image{height:118vw;margin-top:0}
+  .about-page .about-story-editorial__copy p:first-of-type::first-letter{font-size:4.4rem}
+  .about-page .credentials-card{padding:1.8rem 1.25rem}
+  .about-page .about-beyond-gallery{grid-template-columns:1fr 1fr;gap:.75rem}
+  .about-page .about-beyond-gallery__wide,
+  .about-page .about-beyond-gallery__portrait{height:78vw}
+  .about-page .about-beyond-editorial__copy{grid-template-columns:1fr}
+  .about-page .about-beyond-editorial__belief,
+  .about-page .about-beyond-values{grid-column:1}
+  .about-page .about-beyond-values{grid-template-columns:1fr}
+  .about-page .cta-panel{border-radius:8px}
+}
