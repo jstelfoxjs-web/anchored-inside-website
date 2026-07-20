@@ -3464,14 +3464,3 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 
 /* Services hero label intentionally removed */
 .services-editorial-page .services-image-hero__copy > .eyebrow { display: none !important; }
-
-/* Full-resolution Philosophy images — July 2026 */
-.principle-story__image img{
-  image-rendering:auto;
-  filter:none !important;
-  transform:translateZ(0);
-  backface-visibility:hidden;
-}
-.principle-story--safety .principle-story__image img{object-position:50% 47%;}
-.principle-story--parts .principle-story__image img{object-position:50% 50%;}
-.principle-story--wisdom .principle-story__image img{object-position:50% 50%;}
