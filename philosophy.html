@@ -9,7 +9,91 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=26-philosophy-hero-fixed">
+  <link rel="stylesheet" href="assets/css/styles.css?v=25-philosophy-hero">
+
+  <style>
+    /* Philosophy hero: isolated from legacy shared hero spacing */
+    body.anchored-philosophy-page main { margin: 0 !important; padding: 0 !important; }
+    body.anchored-philosophy-page #philosophy-page-hero {
+      position: relative !important;
+      isolation: isolate;
+      width: 100% !important;
+      min-height: clamp(560px, calc(100svh - 108px), 820px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      overflow: hidden;
+      color: #fff;
+      background-image:
+        linear-gradient(90deg, rgba(8,30,32,.78) 0%, rgba(8,30,32,.55) 45%, rgba(8,30,32,.14) 82%),
+        url("assets/images/philosophy-hero-nature.svg");
+      background-size: cover;
+      background-position: center 52%;
+      background-repeat: no-repeat;
+    }
+    body.anchored-philosophy-page #philosophy-page-hero .philosophy-page-hero__inner {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 3rem, 1320px);
+      margin: 0 auto;
+      padding: clamp(5rem, 10vh, 8rem) 0;
+    }
+    body.anchored-philosophy-page #philosophy-page-hero .philosophy-page-hero__copy {
+      width: min(760px, 70vw);
+    }
+    body.anchored-philosophy-page #philosophy-page-hero .eyebrow {
+      margin: 0 0 1.25rem !important;
+      color: rgba(255,255,255,.92) !important;
+      letter-spacing: .2em;
+    }
+    body.anchored-philosophy-page #philosophy-page-hero h1 {
+      margin: 0 !important;
+      max-width: 10ch;
+      color: #fff !important;
+      font-size: clamp(4rem, 7vw, 7.25rem) !important;
+      line-height: .91 !important;
+      letter-spacing: -.045em !important;
+      font-weight: 500;
+      text-shadow: 0 2px 24px rgba(0,0,0,.18);
+    }
+    body.anchored-philosophy-page .anchored-philosophy-intro {
+      margin: 0 !important;
+      padding: clamp(4rem, 7vw, 7rem) 0 clamp(3.5rem, 6vw, 6rem) !important;
+      background: #f5f0e7;
+    }
+    body.anchored-philosophy-page .anchored-philosophy-intro__inner { max-width: 1120px; }
+    body.anchored-philosophy-page .anchored-philosophy-intro .anchored-philosophy-hero__intro {
+      margin: 0 0 0 auto !important;
+    }
+    @media (max-width: 900px) {
+      body.anchored-philosophy-page #philosophy-page-hero {
+        min-height: 68svh !important;
+        background-position: 56% center;
+      }
+      body.anchored-philosophy-page #philosophy-page-hero .philosophy-page-hero__copy { width: min(680px, 86vw); }
+    }
+    @media (max-width: 700px) {
+      body.anchored-philosophy-page #philosophy-page-hero {
+        min-height: 72svh !important;
+        background-image:
+          linear-gradient(0deg, rgba(8,30,32,.78) 0%, rgba(8,30,32,.28) 72%, rgba(8,30,32,.10) 100%),
+          url("assets/images/philosophy-hero-nature.svg");
+        background-position: 60% center;
+        align-items: flex-end !important;
+      }
+      body.anchored-philosophy-page #philosophy-page-hero .philosophy-page-hero__inner {
+        width: min(100% - 2rem, 1320px);
+        padding: 4rem 0 3.25rem;
+      }
+      body.anchored-philosophy-page #philosophy-page-hero .philosophy-page-hero__copy { width: 100%; }
+      body.anchored-philosophy-page #philosophy-page-hero h1 {
+        font-size: clamp(3.15rem, 15vw, 4.7rem) !important;
+        max-width: 9.5ch;
+      }
+      body.anchored-philosophy-page .anchored-philosophy-intro { padding: 3.5rem 0 4rem !important; }
+    }
+  </style>
 </head>
 <body class="philosophy-page anchored-philosophy-page">
 <header class="site-header">
@@ -28,22 +112,22 @@
 </header>
 
 <main>
-  <section class="anchored-philosophy-hero" aria-labelledby="philosophy-title">
-    <img class="anchored-philosophy-hero__background" src="assets/images/philosophy-hero-nature.svg" alt="Misty green cliffs meeting the sea">
-    <div class="anchored-philosophy-hero__overlay" aria-hidden="true"></div>
-    <div class="container anchored-philosophy-hero__inner">
-      <p class="eyebrow">The foundation of our work</p>
-      <h1 id="philosophy-title">Healing begins from the inside out.</h1>
+  <section id="philosophy-page-hero" aria-labelledby="philosophy-title" role="img" aria-label="A peaceful misty coastline">
+    <div class="philosophy-page-hero__inner">
+      <div class="philosophy-page-hero__copy">
+        <p class="eyebrow">The foundation of our work</p>
+        <h1 id="philosophy-title">Healing begins from the inside out.</h1>
+      </div>
     </div>
   </section>
 
-  <section class="philosophy-introduction" aria-label="Introduction to the Anchored Inside philosophy">
-    <div class="container philosophy-introduction__inner">
-      <div class="philosophy-introduction__copy">
+  <section class="anchored-philosophy-intro" aria-label="Our therapeutic foundation">
+    <div class="container anchored-philosophy-intro__inner">
+      <div class="anchored-philosophy-hero__intro">
         <p>Rather than asking, <em>“What’s wrong with you?”</em> we begin by asking, <em>“What happened to you?”</em> and <em>“How did your nervous system learn to survive?”</em></p>
         <p>Every thought, emotion, behavior, and protective pattern has a purpose. Therapy is not about fixing who you are. It is about creating enough safety to understand your story, reconnect with yourself, and move toward the life you want to live.</p>
       </div>
-      <p class="philosophy-introduction__closing">Our work is grounded in three principles.</p>
+      <p class="anchored-philosophy-hero__closing">Our work is grounded in three principles.</p>
     </div>
   </section>
 
