@@ -3464,11 +3464,3 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 
 /* Services hero label intentionally removed */
 .services-editorial-page .services-image-hero__copy > .eyebrow { display: none !important; }
-
-/* Remove decorative underline rules from website call-to-action links. */
-.text-link,
-.season-panel__link,
-.audience-link {
-  border-bottom: 0 !important;
-  text-decoration: none !important;
-}
