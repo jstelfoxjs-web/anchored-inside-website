@@ -3475,3 +3475,85 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 .principle-story--safety .principle-story__image img{object-position:50% 47%;}
 .principle-story--parts .principle-story__image img{object-position:50% 50%;}
 .principle-story--wisdom .principle-story__image img{object-position:50% 50%;}
+
+/* Philosophy photographic hero — July 2026 */
+.anchored-philosophy-hero--image{
+  position:relative;
+  isolation:isolate;
+  min-height:clamp(620px,78vh,900px);
+  padding:0;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  background:#263f42;
+}
+.anchored-philosophy-hero__media{
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 52%;
+  display:block;
+}
+.anchored-philosophy-hero__shade{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background:
+    linear-gradient(90deg,rgba(13,35,39,.74) 0%,rgba(13,35,39,.48) 42%,rgba(13,35,39,.08) 74%,rgba(13,35,39,.02) 100%),
+    linear-gradient(0deg,rgba(11,31,35,.44) 0%,rgba(11,31,35,0) 58%);
+}
+.anchored-philosophy-hero--image .anchored-philosophy-hero__inner{
+  width:100%;
+  max-width:1280px;
+  padding-top:clamp(10rem,18vh,14rem);
+  padding-bottom:clamp(5rem,9vh,8rem);
+}
+.anchored-philosophy-hero--image .eyebrow{
+  color:#f5eee3;
+  text-shadow:0 1px 14px rgba(0,0,0,.25);
+}
+.anchored-philosophy-hero--image h1{
+  color:#fffaf2;
+  max-width:9.5ch;
+  margin:.45rem 0 2rem;
+  text-shadow:0 3px 28px rgba(0,0,0,.28);
+}
+.anchored-philosophy-hero--image .anchored-philosophy-hero__closing{
+  color:#fffaf2;
+  border-top-color:rgba(255,255,255,.48);
+  max-width:620px;
+  margin:0;
+  font-size:clamp(1.3rem,2vw,1.65rem);
+  text-shadow:0 1px 12px rgba(0,0,0,.25);
+}
+.anchored-philosophy-introduction{
+  background:#f5f0e7;
+  padding:clamp(5rem,8vw,8rem) 0 clamp(7rem,11vw,11rem);
+}
+.anchored-philosophy-introduction__inner{max-width:1120px}
+.anchored-philosophy-introduction .anchored-philosophy-hero__intro{
+  margin-left:auto;
+}
+.anchored-philosophy-introduction .anchored-philosophy-hero__intro p:first-child{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(1.65rem,2.4vw,2.45rem);
+  line-height:1.35;
+  color:#173f43;
+}
+@media(max-width:900px){
+  .anchored-philosophy-hero--image{min-height:680px}
+  .anchored-philosophy-hero__media{object-position:44% center}
+  .anchored-philosophy-hero__shade{background:linear-gradient(90deg,rgba(13,35,39,.72),rgba(13,35,39,.24)),linear-gradient(0deg,rgba(11,31,35,.5),transparent 60%)}
+  .anchored-philosophy-introduction{padding:5rem 0 7rem}
+}
+@media(max-width:620px){
+  .anchored-philosophy-hero--image{min-height:610px;align-items:flex-end}
+  .anchored-philosophy-hero__media{object-position:42% center}
+  .anchored-philosophy-hero--image .anchored-philosophy-hero__inner{padding-top:9rem;padding-bottom:4.25rem}
+  .anchored-philosophy-hero--image h1{font-size:clamp(3.45rem,15vw,4.65rem);max-width:8ch}
+  .anchored-philosophy-introduction{padding:4rem 0 6.5rem}
+  .anchored-philosophy-introduction .anchored-philosophy-hero__intro p:first-child{font-size:1.8rem}
+}
