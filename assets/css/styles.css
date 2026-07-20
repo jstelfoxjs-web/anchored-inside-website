@@ -3464,3 +3464,18 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 
 /* Services hero label intentionally removed */
 .services-editorial-page .services-image-hero__copy > .eyebrow { display: none !important; }
+
+
+/* Anchored Philosophy hero image */
+.anchored-philosophy-hero__image{
+  max-width:900px;
+  margin:0 auto 3.5rem;
+}
+.anchored-philosophy-hero__image img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.principle-story--safety{
+  margin-top:1.5rem;
+}
