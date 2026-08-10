@@ -1,0 +1,60 @@
+media:
+  - name: handouts
+    label: Handouts
+    input: assets/handouts
+    output: /assets/handouts
+    rename: safe
+    categories:
+      - image
+      - document
+
+content:
+  - name: toolbox
+    label: Toolbox Handouts
+    type: file
+    path: data/resources.json
+    format: json
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{title}"
+    fields:
+      - name: title
+        label: Handout title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+        required: true
+      - name: audience
+        label: Audience tags
+        type: string
+        list: true
+        required: true
+      - name: topics
+        label: Topic tags
+        type: string
+        list: true
+        required: true
+      - name: type
+        label: Resource type
+        type: string
+        required: true
+      - name: file
+        label: Handout file
+        type: file
+        required: true
+      - name: preview
+        label: Preview image (optional)
+        type: image
+        required: false
+      - name: keywords
+        label: Search keywords
+        type: string
+        list: true
+        required: false
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
