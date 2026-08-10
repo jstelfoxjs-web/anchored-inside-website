@@ -1,5 +1,42 @@
 [
   {
+    "title": "Two Sides of the Street",
+    "audience": [
+      "couples",
+      "individuals"
+    ],
+    "topics": [
+      "relationships",
+      "accountability",
+      "boundaries",
+      "communication",
+      "repair",
+      "shared-responsibility",
+      "relational-patterns"
+    ],
+    "type": "Relationship handout",
+    "description": "A visual guide to owning personal triggers, wounds, choices, and patterns while sharing responsibility for communication, repair, trust, and the relationship built in the middle.",
+    "file": "assets/handouts/two-sides-of-the-street.png",
+    "keywords": [
+      "couples",
+      "relationship work",
+      "clean your side of the street",
+      "personal responsibility",
+      "shared responsibility",
+      "accountability",
+      "unhealed wounds",
+      "unhealthy patterns",
+      "triggers",
+      "ownership",
+      "conflict",
+      "rupture and repair",
+      "emotional safety",
+      "trust",
+      "teamwork"
+    ],
+    "featured": true
+  },
+  {
     "title": "ACT Limit Setting: A Parent Guide",
     "audience": [
       "parents",
