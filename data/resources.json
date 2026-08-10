@@ -6,10 +6,11 @@
       "families"
     ],
     "topics": [
-      "boundaries",
       "parenting",
+      "boundaries",
       "setting-limits",
-      "act"
+      "act",
+      "connection"
     ],
     "type": "Parent guide",
     "description": "A calm, connection-centered three-step approach for acknowledging a child's feelings, communicating a clear limit, and targeting safe alternatives.",
@@ -38,7 +39,6 @@
       "parents"
     ],
     "topics": [
-      "nervous-system-regulation",
       "nervous-system",
       "regulation",
       "grounding",
@@ -72,12 +72,9 @@
     "topics": [
       "parenting",
       "parts-work",
-      "internal-family-systems",
-      "attachment",
       "childhood-wounds",
       "self-compassion",
-      "emotional-regulation",
-      "generational-patterns"
+      "emotional-regulation"
     ],
     "type": "Reflective handout",
     "description": "Explore how protector and exile parts shaped by childhood experiences can show up in parenting, then practice five steps for responding with greater awareness, compassion, and intention.",
@@ -106,12 +103,25 @@
       "parents"
     ],
     "topics": [
+      "parenting",
       "attachment",
-      "independence"
+      "independence",
+      "connection"
     ],
-    "type": "Visual handout",
+    "type": "Parent reflection",
     "description": "A reflective parenting message about being a secure base while children grow toward independence.",
     "file": "assets/handouts/places-you-will-go.jpeg",
+    "keywords": [
+      "raising children",
+      "secure attachment",
+      "secure base",
+      "safe harbor",
+      "confidence",
+      "curiosity",
+      "empathy",
+      "exploration",
+      "growing up"
+    ],
     "featured": true
   },
   {
@@ -121,11 +131,23 @@
     ],
     "topics": [
       "parenting",
-      "connection"
+      "connection",
+      "co-regulation",
+      "communication",
+      "boundaries"
     ],
-    "type": "Visual handout",
+    "type": "Parent guide",
     "description": "A quick guide to playful, structured, and calming engagement.",
     "file": "assets/handouts/three-types-engagement.jpeg",
+    "keywords": [
+      "playful engagement",
+      "structured engagement",
+      "calming engagement",
+      "tone of voice",
+      "redos",
+      "choices",
+      "emotion regulation"
+    ],
     "featured": true
   },
   {
@@ -135,11 +157,25 @@
     ],
     "topics": [
       "parenting",
-      "repair"
+      "repair",
+      "communication",
+      "connection"
     ],
-    "type": "Visual handout",
+    "type": "Skill guide",
     "description": "Practical ways to support respectful re-dos, repair, and collaborative compromise.",
     "file": "assets/handouts/positive-engagement-redos.jpeg",
+    "keywords": [
+      "try again",
+      "redos",
+      "compromise",
+      "conflict resolution",
+      "collaboration",
+      "apologizing",
+      "asking for help",
+      "kindness",
+      "same team",
+      "middle ground"
+    ],
     "featured": false
   },
   {
@@ -149,11 +185,22 @@
     ],
     "topics": [
       "parenting",
-      "choice"
+      "choices",
+      "boundaries",
+      "communication"
     ],
-    "type": "Visual handout",
+    "type": "Skill guide",
     "description": "Developmentally appropriate choices and collaborative problem-solving.",
     "file": "assets/handouts/positive-engagement-sharing-choice.jpeg",
+    "keywords": [
+      "limited choices",
+      "developmentally appropriate choices",
+      "collaborative problem solving",
+      "responsibility",
+      "screen time",
+      "decision making",
+      "shared control"
+    ],
     "featured": false
   },
   {
@@ -162,12 +209,24 @@
       "parents"
     ],
     "topics": [
+      "parenting",
       "communication",
-      "connection"
+      "connection",
+      "family-rituals"
     ],
-    "type": "Visual handout",
+    "type": "Skill guide",
     "description": "Open-ended questions, emotional reflection, and family rituals that support voice.",
     "file": "assets/handouts/positive-engagement-giving-voice.jpeg",
+    "keywords": [
+      "giving voice",
+      "open-ended questions",
+      "emotional validation",
+      "reflecting feelings",
+      "mirroring emotions",
+      "rose and thorn",
+      "family check-in",
+      "listening"
+    ],
     "featured": false
   },
   {
@@ -177,11 +236,24 @@
     ],
     "topics": [
       "parenting",
-      "routines"
+      "routines",
+      "transitions",
+      "behavior-support"
     ],
-    "type": "Visual handout",
+    "type": "Parent guide",
     "description": "Transitions, sequencing, routines, clear instructions, and visual supports.",
     "file": "assets/handouts/structure.jpeg",
+    "keywords": [
+      "predictability",
+      "advance warnings",
+      "sequencing tasks",
+      "executive functioning",
+      "clear instructions",
+      "visual supports",
+      "checklists",
+      "picture cards",
+      "daily expectations"
+    ],
     "featured": true
   },
   {
@@ -193,11 +265,24 @@
     ],
     "topics": [
       "nervous-system",
-      "regulation"
+      "regulation",
+      "brain-development",
+      "stress-response"
     ],
     "type": "Psychoeducation",
     "description": "A simple visual for understanding survival responses and higher-order thinking.",
     "file": "assets/handouts/upstairs-downstairs-brain.jpeg",
+    "keywords": [
+      "upstairs brain",
+      "downstairs brain",
+      "prefrontal cortex",
+      "survival brain",
+      "fight flight freeze",
+      "decision making",
+      "self-regulation",
+      "psychoeducation",
+      "Dan Siegel"
+    ],
     "featured": true
   },
   {
@@ -206,12 +291,24 @@
       "parents"
     ],
     "topics": [
+      "parenting",
       "co-regulation",
-      "parenting"
+      "communication",
+      "attachment"
     ],
     "type": "Skill guide",
     "description": "A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.",
     "file": "assets/handouts/soothe-technique.jpeg",
+    "keywords": [
+      "SOOTHE",
+      "soft tone",
+      "organize the child's experience",
+      "offer choices",
+      "touch",
+      "togetherness",
+      "underlying concern",
+      "calming"
+    ],
     "featured": true
   },
   {
@@ -220,12 +317,22 @@
       "parents"
     ],
     "topics": [
+      "parenting",
       "co-regulation",
+      "nervous-system",
       "attachment"
     ],
-    "type": "Visual handout",
+    "type": "Visual reminder",
     "description": "A reminder to regulate your own body and tone before guiding a distressed child.",
     "file": "assets/handouts/anchor-below-child.jpeg",
+    "keywords": [
+      "parent as anchor",
+      "breathe deeply",
+      "regulate first",
+      "parent regulation",
+      "calm presence",
+      "Paris Goodyear-Brown"
+    ],
     "featured": true
   },
   {
@@ -235,12 +342,26 @@
       "families"
     ],
     "topics": [
+      "parenting",
       "attachment",
-      "family-values"
+      "connection",
+      "family-values",
+      "family-rituals",
+      "belonging"
     ],
-    "type": "Visual handout",
+    "type": "Family reflection",
     "description": "Ideas for secure attachment, family rituals, shared values, and belonging.",
     "file": "assets/handouts/anchoring-family.jpeg",
+    "keywords": [
+      "secure attachment",
+      "family connection",
+      "shared meals",
+      "question jar",
+      "game night",
+      "quality time",
+      "core values",
+      "family closeness"
+    ],
     "featured": true
   }
 ]
