@@ -3625,3 +3625,11 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
   }
   .anchored-philosophy-page .anchored-philosophy-intro{padding:3.75rem 0 4.5rem;}
 }
+
+.home-page .text-link{
+  border-bottom:0;
+  text-decoration:none;
+}
+.home-page .season-panel__link{
+  border-bottom:0;
+}
