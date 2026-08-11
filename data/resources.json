@@ -8,7 +8,6 @@
     ],
     "topics": [
       "relationships",
-      "communication",
       "boundaries"
     ],
     "type": "Relationship handout",
@@ -70,9 +69,7 @@
       "parents"
     ],
     "topics": [
-      "nervous-system",
-      "regulation",
-      "somatic"
+      "regulation"
     ],
     "type": "Visual handout",
     "file": "/assets/handouts/when-your-nervous-system-is-fried.pdf",
@@ -100,7 +97,7 @@
     ],
     "topics": [
       "parenting",
-      "ifs-parts-work",
+      "regulation",
       "self-compassion"
     ],
     "type": "Reflective handout",
@@ -130,9 +127,7 @@
       "parents"
     ],
     "topics": [
-      "parenting",
-      "regulation",
-      "communication"
+      "parenting"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/three-types-engagement.jpeg",
@@ -154,9 +149,8 @@
       "parents"
     ],
     "topics": [
-      "parenting",
-      "communication",
-      "relationships"
+      "boundaries",
+      "parenting"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-redos.jpeg",
@@ -182,8 +176,7 @@
     ],
     "topics": [
       "parenting",
-      "boundaries",
-      "communication"
+      "boundaries"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-sharing-choice.jpeg",
@@ -206,7 +199,6 @@
     ],
     "topics": [
       "parenting",
-      "communication",
       "attachment"
     ],
     "type": "Skill guide",
@@ -230,9 +222,7 @@
       "parents"
     ],
     "topics": [
-      "parenting",
-      "executive-functioning",
-      "impulse-control"
+      "parenting"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/structure.jpeg",
@@ -258,9 +248,7 @@
       "teens"
     ],
     "topics": [
-      "brain-development",
-      "nervous-system",
-      "regulation"
+      "parenting"
     ],
     "type": "Psychoeducation",
     "file": "/assets/handouts/upstairs-downstairs-brain.jpeg",
@@ -285,8 +273,7 @@
     ],
     "topics": [
       "parenting",
-      "regulation",
-      "communication"
+      "regulation"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/soothe-technique.jpeg",
@@ -309,8 +296,8 @@
       "parents"
     ],
     "topics": [
+      "parenting",
       "attachment",
-      "nervous-system",
       "regulation"
     ],
     "type": "Visual reminder",
@@ -334,8 +321,7 @@
     ],
     "topics": [
       "parenting",
-      "attachment",
-      "values"
+      "act"
     ],
     "type": "Family reflection",
     "file": "/assets/handouts/anchoring-family.jpeg",
@@ -359,9 +345,7 @@
       "Families"
     ],
     "topics": [
-      "parenting",
-      "nervous-system",
-      "neurodiversity"
+      "parenting"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/orchid-vs-dandelion-kids-5-1.pdf",
