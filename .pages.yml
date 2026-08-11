@@ -48,16 +48,28 @@ content:
               label: Trauma
             - name: attachment
               label: Attachment
+            - name: nervous-system
+              label: Nervous System
+            - name: brain-development
+              label: Brain Development
             - name: regulation
               label: Regulation
             - name: impulse-control
               label: Impulse Control
+            - name: executive-functioning
+              label: Executive Functioning
+            - name: social-emotional-skills
+              label: Social-Emotional Skills
             - name: parenting
               label: Parenting
             - name: relationships
               label: Relationships
+            - name: communication
+              label: Communication
             - name: boundaries
               label: Boundaries
+            - name: values
+              label: Values
             - name: self-compassion
               label: Self-Compassion
             - name: grief
@@ -72,6 +84,14 @@ content:
               label: DBT
             - name: cbt
               label: CBT
+            - name: emdr
+              label: EMDR
+            - name: ifs-parts-work
+              label: IFS / Parts Work
+            - name: play-therapy
+              label: Play Therapy
+            - name: somatic
+              label: Somatic
       - name: type
         label: Resource type
         type: string
