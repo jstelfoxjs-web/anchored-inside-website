@@ -1,6 +1,7 @@
 [
   {
     "title": "Two Sides of the Street",
+    "description": "A visual guide to owning personal triggers, wounds, choices, and patterns while sharing responsibility for communication, repair, trust, and the relationship built in the middle.",
     "audience": [
       "couples",
       "individuals"
@@ -15,8 +16,7 @@
       "relational-patterns"
     ],
     "type": "Relationship handout",
-    "description": "A visual guide to owning personal triggers, wounds, choices, and patterns while sharing responsibility for communication, repair, trust, and the relationship built in the middle.",
-    "file": "assets/handouts/two-sides-of-the-street.png",
+    "file": "/assets/handouts/two-sides-of-the-street.png",
     "keywords": [
       "couples",
       "relationship work",
@@ -38,6 +38,7 @@
   },
   {
     "title": "ACT Limit Setting: A Parent Guide",
+    "description": "A calm, connection-centered three-step approach for acknowledging a child's feelings, communicating a clear limit, and targeting safe alternatives.",
     "audience": [
       "parents",
       "families"
@@ -50,9 +51,8 @@
       "connection"
     ],
     "type": "Parent guide",
-    "description": "A calm, connection-centered three-step approach for acknowledging a child's feelings, communicating a clear limit, and targeting safe alternatives.",
-    "file": "assets/handouts/act-limit-setting-parent-guide.pdf",
-    "preview": "assets/handouts/act-limit-setting-parent-guide.png",
+    "file": "/assets/handouts/act-limit-setting-parent-guide.pdf",
+    "preview": "/assets/handouts/act-limit-setting-parent-guide.png",
     "keywords": [
       "ACT",
       "acknowledge",
@@ -70,6 +70,7 @@
   },
   {
     "title": "What to Do When Your Nervous System Is Fried",
+    "description": "A practical visual menu of simple sensory, movement, connection, rest, and grounding ideas for moments of overwhelm or nervous-system overload.",
     "audience": [
       "individuals",
       "teens",
@@ -83,9 +84,8 @@
       "burnout"
     ],
     "type": "Visual handout",
-    "description": "A practical visual menu of simple sensory, movement, connection, rest, and grounding ideas for moments of overwhelm or nervous-system overload.",
-    "file": "assets/handouts/when-your-nervous-system-is-fried.pdf",
-    "preview": "assets/handouts/when-your-nervous-system-is-fried.png",
+    "file": "/assets/handouts/when-your-nervous-system-is-fried.pdf",
+    "preview": "/assets/handouts/when-your-nervous-system-is-fried.png",
     "keywords": [
       "overwhelmed",
       "fried",
@@ -102,6 +102,7 @@
   },
   {
     "title": "Parts Work for Parenting: Our Struggles Have Stories",
+    "description": "Explore how protector and exile parts shaped by childhood experiences can show up in parenting, then practice five steps for responding with greater awareness, compassion, and intention.",
     "audience": [
       "parents",
       "individuals"
@@ -114,9 +115,8 @@
       "emotional-regulation"
     ],
     "type": "Reflective handout",
-    "description": "Explore how protector and exile parts shaped by childhood experiences can show up in parenting, then practice five steps for responding with greater awareness, compassion, and intention.",
-    "file": "assets/handouts/parts-work-for-parenting.pdf",
-    "preview": "assets/handouts/parts-work-for-parenting.png",
+    "file": "/assets/handouts/parts-work-for-parenting.pdf",
+    "preview": "/assets/handouts/parts-work-for-parenting.png",
     "keywords": [
       "IFS",
       "internal family systems",
@@ -136,6 +136,7 @@
   },
   {
     "title": "Oh, the Places You Will Go",
+    "description": "A reflective parenting message about being a secure base while children grow toward independence.",
     "audience": [
       "parents"
     ],
@@ -146,8 +147,7 @@
       "connection"
     ],
     "type": "Parent reflection",
-    "description": "A reflective parenting message about being a secure base while children grow toward independence.",
-    "file": "assets/handouts/places-you-will-go.jpeg",
+    "file": "/assets/handouts/places-you-will-go.jpeg",
     "keywords": [
       "raising children",
       "secure attachment",
@@ -163,6 +163,7 @@
   },
   {
     "title": "Three Types of Engagement",
+    "description": "A quick guide to playful, structured, and calming engagement.",
     "audience": [
       "parents"
     ],
@@ -174,8 +175,7 @@
       "boundaries"
     ],
     "type": "Parent guide",
-    "description": "A quick guide to playful, structured, and calming engagement.",
-    "file": "assets/handouts/three-types-engagement.jpeg",
+    "file": "/assets/handouts/three-types-engagement.jpeg",
     "keywords": [
       "playful engagement",
       "structured engagement",
@@ -189,6 +189,7 @@
   },
   {
     "title": "Positive Engagement: Redos & Compromise",
+    "description": "Practical ways to support respectful re-dos, repair, and collaborative compromise.",
     "audience": [
       "parents"
     ],
@@ -199,8 +200,7 @@
       "connection"
     ],
     "type": "Skill guide",
-    "description": "Practical ways to support respectful re-dos, repair, and collaborative compromise.",
-    "file": "assets/handouts/positive-engagement-redos.jpeg",
+    "file": "/assets/handouts/positive-engagement-redos.jpeg",
     "keywords": [
       "try again",
       "redos",
@@ -217,6 +217,7 @@
   },
   {
     "title": "Positive Engagement: Sharing Choice",
+    "description": "Developmentally appropriate choices and collaborative problem-solving.",
     "audience": [
       "parents"
     ],
@@ -227,8 +228,7 @@
       "communication"
     ],
     "type": "Skill guide",
-    "description": "Developmentally appropriate choices and collaborative problem-solving.",
-    "file": "assets/handouts/positive-engagement-sharing-choice.jpeg",
+    "file": "/assets/handouts/positive-engagement-sharing-choice.jpeg",
     "keywords": [
       "limited choices",
       "developmentally appropriate choices",
@@ -242,6 +242,7 @@
   },
   {
     "title": "Positive Engagement: Giving Voice",
+    "description": "Open-ended questions, emotional reflection, and family rituals that support voice.",
     "audience": [
       "parents"
     ],
@@ -252,8 +253,7 @@
       "family-rituals"
     ],
     "type": "Skill guide",
-    "description": "Open-ended questions, emotional reflection, and family rituals that support voice.",
-    "file": "assets/handouts/positive-engagement-giving-voice.jpeg",
+    "file": "/assets/handouts/positive-engagement-giving-voice.jpeg",
     "keywords": [
       "giving voice",
       "open-ended questions",
@@ -268,6 +268,7 @@
   },
   {
     "title": "Structure & Predictability",
+    "description": "Transitions, sequencing, routines, clear instructions, and visual supports.",
     "audience": [
       "parents"
     ],
@@ -278,8 +279,7 @@
       "behavior-support"
     ],
     "type": "Parent guide",
-    "description": "Transitions, sequencing, routines, clear instructions, and visual supports.",
-    "file": "assets/handouts/structure.jpeg",
+    "file": "/assets/handouts/structure.jpeg",
     "keywords": [
       "predictability",
       "advance warnings",
@@ -295,6 +295,7 @@
   },
   {
     "title": "Upstairs and Downstairs Brain",
+    "description": "A simple visual for understanding survival responses and higher-order thinking.",
     "audience": [
       "parents",
       "individuals",
@@ -307,8 +308,7 @@
       "stress-response"
     ],
     "type": "Psychoeducation",
-    "description": "A simple visual for understanding survival responses and higher-order thinking.",
-    "file": "assets/handouts/upstairs-downstairs-brain.jpeg",
+    "file": "/assets/handouts/upstairs-downstairs-brain.jpeg",
     "keywords": [
       "upstairs brain",
       "downstairs brain",
@@ -324,6 +324,7 @@
   },
   {
     "title": "S.O.O.T.H.E. Technique",
+    "description": "A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.",
     "audience": [
       "parents"
     ],
@@ -334,8 +335,7 @@
       "attachment"
     ],
     "type": "Skill guide",
-    "description": "A concise co-regulation sequence emphasizing tone, organization, choice, togetherness, and closure.",
-    "file": "assets/handouts/soothe-technique.jpeg",
+    "file": "/assets/handouts/soothe-technique.jpeg",
     "keywords": [
       "SOOTHE",
       "soft tone",
@@ -350,6 +350,7 @@
   },
   {
     "title": "Anchor Below Your Child",
+    "description": "A reminder to regulate your own body and tone before guiding a distressed child.",
     "audience": [
       "parents"
     ],
@@ -360,8 +361,7 @@
       "attachment"
     ],
     "type": "Visual reminder",
-    "description": "A reminder to regulate your own body and tone before guiding a distressed child.",
-    "file": "assets/handouts/anchor-below-child.jpeg",
+    "file": "/assets/handouts/anchor-below-child.jpeg",
     "keywords": [
       "parent as anchor",
       "breathe deeply",
@@ -374,6 +374,7 @@
   },
   {
     "title": "Anchoring the Family",
+    "description": "Ideas for secure attachment, family rituals, shared values, and belonging.",
     "audience": [
       "parents",
       "families"
@@ -387,8 +388,7 @@
       "belonging"
     ],
     "type": "Family reflection",
-    "description": "Ideas for secure attachment, family rituals, shared values, and belonging.",
-    "file": "assets/handouts/anchoring-family.jpeg",
+    "file": "/assets/handouts/anchoring-family.jpeg",
     "keywords": [
       "secure attachment",
       "family connection",
@@ -400,5 +400,22 @@
       "family closeness"
     ],
     "featured": true
+  },
+  {
+    "title": "Orchid and Dandelion Children",
+    "description": "A parent-friendly guide to understanding differences in children’s sensitivity, temperament, and responses to their environments, with practical ways to support both highly sensitive orchid children and more adaptable dandelion children.",
+    "audience": [
+      "Parents",
+      "Families"
+    ],
+    "topics": [
+      "parenting",
+      "temperament",
+      "high-sensitivity",
+      "emotional regulation"
+    ],
+    "type": "Parent guide",
+    "file": "/assets/handouts/orchid-vs-dandelion-kids-5-1.pdf",
+    "featured": false
   }
 ]
