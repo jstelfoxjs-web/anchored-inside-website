@@ -8,12 +8,7 @@
     ],
     "topics": [
       "relationships",
-      "accountability",
-      "boundaries",
-      "communication",
-      "repair",
-      "shared-responsibility",
-      "relational-patterns"
+      "boundaries"
     ],
     "type": "Relationship handout",
     "file": "/assets/handouts/two-sides-of-the-street.png",
@@ -45,10 +40,7 @@
     ],
     "topics": [
       "parenting",
-      "boundaries",
-      "setting-limits",
-      "act",
-      "connection"
+      "boundaries"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/act-limit-setting-parent-guide.pdf",
@@ -77,11 +69,7 @@
       "parents"
     ],
     "topics": [
-      "nervous-system",
-      "regulation",
-      "grounding",
-      "stress",
-      "burnout"
+      "regulation"
     ],
     "type": "Visual handout",
     "file": "/assets/handouts/when-your-nervous-system-is-fried.pdf",
@@ -109,10 +97,8 @@
     ],
     "topics": [
       "parenting",
-      "parts-work",
-      "childhood-wounds",
-      "self-compassion",
-      "emotional-regulation"
+      "regulation",
+      "self-compassion"
     ],
     "type": "Reflective handout",
     "file": "/assets/handouts/parts-work-for-parenting.pdf",
@@ -135,44 +121,13 @@
     "featured": true
   },
   {
-    "title": "Oh, the Places You Will Go",
-    "description": "A reflective parenting message about being a secure base while children grow toward independence.",
-    "audience": [
-      "parents"
-    ],
-    "topics": [
-      "parenting",
-      "attachment",
-      "independence",
-      "connection"
-    ],
-    "type": "Parent reflection",
-    "file": "/assets/handouts/places-you-will-go.jpeg",
-    "keywords": [
-      "raising children",
-      "secure attachment",
-      "secure base",
-      "safe harbor",
-      "confidence",
-      "curiosity",
-      "empathy",
-      "exploration",
-      "growing up"
-    ],
-    "featured": true
-  },
-  {
     "title": "Three Types of Engagement",
     "description": "A quick guide to playful, structured, and calming engagement.",
     "audience": [
       "parents"
     ],
     "topics": [
-      "parenting",
-      "connection",
-      "co-regulation",
-      "communication",
-      "boundaries"
+      "parenting"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/three-types-engagement.jpeg",
@@ -194,10 +149,8 @@
       "parents"
     ],
     "topics": [
-      "parenting",
-      "repair",
-      "communication",
-      "connection"
+      "boundaries",
+      "parenting"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-redos.jpeg",
@@ -223,9 +176,7 @@
     ],
     "topics": [
       "parenting",
-      "choices",
-      "boundaries",
-      "communication"
+      "boundaries"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-sharing-choice.jpeg",
@@ -248,9 +199,7 @@
     ],
     "topics": [
       "parenting",
-      "communication",
-      "connection",
-      "family-rituals"
+      "attachment"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-giving-voice.jpeg",
@@ -273,10 +222,7 @@
       "parents"
     ],
     "topics": [
-      "parenting",
-      "routines",
-      "transitions",
-      "behavior-support"
+      "parenting"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/structure.jpeg",
@@ -302,10 +248,7 @@
       "teens"
     ],
     "topics": [
-      "nervous-system",
-      "regulation",
-      "brain-development",
-      "stress-response"
+      "parenting"
     ],
     "type": "Psychoeducation",
     "file": "/assets/handouts/upstairs-downstairs-brain.jpeg",
@@ -330,9 +273,7 @@
     ],
     "topics": [
       "parenting",
-      "co-regulation",
-      "communication",
-      "attachment"
+      "regulation"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/soothe-technique.jpeg",
@@ -356,9 +297,8 @@
     ],
     "topics": [
       "parenting",
-      "co-regulation",
-      "nervous-system",
-      "attachment"
+      "attachment",
+      "regulation"
     ],
     "type": "Visual reminder",
     "file": "/assets/handouts/anchor-below-child.jpeg",
@@ -381,11 +321,7 @@
     ],
     "topics": [
       "parenting",
-      "attachment",
-      "connection",
-      "family-values",
-      "family-rituals",
-      "belonging"
+      "act"
     ],
     "type": "Family reflection",
     "file": "/assets/handouts/anchoring-family.jpeg",
@@ -409,10 +345,7 @@
       "Families"
     ],
     "topics": [
-      "parenting",
-      "temperament",
-      "high-sensitivity",
-      "emotional regulation"
+      "parenting"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/orchid-vs-dandelion-kids-5-1.pdf",
