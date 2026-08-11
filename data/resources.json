@@ -8,7 +8,12 @@
     ],
     "topics": [
       "relationships",
-      "boundaries"
+      "accountability",
+      "boundaries",
+      "communication",
+      "repair",
+      "shared-responsibility",
+      "relational-patterns"
     ],
     "type": "Relationship handout",
     "file": "/assets/handouts/two-sides-of-the-street.png",
@@ -41,7 +46,9 @@
     "topics": [
       "parenting",
       "boundaries",
-      "act"
+      "setting-limits",
+      "act",
+      "connection"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/act-limit-setting-parent-guide.pdf",
@@ -70,7 +77,11 @@
       "parents"
     ],
     "topics": [
-      "regulation"
+      "nervous-system",
+      "regulation",
+      "grounding",
+      "stress",
+      "burnout"
     ],
     "type": "Visual handout",
     "file": "/assets/handouts/when-your-nervous-system-is-fried.pdf",
@@ -98,8 +109,10 @@
     ],
     "topics": [
       "parenting",
-      "trauma",
-      "self-compassion"
+      "parts-work",
+      "childhood-wounds",
+      "self-compassion",
+      "emotional-regulation"
     ],
     "type": "Reflective handout",
     "file": "/assets/handouts/parts-work-for-parenting.pdf",
@@ -129,7 +142,9 @@
     ],
     "topics": [
       "parenting",
-      "attachment"
+      "attachment",
+      "independence",
+      "connection"
     ],
     "type": "Parent reflection",
     "file": "/assets/handouts/places-you-will-go.jpeg",
@@ -154,7 +169,9 @@
     ],
     "topics": [
       "parenting",
-      "regulation",
+      "connection",
+      "co-regulation",
+      "communication",
       "boundaries"
     ],
     "type": "Parent guide",
@@ -178,7 +195,9 @@
     ],
     "topics": [
       "parenting",
-      "relationships"
+      "repair",
+      "communication",
+      "connection"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-redos.jpeg",
@@ -204,7 +223,9 @@
     ],
     "topics": [
       "parenting",
-      "boundaries"
+      "choices",
+      "boundaries",
+      "communication"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-sharing-choice.jpeg",
@@ -227,7 +248,9 @@
     ],
     "topics": [
       "parenting",
-      "relationships"
+      "communication",
+      "connection",
+      "family-rituals"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-giving-voice.jpeg",
@@ -251,7 +274,9 @@
     ],
     "topics": [
       "parenting",
-      "impulse-control"
+      "routines",
+      "transitions",
+      "behavior-support"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/structure.jpeg",
@@ -277,8 +302,10 @@
       "teens"
     ],
     "topics": [
+      "nervous-system",
       "regulation",
-      "impulse-control"
+      "brain-development",
+      "stress-response"
     ],
     "type": "Psychoeducation",
     "file": "/assets/handouts/upstairs-downstairs-brain.jpeg",
@@ -303,7 +330,8 @@
     ],
     "topics": [
       "parenting",
-      "regulation",
+      "co-regulation",
+      "communication",
       "attachment"
     ],
     "type": "Skill guide",
@@ -328,7 +356,8 @@
     ],
     "topics": [
       "parenting",
-      "regulation",
+      "co-regulation",
+      "nervous-system",
       "attachment"
     ],
     "type": "Visual reminder",
@@ -353,7 +382,10 @@
     "topics": [
       "parenting",
       "attachment",
-      "relationships"
+      "connection",
+      "family-values",
+      "family-rituals",
+      "belonging"
     ],
     "type": "Family reflection",
     "file": "/assets/handouts/anchoring-family.jpeg",
@@ -378,17 +410,16 @@
     ],
     "topics": [
       "parenting",
-      "regulation"
+      "temperament",
+      "high-sensitivity",
+      "emotional regulation"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/orchid-vs-dandelion-kids-5-1.pdf",
     "keywords": [
       "orchid child",
       "dandelion child",
-      "highly sensitive child",
-      "temperament",
-      "environmental sensitivity",
-      "parenting sensitive children"
+      "highly sensitive child"
     ],
     "featured": false
   }
