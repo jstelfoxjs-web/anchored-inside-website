@@ -27,9 +27,26 @@ content:
         required: true
       - name: audience
         label: Audience tags
-        type: string
-        list: true
+        type: select
         required: true
+        options:
+          multiple: true
+          min: 1
+          max: 3
+          placeholder: Select audience tags
+          values:
+            - name: all
+              label: Everyone
+            - name: parents
+              label: Parents
+            - name: adults
+              label: Adults
+            - name: teens
+              label: Teens
+            - name: families
+              label: Families
+            - name: couples
+              label: Couples
       - name: topics
         label: Topic tags
         type: select
@@ -94,8 +111,36 @@ content:
               label: Somatic
       - name: type
         label: Resource type
-        type: string
+        type: select
         required: true
+        options:
+          values:
+            - name: Psychoeducation
+              label: Psychoeducation
+            - name: Worksheet
+              label: Worksheet
+            - name: Activity
+              label: Activity
+            - name: Guide
+              label: Guide
+            - name: Assessment
+              label: Assessment
+            - name: Parent guide
+              label: Parent guide
+            - name: Skill guide
+              label: Skill guide
+            - name: Visual handout
+              label: Visual handout
+            - name: Reflective handout
+              label: Reflective handout
+            - name: Visual reminder
+              label: Visual reminder
+            - name: Family reflection
+              label: Family reflection
+            - name: Relationship handout
+              label: Relationship handout
+            - name: Parent reflection
+              label: Parent reflection
       - name: file
         label: Handout file
         type: file
