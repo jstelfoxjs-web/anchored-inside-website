@@ -368,14 +368,15 @@
       "trauma"
     ],
     "type": "Psychoeducation",
-    "file": "/assets/handouts/emdr-psychoeducation-for-adults.pdf",
-    "keywords": [
-      "EMDR",
-      "Handout",
-      "Psychoeducation",
-      "Trauma",
-      "EMDR therapy"
-    ],
-    "featured": false
-  }
+"file": "/assets/handouts/emdr-psychoeducation-for-adults.pdf",
+"preview": "/assets/handouts/emdr-psychoeducation-for-adults.png",
+"keywords": [  "EMDR",
+    "Handout",
+    "Psychoeducation",
+    "Trauma",
+    "EMDR therapy"
+],
+"featured": false
+}
 ]
+    
