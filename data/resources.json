@@ -355,5 +355,22 @@
       "highly sensitive child"
     ],
     "featured": false
+  },
+  {
+    "title": "What is EMDR and How It Works",
+    "description": "A friendly overview of EMDR therapy, including how distressing experiences may be stored, Adaptive Information Processing (AIP), present-day triggers, resourcing and readiness, parts work, and the eight phases of EMDR treatment.\n",
+    "audience": [
+      "adults"
+    ],
+    "topics": [
+      "emdr",
+      "trauma"
+    ],
+    "type": "Psychoeducation",
+    "file": "/assets/handouts/emdr-psychoeducation-for-adults.png",
+    "keywords": [
+      "EMDR"
+    ],
+    "featured": false
   }
 ]
