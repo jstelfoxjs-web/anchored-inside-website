@@ -3,8 +3,7 @@
     "title": "Two Sides of the Street",
     "description": "A visual guide to owning personal triggers, wounds, choices, and patterns while sharing responsibility for communication, repair, trust, and the relationship built in the middle.",
     "audience": [
-      "couples",
-      "individuals"
+      "all"
     ],
     "topics": [
       "relationships",
@@ -35,8 +34,7 @@
     "title": "ACT Limit Setting: A Parent Guide",
     "description": "A calm, connection-centered three-step approach for acknowledging a child's feelings, communicating a clear limit, and targeting safe alternatives.",
     "audience": [
-      "parents",
-      "families"
+      "parents"
     ],
     "topics": [
       "parenting",
@@ -64,12 +62,11 @@
     "title": "What to Do When Your Nervous System Is Fried",
     "description": "A practical visual menu of simple sensory, movement, connection, rest, and grounding ideas for moments of overwhelm or nervous-system overload.",
     "audience": [
-      "individuals",
-      "teens",
-      "parents"
+      "all"
     ],
     "topics": [
-      "regulation"
+      "regulation",
+      "nervous-system"
     ],
     "type": "Visual handout",
     "file": "/assets/handouts/when-your-nervous-system-is-fried.pdf",
@@ -92,13 +89,11 @@
     "title": "Parts Work for Parenting: Our Struggles Have Stories",
     "description": "Explore how protector and exile parts shaped by childhood experiences can show up in parenting, then practice five steps for responding with greater awareness, compassion, and intention.",
     "audience": [
-      "parents",
-      "individuals"
+      "parents"
     ],
     "topics": [
       "parenting",
-      "regulation",
-      "self-compassion"
+      "ifs-parts-work"
     ],
     "type": "Reflective handout",
     "file": "/assets/handouts/parts-work-for-parenting.pdf",
@@ -149,7 +144,6 @@
       "parents"
     ],
     "topics": [
-      "boundaries",
       "parenting"
     ],
     "type": "Skill guide",
@@ -175,8 +169,7 @@
       "parents"
     ],
     "topics": [
-      "parenting",
-      "boundaries"
+      "parenting"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-sharing-choice.jpeg",
@@ -198,8 +191,7 @@
       "parents"
     ],
     "topics": [
-      "parenting",
-      "attachment"
+      "parenting"
     ],
     "type": "Skill guide",
     "file": "/assets/handouts/positive-engagement-giving-voice.jpeg",
@@ -243,12 +235,11 @@
     "title": "Upstairs and Downstairs Brain",
     "description": "A simple visual for understanding survival responses and higher-order thinking.",
     "audience": [
-      "parents",
-      "individuals",
-      "teens"
+      "all",
+      "parents"
     ],
     "topics": [
-      "parenting"
+      "brain-development"
     ],
     "type": "Psychoeducation",
     "file": "/assets/handouts/upstairs-downstairs-brain.jpeg",
@@ -297,7 +288,6 @@
     ],
     "topics": [
       "parenting",
-      "attachment",
       "regulation"
     ],
     "type": "Visual reminder",
@@ -321,7 +311,7 @@
     ],
     "topics": [
       "parenting",
-      "act"
+      "values"
     ],
     "type": "Family reflection",
     "file": "/assets/handouts/anchoring-family.jpeg",
@@ -341,11 +331,11 @@
     "title": "Orchid and Dandelion Children",
     "description": "A parent-friendly guide to understanding differences in children’s sensitivity, temperament, and responses to their environments, with practical ways to support both highly sensitive orchid children and more adaptable dandelion children.",
     "audience": [
-      "Parents",
-      "Families"
+      "parents"
     ],
     "topics": [
-      "parenting"
+      "parenting",
+      "brain-development"
     ],
     "type": "Parent guide",
     "file": "/assets/handouts/orchid-vs-dandelion-kids-5-1.pdf",
@@ -360,23 +350,22 @@
     "title": "What is EMDR and How It Works",
     "description": "A friendly overview of EMDR therapy, including how distressing experiences may be stored, Adaptive Information Processing (AIP), present-day triggers, resourcing and readiness, parts work, and the eight phases of EMDR treatment.\n",
     "audience": [
-      "Adults",
-      "Everyone"
+      "all"
     ],
     "topics": [
       "emdr",
       "trauma"
     ],
     "type": "Psychoeducation",
-"file": "/assets/handouts/emdr-psychoeducation-for-adults.pdf",
-"preview": "/assets/handouts/emdr-psychoeducation-for-adults.png",
-"keywords": [  "EMDR",
-    "Handout",
-    "Psychoeducation",
-    "Trauma",
-    "EMDR therapy"
-],
-"featured": false
-}
+    "file": "/assets/handouts/emdr-psychoeducation-for-adults.pdf",
+    "preview": "/assets/handouts/emdr-psychoeducation-for-adults.png",
+    "keywords": [
+      "EMDR",
+      "Handout",
+      "Psychoeducation",
+      "Trauma",
+      "EMDR therapy"
+    ],
+    "featured": false
+  }
 ]
-    
