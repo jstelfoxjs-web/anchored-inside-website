@@ -367,5 +367,29 @@
       "EMDR therapy"
     ],
     "featured": false
+  },
+  {
+    "title": "The Caregiving System: When protection helps— and when stepping back helps children grow",
+    "description": "A parent and caregiver guide to understanding the caregiving system, childhood anxiety, and the balance between protection and independence. Explore how family accommodation can unintentionally reinforce anxiety, why children may seem more capable away from parents, and practical ways to shift from rescuing to supportive scaffolding that builds confidence, coping, and independence.",
+    "audience": [
+      "parents"
+    ],
+    "topics": [
+      "attachment",
+      "parenting",
+      "anxiety"
+    ],
+    "type": "Psychoeducation",
+    "file": "/assets/handouts/caregivingsystemhandoutweboptimized.pdf",
+    "keywords": [
+      "caregiving system",
+      "attachment",
+      "secure base",
+      "safe haven",
+      "attachment needs",
+      "caregiving system",
+      "responsive caregiving"
+    ],
+    "featured": false
   }
 ]
