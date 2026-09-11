@@ -410,5 +410,21 @@
       "kristen neff"
     ],
     "featured": false
+  },
+  {
+    "title": "Self Sabotage",
+    "description": "Self sabotage cycle ",
+    "audience": [
+      "all",
+      "adults",
+      "teens"
+    ],
+    "topics": [
+      "self-compassion",
+      "relationships"
+    ],
+    "type": "Visual handout",
+    "file": "/assets/handouts/self-sabatoge-cycle.jpg",
+    "featured": false
   }
 ]
