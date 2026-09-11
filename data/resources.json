@@ -393,25 +393,6 @@
     "featured": false
   },
   {
-    "title": "Self-Compassion: Be Kind to Yourself",
-    "description": "A practical self-compassion guide based on the work of Kristin Neff, PhD. Learn the three core components of self-compassion—self-kindness, shared humanity, and mindfulness—and practice responding to difficult emotions, mistakes, and struggles with greater care and understanding. Includes simple examples and a brief 1–2 minute self-compassion practice.",
-    "audience": [
-      "all",
-      "adults",
-      "teens"
-    ],
-    "topics": [
-      "self-compassion"
-    ],
-    "type": "Reflective handout",
-    "file": "/assets/handouts/self-compassion-2.pdf",
-    "keywords": [
-      "self compassion",
-      "kristen neff"
-    ],
-    "featured": false
-  },
-  {
     "title": "Self Sabotage",
     "description": "Self sabotage cycle ",
     "audience": [
@@ -425,6 +406,25 @@
     ],
     "type": "Visual handout",
     "file": "/assets/handouts/self-sabatoge-cycle.jpg",
+    "featured": false
+  },
+  {
+    "title": "Self-Compassion: Be Kind to Yourself",
+    "description": "A practical self compassion guide based on the work of Kristin Neff, PhD. Learn the three core components of self-compassion—self-kindness, shared humanity, and mindfulness—and practice responding to difficult emotions, mistakes, and struggles with greater care and understanding. Includes simple examples and a brief 1–2 minute self-compassion practice.",
+    "audience": [
+      "all",
+      "adults",
+      "teens"
+    ],
+    "topics": [
+      "self-compassion"
+    ],
+    "type": "Reflective handout",
+    "file": "/assets/handouts/self-compassion-4.pdf",
+    "keywords": [
+      "self compassion",
+      "kristen neff"
+    ],
     "featured": false
   }
 ]
