@@ -427,5 +427,25 @@
       "kristen neff"
     ],
     "featured": false
+  },
+  {
+    "title": "DROP the Anchor",
+    "description": "A four-step grounding and cognitive flexibility skill for getting unstuck when your mind gets caught in a spiral. Practice describing and validating what is happening, reframing the first story your mind gives you, orienting toward your values, and physically shifting to disrupt the cycle.",
+    "audience": [
+      "all",
+      "adults",
+      "teens"
+    ],
+    "topics": [
+      "regulation",
+      "act"
+    ],
+    "type": "Visual handout",
+    "file": "/assets/handouts/drop-the-anchor.pdf",
+    "keywords": [
+      "DROP the anchor",
+      "regulation"
+    ],
+    "featured": false
   }
 ]
