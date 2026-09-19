@@ -474,5 +474,26 @@
       "Swirl"
     ],
     "featured": false
+  },
+  {
+    "title": "DROP Your Anchor - for kids ",
+    "description": "A kid-friendly grounding tool for slowing down, noticing big feelings, calming the body, and choosing a helpful next step.",
+    "audience": [
+      "teens",
+      "all"
+    ],
+    "topics": [
+      "nervous-system",
+      "regulation",
+      "social-emotional-skills"
+    ],
+    "type": "Visual handout",
+    "file": "/assets/handouts/drop-kid-version.pdf",
+    "keywords": [
+      "drop your anchor kids",
+      "anchor",
+      "kids "
+    ],
+    "featured": false
   }
 ]
