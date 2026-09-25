@@ -496,5 +496,21 @@
       "kids "
     ],
     "featured": false
+  },
+  {
+    "title": "Your Brain Is Built to Change: Growth Mindset + Neuroplasticity",
+    "description": "Learn how the brain can grow, adapt, and build new pathways throughout life. This handout explores the science of neuroplasticity and growth mindset, including how practice, challenge, mistakes, and new experiences can strengthen learning and support meaningful change.",
+    "audience": [
+      "all"
+    ],
+    "topics": [
+      "brain-development"
+    ],
+    "type": "Visual handout",
+    "file": "/assets/handouts/growth-mindset-neuroplasticity.pdf",
+    "keywords": [
+      "growth mindset"
+    ],
+    "featured": false
   }
 ]
