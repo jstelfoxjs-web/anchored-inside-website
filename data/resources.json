@@ -514,5 +514,24 @@
       "neuroplasticity"
     ],
     "featured": false
+  },
+  {
+    "title": "The Parts We Carry",
+    "description": "A beautifully illustrated introduction to Internal Family Systems (IFS). Explore how managers work proactively to prevent pain, firefighters react when pain breaks through, and exiles carry vulnerable feelings and experiences. Learn about Self and its eight qualities, with gentle prompts to begin noticing your parts with curiosity and compassion.",
+    "audience": [
+      "all",
+      "parents",
+      "teens"
+    ],
+    "topics": [
+      "ifs-parts-work"
+    ],
+    "type": "Reflective handout",
+    "file": "/assets/handouts/the-parts-we-carry.png",
+    "preview": "/assets/handouts/the-parts-we-carry-1.png",
+    "keywords": [
+      "IFS"
+    ],
+    "featured": false
   }
 ]
