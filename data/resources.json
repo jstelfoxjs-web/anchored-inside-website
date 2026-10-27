@@ -561,7 +561,8 @@
     "description": "A gentle illustrated story for kids ages 4–10 about how EMDR helps a memory boat lost at sea find its way home, with calming tools, drawing pages, and a guide for grown-ups.",
     "audience": [
       "parents",
-      "families"
+      "families",
+      "all"
     ],
     "topics": [
       "emdr",
@@ -571,6 +572,27 @@
     "type": "Guide",
     "file": "/assets/handouts/when-memories-get-lost-at-sea.pdf",
     "preview": "/assets/handouts/when-memories-get-lost-at-sea-cover.jpg",
+    "keywords": [
+      "storm",
+      "memory boat",
+      "lost at sea",
+      "Tuff",
+      "harbor",
+      "children's book",
+      "kids",
+      "story",
+      "EMDR for kids",
+      "bilateral stimulation",
+      "butterfly hug",
+      "safe place",
+      "calm tools",
+      "trauma",
+      "PTSD",
+      "big feelings",
+      "triggers",
+      "Captain",
+      "light inside"
+    ],
     "featured": false
   }
 ]
