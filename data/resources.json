@@ -555,5 +555,22 @@
       "Dr Eliza Pressman"
     ],
     "featured": false
+  },
+  {
+    "title": "When Memories Get Lost at Sea: A Child's Story About EMDR",
+    "description": "A gentle illustrated story for kids ages 4–10 about how EMDR helps a memory boat lost at sea find its way home, with calming tools, drawing pages, and a guide for grown-ups.",
+    "audience": [
+      "parents",
+      "families"
+    ],
+    "topics": [
+      "emdr",
+      "trauma",
+      "regulation"
+    ],
+    "type": "Guide",
+    "file": "/assets/handouts/when-memories-get-lost-at-sea.pdf",
+    "preview": "/assets/handouts/when-memories-get-lost-at-sea-cover.jpg",
+    "featured": false
   }
 ]
