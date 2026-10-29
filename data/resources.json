@@ -629,5 +629,33 @@
       "family of origin"
     ],
     "featured": false
+  },
+  {
+    "title": "Your Window of Tolerance",
+    "description": "An illustrated one-page guide to Dan Siegel’s window of tolerance: hyperarousal (fight or flight), the anchored window, and hypoarousal (freeze or shutdown), with simple ways to settle or gently wake the body and a few lines to notice your own signs.",
+    "audience": [
+      "all"
+    ],
+    "topics": [
+      "regulation",
+      "nervous-system",
+      "anxiety"
+    ],
+    "type": "Visual handout",
+    "file": "/assets/handouts/your-window-of-tolerance.pdf",
+    "preview": "/assets/handouts/your-window-of-tolerance-preview.png",
+    "keywords": [
+      "window of tolerance",
+      "Dan Siegel",
+      "hyperarousal",
+      "hypoarousal",
+      "fight flight",
+      "freeze",
+      "shutdown",
+      "grounding",
+      "nervous system",
+      "regulation"
+    ],
+    "featured": false
   }
 ]
