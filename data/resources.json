@@ -594,5 +594,40 @@
       "light inside"
     ],
     "featured": false
+  },
+  {
+    "title": "Adult Children of Emotionally Immature Parents",
+    "description": "A gentle guide to understanding the four types of emotionally immature parents, the emotional loneliness they can leave behind, and how to move from old roles toward your true self and reparent yourself, based on Lindsay C. Gibson's work.",
+    "audience": [
+      "adults",
+      "all"
+    ],
+    "topics": [
+      "attachment",
+      "relationships",
+      "boundaries"
+    ],
+    "type": "Psychoeducation",
+    "file": "/assets/handouts/adult-children-of-emotionally-immature-parents.pdf",
+    "preview": "/assets/handouts/adult-children-of-emotionally-immature-parents-cover.jpg",
+    "keywords": [
+      "emotionally immature parents",
+      "Lindsay Gibson",
+      "emotional neglect",
+      "emotional loneliness",
+      "childhood emotional neglect",
+      "internalizer",
+      "externalizer",
+      "role-self",
+      "healing fantasy",
+      "reparenting",
+      "reparent yourself",
+      "inner child",
+      "boundaries",
+      "adult children",
+      "true self",
+      "family of origin"
+    ],
+    "featured": false
   }
 ]
