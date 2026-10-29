@@ -657,5 +657,64 @@
       "regulation"
     ],
     "featured": false
+  },
+  {
+    "title": "Understanding Your Child: A Parent's Guide to the Crucial Cs",
+    "description": "An Adlerian-based guide for parents to the four Crucial Cs (Connect, Capable, Count, Courage), how to decode what misbehavior is really asking for, and how to use encouragement instead of praise, with practical tips for today's families.",
+    "audience": [
+      "parents",
+      "families"
+    ],
+    "topics": [
+      "parenting",
+      "play-therapy",
+      "social-emotional-skills"
+    ],
+    "type": "Parent guide",
+    "file": "/assets/handouts/understanding-your-child-crucial-cs-parent-guide.pdf",
+    "preview": "/assets/handouts/understanding-your-child-crucial-cs-parent-guide-cover.jpg",
+    "keywords": [
+      "Crucial Cs",
+      "Adlerian",
+      "connect",
+      "capable",
+      "count",
+      "courage",
+      "misbehavior",
+      "goals of misbehavior",
+      "encouragement vs praise",
+      "parenting tips",
+      "screens"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Interpersonal Effectiveness: DEAR MAN, GIVE & FAST",
+    "description": "A DBT skills handout for teens and adults covering DEAR MAN for asking for what you need, GIVE for keeping relationships strong, and FAST for protecting self-respect, with example scripts and a fill-in practice worksheet.",
+    "audience": [
+      "teens",
+      "adults"
+    ],
+    "topics": [
+      "dbt",
+      "communication",
+      "boundaries"
+    ],
+    "type": "Skill guide",
+    "file": "/assets/handouts/dbt-interpersonal-effectiveness-dear-man-give-fast.pdf",
+    "preview": "/assets/handouts/dbt-interpersonal-effectiveness-dear-man-give-fast-cover.jpg",
+    "keywords": [
+      "DBT",
+      "DEAR MAN",
+      "GIVE",
+      "FAST",
+      "interpersonal effectiveness",
+      "assertiveness",
+      "self-respect",
+      "relationships",
+      "communication skills",
+      "worksheet"
+    ],
+    "featured": false
   }
 ]
