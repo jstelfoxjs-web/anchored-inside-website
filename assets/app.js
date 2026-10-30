@@ -218,7 +218,7 @@ function render(items, { updateHistory = true } = {}) {
       ...(item.keywords || [])
     ].join(' ').toLowerCase();
     const matchesSearch = !query || queryTerms.some(term => searchableText.includes(term));
-    const matchesAudience = filterState.audience === 'any' || itemAudiences.includes(filterState.audience);
+    const matchesAudience = filterState.audience === 'all' || filterState.audience === 'any' || itemAudiences.includes(filterState.audience);
     const matchesTopic = selectedTopic === 'all' || itemTopics.includes(selectedTopic);
     return matchesSearch && matchesAudience && matchesTopic;
   });
