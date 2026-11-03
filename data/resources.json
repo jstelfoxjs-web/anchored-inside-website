@@ -716,5 +716,39 @@
       "worksheet"
     ],
     "featured": false
+  },
+  {
+    "title": "Understanding OCD: Skills & Strategies Guide",
+    "description": "A psychoeducation and skills guide for teens, parents, and practitioners covering the OCD cycle, common types and myths, CBT thinking skills, mindfulness, and a step-by-step Phases of Therapy section from grounding through ERP, with a fill-in exposure hierarchy ladder worksheet.",
+    "audience": [
+      "teens",
+      "parents",
+      "families"
+    ],
+    "topics": [
+      "anxiety",
+      "regulation",
+      "parenting"
+    ],
+    "type": "Skill guide",
+    "file": "/assets/handouts/ocd-skills-strategies-guide.pdf",
+    "preview": "/assets/handouts/ocd-skills-strategies-guide-cover.jpg",
+    "keywords": [
+      "OCD",
+      "obsessive-compulsive disorder",
+      "ERP",
+      "exposure and response prevention",
+      "exposure hierarchy",
+      "SUDS",
+      "CBT",
+      "intrusive thoughts",
+      "compulsions",
+      "reassurance seeking",
+      "accommodation",
+      "grounding",
+      "mindfulness",
+      "worksheet"
+    ],
+    "featured": false
   }
 ]
