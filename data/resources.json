@@ -780,5 +780,35 @@
       "skills"
     ],
     "featured": false
+  },
+  {
+    "title": "Window of Tolerance Handout (Kids & Adults)",
+    "description": "A two-sided handout explaining the Window of Tolerance and the vagus nerve. The front is for kids (My Just-Right Zone), and the back is for adults (hyperarousal, window of tolerance, hypoarousal).",
+    "audience": [
+      "parents",
+      "families",
+      "all"
+    ],
+    "topics": [
+      "regulation",
+      "nervous-system"
+    ],
+    "type": "Visual handout",
+    "file": "/assets/handouts/window-of-tolerance-handout.pdf",
+    "preview": "/assets/handouts/window-of-tolerance-handout-cover.jpg",
+    "keywords": [
+      "window of tolerance",
+      "just-right zone",
+      "vagus nerve",
+      "polyvagal",
+      "ventral vagal",
+      "sympathetic",
+      "dorsal vagal",
+      "hyperarousal",
+      "hypoarousal",
+      "kids",
+      "regulation"
+    ],
+    "featured": false
   }
 ]
