@@ -750,5 +750,36 @@
       "worksheet"
     ],
     "featured": false
+  },
+  {
+    "title": "Acceptance & Commitment Therapy (ACT): Skills Guide",
+    "description": "A 26-page workbook for adults, teens and families: the six ACT processes, 30 step-by-step skills, and Values Bull's-Eye, Choice Point and Committed Action Plan worksheets.",
+    "audience": [
+      "adults",
+      "teens",
+      "parents",
+      "families"
+    ],
+    "topics": [
+      "act",
+      "values",
+      "anxiety"
+    ],
+    "type": "Skill guide",
+    "file": "/assets/handouts/act-skills-guide.pdf",
+    "preview": "/assets/handouts/act-skills-guide-cover.jpg",
+    "keywords": [
+      "ACT",
+      "acceptance and commitment therapy",
+      "six processes",
+      "values",
+      "values bull's-eye",
+      "choice point",
+      "committed action",
+      "mindfulness",
+      "worksheet",
+      "skills"
+    ],
+    "featured": false
   }
 ]
