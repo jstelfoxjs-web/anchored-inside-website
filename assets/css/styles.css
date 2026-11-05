@@ -146,7 +146,7 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
 }
 
 /* Jessica portrait and homepage details */
-.portrait-photo img{aspect-ratio:4/5;object-position:center center}
+.portrait-photo img{aspect-ratio:4/5;object-fit:cover;object-position:52.5% center}
 .signature-line{margin-top:1.35rem;padding-left:1rem;border-left:3px solid var(--sand);color:var(--ocean-deep)!important}
 .inline-links{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.15rem}
 @media(max-width:640px){.inline-links{display:grid;gap:.8rem}}
