@@ -810,5 +810,32 @@
       "regulation"
     ],
     "featured": false
+  },
+  {
+    "title": "Welcoming All of Me: A Parts Workbook (Fisher)",
+    "description": "A gentle, client-friendly workbook for understanding the different parts of yourself that trauma can leave behind, with reflection prompts and grounding practices. Adapted from Janina Fisher's Healing the Fragmented Selves of Trauma Survivors (2017).",
+    "audience": [
+      "adults",
+      "all"
+    ],
+    "topics": [
+      "trauma",
+      "ifs-parts-work"
+    ],
+    "type": "Workbook",
+    "file": "/assets/handouts/welcoming-all-of-me-workbook.pdf",
+    "preview": "/assets/handouts/welcoming-all-of-me-workbook-cover.jpg",
+    "keywords": [
+      "Janina Fisher",
+      "parts work",
+      "fragmented selves",
+      "structural dissociation",
+      "trauma",
+      "inner child",
+      "self-compassion",
+      "dual awareness",
+      "grounding"
+    ],
+    "featured": false
   }
 ]
