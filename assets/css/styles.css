@@ -3740,3 +3740,14 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 @media print{
   .a2hs{display:none !important}
 }
+
+/* My Practice callout on the Toolbox page */
+.practice-callout{padding:26px 0 0}
+.practice-callout-card{display:flex;align-items:center;gap:18px;padding:18px 22px;border:1px solid rgba(18,64,73,.13);border-radius:16px;background:var(--foam);color:var(--ink);text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+.practice-callout-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(30,55,58,.08)}
+.practice-callout-icon{flex:none;width:52px;height:52px;border-radius:13px;display:block;object-fit:cover}
+.practice-callout-text{flex:1;min-width:0}
+.practice-callout-text strong{display:block;font:500 1.7rem/1.1 'Cormorant Garamond',serif;color:var(--ink)}
+.practice-callout-text span{display:block;font:400 .95rem/1.5 "Manrope",sans-serif;color:#344e53;margin-top:2px}
+.practice-callout-btn{flex:none}
+@media(max-width:680px){.practice-callout-card{flex-wrap:wrap;gap:14px;padding:18px}.practice-callout-btn{width:100%}}
