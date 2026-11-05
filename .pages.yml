@@ -141,6 +141,8 @@ content:
               label: Relationship handout
             - name: Parent reflection
               label: Parent reflection
+            - name: Workbook
+              label: Workbook
       - name: file
         label: Handout file
         type: file

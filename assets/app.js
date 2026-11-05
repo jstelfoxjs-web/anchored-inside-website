@@ -9,6 +9,7 @@ document.querySelectorAll('.nav a').forEach(link => link.addEventListener('click
 const resourceGrid = document.getElementById('resource-grid');
 const search = document.getElementById('resource-search');
 const topic = document.getElementById('topic-filter');
+const typeFilter = document.getElementById('type-filter');
 const count = document.getElementById('resource-count');
 const emptyState = document.getElementById('resource-empty');
 const activeFilterNote = document.getElementById('active-filter-note');
@@ -20,6 +21,7 @@ const emptyCopy = emptyState?.querySelector('p');
 const filterState = {
   audience: 'all',
   topic: 'all',
+  type: 'all',
   search: ''
 };
 let topicSource = null;
@@ -56,6 +58,10 @@ const topicLabelOverrides = {
   dbt: 'DBT',
   emdr: 'EMDR',
   'ifs-parts-work': 'IFS / Parts Work'
+};
+
+const typeLabelOverrides = {
+  workbook: 'Workbooks'
 };
 
 function normalizeBase(value) {
@@ -98,6 +104,18 @@ function getItemTopics(item) {
   return [...new Set((item.topics || []).map(normalizeTopic).filter(Boolean))];
 }
 
+function normalizeType(value) {
+  const normalized = normalizeBase(value);
+  if (normalized === 'workbooks') return 'workbook';
+  return normalized;
+}
+
+function typeLabel(value) {
+  const normalized = normalizeType(value);
+  if (typeLabelOverrides[normalized]) return typeLabelOverrides[normalized];
+  return String(value ?? '').trim();
+}
+
 function syncFilterControls() {
   document.querySelectorAll('[data-audience]').forEach(button => {
     const isActive = normalizeAudience(button.dataset.audience) === filterState.audience;
@@ -108,6 +126,11 @@ function syncFilterControls() {
   if (topic) {
     const optionExists = [...topic.options].some(option => option.value === filterState.topic);
     topic.value = optionExists ? filterState.topic : 'all';
+  }
+
+  if (typeFilter) {
+    const optionExists = [...typeFilter.options].some(option => option.value === filterState.type);
+    typeFilter.value = optionExists ? filterState.type : 'all';
   }
 
   document.querySelectorAll('[data-topic-shortcut], [data-topic]').forEach(button => {
@@ -125,6 +148,8 @@ function updateUrl() {
   else url.searchParams.set('audience', filterState.audience);
   if (filterState.topic === 'all') url.searchParams.delete('topic');
   else url.searchParams.set('topic', filterState.topic);
+  if (filterState.type === 'all') url.searchParams.delete('type');
+  else url.searchParams.set('type', filterState.type);
   window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
 }
 
@@ -132,6 +157,7 @@ function readUrlFilters() {
   const params = new URLSearchParams(window.location.search);
   filterState.audience = normalizeAudience(params.get('audience') || 'all') || 'all';
   filterState.topic = normalizeTopic(params.get('topic') || 'all') || 'all';
+  filterState.type = normalizeType(params.get('type') || 'all') || 'all';
 }
 
 async function loadResources() {
@@ -140,6 +166,7 @@ async function loadResources() {
   readUrlFilters();
   resources = embeddedResources;
   populateTopics(resources);
+  populateTypes(resources);
   syncFilterControls();
   render(resources, { updateHistory: false });
 
@@ -149,6 +176,7 @@ async function loadResources() {
       if (!response.ok) throw new Error('Unable to load resources.');
       resources = await response.json();
       populateTopics(resources);
+      populateTypes(resources);
       syncFilterControls();
       render(resources, { updateHistory: false });
     } catch (error) {
@@ -162,6 +190,22 @@ function populateTopics(items) {
   const topics = [...new Set(items.flatMap(getItemTopics))].sort((a, b) => titleCase(a).localeCompare(titleCase(b)));
   topic.innerHTML = '<option value="all">All topics</option>' + topics
     .map(item => `<option value="${item}">${titleCase(item)}</option>`)
+    .join('');
+}
+
+function populateTypes(items) {
+  if (!typeFilter) return;
+  const labels = new Map();
+  items.forEach(item => {
+    const raw = String(item.type ?? '').trim();
+    if (!raw) return;
+    const key = normalizeType(raw);
+    if (!key || labels.has(key)) return;
+    labels.set(key, typeLabelOverrides[key] || raw);
+  });
+  const types = [...labels.entries()].sort((a, b) => a[1].localeCompare(b[1]));
+  typeFilter.innerHTML = '<option value="all">All types</option>' + types
+    .map(([value, label]) => `<option value="${value}">${label}</option>`)
     .join('');
 }
 
@@ -181,6 +225,7 @@ function setTopic(value, source = 'lower') {
 function clearFilters() {
   filterState.audience = 'any';
   filterState.topic = 'all';
+  filterState.type = 'all';
   filterState.search = '';
   topicSource = null;
   if (search) search.value = '';
@@ -192,6 +237,7 @@ function render(items, { updateHistory = true } = {}) {
   filterState.search = (search?.value || '').toLowerCase().trim();
   const query = filterState.search;
   const selectedTopic = normalizeTopic(filterState.topic || 'all');
+  const selectedType = normalizeType(filterState.type || 'all');
   const searchAliases = {
     trauma: ['trauma', 'nervous-system', 'regulation', 'co-regulation', 'attachment', 'safety'],
     anxiety: ['anxiety', 'regulation', 'nervous-system', 'grounding', 'calming', 'soothe'],
@@ -220,7 +266,8 @@ function render(items, { updateHistory = true } = {}) {
     const matchesSearch = !query || queryTerms.some(term => searchableText.includes(term));
     const matchesAudience = filterState.audience === 'all' || filterState.audience === 'any' || itemAudiences.includes(filterState.audience);
     const matchesTopic = selectedTopic === 'all' || itemTopics.includes(selectedTopic);
-    return matchesSearch && matchesAudience && matchesTopic;
+    const matchesType = selectedType === 'all' || normalizeType(item.type) === selectedType;
+    return matchesSearch && matchesAudience && matchesTopic && matchesType;
   });
 
   if (count) count.textContent = `${filtered.length} tool${filtered.length === 1 ? '' : 's'}`;
@@ -236,6 +283,7 @@ function render(items, { updateHistory = true } = {}) {
   if (query) filterDescriptions.push(`search: “${query}”`);
   if (filterState.audience !== 'all') filterDescriptions.push(`audience: ${audienceLabel(filterState.audience)}`);
   if (selectedTopic !== 'all') filterDescriptions.push(`topic: ${titleCase(selectedTopic)}`);
+  if (selectedType !== 'all') filterDescriptions.push(`type: ${typeLabel(selectedType)}`);
   if (activeFilterNote) {
     activeFilterNote.hidden = filterDescriptions.length === 0;
     activeFilterNote.textContent = filterDescriptions.length ? `Showing tools for ${filterDescriptions.join(' · ')}` : '';
@@ -245,6 +293,7 @@ function render(items, { updateHistory = true } = {}) {
     const plainFilters = [];
     if (filterState.audience !== 'all') plainFilters.push(audienceLabel(filterState.audience));
     if (selectedTopic !== 'all') plainFilters.push(titleCase(selectedTopic));
+    if (selectedType !== 'all') plainFilters.push(typeLabel(selectedType));
     if (query) plainFilters.push(`“${query}”`);
     if (emptyTitle) emptyTitle.textContent = plainFilters.length ? `No tools found for ${plainFilters.join(' + ')}` : 'No tools found';
     if (emptyCopy) emptyCopy.textContent = 'Try another topic, change the audience, or view all tools.';
@@ -290,6 +339,12 @@ search?.addEventListener('keydown', event => {
 
 topic?.addEventListener('change', () => {
   setTopic(topic.value, 'lower');
+});
+
+typeFilter?.addEventListener('change', () => {
+  filterState.type = normalizeType(typeFilter.value) || 'all';
+  syncFilterControls();
+  render(resources);
 });
 
 document.querySelectorAll('[data-audience]').forEach(button => {
