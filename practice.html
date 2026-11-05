@@ -39,24 +39,25 @@ const MEDITATIONS = [
 </script>
 
 <style>
-:root{--ink:#1e3a3c;--ink2:#2f5457;--bg:#f4f3ef;--card:#fff;--line:#e2e4e1;--soft:#eef2f1;--mut:#66706f;--txt:#1f2526;--ok:#2f6b4f;--okbg:#e6f1ea;--warm:#b0664a;--warmbg:#f8ede8;--r:14px}
+:root{--ink:#153f48;--ink2:#2f6973;--bg:#f6f4ef;--card:#fff;--line:#e3e8e6;--soft:#dfecea;--sand:#f3e9dc;--sandink:#6b4a32;--blush:#f6e7e0;--blushink:#7a3f2a;--mut:#607277;--txt:#18363d;--ok:#2f6973;--okbg:#dfecea;--warm:#9c6c4c;--warmbg:#f6e7e0;--r:18px}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Manrope,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
 body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-.wrap{max-width:560px;margin:0 auto;padding:18px 16px 60px}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 110px}
 h1,h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;color:var(--ink);margin:0}
 h1{font-size:32px;line-height:1.1}
 h2{font-size:24px;margin-bottom:4px}
 .backlink{display:inline-block;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;margin:0 0 10px}
 .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
 .sub{color:var(--mut);font-size:14px;margin:2px 0 0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin:0 0 14px;box-shadow:0 1px 2px rgba(21,63,72,.04)}
 .btn{appearance:none;border:1px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:12px 18px;font:600 15px Manrope,sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px}
 .btn.solid{background:var(--ink);color:#fff}
 .btn.block{width:100%}
 .btn.small{padding:8px 14px;min-height:38px;font-size:14px}
 .btn.ghost{border-color:var(--line)}
 .btn.rec{background:var(--warm);border-color:var(--warm);color:#fff}
+.btn.solid:active,.btn.clay:active{opacity:.92}
 .btn:active{transform:scale(.98)}
 .row{display:flex;gap:10px;align-items:center}
 .row.wrapr{flex-wrap:wrap}
@@ -115,18 +116,69 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
 .hr{height:1px;background:var(--line);margin:14px 0}
 .checkin{background:var(--soft);border-radius:12px;padding:12px 14px;margin:8px 0 12px}
 .checkin b{color:var(--ink)}
-@media print{.noprint{display:none!important}body{background:#fff}.card{border:0;padding:0}}
+.topband{background:var(--ink);color:#fff;padding:calc(env(safe-area-inset-top) + 14px) 0 22px}
+.topband-in{max-width:560px;margin:0 auto;padding:0 18px}
+.tb-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.topband .backlink{color:#fff;opacity:.85;margin:0}
+.tb-brand{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;font-weight:600}
+.tb-brand img{filter:brightness(0) invert(1);opacity:.9}
+.topband h1{color:#fff;font-size:34px;margin:14px 0 2px}
+.topband .sub{color:rgba(255,255,255,.78)}
+.ringrow{display:flex;align-items:center;gap:14px;margin-top:16px;background:rgba(255,255,255,.08);border-radius:18px;padding:12px 14px}
+.ringrow b{display:block;font-size:16px;font-weight:700}
+.ringrow span{font-size:13px;opacity:.8}
+.tabpanel{padding-top:16px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.97);border-top:1px solid var(--line);display:flex;justify-content:center;padding:6px 6px calc(env(safe-area-inset-bottom) + 8px);box-shadow:0 -4px 18px rgba(21,63,72,.06)}
+.tabbar-in{display:flex;width:100%;max-width:560px}
+.tab{flex:1;background:none;border:0;color:#8a9a9d;font:600 11px Manrope,sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;cursor:pointer}
+.tab svg{width:24px;height:24px}
+.tab.on{color:var(--ink)}
+.tab.on .tabpill{background:var(--soft)}
+.tabpill{border-radius:999px;padding:3px 16px;display:flex}
+.nextcard{border:0;background:#fff;box-shadow:0 6px 20px rgba(21,63,72,.08)}
+.nextrow{display:flex;gap:12px;align-items:center;margin:10px 0 2px}
+.nexticon{width:44px;height:44px;border-radius:14px;background:var(--blush);color:var(--warm);display:flex;align-items:center;justify-content:center;flex:none}
+.nexticon svg{width:22px;height:22px}
+.nextrow b{display:block;font-size:17px}
+.nextrow span{font-size:14px;color:var(--mut)}
+.btn.clay{background:var(--warm);border-color:var(--warm);color:#fff}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px}
+.tile{appearance:none;border:0;border-radius:18px;padding:16px;min-height:112px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;font-family:Manrope,sans-serif}
+.tile svg{width:26px;height:26px}
+.tile b{display:block;font-size:15px;font-weight:700}
+.tile small{display:block;font-size:12.5px;opacity:.82;margin-top:2px}
+.tile:active{transform:scale(.98)}
+.t-sea{background:var(--soft);color:var(--ink)}
+.t-sand{background:var(--sand);color:var(--sandink)}
+.t-ink{background:var(--ink);color:#fff}
+.t-blush{background:var(--blush);color:var(--blushink)}
+.sechead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+.stressbox{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px}
+.sbox{border-radius:14px;padding:10px 12px}
+.sbox.b{background:var(--blush);color:var(--blushink)}
+.sbox.a{background:var(--soft);color:var(--ink)}
+.sbox label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:700}
+.sbox .big{color:inherit;font-size:30px;min-width:0}
+.sbox input[type=range]{accent-color:currentColor}
+.sbox .scale{color:inherit;opacity:.75}
+@media(min-width:700px){.topband h1{font-size:40px}}
+@media print{.tabbar,.topband{display:none!important}.noprint{display:none!important}body{background:#fff}.card{border:0;padding:0}}
 </style>
 </head>
 <body>
+<header class="topband noprint">
+  <div class="topband-in">
+    <div class="tb-row"><a href="resources.html" class="backlink">← The Toolbox</a><span class="tb-brand"><img src="data:image/png;base64,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" alt="" width="18" height="18">Anchored Inside</span></div>
+    <h1 id="greet">My Practice</h1>
+    <p class="sub" id="weekLabel">Your skills for the week, all in one place.</p>
+    <div class="ringrow hidden" id="ringRow">
+      <svg width="58" height="58" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="24" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="6"/><circle id="ringArc" cx="29" cy="29" r="24" fill="none" stroke="#e8d8c4" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" transform="rotate(-90 29 29)"/><text id="ringText" x="29" y="34" text-anchor="middle" fill="#fff" font-size="16" font-family="Cormorant Garamond, Georgia, serif" font-weight="600">0/3</text></svg>
+      <div><b id="ringMain">0 of 3 practices</b><span id="ringSub">Your first practice is the hardest. You've got this.</span></div>
+    </div>
+  </div>
+</header>
 <div class="wrap">
 
-  <header class="noprint" style="margin-bottom:6px">
-    <a href="resources.html" class="backlink">← The Toolbox</a>
-    <div class="eyebrow" style="display:flex;align-items:center;gap:8px"><img src="data:image/png;base64,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" alt="" width="22" height="22" style="display:block">Anchored Inside</div>
-    <h1>My Practice</h1>
-    <p class="sub" id="weekLabel">Your skills for the week, all in one place.</p>
-  </header>
 
   <!-- ============ WELCOME (first visit) ============ -->
   <section id="welcome" class="hidden">
@@ -171,24 +223,56 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
     </div>
   </section>
 
-  <!-- ============ HOME ============ -->
+  <!-- ============ HOME (tabs) ============ -->
   <main id="home" class="hidden">
     <div id="pendingCard"></div>
 
+    <section class="tabpanel" id="tab-today" role="tabpanel" aria-label="Today">
+      <div class="card nextcard">
+        <div class="eyebrow">Next reminder</div>
+        <div class="nextrow"><div class="nexticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><div id="nextRem"><b>—</b><span></span></div></div>
+        <button class="btn clay block" style="margin-top:12px" onclick="startPractice()">▶ Start practice</button>
+      </div>
+      <div class="tiles">
+        <button class="tile t-sea" onclick="goTab('practice','sum')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span><b>Session summary</b><small id="tileSum">Listen to your recap</small></span></button>
+        <button class="tile t-sand" onclick="goTab('meditate')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg><span><b>Meditate</b><small id="tileMed">Your meditations</small></span></button>
+        <button class="tile t-ink" onclick="goTab('practice','log')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span><b>Log a practice</b><small>Takes 3 taps</small></span></button>
+        <button class="tile t-blush" onclick="goTab('week')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span><b>My week</b><small id="tileWeek">0 of 3 done</small></span></button>
+      </div>
     <!-- This week -->
     <div class="card">
-      <div class="eyebrow">This week</div>
+      <h2>This week</h2>
       <div id="skillChips" style="margin-top:8px"></div>
       <div class="hr"></div>
-      <b style="font-size:15px">Reminders</b>
+      <div class="eyebrow">Reminders</div>
       <div id="remChips" style="margin-top:8px"></div>
       <button class="btn small ghost" onclick="downloadReminders()">Add reminders to my calendar</button>
       <p class="err" id="icsMsg"></p>
       <p class="note">Or set 3 alarms in your Clock app and name each one after your skill.</p>
     </div>
+    </section>
 
+    <section class="tabpanel hidden" id="tab-practice" role="tabpanel" aria-label="Practice">
+      <div class="card" id="logCard">
+      <h2>Log a practice</h2>
+      <p class="sub">What did you practice?</p>
+      <div id="logSkills" style="margin-top:10px"></div>
+      <input type="text" id="otherIn" class="hidden" placeholder="What did you practice?" aria-label="What did you practice?" oninput="$('#logErr').textContent=''">
+
+      <div class="stressbox">
+        <div class="sbox b"><label for="before">Before <span class="big" id="bv">5</span></label><input type="range" min="0" max="10" step="1" value="5" id="before" oninput="$('#bv').textContent=this.value"><div class="scale"><span>0 calm</span><span>10</span></div></div>
+        <div class="sbox a"><label for="after">After <span class="big" id="av">5</span></label><input type="range" min="0" max="10" step="1" value="5" id="after" oninput="$('#av').textContent=this.value"><div class="scale"><span>0 calm</span><span>10</span></div></div>
+      </div>
+      <p class="note" style="margin-top:2px">Rate your stress from 0 (calm) to 10 (overwhelmed).</p>
+      <label class="f">Note <span style="font-weight:400;color:var(--mut)">(optional)</span></label>
+      <input type="text" id="noteIn" placeholder="Used it in the car before work">
+
+      <button class="btn solid block" style="margin-top:14px" onclick="logPractice()">✓ Save practice</button>
+      <p class="err" id="logErr"></p>
+      <p class="ok" id="logOk"></p>
+      </div>
     <!-- Session summary recorder -->
-    <div class="card">
+    <div class="card" id="sumCard">
       <h2>Session summary recording</h2>
       <p class="sub">We record this together at the end of session to recap what we worked on. Play it back during the week, especially when a reminder goes off.</p>
       <div id="sumPlayer" style="margin-top:10px"></div>
@@ -207,63 +291,36 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
       <p class="err" id="recErr"></p>
       <p class="note">The first time, your phone will ask to use the microphone. Tap <b>Allow</b>. Recordings stay on this phone only.</p>
     </div>
+    </section>
 
-    <!-- This week's meditations -->
-    <div class="card">
-      <h2 id="meditate">This week's meditations</h2>
-      <div id="weekMeds"></div>
-    </div>
-
-    <!-- Week + log -->
-    <div class="card" id="logCard">
-      <div class="row" style="justify-content:space-between">
-        <h2>My week</h2>
-        <span class="sub"><b id="dayCount">0</b> of 3 practices</span>
+    <section class="tabpanel hidden" id="tab-meditate" role="tabpanel" aria-label="Meditate">
+      <div class="card">
+        <h2 id="meditate">This week's meditations</h2>
+        <p class="sub">Picked for you this week. Tap ▶ to begin.</p>
+        <div id="weekMeds"></div>
       </div>
-      <div class="week" id="week"></div>
-      <p class="note" id="goalNote"></p>
-
-      <div class="hr"></div>
-      <b style="font-size:15px">Log a practice</b>
-      <div id="logSkills" style="margin-top:10px"></div>
-      <input type="text" id="otherIn" class="hidden" placeholder="What did you practice?" aria-label="What did you practice?" oninput="$('#logErr').textContent=''">
-
-      <label class="f">Stress before</label>
-      <div class="row"><input type="range" min="0" max="10" step="1" value="5" id="before" oninput="$('#bv').textContent=this.value"><span class="big" id="bv">5</span></div>
-      <div class="scale"><span>0 calm</span><span>10 overwhelmed</span></div>
-
-      <label class="f">Stress after</label>
-      <div class="row"><input type="range" min="0" max="10" step="1" value="5" id="after" oninput="$('#av').textContent=this.value"><span class="big" id="av">5</span></div>
-      <div class="scale"><span>0 calm</span><span>10 overwhelmed</span></div>
-
-      <label class="f">Note <span style="font-weight:400;color:var(--mut)">(optional)</span></label>
-      <input type="text" id="noteIn" placeholder="Used it in the car before work">
-
-      <button class="btn solid block" style="margin-top:14px" onclick="logPractice()">✓ Log practice</button>
-      <p class="err" id="logErr"></p>
-      <p class="ok" id="logOk"></p>
-    </div>
-
-    <!-- Recent -->
-    <div class="card">
-      <details class="libdrop" id="recentDrop"><summary><h2 style="margin:0">Recent practice</h2><span class="tcount" id="logCount"></span></summary>
-        <div id="logList" style="margin-top:8px"></div>
-      <div class="row wrapr" style="margin-top:12px">
-        <button class="btn small solid" onclick="showSummary()">Show my week in session</button>
-        <button class="btn small ghost" onclick="openSetup()">Edit my week</button>
-        <button class="btn small ghost" onclick="newWeek(this)">Start a new week</button>
-      </div>
-      </details>
-    </div>
-
-    <!-- Library -->
-    <div class="card">
-      <details class="libdrop" id="libDrop"><summary><h2 style="margin:0">All meditations</h2><span class="tcount" id="libCount"></span></summary>
-        <p class="sub" style="margin-top:6px">Tap a topic to open it. Tap the star to add a meditation to this week.</p>
+      <div class="card" id="libDrop">
+        <div class="sechead"><h2>All meditations</h2><span class="tcount sub" id="libCount"></span></div>
+        <p class="sub">Tap a topic to open it. Tap the star to add a meditation to this week.</p>
         <div id="library"></div>
-      </details>
-    </div>
+      </div>
+    </section>
 
+    <section class="tabpanel hidden" id="tab-week" role="tabpanel" aria-label="My week">
+      <div class="card">
+        <div class="sechead"><h2>My week</h2><span class="sub"><b id="dayCount">0</b> of 3 practices</span></div>
+        <div class="week" id="week"></div>
+        <p class="note" id="goalNote"></p>
+      </div>
+      <div class="card" id="recentDrop">
+        <div class="sechead"><h2>Recent practice</h2><span class="tcount sub" id="logCount"></span></div>
+        <div id="logList"></div>
+      </div>
+      <button class="btn solid block" style="margin-bottom:10px" onclick="showSummary()">Show my week in session</button>
+      <div class="row" style="margin-bottom:14px">
+        <button class="btn ghost" style="flex:1" onclick="openSetup()">Edit my week</button>
+        <button class="btn ghost" style="flex:1" onclick="newWeek(this)">Start a new week</button>
+      </div>
     <div class="card">
       <details>
         <summary>Help and privacy</summary>
@@ -272,9 +329,10 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
         <p class="note"><b>Microphone.</b> If recording does not work, check that your browser is allowed to use the microphone in your phone's Settings.</p>
       </details>
     </div>
-
     <div class="safety">If you are in crisis or thinking about harming yourself, call or text <b>988</b> (Suicide and Crisis Lifeline) or call <b>911</b>. This page is not monitored.</div>
+    </section>
   </main>
+
 
   <!-- ============ WEEK SUMMARY (show in session / print) ============ -->
   <section id="summary" class="hidden">
@@ -293,6 +351,14 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
 
 </div>
 
+<nav class="tabbar hidden noprint" id="tabbar" role="tablist" aria-label="Sections">
+  <div class="tabbar-in">
+    <button class="tab on" data-tab="today" role="tab" aria-selected="true" onclick="goTab('today')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></span>Today</button>
+    <button class="tab" data-tab="practice" role="tab" aria-selected="false" onclick="goTab('practice')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span>Practice</button>
+    <button class="tab" data-tab="meditate" role="tab" aria-selected="false" onclick="goTab('meditate')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg></span>Meditate</button>
+    <button class="tab" data-tab="week" role="tab" aria-selected="false" onclick="goTab('week')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></span>My week</button>
+  </div>
+</nav>
 <script>
 const $ = s => document.querySelector(s);
 const KEY = 'anchoredInside.practice.v1';
@@ -339,7 +405,38 @@ function fmtTime(t){ const [h,m]=t.split(':').map(Number); const d=new Date(); d
 function medId(m){ return m.link; }
 function ytId(url){ const m=String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/); return m?m[1]:null; }
 function isAudio(url){ return /\.(mp3|m4a|wav|ogg|aac)(\?|$)/i.test(url); }
-function show(id){ ['welcome','setup','home','summary'].forEach(s=>$('#'+s).classList.toggle('hidden', s!==id)); $('header').classList.toggle('hidden', id==='summary'); window.scrollTo(0,0); }
+function show(id){ ['welcome','setup','home','summary'].forEach(s=>$('#'+s).classList.toggle('hidden', s!==id)); $('header').classList.toggle('hidden', id==='summary'); $('#tabbar').classList.toggle('hidden', id!=='home'); $('#ringRow').classList.toggle('hidden', !(id==='home' && (curTab==='today'||curTab==='week'))); if(id!=='home'){ $('#greet').textContent='My Practice'; } else { setGreeting(); } window.scrollTo(0,0); }
+let curTab='today';
+function setGreeting(){ const h=new Date().getHours(); $('#greet').textContent = curTab==='today' ? (h<12?'Good morning':h<17?'Good afternoon':'Good evening') : ({practice:'Practice',meditate:'Meditate',week:'My week'})[curTab]; }
+function goTab(t, focus){
+  curTab=t;
+  ['today','practice','meditate','week'].forEach(x=>$('#tab-'+x).classList.toggle('hidden', x!==t));
+  document.querySelectorAll('#tabbar .tab').forEach(b=>{ const on=b.dataset.tab===t; b.classList.toggle('on',on); b.setAttribute('aria-selected', on?'true':'false'); });
+  setGreeting();
+  $('#ringRow').classList.toggle('hidden', !(t==='today'||t==='week'));
+  window.scrollTo(0,0);
+  if(focus==='sum'){ setTimeout(()=>$('#sumCard').scrollIntoView({behavior:'smooth',block:'start'}),50); }
+}
+function nextReminder(){
+  if(!S.week) return null;
+  const now=Date.now();
+  const list=S.week.reminders.map(r=>{ const [h,m]=r.time.split(':').map(Number); const d=new Date(S.week.start+(r.day||0)*DAY); d.setHours(h,m,0,0); return {...r, at:d.getTime()}; }).sort((a,b)=>a.at-b.at);
+  return list.find(r=>r.at>=now-30*60*1000) || null;
+}
+function renderNext(){
+  const r=nextReminder(), el=$('#nextRem');
+  if(!r){ el.innerHTML='<b>No more reminders this week</b><span>Practice anytime. Every bit counts.</span>'; return; }
+  const d=new Date(r.at), isToday=new Date().toDateString()===d.toDateString();
+  const when=(isToday?'Today':d.toLocaleDateString(undefined,{weekday:'long'}))+' · '+fmtTime(r.time);
+  const what=r.what?r.what.replace(' (meditation)',''):'Any of my skills';
+  el.innerHTML=`<b>${esc(when)}</b><span>${r.anchor?esc(r.anchor)+' · ':''}${esc(what)}</span>`;
+}
+function startPractice(){
+  const r=nextReminder();
+  if(r && isMed(r)){ goTab('meditate'); return; }
+  if(r && r.what){ logSkill=r.what; renderLogSkills(); }
+  goTab('practice','sum');
+}
 
 /* ---------- setup ---------- */
 function openSetup(){
@@ -417,6 +514,8 @@ function renderMedList(sel, withPlay){
 function renderLibCount(){ const el=$('#libCount'); if(el) el.textContent=`${MEDITATIONS.length} meditation${MEDITATIONS.length===1?'':'s'}`; }
 function renderWeekMeds(){
   renderLibCount();
+  const nStar=MEDITATIONS.filter(m=>S.stars.includes(medId(m))).length;
+  if($('#tileMed')) $('#tileMed').textContent = nStar ? `${nStar} picked for you` : 'Browse meditations';
   const list=MEDITATIONS.filter(m=>S.stars.includes(medId(m)));
   $('#weekMeds').innerHTML = list.length ? list.map(m=>medRow(m,true)).join('') : '<p class="note">No meditations picked yet. Tap a star in the list below.</p>';
 }
@@ -535,6 +634,7 @@ async function renderRecordings(){
       urls[k]=URL.createObjectURL(a.blob);
       $(el).innerHTML=`<audio controls preload="metadata" src="${urls[k]}"></audio><p class="note" style="margin:0">Recorded ${fmtDay(a.at)} · <button class="x" onclick="deleteRec('${k}',this)">Delete</button></p>`;
       $(btn).textContent = k==='summary' ? 'Record a new summary' : 'Record again';
+      if(k==='summary' && $('#tileSum')) $('#tileSum').textContent = 'Recorded ' + new Date(a.at).toLocaleDateString(undefined,{month:'short',day:'numeric'});
     } else { $(el).innerHTML = k==='summary' ? '<p class="note" style="margin-top:0">No recording yet. Tap the button at the end of your next session.</p>' : ''; $(btn).textContent=label; }
   }
 }
@@ -603,6 +703,13 @@ function renderWeek(){
   $('#dayCount').textContent=Math.min(total,99);
   $('#goalNote').textContent = total>=GOAL ? 'You reached your goal for the week. Extra practice is a bonus.' : `⏰ marks your reminder days. ${GOAL-total} to go.`;
   $('#weekLabel').textContent = today>6 ? 'Your week is complete. Bring it to session, then start a new week.' : `Day ${Math.max(1,today+1)} of 7 · started ${fmtDay(S.week.start)}`;
+  const done=Math.min(total,GOAL), d=summaryData();
+  $('#ringArc').setAttribute('stroke-dashoffset', String(150.8*(1-done/GOAL)));
+  $('#ringText').textContent=`${Math.min(total,99)}/${GOAL}`;
+  $('#ringMain').textContent = total>=GOAL ? `Goal reached: ${total} practices` : `${total} of ${GOAL} practices`;
+  $('#ringSub').textContent = d.logs.length ? (d.avgDrop>0 ? `Stress down ${d.avgDrop.toFixed(1).replace('.0','')} points on average` : 'Showing up to practice counts.') : 'Your first practice is the hardest. You\'ve got this.';
+  $('#tileWeek').textContent = `${Math.min(total,99)} of ${GOAL} done`;
+  if(typeof renderNext==='function') renderNext();
 }
 
 /* ---------- summary ---------- */
@@ -643,8 +750,8 @@ function renderHome(){
 function handleHash(){
   if(!S.week) return;
   const h=location.hash;
-  if(h==='#meditate'){ const c=$('#weekMeds').closest('.card'); c.scrollIntoView({behavior:'smooth'}); c.style.outline='2px solid var(--warm)'; setTimeout(()=>c.style.outline='',2500); const m=MEDITATIONS.find(x=>S.stars.includes(medId(x))); if(m){ logSkill=m.title; renderLogSkills(); } }
-  else if(h==='#practice'){ $('#sumPlayer').closest('.card').scrollIntoView({behavior:'smooth'}); }
+  if(h==='#meditate'){ goTab('meditate'); const m=MEDITATIONS.find(x=>S.stars.includes(medId(x))); if(m){ logSkill=m.title; renderLogSkills(); } }
+  else if(h==='#practice'){ goTab('practice','sum'); }
 }
 if(S.week){ renderHome(); show('home'); setTimeout(handleHash,300); } else { show('welcome'); }
 window.addEventListener('hashchange',handleHash);
