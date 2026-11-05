@@ -868,7 +868,7 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
   .home-page .logo{height:66px}
   .home-page .nav-toggle{display:block;color:var(--ink);background:#fff;border-color:var(--line)}
   .home-page .nav{top:78px;background:#fff;border-color:var(--line)}
-  .home-page .nav a{color:var(--ink)!important}
+  .home-page .nav a:not(.btn){color:var(--ink)!important}
 }
 @media(max-width:640px){
   .home-page .nav-wrap{width:min(1180px,calc(100% - 40px))}
@@ -934,8 +934,10 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
     border-color:rgba(255,255,255,.42);
     backdrop-filter:blur(8px);
   }
-  .home-page .nav{top:78px;background:rgba(255,253,249,.97);border-color:rgba(27,55,61,.1);box-shadow:0 14px 35px rgba(10,36,42,.14)}
-  .home-page .nav a{color:var(--ink)!important;text-shadow:none!important}
+  /* Opaque cream. A translucent panel inside the header's backdrop-filter lets the page show through on iOS. */
+  .home-page .nav{top:78px;background:#fffdf9;opacity:1;isolation:isolate;-webkit-backdrop-filter:none;backdrop-filter:none;border-color:rgba(27,55,61,.1);box-shadow:0 14px 35px rgba(10,36,42,.14)}
+  .home-page .nav a:not(.btn){color:var(--ink)!important;text-shadow:none!important}
+  .home-page .nav a.btn-primary{color:#fffdf9!important}
   .home-page .site-header.is-scrolled .nav-wrap{min-height:72px}
   .home-page .site-header.is-scrolled .logo{height:52px}
   .home-page .site-header.is-scrolled .nav-toggle{color:var(--ink);background:rgba(255,255,255,.78);border-color:var(--line)}
