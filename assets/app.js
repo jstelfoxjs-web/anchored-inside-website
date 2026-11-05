@@ -401,12 +401,17 @@ function openResource(card) {
   const isPdf = /\.pdf(?:$|[?#])/i.test(file);
 
   lastFocusedResource = card;
+  viewer.classList.remove('is-reader');
   document.getElementById('modal-title').textContent = title;
   download.href = file;
   download.setAttribute('download', '');
-  viewer.innerHTML = isPdf
-    ? `<iframe class="resource-pdf" src="${file}#view=FitH&toolbar=1&navpanes=0" title="${title}"></iframe>`
-    : `<img class="resource-full-image" src="${file}" alt="${title}">`;
+  if (isPdf && useScrollReader()) {
+    renderPdfReader(viewer, file, title);
+  } else {
+    viewer.innerHTML = isPdf
+      ? `<iframe class="resource-pdf" src="${file}#view=FitH&toolbar=1&navpanes=0" title="${title}"></iframe>`
+      : `<img class="resource-full-image" src="${file}" alt="${title}">`;
+  }
 
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
@@ -432,12 +437,117 @@ document.addEventListener('keydown', event => {
 
 function closeModal() {
   if (!modal || !modal.classList.contains('open')) return;
+  pdfReaderToken += 1;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   const viewer = document.getElementById('modal-viewer');
   if (viewer) viewer.innerHTML = '';
   lastFocusedResource?.focus();
+}
+
+
+// Phone-friendly PDF reader. Embedded PDFs on iPhone often show one page or
+// will not scroll, so on touch screens and narrow windows each page is drawn
+// with PDF.js and stacked for normal scrolling. Desktop keeps the built-in viewer.
+const PDFJS_BASE = 'assets/vendor/pdfjs-3.11.174/';
+let pdfjsLoading = null;
+let pdfReaderToken = 0;
+
+function useScrollReader() {
+  return window.matchMedia('(pointer: coarse), (max-width: 760px)').matches;
+}
+
+function loadPdfJs() {
+  if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+  if (!pdfjsLoading) {
+    pdfjsLoading = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = PDFJS_BASE + 'pdf.min.js';
+      script.onload = () => {
+        if (!window.pdfjsLib) { reject(new Error('PDF.js did not load')); return; }
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_BASE + 'pdf.worker.min.js';
+        resolve(window.pdfjsLib);
+      };
+      script.onerror = () => { pdfjsLoading = null; reject(new Error('PDF.js did not load')); };
+      document.head.appendChild(script);
+    });
+  }
+  return pdfjsLoading;
+}
+
+function escapeAttr(value) {
+  return String(value || '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+}
+
+async function renderPdfReader(viewer, file, title) {
+  const token = ++pdfReaderToken;
+  viewer.classList.add('is-reader');
+  viewer.innerHTML = `<div class="pdf-reader"><p class="pdf-reader-status" role="status">Loading ${escapeAttr(title)}…</p></div>`;
+  const reader = viewer.querySelector('.pdf-reader');
+  const status = reader.querySelector('.pdf-reader-status');
+  try {
+    const pdfjsLib = await loadPdfJs();
+    const pdf = await pdfjsLib.getDocument({ url: file }).promise;
+    if (token !== pdfReaderToken) return;
+    status.textContent = `${pdf.numPages} page${pdf.numPages === 1 ? '' : 's'} · scroll to read`;
+
+    const first = await pdf.getPage(1);
+    const base = first.getViewport({ scale: 1 });
+    const pages = [];
+    for (let n = 1; n <= pdf.numPages; n++) {
+      const slot = document.createElement('div');
+      slot.className = 'pdf-page';
+      slot.dataset.page = String(n);
+      slot.style.aspectRatio = `${base.width} / ${base.height}`;
+      slot.setAttribute('aria-label', `Page ${n} of ${pdf.numPages}`);
+      reader.appendChild(slot);
+      pages.push(slot);
+    }
+    const link = document.createElement('p');
+    link.className = 'pdf-reader-foot';
+    link.innerHTML = `<a href="${escapeAttr(file)}" target="_blank" rel="noopener">Open the full PDF</a> to print or save it.`;
+    reader.appendChild(link);
+
+    const drawn = new Set();
+    const draw = async slot => {
+      const n = Number(slot.dataset.page);
+      if (drawn.has(n) || token !== pdfReaderToken) return;
+      drawn.add(n);
+      try {
+        const page = n === 1 ? first : await pdf.getPage(n);
+        const unscaled = page.getViewport({ scale: 1 });
+        slot.style.aspectRatio = `${unscaled.width} / ${unscaled.height}`;
+        const cssWidth = slot.clientWidth || reader.clientWidth || 360;
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        const viewport = page.getViewport({ scale: (cssWidth / unscaled.width) * ratio });
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        if (token !== pdfReaderToken) return;
+        slot.appendChild(canvas);
+        slot.classList.add('is-drawn');
+      } catch (error) {
+        drawn.delete(n);
+      }
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { observer.unobserve(entry.target); draw(entry.target); }
+        });
+      }, { root: viewer, rootMargin: '900px 0px' });
+      pages.forEach(slot => observer.observe(slot));
+    } else {
+      for (const slot of pages) await draw(slot);
+    }
+  } catch (error) {
+    if (token !== pdfReaderToken) return;
+    viewer.classList.remove('is-reader');
+    viewer.innerHTML = `<div class="pdf-reader"><p class="pdf-reader-status">This handout could not be shown here. <a href="${escapeAttr(file)}" target="_blank" rel="noopener">Open the PDF</a> instead.</p></div>`;
+  }
 }
 
 const stickyHeader = document.querySelector('[data-sticky-header]');
