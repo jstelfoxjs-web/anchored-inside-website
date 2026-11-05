@@ -864,5 +864,33 @@
       "family"
     ],
     "featured": false
+  },
+  {
+    "title": "Caring for Me, Too: A Codependency Workbook (Beattie)",
+    "description": "A gentle, client-friendly workbook on letting go of control, caretaking and over-responsibility, with reflection prompts, practices and diagrams on detachment, the drama triangle and acceptance. Adapted from Melody Beattie's Codependent No More (1987, 1992).",
+    "audience": [
+      "adults",
+      "all"
+    ],
+    "topics": [
+      "boundaries",
+      "relationships"
+    ],
+    "type": "Workbook",
+    "file": "/assets/handouts/caring-for-me-too-workbook.pdf",
+    "preview": "/assets/handouts/caring-for-me-too-workbook-cover.jpg",
+    "keywords": [
+      "Melody Beattie",
+      "Codependent No More",
+      "codependency",
+      "detachment",
+      "drama triangle",
+      "caretaking",
+      "enabling",
+      "boundaries",
+      "Al-Anon",
+      "self-care"
+    ],
+    "featured": false
   }
 ]
