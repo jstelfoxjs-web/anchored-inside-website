@@ -226,6 +226,7 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
       <div class="hr"></div>
       <b style="font-size:15px">Log a practice</b>
       <div id="logSkills" style="margin-top:10px"></div>
+      <input type="text" id="otherIn" class="hidden" placeholder="What did you practice?" aria-label="What did you practice?" oninput="$('#logErr').textContent=''">
 
       <label class="f">Stress before</label>
       <div class="row"><input type="range" min="0" max="10" step="1" value="5" id="before" oninput="$('#bv').textContent=this.value"><span class="big" id="bv">5</span></div>
@@ -570,13 +571,17 @@ let logSkill=null;
 function renderLogSkills(){
   const opts=[...practiceOptions(S.week.skills).map(o=>o.replace(' (meditation)','')), 'Other'];
   if(!opts.includes(logSkill)) logSkill=opts[0];
-  $('#logSkills').innerHTML=opts.map(o=>`<button class="pick ${o===logSkill?'sel':''}" onclick="logSkill=this.dataset.v;renderLogSkills()" data-v="${esc(o)}">${esc(o)}</button>`).join('');
+  $('#logSkills').innerHTML=opts.map(o=>`<button class="pick ${o===logSkill?'sel':''}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}">${esc(o)}</button>`).join('');
+  $('#otherIn').classList.toggle('hidden', logSkill!=='Other');
 }
 function logPractice(){
   $('#logErr').textContent='';
   if(!logSkill){ $('#logErr').textContent='Pick the skill you practiced.'; return; }
+  let skillName=logSkill;
+  if(logSkill==='Other'){ skillName=$('#otherIn').value.trim(); if(!skillName){ $('#logErr').textContent='Type what you practiced.'; $('#otherIn').focus(); return; } }
   const b=+$('#before').value, a=+$('#after').value;
-  S.logs.unshift({id:Date.now(), ts:Date.now(), skill:logSkill, before:b, after:a, note:$('#noteIn').value.trim()});
+  S.logs.unshift({id:Date.now(), ts:Date.now(), skill:skillName, before:b, after:a, note:$('#noteIn').value.trim()});
+  $('#otherIn').value='';
   save(); $('#noteIn').value='';
   const diff=b-a;
   $('#logOk').textContent = diff>0 ? `Logged. Your stress went down ${diff} point${diff===1?'':'s'}. Nice work.` : 'Logged. Showing up to practice counts.';
