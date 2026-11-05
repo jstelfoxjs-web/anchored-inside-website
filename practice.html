@@ -147,6 +147,7 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
       <p class="sub">Fill this in together at the end of session.</p>
 
       <label class="f">Skills to practice this week (up to 3)</label>
+      <p class="note" style="margin-top:0">Meditations you star below are added automatically, so there's no need to type them here.</p>
       <input type="text" id="sk0" placeholder="Four Elements">
       <input type="text" id="sk1" placeholder="Calm place" style="margin-top:8px">
       <input type="text" id="sk2" placeholder="Container" style="margin-top:8px">
@@ -355,9 +356,11 @@ function openSetup(){
   $('#skErr').textContent=''; $('#remErr').textContent='';
   show('setup');
 }
+function isGenericMed(s){ return /^\s*(guided\s+)?(meditation|meditations|meditate|meditating)\s*$/i.test(s); }
 function practiceOptions(skills){
   const meds=MEDITATIONS.filter(m=>S.stars.includes(medId(m))).map(m=>m.title+' (meditation)');
-  return [...skills, ...meds];
+  const kept = meds.length ? skills.filter(s=>!isGenericMed(s)) : skills;
+  return [...kept, ...meds];
 }
 function setupSkills(){ return [0,1,2].map(i=>$('#sk'+i).value.trim()).filter(Boolean); }
 function refreshWhat(){
@@ -627,7 +630,7 @@ async function copySummary(){
 
 /* ---------- render ---------- */
 function renderHome(){
-  $('#skillChips').innerHTML=S.week.skills.map(s=>`<span class="chip">${esc(s)}</span>`).join('');
+  $('#skillChips').innerHTML=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)','')).map(s=>`<span class="chip">${esc(s)}</span>`).join('');
   $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">⏰ ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
   renderWeek(); renderLogSkills(); renderLogs(); renderWeekMeds(); renderMedList('#library',true); renderRecordings(); renderPending();
 }
