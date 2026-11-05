@@ -467,3 +467,127 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 } else {
   document.querySelectorAll('.reveal-section,.editorial-card,.resource-card').forEach(el => el.classList.add('is-visible'));
 }
+
+(function () {
+  const secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  if ('serviceWorker' in navigator && secure) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
+
+  const dismissKey = 'anchored-a2hs-dismissed';
+  let deferredPrompt = null;
+  let prompted = false;
+
+  function dismissed() {
+    try { return localStorage.getItem(dismissKey) === '1'; }
+    catch (error) { return true; }
+  }
+
+  function standalone() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  }
+
+  function rememberDismiss() {
+    try { localStorage.setItem(dismissKey, '1'); }
+    catch (error) {}
+  }
+
+  function toolboxLocked() {
+    return document.documentElement.classList.contains('toolbox-locked');
+  }
+
+  function removePrompt() {
+    document.getElementById('a2hs')?.remove();
+  }
+
+  function showPrompt(mode) {
+    if (prompted || dismissed() || standalone() || toolboxLocked() || document.getElementById('a2hs')) return;
+    prompted = true;
+
+    const bar = document.createElement('div');
+    bar.id = 'a2hs';
+    bar.className = 'a2hs';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Add to home screen');
+
+    const copy = document.createElement('p');
+    const title = document.createElement('strong');
+    title.textContent = 'Keep these tools nearby.';
+    copy.appendChild(title);
+    copy.appendChild(document.createTextNode(mode === 'ios'
+      ? ' In Safari, tap Share, then Add to Home Screen.'
+      : ' Add Anchored Inside to your home screen.'));
+
+    const actions = document.createElement('div');
+    actions.className = 'a2hs-actions';
+
+    if (mode === 'install') {
+      const add = document.createElement('button');
+      add.type = 'button';
+      add.className = 'a2hs-add';
+      add.textContent = 'Add';
+      add.addEventListener('click', () => {
+        const promptEvent = deferredPrompt;
+        deferredPrompt = null;
+        if (!promptEvent) return;
+        promptEvent.prompt();
+        promptEvent.userChoice.finally(() => {
+          rememberDismiss();
+          removePrompt();
+        });
+      });
+      actions.appendChild(add);
+    }
+
+    const dismiss = document.createElement('button');
+    dismiss.type = 'button';
+    dismiss.className = 'a2hs-dismiss';
+    dismiss.textContent = 'Not now';
+    dismiss.addEventListener('click', () => {
+      rememberDismiss();
+      removePrompt();
+    });
+    actions.appendChild(dismiss);
+    bar.appendChild(copy);
+    bar.appendChild(actions);
+    document.body.appendChild(bar);
+    requestAnimationFrame(() => bar.classList.add('is-in'));
+  }
+
+  function maybeShowIos() {
+    const ua = window.navigator.userAgent || '';
+    const iOS = /iphone|ipad|ipod/i.test(ua);
+    const iPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+    const safari = /safari/i.test(ua) && !/crios|fxios|edgios|chrome|android/i.test(ua);
+    if ((iOS || iPadOS) && safari) showPrompt('ios');
+  }
+
+  function showWhenAppropriate() {
+    if (toolboxLocked()) return;
+    if (deferredPrompt) showPrompt('install');
+    else maybeShowIos();
+  }
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    window.setTimeout(showWhenAppropriate, 1600);
+  });
+
+  window.addEventListener('appinstalled', () => {
+    rememberDismiss();
+    removePrompt();
+  });
+
+  window.setTimeout(showWhenAppropriate, 2200);
+
+  if (toolboxLocked()) {
+    const observer = new MutationObserver(() => {
+      if (!toolboxLocked()) {
+        observer.disconnect();
+        window.setTimeout(showWhenAppropriate, 800);
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
