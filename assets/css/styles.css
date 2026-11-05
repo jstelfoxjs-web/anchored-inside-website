@@ -868,7 +868,7 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
   .home-page .logo{height:66px}
   .home-page .nav-toggle{display:block;color:var(--ink);background:#fff;border-color:var(--line)}
   .home-page .nav{top:78px;background:#fff;border-color:var(--line)}
-  .home-page .nav a{color:var(--ink)!important}
+  .home-page .nav a:not(.btn){color:var(--ink)!important}
 }
 @media(max-width:640px){
   .home-page .nav-wrap{width:min(1180px,calc(100% - 40px))}
@@ -934,8 +934,10 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
     border-color:rgba(255,255,255,.42);
     backdrop-filter:blur(8px);
   }
-  .home-page .nav{top:78px;background:rgba(255,253,249,.97);border-color:rgba(27,55,61,.1);box-shadow:0 14px 35px rgba(10,36,42,.14)}
-  .home-page .nav a{color:var(--ink)!important;text-shadow:none!important}
+  /* Opaque cream. A translucent panel inside the header's backdrop-filter lets the page show through on iOS. */
+  .home-page .nav{top:78px;background:#fffdf9;opacity:1;isolation:isolate;-webkit-backdrop-filter:none;backdrop-filter:none;border-color:rgba(27,55,61,.1);box-shadow:0 14px 35px rgba(10,36,42,.14)}
+  .home-page .nav a:not(.btn){color:var(--ink)!important;text-shadow:none!important}
+  .home-page .nav a.btn-primary{color:#fffdf9!important}
   .home-page .site-header.is-scrolled .nav-wrap{min-height:72px}
   .home-page .site-header.is-scrolled .logo{height:52px}
   .home-page .site-header.is-scrolled .nav-toggle{color:var(--ink);background:rgba(255,255,255,.78);border-color:var(--line)}
@@ -3675,3 +3677,66 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
   font-weight:500;
 }
 .home-page .nav a.btn-primary{color:#fffdf9!important}
+
+.a2hs{
+  position:fixed;
+  z-index:70;
+  left:50%;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  width:min(420px, calc(100% - 28px));
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 14px 14px 16px;
+  background:var(--white);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateX(-50%) translateY(10px);
+  transition:opacity .35s ease, transform .35s ease;
+}
+.a2hs.is-in{opacity:1;transform:translateX(-50%) translateY(0)}
+.a2hs p{margin:0;font-size:.84rem;line-height:1.45;color:var(--muted)}
+.a2hs strong{
+  display:block;
+  margin-bottom:2px;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.28rem;
+  font-weight:500;
+  line-height:1.05;
+  color:var(--ocean-deep);
+}
+.a2hs-actions{display:flex;align-items:center;gap:4px;flex:0 0 auto}
+.a2hs-add{
+  border:0;
+  border-radius:999px;
+  background:var(--ocean-deep);
+  color:#fff;
+  font-weight:800;
+  font-size:.82rem;
+  padding:.55rem .9rem;
+  cursor:pointer;
+}
+.a2hs-add:hover{background:#102f36}
+.a2hs-dismiss{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-weight:700;
+  font-size:.78rem;
+  padding:.45rem .35rem;
+  cursor:pointer;
+}
+.a2hs-dismiss:hover{color:var(--ocean-deep)}
+@media (max-width:480px){
+  .a2hs{align-items:flex-start;flex-direction:column;gap:10px;padding:14px 14px 12px}
+  .a2hs-actions{align-self:flex-end}
+}
+@media (prefers-reduced-motion:reduce){
+  .a2hs{transition:none;opacity:1;transform:translateX(-50%)}
+}
+@media print{
+  .a2hs{display:none !important}
+}
