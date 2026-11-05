@@ -3633,3 +3633,27 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 .home-page .season-panel__link{
   border-bottom:0;
 }
+
+.schedule-aside{
+  margin:1.15rem 0 0;
+  max-width:36rem;
+  color:var(--muted);
+  font-size:.98rem;
+  line-height:1.6;
+}
+.schedule-aside a{
+  color:var(--ocean-deep);
+  font-weight:700;
+}
+.footer-schedule-note{
+  margin:.15rem 0 .35rem;
+  max-width:28ch;
+  color:#bfd0ce;
+  font-size:.82rem;
+  line-height:1.45;
+}
+.footer-links a.schedule-link{
+  color:#c5d9d6;
+  font-weight:500;
+}
+.home-page .nav a.btn-primary{color:#fffdf9!important}
