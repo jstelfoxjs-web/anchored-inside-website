@@ -837,5 +837,32 @@
       "grounding"
     ],
     "featured": false
+  },
+  {
+    "title": "Coming Home to Myself: A Workbook for Adult Children of Emotionally Immature Parents (Gibson)",
+    "description": "A companion to Welcoming All of Me: a guided workbook for understanding the emotional loneliness of growing up with emotionally immature parents, with reflections and practices for relating to family from a steadier place. Adapted from Lindsay C. Gibson's Adult Children of Emotionally Immature Parents (2015).",
+    "audience": [
+      "adults",
+      "all"
+    ],
+    "topics": [
+      "trauma",
+      "attachment",
+      "relationships"
+    ],
+    "type": "Workbook",
+    "file": "/assets/handouts/coming-home-to-myself-workbook.pdf",
+    "preview": "/assets/handouts/coming-home-to-myself-workbook-cover.jpg",
+    "keywords": [
+      "Lindsay Gibson",
+      "emotionally immature parents",
+      "emotional loneliness",
+      "role-self",
+      "healing fantasy",
+      "internalizer",
+      "externalizer",
+      "family"
+    ],
+    "featured": false
   }
 ]

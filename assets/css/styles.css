@@ -523,7 +523,7 @@ footer{background:#102f36;color:#e9f4f2;padding:70px 0 35px}
  .toolkit-hero-grid{grid-template-columns:1fr;gap:38px}
  .journey-grid{grid-template-columns:repeat(2,1fr)}
  .toolkit-layout{grid-template-columns:1fr}
- .toolkit-filters{position:static;display:grid;grid-template-columns:1fr 1fr auto;gap:20px;align-items:end}
+ .toolkit-filters{position:static;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end}
  .filter-group+.filter-group{margin-top:0}
  .clear-filters{margin:0 0 .7rem}
 }
