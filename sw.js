@@ -4,7 +4,7 @@
    shows up on the next visit while the visitor is online. Handouts and
    resources.json are stored the first time they are opened. */
 
-const CACHE_VERSION = 'anchored-v6';
+const CACHE_VERSION = 'anchored-v7';
 const SHELL_CACHE = `anchored-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `anchored-runtime-${CACHE_VERSION}`;
 
@@ -162,7 +162,9 @@ function isFontHost(url) {
 async function networkFirst(request, cacheName) {
   const cache = await caches.open(cacheName);
   try {
-    const response = await fetch(request);
+    // Revalidate with the server so an updated page shows on the next visit,
+    // even when the browser's HTTP cache still holds an older copy.
+    const response = await fetch(request, { cache: 'no-cache' });
     if (response && response.ok && response.type === 'basic') {
       await cache.put(request, response.clone());
     }
