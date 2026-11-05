@@ -447,15 +447,16 @@ function closeModal() {
 }
 
 
-// Phone-friendly PDF reader. Embedded PDFs on iPhone often show one page or
-// will not scroll, so on touch screens and narrow windows each page is drawn
-// with PDF.js and stacked for normal scrolling. Desktop keeps the built-in viewer.
+// Scrollable PDF reader. Embedded PDFs in Safari (iPhone, iPad and Mac) often
+// show one page or will not scroll, so each page is drawn with PDF.js and
+// stacked for normal scrolling.
 const PDFJS_BASE = 'assets/vendor/pdfjs-3.11.174/';
 let pdfjsLoading = null;
 let pdfReaderToken = 0;
 
 function useScrollReader() {
-  return window.matchMedia('(pointer: coarse), (max-width: 760px)').matches;
+  // Used everywhere: Safari's embedded PDF viewer can show only the first page.
+  return true;
 }
 
 function loadPdfJs() {
