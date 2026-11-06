@@ -108,7 +108,14 @@ h2{font-size:24px;margin-bottom:4px}
 .introicon svg{width:24px;height:24px}
 .introrow h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:23px;line-height:1.15;margin:2px 0 4px;color:var(--ink)}
 .introrow p{margin:0;font-size:14px;color:var(--mut)}
-.firstcard{border-left:4px solid var(--ink2)}
+.firstcard{position:relative;min-height:236px;border-radius:22px;overflow:hidden;margin:0 0 14px;box-shadow:0 10px 30px rgba(21,63,72,.16);
+  background:linear-gradient(100deg,rgba(255,250,243,.94) 0%,rgba(255,250,243,.72) 38%,rgba(255,250,243,0) 66%),url(assets/images/practice-week-begins.jpg) center 70%/cover no-repeat,#f3e9dc}
+.firstcard::after{content:"";position:absolute;inset:0;border-radius:22px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);pointer-events:none}
+.fc-copy{position:relative;padding:24px 22px;max-width:60%}
+.fc-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--warm)}
+.fc-copy h3{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:29px;line-height:1.05;color:var(--ink);margin:10px 0 12px}
+.fc-copy p{margin:0;font-size:14px;color:var(--ink2);font-weight:600}
+.fc-copy p::before{content:"";display:block;width:34px;height:2px;background:var(--warm);border-radius:2px;margin-bottom:10px;opacity:.8}
 .tdrop{border-left:5px solid var(--tc,var(--ink2))}
 .tdrop summary .tico{width:30px;height:30px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;margin-right:10px;background:var(--tcbg,var(--soft));color:var(--tc,var(--ink2));flex:none}
 .tdrop summary .tico svg{width:17px;height:17px}
@@ -411,12 +418,12 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
           <p id="goalSub">Anything extra is a bonus. Bring this week to session.</p>
         </div></div>
       </div>
-      <div class="card firstcard hidden" id="firstCard">
-        <div class="introrow"><span class="introicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M12 7v13M8 11h8M5 14a7 7 0 0 0 14 0"/></svg></span><div>
-          <div class="eyebrow">Your week begins</div>
+      <div class="firstcard hidden" id="firstCard" role="img" aria-label="A person standing at the edge of a calm lake at sunrise">
+        <div class="fc-copy">
+          <div class="fc-eyebrow">Your week begins</div>
           <h3>Start whenever you're ready.</h3>
-          <p>Even two minutes counts. When a reminder goes off, open the app and tap Start practice.</p>
-        </div></div>
+          <p>Even two minutes counts.</p>
+        </div>
       </div>
       <div class="card nextcard">
         <div class="eyebrow">Next reminder</div>
