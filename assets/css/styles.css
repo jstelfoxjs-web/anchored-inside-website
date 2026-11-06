@@ -3858,14 +3858,17 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 
 /* My Practice callout on the Toolbox page */
 .practice-callout{padding:26px 0 0}
-.practice-callout-card{display:flex;align-items:center;gap:18px;padding:18px 22px;border:1px solid rgba(18,64,73,.13);border-radius:16px;background:var(--foam);color:var(--ink);text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+.practice-callout-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;min-height:240px;padding:28px 32px;border:0;border-radius:22px;color:var(--ink);text-decoration:none;overflow:hidden;box-shadow:0 14px 34px rgba(21,63,72,.12);transition:transform .25s ease,box-shadow .25s ease;
+  background:linear-gradient(90deg,rgba(255,250,243,.97) 0%,rgba(255,250,243,.9) 42%,rgba(255,250,243,0) 72%),url("../images/practice-week-begins.jpg") right 60%/cover no-repeat,#f3e9dc}
+.practice-callout-text .practice-callout-eyebrow{display:block;font:800 .72rem/1 "Manrope",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--clay,#9c6c4c);margin-bottom:8px}
 .practice-callout-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(30,55,58,.08)}
-.practice-callout-icon{flex:none;width:52px;height:52px;border-radius:13px;display:block;object-fit:cover;background:#fff;box-shadow:0 0 0 1px rgba(18,64,73,.14)}
+.practice-callout-icon{display:none!important;flex:none;width:52px;height:52px;border-radius:13px;display:block;object-fit:cover;background:#fff;box-shadow:0 0 0 1px rgba(18,64,73,.14)}
 .practice-callout-text{flex:1;min-width:0}
-.practice-callout-text strong{display:block;font:500 1.7rem/1.1 'Cormorant Garamond',serif;color:var(--ink)}
+.practice-callout-text{max-width:460px}
+.practice-callout-text strong{display:block;font:italic 500 2.3rem/1.05 'Cormorant Garamond',serif;color:var(--ocean-deep)}
 .practice-callout-text span{display:block;font:400 .95rem/1.5 "Manrope",sans-serif;color:#344e53;margin-top:2px}
 .practice-callout-btn{flex:none}
-@media(max-width:680px){.practice-callout-card{flex-wrap:wrap;gap:14px;padding:18px}.practice-callout-btn{width:100%}}
+@media(max-width:680px){.practice-callout-card{justify-content:flex-end;align-items:stretch;gap:14px;min-height:400px;padding:22px;background:linear-gradient(180deg,rgba(255,250,243,0) 0%,rgba(255,250,243,0) 34%,rgba(255,250,243,.92) 56%,rgba(255,250,243,.98) 100%),url("../images/practice-week-begins.jpg") 70% top/auto 62% no-repeat,#fbf6ef}.practice-callout-icon{display:none}.practice-callout-text{flex:none;max-width:none}.practice-callout-text strong{font-size:2rem}.practice-callout-btn{width:100%}}
 
 /* Phone-friendly PDF reader in the Toolbox */
 .resource-viewer.is-reader{display:block;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
