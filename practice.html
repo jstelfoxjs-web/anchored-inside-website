@@ -560,7 +560,7 @@ function ciSave(btn){
   S.pending=null; save();
   const diff=before-after;
   c.querySelector('[data-step=after]').classList.add('hidden');
-  c.querySelector('.ciOk').textContent = diff>0 ? `Saved. Your stress went down ${diff} point${diff===1?'':'s'}.` : 'Saved. Showing up to practice counts.';
+  c.querySelector('.ciOk').textContent = cheer(before, after);
   renderWeek(); renderLogs(); renderPending();
 }
 function playMed(id, btn){
@@ -692,6 +692,52 @@ function downloadReminders(){
   document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},1000);
 }
 
+
+/* ---------- encouraging messages ---------- */
+const CHEERS = {
+  big: [ // dropped 4 or more points
+    "Down {n} points! Your nervous system just sent you a thank-you card.",
+    "{n} points calmer. Somewhere, a very tense shoulder just dropped an inch.",
+    "Whoa, {n} points! You just turned the volume down on a loud day. That's real skill.",
+    "{n} points lighter. If calm were a sport, you'd be warming up for the finals.",
+    "Down {n}! Your body noticed, even if your to-do list didn't.",
+    "{n} points! That's not luck. That's you, practicing. Be proud of that."
+  ],
+  medium: [ // dropped 2 or 3
+    "Down {n} points. Small waves, steady boat. Nicely done.",
+    "{n} points calmer. Your future self is quietly cheering.",
+    "You shaved {n} points off your stress. Not bad for a few minutes of being kind to yourself.",
+    "Down {n}. Calm isn't a light switch, it's a dimmer, and you just turned it.",
+    "{n} points lighter. Give yourself the credit you'd give a friend."
+  ],
+  small: [ // dropped 1
+    "Down 1 point. Tiny steps still count as steps, and you took one.",
+    "1 point calmer. Even a little ease is worth noticing.",
+    "A 1-point drop! Your nervous system is listening, even when it whispers back.",
+    "Down 1. Slow and steady is still moving."
+  ],
+  same: [ // no change
+    "Logged. Some days the work is just showing up, and you did.",
+    "Same number, but you practiced anyway. That's how skills get built.",
+    "No change today, and that's okay. You still kept your promise to yourself.",
+    "Logged. Hard days count too, maybe even more."
+  ],
+  up: [ // went up
+    "Logged. Sometimes feelings get louder before they get quieter. That's information, not failure.",
+    "Thanks for being honest. Bring this one to session, and go gently with yourself right now.",
+    "Logged. You noticed what was happening, and that's a skill too. Be kind to yourself today."
+  ]
+};
+let lastCheer = '';
+function cheer(before, after){
+  const diff = before - after;
+  const pool = diff >= 4 ? CHEERS.big : diff >= 2 ? CHEERS.medium : diff === 1 ? CHEERS.small : diff === 0 ? CHEERS.same : CHEERS.up;
+  let msg = pool[Math.floor(Math.random()*pool.length)];
+  if (pool.length > 1 && msg === lastCheer) msg = pool[(pool.indexOf(msg)+1) % pool.length];
+  lastCheer = msg;
+  return msg.replace('{n}', String(diff));
+}
+
 /* ---------- logging ---------- */
 let logSkill=null;
 function renderLogSkills(){
@@ -710,8 +756,8 @@ function logPractice(){
   $('#otherIn').value='';
   save(); $('#noteIn').value='';
   const diff=b-a;
-  $('#logOk').textContent = diff>0 ? `Logged. Your stress went down ${diff} point${diff===1?'':'s'}. Nice work.` : 'Logged. Showing up to practice counts.';
-  setTimeout(()=>$('#logOk').textContent='',5000);
+  $('#logOk').textContent = cheer(b, a);
+  setTimeout(()=>$('#logOk').textContent='',9000);
   renderWeek(); renderLogs();
 }
 function delLog(id,btn){ if(!confirmTap(btn,'Tap again to delete')) return; S.logs=S.logs.filter(l=>l.id!==id); save(); renderWeek(); renderLogs(); }
