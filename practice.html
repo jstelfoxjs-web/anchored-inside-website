@@ -239,11 +239,32 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
         <button class="btn clay block" style="margin-top:12px" onclick="startPractice()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg> Start practice</button>
       </div>
       <div class="tiles">
-        <button class="tile t-sea" onclick="goTab('practice','sum')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span><b>Session summary</b><small id="tileSum">Listen to your recap</small></span></button>
+        <button class="tile t-sea" onclick="goTab('today','sum')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span><b>Session summary</b><small id="tileSum">Listen to your recap</small></span></button>
         <button class="tile t-sand" onclick="goTab('meditate')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg><span><b>Meditate</b><small id="tileMed">Your meditations</small></span></button>
         <button class="tile t-ink" onclick="goTab('practice','log')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span><b>Log a practice</b><small>Takes 3 taps</small></span></button>
         <button class="tile t-blush" onclick="goTab('week')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span><b>My week</b><small id="tileWeek">0 of 3 done</small></span></button>
       </div>
+    <!-- Session summary recorder -->
+    <div class="card" id="sumCard">
+      <h2>Session summary recording</h2>
+      <p class="sub">We record this together at the end of session to recap what we worked on. Play it back during the week, especially when a reminder goes off.</p>
+      <div id="sumPlayer" style="margin-top:10px"></div>
+      <div class="row wrapr" style="margin-top:6px">
+        <button class="btn rec" id="recBtn" onclick="toggleRec('summary')">Record summary</button>
+        <span class="timer hidden" id="recTimer">0:00</span>
+      </div>
+      <div class="hr"></div>
+      <b style="font-size:15px">My own takeaway</b>
+      <p class="note" style="margin-top:2px">Optional: one sentence in your own voice. "The thing I want to remember is…"</p>
+      <div id="takePlayer"></div>
+      <div class="row wrapr" style="margin-top:6px">
+        <button class="btn small ghost" id="recBtn2" onclick="toggleRec('takeaway')">Record my takeaway</button>
+        <span class="timer hidden" id="recTimer2">0:00</span>
+      </div>
+      <p class="err" id="recErr"></p>
+      <p class="note">The first time, your phone will ask to use the microphone. Tap <b>Allow</b>. Recordings stay on this phone only.</p>
+    </div>
+
     <!-- This week -->
     <div class="card">
       <h2>This week</h2>
@@ -276,26 +297,6 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
       <p class="err" id="logErr"></p>
       <p class="ok" id="logOk"></p>
       </div>
-    <!-- Session summary recorder -->
-    <div class="card" id="sumCard">
-      <h2>Session summary recording</h2>
-      <p class="sub">We record this together at the end of session to recap what we worked on. Play it back during the week, especially when a reminder goes off.</p>
-      <div id="sumPlayer" style="margin-top:10px"></div>
-      <div class="row wrapr" style="margin-top:6px">
-        <button class="btn rec" id="recBtn" onclick="toggleRec('summary')">Record summary</button>
-        <span class="timer hidden" id="recTimer">0:00</span>
-      </div>
-      <div class="hr"></div>
-      <b style="font-size:15px">My own takeaway</b>
-      <p class="note" style="margin-top:2px">Optional: one sentence in your own voice. "The thing I want to remember is…"</p>
-      <div id="takePlayer"></div>
-      <div class="row wrapr" style="margin-top:6px">
-        <button class="btn small ghost" id="recBtn2" onclick="toggleRec('takeaway')">Record my takeaway</button>
-        <span class="timer hidden" id="recTimer2">0:00</span>
-      </div>
-      <p class="err" id="recErr"></p>
-      <p class="note">The first time, your phone will ask to use the microphone. Tap <b>Allow</b>. Recordings stay on this phone only.</p>
-    </div>
     </section>
 
     <section class="tabpanel hidden" id="tab-meditate" role="tabpanel" aria-label="Meditate">
@@ -425,7 +426,7 @@ function goTab(t, focus){
   setGreeting();
   $('#ringRow').classList.toggle('hidden', !(t==='today'||t==='week'));
   window.scrollTo(0,0);
-  if(focus==='sum'){ setTimeout(()=>$('#sumCard').scrollIntoView({behavior:'smooth',block:'start'}),50); }
+  if(focus==='sum'){ setTimeout(()=>{ const c=$('#sumCard'); c.scrollIntoView({behavior:'smooth',block:'start'}); c.style.boxShadow='0 0 0 2px var(--warm)'; setTimeout(()=>c.style.boxShadow='',2200); },60); }
 }
 function nextReminder(){
   if(!S.week) return null;
@@ -445,7 +446,7 @@ function startPractice(){
   const r=nextReminder();
   if(r && isMed(r)){ goTab('meditate'); return; }
   if(r && r.what){ logSkill=r.what; renderLogSkills(); }
-  goTab('practice','sum');
+  goTab('today','sum');
 }
 
 /* ---------- setup ---------- */
@@ -776,7 +777,7 @@ function handleHash(){
   if(!S.week) return;
   const h=location.hash;
   if(h==='#meditate'){ goTab('meditate'); const m=MEDITATIONS.find(x=>S.stars.includes(medId(x))); if(m){ logSkill=m.title; renderLogSkills(); } }
-  else if(h==='#practice'){ goTab('practice','sum'); }
+  else if(h==='#practice'){ goTab('today','sum'); }
 }
 if(S.week){ renderHome(); show('home'); setTimeout(handleHash,300); } else { show('welcome'); }
 window.addEventListener('hashchange',handleHash);
