@@ -4,7 +4,7 @@
    shows up on the next visit while the visitor is online. Handouts and
    resources.json are stored the first time they are opened. */
 
-const CACHE_VERSION = 'anchored-v27';
+const CACHE_VERSION = 'anchored-v29';
 const SHELL_CACHE = `anchored-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `anchored-runtime-${CACHE_VERSION}`;
 
