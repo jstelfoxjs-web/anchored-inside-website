@@ -406,10 +406,9 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4-3-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-3 8-7 11z"/><path d="M12 7v7M9 11h6"/></svg></span>
         <div><div class="su-step">Step 1</div><h3>Skills to practice</h3></div></div>
       <p class="note" style="margin-top:0">Up to 3. Starred meditations in Step 2 count too, so there's no need to type them here.</p>
-      <p class="note" style="margin-top:0"><b>Scheduled</b> skills are practiced when a reminder goes off. <b>In the moment</b> skills are used when a situation comes up, like reflective listening with your child.</p>
-      <div class="su-skill"><i>1</i><input type="text" id="sk0" placeholder="Four Elements" aria-label="Skill 1"><div class="mseg" id="mt0" aria-pressed="false" role="radiogroup" aria-label="When is skill 1 used?"><button type="button" class="ms-s" onclick="toggleMoment(0,false)">Scheduled</button><button type="button" class="ms-m" onclick="toggleMoment(0,true)">In the moment</button></div></div>
-      <div class="su-skill"><i>2</i><input type="text" id="sk1" placeholder="Calm place" aria-label="Skill 2"><div class="mseg" id="mt1" aria-pressed="false" role="radiogroup" aria-label="When is skill 2 used?"><button type="button" class="ms-s" onclick="toggleMoment(1,false)">Scheduled</button><button type="button" class="ms-m" onclick="toggleMoment(1,true)">In the moment</button></div></div>
-      <div class="su-skill"><i>3</i><input type="text" id="sk2" placeholder="Container" aria-label="Skill 3"><div class="mseg" id="mt2" aria-pressed="false" role="radiogroup" aria-label="When is skill 3 used?"><button type="button" class="ms-s" onclick="toggleMoment(2,false)">Scheduled</button><button type="button" class="ms-m" onclick="toggleMoment(2,true)">In the moment</button></div></div>
+      <div class="su-skill"><i>1</i><input type="text" id="sk0" placeholder="Four Elements" aria-label="Skill 1"></div>
+      <div class="su-skill"><i>2</i><input type="text" id="sk1" placeholder="Calm place" aria-label="Skill 2"></div>
+      <div class="su-skill"><i>3</i><input type="text" id="sk2" placeholder="Container" aria-label="Skill 3"></div>
       <p class="err" id="skErr"></p>
     </div>
 
@@ -425,7 +424,6 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span>
         <div><div class="su-step">Step 3</div><h3>My 3 practice reminders</h3></div></div>
       <p class="note" style="margin-top:0">Pick 3 days, and tie each one to something you already do.</p>
-      <p class="note hidden" id="momentRemNote" style="margin-top:0;background:var(--blush);color:var(--blushink);border-radius:12px;padding:8px 12px">For in-the-moment skills, a reminder before 3 pm becomes an <b>intention for the day</b>, and a later one becomes a <b>catch-up</b> to log what happened.</p>
       <div id="remRows"></div>
       <p class="err" id="remErr"></p>
     </div>
@@ -755,7 +753,7 @@ function startPractice(){
 /* ---------- setup ---------- */
 function openSetup(){
   const w = S.week || {skills:[], reminders:DEFAULT_REM};
-  for(let i=0;i<3;i++){ $('#sk'+i).value = w.skills[i] || ''; $('#mt'+i).setAttribute('aria-pressed', String(!!w.skills[i] && (w.moment||[]).includes(w.skills[i]))); }
+  for(let i=0;i<3;i++){ $('#sk'+i).value = w.skills[i] || '';  }
   $('#remRows').innerHTML = [0,1,2].map(i=>{
     const r = w.reminders[i] || DEFAULT_REM[i];
     const base = S.week ? S.week.start : midnight(Date.now()).getTime();
@@ -778,9 +776,8 @@ function practiceOptions(skills){
   return [...kept, ...meds];
 }
 function setupSkills(){ return [0,1,2].map(i=>$('#sk'+i).value.trim()).filter(Boolean); }
-function setupMoments(){ return [0,1,2].filter(i=>$('#mt'+i).getAttribute('aria-pressed')==='true' && $('#sk'+i).value.trim()).map(i=>$('#sk'+i).value.trim()); }
-function toggleMoment(i,v){ const b=$('#mt'+i); b.setAttribute('aria-pressed', String(v===undefined ? b.getAttribute('aria-pressed')!=='true' : !!v)); refreshWhat(); }
-function isMoment(name){ return !!(S.week && (S.week.moment||[]).includes(name)); }
+function setupMoments(){ return []; }
+function isMoment(name){ return false; }
 function remKind(r, moments){
   moments = moments || (S.week&&S.week.moment) || [];
   const what=(r.what||'').replace(' (meditation)','');
@@ -796,7 +793,6 @@ function refreshWhat(){
     const cur=el.value||el.dataset.cur||'';
     el.innerHTML='<option value="">Any of my skills</option>'+opts.map(o=>`<option ${o===cur?'selected':''}>${esc(o)}</option>`).join('');
   });
-  const mn=$('#momentRemNote'); if(mn) mn.classList.toggle('hidden', !setupMoments().length);
   refreshAnchors();
 }
 document.addEventListener('input',e=>{ if(/^sk\d$/.test(e.target.id)) refreshWhat(); if(/^r[tw]\d$/.test(e.target.id)) refreshAnchors(); });
@@ -1132,7 +1128,7 @@ function renderLogSkills(){
     o:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg>',
     x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>'};
   const kind=o=> o==='Other'?'x' : allMeds().some(m=>m.title===o)?'m' : isMoment(o)?'o':'s';
-  const SUB={s:'Scheduled',m:'Meditation',o:'In the moment',x:'A skill you used that isn\'t listed'};
+  const SUB={s:'Skill',m:'Meditation',o:'In the moment',x:'Used a skill you didn\'t plan on? Log it here'};
   $('#logSkills').innerHTML=opts.map(o=>{ const k=kind(o), on=o===logSkill;
     return `<button type="button" class="srow k-${k} ${on?'sel':''}" role="radio" aria-checked="${on}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}"><span class="sic">${IC[k]}</span><span class="stx"><b>${o==='Other'?'Something else':esc(o)}</b><small>${SUB[k]}</small></span><span class="sck" aria-hidden="true"></span></button>`; }).join('');
   $('#otherIn').classList.toggle('hidden', logSkill!=='Other');
@@ -1290,7 +1286,7 @@ function renderHome(){
   $('#skillChips').innerHTML=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)','')).map(s=>`<span class="chip">${esc(s)}</span>`).join('');
   const sk=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)',''));
   const wk=x=> allMeds().some(m=>m.title===x)?'m' : isMoment(x)?'o':'s';
-  const WL={s:'Scheduled',m:'Meditation',o:'In the moment'};
+  const WL={s:'Skill',m:'Meditation',o:'In the moment'};
   const days=[...new Set(S.week.reminders.slice().sort((a,b)=>(a.day||0)-(b.day||0)).map(r=>new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})))];
   $('#weekLine').innerHTML = `<div class="wlist">${sk.map(x=>`<div class="wrow w-${wk(x)}"><i></i><span class="wn">${esc(x)}</span><span class="wt">${WL[wk(x)]}</span></div>`).join('')}</div><div class="wrem">${ICON.bell}${S.week.reminders.length} reminder${S.week.reminders.length===1?'':'s'} · ${days.join(', ')}</div>`;
   $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">${ICON.bell} ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
