@@ -135,6 +135,13 @@ h2{font-size:24px;margin-bottom:4px}
   background:linear-gradient(180deg,rgba(14,42,48,.88) 0%,rgba(14,42,48,.55) 38%,rgba(14,42,48,0) 62%),url(assets/images/practice-welcome-boots.jpg) center 60%/cover no-repeat,var(--ink)}
 .welcomehero h3{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:30px;line-height:1.05;color:#fff;margin:8px 0 6px}
 .welcomehero p{margin:0;color:rgba(255,255,255,.85);font-size:14px;font-weight:600}
+.sug{border:1px solid var(--line);border-radius:14px;background:#fff;margin:6px 0 4px;overflow:hidden;box-shadow:0 6px 18px rgba(21,63,72,.08)}
+.sug-h{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--mut);padding:10px 14px 4px}
+.sug-i{display:flex;align-items:baseline;justify-content:space-between;gap:10px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:11px 14px;font:inherit;cursor:pointer;color:var(--txt)}
+.sug-h+.sug-i,.sug-i:first-child{border-top:0}
+.sug-i b{font-size:15px;font-weight:600;color:var(--ink)}
+.sug-i small{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink2);flex:none}
+.sug-i:active,.sug-i:hover{background:#f4f9f8}
 .mom-intro{background:var(--blush);color:var(--blushink);border-radius:12px;padding:10px 12px;font-size:14px;margin:4px 0 2px}
 .mom-missed{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0 0;color:var(--txt)}
 .mom-missed input{width:20px;height:20px;margin-top:1px;accent-color:var(--warm);flex:none}
@@ -516,7 +523,8 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="card" id="logCard">
       <h2>What did you practice?</h2>
       <div id="logSkills" style="margin-top:10px"></div>
-      <input type="text" id="otherIn" class="hidden" placeholder="Which skill? e.g. Opposite action" aria-label="What did you practice?" oninput="$('#logErr').textContent=''">
+      <input type="text" id="otherIn" class="hidden" placeholder="Start typing a skill, e.g. Opposite action" aria-label="What did you practice?" autocomplete="off" autocapitalize="sentences" oninput="$('#logErr').textContent='';renderSug()" onfocus="renderSug()">
+      <div id="otherSug" class="sug hidden" role="listbox" aria-label="Suggested skills"></div>
       <div id="otherMode" class="hidden">
         <div class="seg" role="radiogroup" aria-label="How did you use it?">
           <button type="button" id="omPractice" class="sel" onclick="setOtherMoment(false)">I practiced it</button>
@@ -1146,7 +1154,7 @@ function renderLogSkills(){
   const SUB={s:'Skill',m:'Meditation',o:'In the moment',x:'Used a skill you didn\'t plan on? Log it here'};
   $('#logSkills').innerHTML=opts.map(o=>{ const k=kind(o), on=o===logSkill;
     return `<button type="button" class="srow k-${k} ${on?'sel':''}" role="radio" aria-checked="${on}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}"><span class="sic">${IC[k]}</span><span class="stx"><b>${o==='Other'?'Something else':esc(o)}</b><small>${SUB[k]}</small></span><span class="sck" aria-hidden="true"></span></button>`; }).join('');
-  $('#otherIn').classList.toggle('hidden', logSkill!=='Other');
+  $('#otherIn').classList.toggle('hidden', logSkill!=='Other'); renderSug();
   $('#otherMode').classList.toggle('hidden', logSkill!=='Other');
   $('#omPractice').classList.toggle('sel', !otherMoment); $('#omMoment').classList.toggle('sel', otherMoment);
   const mo=isMoment(logSkill) || (logSkill==='Other' && otherMoment);
@@ -1155,6 +1163,27 @@ function renderLogSkills(){
   $('#logCard h2').textContent = mo ? 'Log a moment' : 'What did you practice?';
   if(mo) renderMoment();
 }
+const TECHNIQUES = [["Blue smoke breath", "Breathing"], ["Hand breathing", "Breathing"], ["Round-wave breath", "Breathing"], ["Calming belly breath", "Breathing"], ["Energizing breath", "Breathing"], ["Lateral (rib) breathing", "Breathing"], ["Three-part breath", "Breathing"], ["Lunar breath", "Breathing"], ["Paced breathing", "Breathing"], ["Cotton ball / feather blow", "Breathing"], ["Feet and legs grounding", "Grounding"], ["Grounding into gravity (walking)", "Grounding"], ["Scanning toward safety", "Grounding"], ["Soft vision", "Grounding"], ["Orienting movements", "Grounding"], ["5 senses awareness", "Grounding"], ["Sensory toolkit", "Grounding"], ["Dropping anchor", "Grounding"], ["MOVE! freeze interrupt", "Movement"], ["Shaking to safety", "Movement"], ["Running faster than the tiger", "Movement"], ["Unfurling movement", "Movement"], ["Micro-movement in neck", "Movement"], ["Releasing the psoas", "Movement"], ["Posture snapshot", "Movement"], ["Flat back strength", "Movement"], ["Voo sound", "Sound & voice"], ["Hmmm sound", "Sound & voice"], ["Vowel sounds", "Sound & voice"], ["Corridor of sound", "Sound & voice"], ["Compassionate self-touch", "Body & self-touch"], ["Butterfly hug (self-tapping)", "Body & self-touch"], ["Tapping", "Body & self-touch"], ["Sun rays visualization", "Body & self-touch"], ["Dip-your-toe body scan", "Body & self-touch"], ["Body snapshot check-in", "Body & self-touch"], ["Open attention", "Body & self-touch"], ["Global body awareness", "Body & self-touch"], ["Body awareness inventory", "Body & self-touch"], ["Befriending the body", "Body & self-touch"], ["Somatic coherence check-in", "Body & self-touch"], ["Internal / external pendulation", "Body & self-touch"], ["Dual awareness practice", "Body & self-touch"], ["Outing the shame monster", "Body & self-touch"], ["Calm place", "Resources"], ["Container", "Resources"], ["Somatic container", "Resources"], ["Resource practice (RDI)", "Resources"], ["Nurturing figure", "Resources"], ["Protector figure", "Resources"], ["Wise self", "Resources"], ["Team of helpers", "Resources"], ["Internal support team", "Resources"], ["TICES log", "Tracking"], ["Tracking triggers chart", "Tracking"], ["Nervous system zones", "Tracking"], ["Makes it worse / makes it better list", "Tracking"], ["Self-monitoring log", "Tracking"], ["Wise mind", "Mindfulness"], ["Observe", "Mindfulness"], ["Describe", "Mindfulness"], ["Participate", "Mindfulness"], ["Nonjudgmental stance", "Mindfulness"], ["One-mindfully", "Mindfulness"], ["Effectively", "Mindfulness"], ["TIPP", "Distress tolerance"], ["STOP", "Distress tolerance"], ["Pros and cons", "Distress tolerance"], ["Self-soothe", "Distress tolerance"], ["IMPROVE the moment", "Distress tolerance"], ["Radical acceptance", "Distress tolerance"], ["Turning the mind", "Distress tolerance"], ["Check the facts", "Emotion regulation"], ["Opposite action", "Emotion regulation"], ["PLEASE", "Emotion regulation"], ["Build mastery", "Emotion regulation"], ["Cope ahead", "Emotion regulation"], ["DEAR MAN", "Relationships"], ["GIVE", "Relationships"], ["FAST", "Relationships"], ["Values check-in", "Values (ACT)"], ["Committed action", "Values (ACT)"], ["Cognitive defusion", "Values (ACT)"], ["Leaves on a stream", "Values (ACT)"], ["Make room for the feeling", "Values (ACT)"], ["Observer self", "Values (ACT)"], ["Choice point", "Values (ACT)"], ["Passengers on the bus", "Values (ACT)"], ["Willingness scale", "Values (ACT)"], ["Self-compassionate defusion", "Values (ACT)"], ["Values-based exposure", "Values (ACT)"], ["Compass check", "Values (ACT)"], ["Expansion practice", "Values (ACT)"], ["Drop the rope", "Values (ACT)"], ["CBT triangle", "Thoughts (CBT)"], ["Thought record", "Thoughts (CBT)"], ["Spot the thinking trap", "Thoughts (CBT)"], ["Behavioral activation", "Thoughts (CBT)"], ["Activity monitoring", "Thoughts (CBT)"], ["Graded exposure", "Thoughts (CBT)"], ["Worry time", "Thoughts (CBT)"], ["Problem-solving steps", "Thoughts (CBT)"], ["Behavioral experiment", "Thoughts (CBT)"], ["Coping cards", "Thoughts (CBT)"], ["Sleep routine", "Thoughts (CBT)"], ["Progressive muscle relaxation", "Thoughts (CBT)"], ["Special play time", "Parenting"], ["PACE", "Parenting"], ["Reflective responding", "Parenting"], ["Rupture and repair", "Parenting"], ["Emotion coaching", "Parenting"], ["Co-regulation plan", "Parenting"], ["Separation games", "Parenting"], ["Secure base scavenger hunt", "Parenting"], ["Transitional object ritual", "Parenting"], ["Mirroring game", "Parenting"], ["Weather report check-in", "Parenting"], ["Calm corner", "Parenting"], ["Praise for effort", "Parenting"], ["Family ritual", "Parenting"], ["Structure play", "Parenting"], ["Engagement play", "Parenting"], ["Nurture play", "Parenting"], ["Challenge play", "Parenting"], ["Most generous interpretation", "Parenting"]];
+function pastSkills(){
+  const cur=new Set(practiceOptions(S.week?S.week.skills:[]).map(x=>x.replace(' (meditation)','')));
+  const seen=[]; const add=x=>{ if(x && !cur.has(x) && !seen.includes(x)) seen.push(x); };
+  S.logs.forEach(l=>add(l.skill)); (S.history||[]).forEach(h=>(h.skills||[]).forEach(add));
+  return seen.slice(0,4);
+}
+function renderSug(){
+  const box=$('#otherSug'), inp=$('#otherIn'); if(!box||!inp) return;
+  if(logSkill!=='Other'){ box.classList.add('hidden'); return; }
+  const q=inp.value.trim().toLowerCase(); let items=[], head='';
+  if(!q){ items=pastSkills().map(n=>{ const t=TECHNIQUES.find(x=>x[0].toLowerCase()===n.toLowerCase()); return [n, t?t[1]:'From past weeks']; }); head=items.length?'Recent skills':''; }
+  else {
+    const starts=TECHNIQUES.filter(t=>t[0].toLowerCase().startsWith(q)), has=TECHNIQUES.filter(t=>!t[0].toLowerCase().startsWith(q) && (t[0].toLowerCase().includes(q) || t[1].toLowerCase().includes(q)));
+    items=[...starts,...has].slice(0,6);
+    if(items.length===1 && items[0][0].toLowerCase()===q) items=[];
+  }
+  box.innerHTML = (head?`<div class="sug-h">${head}</div>`:'') + items.map(([n,c])=>`<button type="button" role="option" class="sug-i" data-v="${esc(n)}" onclick="pickSug(this.dataset.v)"><b>${esc(n)}</b><small>${esc(c)}</small></button>`).join('');
+  box.classList.toggle('hidden', !items.length);
+}
+function pickSug(v){ $('#otherIn').value=v; $('#otherSug').classList.add('hidden'); $('#logErr').textContent=''; }
 let mom={when:'now', outcome:'', calm:''}, otherMoment=false;
 function setOtherMoment(v){ otherMoment=v; renderLogSkills(); }
 function pickRow(sel, key, opts){
