@@ -6,12 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Explore therapist-created handouts, visual guides, and practical tools for healing, growth, parenting, and connection.">
   <link rel="icon" href="assets/images/favicon.png">
-  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="manifest" href="/manifest-practice.webmanifest">
+  <script>
+    /* The home-screen app saved from this page opens on My Practice; tapping back to The Toolbox inside the app still works. */
+    (function () {
+      try {
+        var app = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+        if (app && !sessionStorage.getItem('anchoredAppLaunched') && !document.referrer) {
+          sessionStorage.setItem('anchoredAppLaunched', '1');
+          location.replace('/practice.html');
+        }
+        if (app) sessionStorage.setItem('anchoredAppLaunched', '1');
+      } catch (e) {}
+    })();
+  </script>
   <meta name="theme-color" content="#153f48">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Anchored">
+  <meta name="apple-mobile-web-app-title" content="Anchored Inside">
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,10 +92,10 @@
   <section class="practice-callout" aria-labelledby="practice-callout-title">
     <div class="container">
       <a class="practice-callout-card" href="practice.html">
-        <img class="practice-callout-icon" src="assets/icons/anchored-tools-192.png" alt="" width="52" height="52">
+        <img class="practice-callout-icon" src="assets/icons/icon-192.png" alt="" width="52" height="52">
         <span class="practice-callout-text">
           <strong id="practice-callout-title">My Practice</strong>
-          <span>Your weekly skills, meditations and session recording, all in one place.</span>
+          <span>Your weekly skills, meditations and session recording, all in one place. Save it to your home screen as the Anchored Inside app.</span>
         </span>
         <span class="btn btn-primary practice-callout-btn">Open My Practice <span aria-hidden="true">→</span></span>
       </a>
