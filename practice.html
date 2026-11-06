@@ -307,8 +307,13 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 .log .acts{display:none;margin-top:6px}
 .log.open .acts{display:block}
 .log .delbtn{background:none;border:1px solid var(--line);color:#a3332b;border-radius:999px;font:600 13px Manrope,sans-serif;padding:6px 12px;cursor:pointer}
-.goalcard{border-left:4px solid #9a7448;background:#fffdf9}
-.goalcard .introicon{background:var(--sand);color:#9a7448}
+.goalcard{position:relative;min-height:290px;border-radius:22px;overflow:hidden;margin:0 0 14px;display:flex;align-items:flex-end;box-shadow:0 10px 30px rgba(21,63,72,.2);
+  background:linear-gradient(180deg,rgba(14,42,48,0) 42%,rgba(14,42,48,.7) 66%,rgba(14,42,48,.94) 100%),url(assets/images/practice-goal-lighthouse.jpg) 38% top/cover no-repeat,var(--ink)}
+.gc-copy{padding:22px}
+.gc-copy h3{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:25px;line-height:1.08;color:#fff;margin:8px 0 8px;max-width:92%}
+.gc-copy p{margin:0;font-size:14px;color:rgba(255,255,255,.82);font-weight:600}
+.pstrip{margin:-18px -18px 16px;height:132px;border-radius:var(--r) var(--r) 0 0;background-size:cover;background-repeat:no-repeat;display:flex;align-items:flex-end;padding:14px 18px}
+.pstrip span{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:21px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.25)}
 .embed{background:var(--soft)}
 .embed .ld{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink);font-size:13px;font-weight:600}
 .embed .ld img{width:34px;height:34px;opacity:.7;border-radius:9px}
@@ -411,12 +416,12 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
     <div id="pendingCard"></div>
 
     <section class="tabpanel" id="tab-today" role="tabpanel" aria-label="Today">
-      <div class="card goalcard hidden" id="goalCard">
-        <div class="introrow"><span class="introicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span><div>
-          <div class="eyebrow" style="color:#9a7448">Goal reached</div>
+      <div class="goalcard hidden" id="goalCard" role="img" aria-label="A lighthouse on a rocky point at dusk">
+        <div class="gc-copy">
+          <div class="fc-eyebrow" style="color:#f1d3b3">Goal reached</div>
           <h3>Three times this week, you came back to yourself.</h3>
           <p id="goalSub">Anything extra is a bonus. Bring this week to session.</p>
-        </div></div>
+        </div>
       </div>
       <div class="firstcard hidden" id="firstCard" role="img" aria-label="A person standing at the edge of a calm lake at sunrise">
         <div class="fc-copy">
@@ -520,8 +525,8 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 
     <section class="tabpanel hidden" id="tab-meditate" role="tabpanel" aria-label="Meditate">
       <div class="card">
-        <div class="eyebrow">Coming home</div>
-        <h2 id="meditate" style="margin-top:2px">This week's meditations</h2>
+        <div class="pstrip" style="background-image:linear-gradient(180deg,rgba(21,63,72,.05) 30%,rgba(21,63,72,.6) 100%),url(assets/images/practice-meditate-coast.jpg);background-position:center 45%" role="img" aria-label="A misty green coastline above calm water"><span>Coming home</span></div>
+        <h2 id="meditate">This week's meditations</h2>
         <p class="sub">A few quiet minutes to come home to yourself. Tap play to begin.</p>
         <div id="weekMeds"></div>
       </div>
@@ -535,6 +540,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 
     <section class="tabpanel hidden" id="tab-notes" role="tabpanel" aria-label="Reflection">
       <div class="card">
+        <div class="pstrip" style="background-image:linear-gradient(180deg,rgba(21,63,72,0) 35%,rgba(21,63,72,.55) 100%),url(assets/images/practice-reflect-beach.jpg);background-position:center 60%" role="img" aria-label="A wooden walkway through beach dunes at sunset"><span>A quiet place to write</span></div>
         <h2>Reflection</h2>
         <p class="sub">A few quiet words for yourself. Everything stays on this phone.</p>
         <label class="f" for="noteText">What I'm noticing</label>
