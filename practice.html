@@ -444,9 +444,9 @@ function renderNext(){
 }
 function startPractice(){
   const r=nextReminder();
-  if(r && isMed(r)){ goTab('meditate'); return; }
-  if(r && r.what){ logSkill=r.what; renderLogSkills(); }
-  goTab('today','sum');
+  if(r && r.what){ logSkill=r.what.replace(' (meditation)',''); }
+  renderLogSkills();
+  goTab('practice');
 }
 
 /* ---------- setup ---------- */
