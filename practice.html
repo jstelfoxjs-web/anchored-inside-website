@@ -146,6 +146,18 @@ h2{font-size:24px;margin-bottom:4px}
 .addmed .plus{width:24px;height:24px;border-radius:50%;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-weight:800}
 #weekMeds .rmmine{display:none}
 .rmmine{background:none;border:1px solid var(--line);border-radius:999px;color:#a3332b;font:600 12px Manrope,sans-serif;padding:5px 10px;margin-left:6px;cursor:pointer;flex:none}
+.srow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;margin:0 0 8px;cursor:pointer;font:inherit;color:var(--txt);transition:border-color .15s,background .15s}
+.srow .sic{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.srow .sic svg{width:19px;height:19px}
+.srow .stx{flex:1;min-width:0}
+.srow .stx b{display:block;font-size:15px;font-weight:700;color:var(--ink);line-height:1.25}
+.srow .stx small{display:block;font-size:12px;color:var(--mut);margin-top:1px}
+.srow .sck{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);flex:none;position:relative}
+.srow.sel{border-color:var(--ink2);background:#f4f9f8}
+.srow.sel .sck{background:var(--ink2);border-color:var(--ink2)}
+.srow.sel .sck::after{content:"";position:absolute;left:7px;top:3px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.k-s .sic{background:var(--soft);color:var(--ink2)} .k-m .sic{background:var(--sand);color:#9a7448} .k-o .sic{background:var(--blush);color:var(--warm)}
+.k-x{border-style:dashed} .k-x .sic{background:var(--bg);color:var(--mut)}
 .pick{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 14px;font:500 14px Manrope,sans-serif;margin:0 8px 8px 0;color:var(--txt);cursor:pointer}
 .pick.sel{border-color:var(--ink);background:var(--soft);color:var(--ink);font-weight:700}
 label.f{display:block;font-size:14px;font-weight:600;margin:12px 0 6px;color:var(--ink)}
@@ -302,7 +314,12 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 .weekline>summary::-webkit-details-marker{display:none}
 .weekline>summary::after{content:'▾';color:var(--mut);margin-left:auto;transition:transform .15s}
 .weekline[open]>summary::after{transform:rotate(180deg)}
-.weekline .wl{font-size:14px;color:var(--mut);margin-top:2px}
+.weekline .wl{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.weekline>summary>div{flex:1;min-width:0}
+.wchip{display:inline-flex;align-items:center;gap:5px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;font-weight:700;border-radius:999px;padding:5px 10px}
+.wchip .ico{width:13px;height:13px}
+.w-s{background:var(--soft);color:var(--ink)} .w-m{background:var(--sand);color:#7d5c36} .w-o{background:var(--blush);color:var(--blushink)}
+.w-r{background:#fff;border:1px solid var(--line);color:var(--mut)}
 .dots{background:none;border:0;color:var(--mut);font-size:20px;line-height:1;padding:0 4px 6px;cursor:pointer;border-radius:8px}
 .log .top{align-items:flex-start}
 .log .acts{display:none;margin-top:6px}
@@ -1087,7 +1104,14 @@ let logSkill=null;
 function renderLogSkills(){
   const opts=[...practiceOptions(S.week.skills).map(o=>o.replace(' (meditation)','')), 'Other'];
   if(!opts.includes(logSkill)) logSkill=opts[0];
-  $('#logSkills').innerHTML=opts.map(o=>`<button class="pick ${o===logSkill?'sel':''}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}">${o==='Other'?'+ Something else':esc(o)}</button>`).join('');
+  const IC={s:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-3 8-7 11z"/><path d="M12 7v7M9 11h6"/></svg>',
+    m:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg>',
+    o:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg>',
+    x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>'};
+  const kind=o=> o==='Other'?'x' : allMeds().some(m=>m.title===o)?'m' : isMoment(o)?'o':'s';
+  const SUB={s:'Skill',m:'Meditation',o:'In the moment',x:'A skill you used that isn\'t listed'};
+  $('#logSkills').innerHTML=opts.map(o=>{ const k=kind(o), on=o===logSkill;
+    return `<button type="button" class="srow k-${k} ${on?'sel':''}" role="radio" aria-checked="${on}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}"><span class="sic">${IC[k]}</span><span class="stx"><b>${o==='Other'?'Something else':esc(o)}</b><small>${SUB[k]}</small></span><span class="sck" aria-hidden="true"></span></button>`; }).join('');
   $('#otherIn').classList.toggle('hidden', logSkill!=='Other');
   $('#otherMode').classList.toggle('hidden', logSkill!=='Other');
   $('#omPractice').classList.toggle('sel', !otherMoment); $('#omMoment').classList.toggle('sel', otherMoment);
@@ -1242,7 +1266,8 @@ async function copySummary(){
 function renderHome(){
   $('#skillChips').innerHTML=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)','')).map(s=>`<span class="chip">${esc(s)}</span>`).join('');
   const sk=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)',''));
-  $('#weekLine').textContent = sk.join(' · ') + ' · ' + S.week.reminders.length + ' reminder' + (S.week.reminders.length===1?'':'s');
+  const wk=x=> allMeds().some(m=>m.title===x)?'m' : isMoment(x)?'o':'s';
+  $('#weekLine').innerHTML = sk.map(x=>`<span class="wchip w-${wk(x)}" title="${esc(x)}">${esc(x)}</span>`).join('') + `<span class="wchip w-r">${ICON.bell}${S.week.reminders.length} reminder${S.week.reminders.length===1?'':'s'}</span>`;
   $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">${ICON.bell} ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
   renderWeek(); renderLogSkills(); renderLogs(); renderWeekMeds(); renderMedList('#library',true); mountAddForms(); renderRecordings(); renderPending(); renderNotes();
 }
