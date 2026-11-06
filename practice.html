@@ -104,6 +104,21 @@ h2{font-size:24px;margin-bottom:4px}
 .tdrop summary>span:first-child{display:flex;align-items:center}
 .tc0{--tc:#2f6973;--tcbg:#dfecea} .tc1{--tc:#9c6c4c;--tcbg:#f6e7e0} .tc2{--tc:#8a6a3f;--tcbg:#f3e9dc} .tc3{--tc:#4f6f8f;--tcbg:#e3ebf3} .tc4{--tc:#5e7a5a;--tcbg:#e6efe2}
 .medby{font-size:12px;color:var(--mut)}
+.su-skill{flex-wrap:wrap}
+#setup .su-skill input{flex:1 1 calc(100% - 40px)}
+.mtog{flex:none;margin:6px 0 6px 38px;border:1.5px solid var(--line);background:#fff;color:var(--mut);border-radius:999px;font:700 12px Manrope,sans-serif;padding:5px 11px;cursor:pointer;white-space:nowrap}
+.mtog::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;margin-right:6px;vertical-align:-1px}
+.mtog[aria-pressed="true"]::before{background:currentColor}
+.mtog[aria-pressed="true"]{background:var(--blush);border-color:var(--warm);color:var(--blushink)}
+.mom-intro{background:var(--blush);color:var(--blushink);border-radius:12px;padding:10px 12px;font-size:14px;margin:4px 0 2px}
+.mom-missed{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0 0;color:var(--txt)}
+.mom-missed input{width:20px;height:20px;margin-top:1px;accent-color:var(--warm);flex:none}
+.dot.mom{background:var(--blush);border-color:var(--warm);color:var(--blushink)}
+.lg-o{background:var(--blush);border:1.5px solid var(--warm)}
+.slog.mo{border-left-color:var(--warm)}
+.slog .mrow{font-size:14px;margin-top:4px}
+.slog .mrow span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--blushink)}
+.chips2 span.o{background:var(--blush);color:var(--blushink)}
 .addmed{margin-top:12px}
 .addmed>summary{font-weight:700;color:var(--ink)}
 .addmed .plus{width:24px;height:24px;border-radius:50%;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-weight:800}
@@ -341,9 +356,10 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4-3-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-3 8-7 11z"/><path d="M12 7v7M9 11h6"/></svg></span>
         <div><div class="su-step">Step 1</div><h3>Skills to practice</h3></div></div>
       <p class="note" style="margin-top:0">Up to 3. Starred meditations in Step 2 count too, so there's no need to type them here.</p>
-      <div class="su-skill"><i>1</i><input type="text" id="sk0" placeholder="Four Elements" aria-label="Skill 1"></div>
-      <div class="su-skill"><i>2</i><input type="text" id="sk1" placeholder="Calm place" aria-label="Skill 2"></div>
-      <div class="su-skill"><i>3</i><input type="text" id="sk2" placeholder="Container" aria-label="Skill 3"></div>
+      <p class="note" style="margin-top:0">Tap <b>In the moment</b> for skills used when a situation comes up, like reflective listening with your child.</p>
+      <div class="su-skill"><i>1</i><input type="text" id="sk0" placeholder="Four Elements" aria-label="Skill 1"><button type="button" class="mtog" id="mt0" aria-pressed="false" onclick="toggleMoment(0)">In the moment</button></div>
+      <div class="su-skill"><i>2</i><input type="text" id="sk1" placeholder="Calm place" aria-label="Skill 2"><button type="button" class="mtog" id="mt1" aria-pressed="false" onclick="toggleMoment(1)">In the moment</button></div>
+      <div class="su-skill"><i>3</i><input type="text" id="sk2" placeholder="Container" aria-label="Skill 3"><button type="button" class="mtog" id="mt2" aria-pressed="false" onclick="toggleMoment(2)">In the moment</button></div>
       <p class="err" id="skErr"></p>
     </div>
 
@@ -359,6 +375,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span>
         <div><div class="su-step">Step 3</div><h3>My 3 practice reminders</h3></div></div>
       <p class="note" style="margin-top:0">Pick 3 days, and tie each one to something you already do.</p>
+      <p class="note hidden" id="momentRemNote" style="margin-top:0;background:var(--blush);color:var(--blushink);border-radius:12px;padding:8px 12px">For in-the-moment skills, a reminder before 3 pm becomes an <b>intention for the day</b>, and a later one becomes a <b>catch-up</b> to log what happened.</p>
       <div id="remRows"></div>
       <p class="err" id="remErr"></p>
     </div>
@@ -389,7 +406,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="card nextcard">
         <div class="eyebrow">Next reminder</div>
         <div class="nextrow"><div class="nexticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><div id="nextRem"><b>—</b><span></span></div></div>
-        <button class="btn clay block" style="margin-top:12px" onclick="startPractice()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg> Start practice</button>
+        <button class="btn clay block" id="startBtn" style="margin-top:12px" onclick="startPractice()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg> Start practice</button>
       </div>
       <div class="tiles">
         <button class="tile t-sea" onclick="goTab('today','sum')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span><b>Session summary</b><small id="tileSum">Listen to your recap</small></span></button>
@@ -440,6 +457,23 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div id="logSkills" style="margin-top:10px"></div>
       <input type="text" id="otherIn" class="hidden" placeholder="What did you practice?" aria-label="What did you practice?" oninput="$('#logErr').textContent=''">
 
+      <div id="momentPart" class="hidden">
+        <div class="mom-intro">Log a real moment. It counts whether it went well, went sideways, or you only noticed afterward.</div>
+        <label class="f">When</label>
+        <div id="momWhen"></div>
+        <label class="f" for="momWhat">What happened?</label>
+        <textarea id="momWhat" rows="2" placeholder="He threw his shoes after school" style="min-height:64px"></textarea>
+        <label class="mom-missed"><input type="checkbox" id="momMissed" onchange="renderMoment()"> I missed it in the moment, but noticed afterward</label>
+        <label class="f" for="momTried" id="momTriedLbl">What I tried</label>
+        <textarea id="momTried" rows="2" placeholder="Told myself he's exhausted, not defiant" style="min-height:64px"></textarea>
+        <div id="momOutcomeWrap">
+          <label class="f">How did it go?</label>
+          <div id="momOutcome"></div>
+        </div>
+        <label class="f">How calm did I stay?</label>
+        <div id="momCalm"></div>
+      </div>
+      <div id="stressPart">
       <div class="stressbox">
         <div class="sbox b"><label for="before">Before <span class="big" id="bv">5</span></label><input type="range" class="rng" min="0" max="10" step="1" value="5" id="before" oninput="$('#bv').textContent=this.value;sliderGlow()"><div class="scale"><span>calm</span><span>intense</span></div></div>
         <div class="sbox a" id="afterBox"><label for="after">After <span class="big" id="av">5</span></label><input type="range" class="rng" min="0" max="10" step="1" value="5" id="after" oninput="$('#av').textContent=this.value;sliderGlow()"><div class="scale"><span>calm</span><span>intense</span></div></div>
@@ -447,8 +481,9 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <p class="note" style="margin-top:2px">Your stress, from 0 (calm) to 10 (overwhelmed).</p>
       <label class="f">Note <span style="font-weight:400;color:var(--mut)">(optional)</span></label>
       <input type="text" id="noteIn" placeholder="Used it in the car before work">
+      </div>
 
-      <button class="btn solid block" style="margin-top:14px" onclick="logPractice()">✓ Save practice</button>
+      <button class="btn solid block" id="logBtn" style="margin-top:14px" onclick="logPractice()">✓ Save practice</button>
       <p class="err" id="logErr"></p>
       <p class="ok" id="logOk"></p>
       </div>
@@ -495,7 +530,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="card">
         <div class="sechead"><h2>My week</h2><span class="sub"><b id="dayCount">0</b> of 3 practices</span></div>
         <div class="week" id="week"></div>
-        <div class="legend"><span><i class="lg-s"></i>Skill</span><span><i class="lg-m"></i>Meditation</span><span><i class="lg-r"></i>Reminder day</span></div>
+        <div class="legend"><span><i class="lg-s"></i>Skill</span><span><i class="lg-m"></i>Meditation</span><span class="lgmom"><i class="lg-o"></i>Moment</span><span><i class="lg-r"></i>Reminder day</span></div>
         <p class="note" id="goalNote" style="text-align:center"></p>
       </div>
       <div class="card">
@@ -559,6 +594,7 @@ const ICON = {
   play:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>',
   stop:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/></svg>',
   bell:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>',
+  pen:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
   leaf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 10c3-3 6-3 9 0s6 3 9 0"/><path d="M3 16c3-3 6-3 9 0s6 3 9 0" opacity=".6"/></svg>'
 };
 const KEY = 'anchoredInside.practice.v1';
@@ -642,7 +678,10 @@ function renderNext(){
   const d=new Date(r.at), isToday=new Date().toDateString()===d.toDateString();
   const when=(isToday?'Today':d.toLocaleDateString(undefined,{weekday:'long'}))+' · '+fmtTime(r.time);
   const what=r.what?r.what.replace(' (meditation)',''):'Any of my skills';
-  el.innerHTML=`<b>${esc(when)}</b><span>${r.anchor?esc(r.anchor)+' · ':''}${esc(what)}</span>`;
+  const k=remKind(r);
+  const line = k==='intention' ? `Intention: look for a moment to use ${what==='Any of my skills'?'your skills':what}${isToday?' today':' that day'}` : k==='catchup' ? `Catch-up: did a moment come up${isToday?' today':''}? Log it, even if you only noticed afterward.` : `${r.anchor?esc(r.anchor)+' · ':''}${esc(what)}`;
+  el.innerHTML=`<b>${esc(when)}</b><span>${k==='practice'?line:esc(line)}</span>`;
+  const sb=$('#startBtn'); if(sb) sb.innerHTML = k==='practice' ? `${ICON.play} Start practice` : `${ICON.pen} Log a moment`;
 }
 function sliderGlow(){ const b=+$('#before').value, a=+$('#after').value; $('#afterBox').classList.toggle('better', a<b); }
 function startPractice(){
@@ -655,7 +694,7 @@ function startPractice(){
 /* ---------- setup ---------- */
 function openSetup(){
   const w = S.week || {skills:[], reminders:DEFAULT_REM};
-  for(let i=0;i<3;i++) $('#sk'+i).value = w.skills[i] || '';
+  for(let i=0;i<3;i++){ $('#sk'+i).value = w.skills[i] || ''; $('#mt'+i).setAttribute('aria-pressed', String(!!w.skills[i] && (w.moment||[]).includes(w.skills[i]))); }
   $('#remRows').innerHTML = [0,1,2].map(i=>{
     const r = w.reminders[i] || DEFAULT_REM[i];
     const base = S.week ? S.week.start : midnight(Date.now()).getTime();
@@ -678,6 +717,17 @@ function practiceOptions(skills){
   return [...kept, ...meds];
 }
 function setupSkills(){ return [0,1,2].map(i=>$('#sk'+i).value.trim()).filter(Boolean); }
+function setupMoments(){ return [0,1,2].filter(i=>$('#mt'+i).getAttribute('aria-pressed')==='true' && $('#sk'+i).value.trim()).map(i=>$('#sk'+i).value.trim()); }
+function toggleMoment(i){ const b=$('#mt'+i); b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); refreshWhat(); }
+function isMoment(name){ return !!(S.week && (S.week.moment||[]).includes(name)); }
+function remKind(r, moments){
+  moments = moments || (S.week&&S.week.moment) || [];
+  const what=(r.what||'').replace(' (meditation)','');
+  const all = S.week ? practiceOptions(S.week.skills).map(x=>x.replace(' (meditation)','')) : [];
+  const momentish = what ? moments.includes(what) : (all.length && all.every(x=>moments.includes(x)));
+  if(!momentish) return 'practice';
+  return (+String(r.time||'12:00').split(':')[0]) < 15 ? 'intention' : 'catchup';
+}
 function refreshWhat(){
   const opts=practiceOptions(setupSkills());
   [0,1,2].forEach(i=>{
@@ -685,6 +735,7 @@ function refreshWhat(){
     const cur=el.value||el.dataset.cur||'';
     el.innerHTML='<option value="">Any of my skills</option>'+opts.map(o=>`<option ${o===cur?'selected':''}>${esc(o)}</option>`).join('');
   });
+  const mn=$('#momentRemNote'); if(mn) mn.classList.toggle('hidden', !setupMoments().length);
 }
 document.addEventListener('input',e=>{ if(/^sk\d$/.test(e.target.id)) refreshWhat(); });
 function cancelSetup(){ show(S.week?'home':'welcome'); }
@@ -694,7 +745,7 @@ function saveSetup(){
   const reminders=[0,1,2].map(i=>({day:+$('#rd'+i).value, time:$('#rt'+i).value, anchor:$('#ra'+i).value.trim(), what:$('#rw'+i).value})).filter(r=>r.time).sort((a,b)=>a.day-b.day||a.time.localeCompare(b.time));
   if(!reminders.length){ $('#remErr').textContent='Add at least one reminder time.'; return; }
   const isNew = !S.week;
-  S.week = {start: isNew ? midnight(Date.now()).getTime() : S.week.start, skills, reminders};
+  S.week = {start: isNew ? midnight(Date.now()).getTime() : S.week.start, skills, reminders, moment: setupMoments()};
   save(); renderHome(); show('home');
 }
 function newWeek(btn){
@@ -904,6 +955,10 @@ async function deleteRec(k,btn){ if(!confirmTap(btn,'Tap again to delete')) retu
 /* ---------- reminders (.ics) ---------- */
 function isMed(r){ return /\(meditation\)$/.test(r.what||''); }
 function icsText(t){ return String(t).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,' '); }
+function icsSummary(r,skills){
+  const w=r.what?r.what.replace(' (meditation)',''):skills, k=remKind(r);
+  return k==='intention' ? 'Intention: look for a moment to use '+w : k==='catchup' ? 'Catch-up: log a moment ('+w+')' : 'Practice: '+w;
+}
 function downloadReminders(){
   if(!S.week) return;
   const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
@@ -918,7 +973,7 @@ function downloadReminders(){
     if(d<Date.now()) return;
     const dt=`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(h)}${pad(m)}00`;
     const now=new Date(), stamp=`${now.getUTCFullYear()}${pad(now.getUTCMonth()+1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
-    ics+=`BEGIN:VEVENT\r\nUID:ai-practice-${S.week.start}-${i}@anchoredinside.com\r\nDTSTAMP:${stamp}\r\nDTSTART:${dt}\r\nDURATION:PT5M\r\nSUMMARY:${icsText('Practice: '+(r.what?r.what.replace(' (meditation)',''):skills))}\r\nDESCRIPTION:${icsText((r.anchor?('When: '+r.anchor+'. '):'')+(iOS?'Open the Anchored Inside app, go to The Toolbox and tap My Practice. ':'')+(isMed(r)?'Tap play on your meditation, then save your check-in.':'Play your summary, practice, then tap Log.')+(iOS?'':' '+base+(isMed(r)?'#meditate':'#practice')))}\r\n${iOS?'':`URL:${base}${isMed(r)?'#meditate':'#practice'}\r\n`}BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:Time to practice\r\nTRIGGER:PT0M\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
+    ics+=`BEGIN:VEVENT\r\nUID:ai-practice-${S.week.start}-${i}@anchoredinside.com\r\nDTSTAMP:${stamp}\r\nDTSTART:${dt}\r\nDURATION:PT5M\r\nSUMMARY:${icsText(icsSummary(r,skills))}\r\nDESCRIPTION:${icsText((r.anchor?('When: '+r.anchor+'. '):'')+(iOS?'Open the Anchored Inside app. ':'')+(remKind(r)==='intention'?'Look for one moment today to use your skill. Log it this evening.':remKind(r)==='catchup'?'Did a moment come up today? Open My Practice and log it, even if you only noticed afterward.':isMed(r)?'Tap play on your meditation, then save your check-in.':'Play your summary, practice, then tap Log.')+(iOS?'':' '+base+(isMed(r)?'#meditate':'#practice')))}\r\n${iOS?'':`URL:${base}${isMed(r)?'#meditate':'#practice'}\r\n`}BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:Time to practice\r\nTRIGGER:PT0M\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
   });
   ics+='END:VCALENDAR\r\n';
   if(!ics.includes('BEGIN:VEVENT')){ $('#icsMsg').textContent='All of this week\'s reminder times have already passed. Tap Edit my week to pick new days.'; return; }
@@ -998,12 +1053,54 @@ function renderLogSkills(){
   if(!opts.includes(logSkill)) logSkill=opts[0];
   $('#logSkills').innerHTML=opts.map(o=>`<button class="pick ${o===logSkill?'sel':''}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}">${esc(o)}</button>`).join('');
   $('#otherIn').classList.toggle('hidden', logSkill!=='Other');
+  const mo=isMoment(logSkill);
+  $('#momentPart').classList.toggle('hidden', !mo); $('#stressPart').classList.toggle('hidden', mo);
+  $('#logBtn').textContent = mo ? '✓ Save this moment' : '✓ Save practice';
+  $('#logCard h2').textContent = mo ? 'Log a moment' : 'What did you practice?';
+  if(mo) renderMoment();
 }
+let mom={when:'now', outcome:'', calm:''};
+function pickRow(sel, key, opts){
+  $(sel).innerHTML=opts.map(([v,l])=>`<button type="button" class="pick ${mom[key]===v?'sel':''}" onclick="mom['${key}']='${v}';$('#logErr').textContent='';renderMoment()">${l}</button>`).join('');
+}
+function renderMoment(){
+  const whenOpts=[['now','Just now'],['earlier','Earlier today']]; if(S.week && dayIndex(Date.now())>0) whenOpts.push(['yesterday','Yesterday']);
+  if(!whenOpts.some(o=>o[0]===mom.when)) mom.when='now';
+  pickRow('#momWhen','when',whenOpts);
+  pickRow('#momOutcome','outcome',[['tough','Tough'],['okay','Okay'],['helped','It helped']]);
+  pickRow('#momCalm','calm',[['low','Not very'],['some','Somewhat'],['high','Pretty calm']]);
+  const missed=$('#momMissed').checked;
+  $('#momOutcomeWrap').classList.toggle('hidden', missed);
+  $('#momTriedLbl').textContent = missed ? "What I'd try next time" : 'What I tried';
+  $('#momTried').placeholder = missed ? 'Pause, breathe, then ask what he needs' : "Told myself he's exhausted, not defiant";
+}
+const MOMENT_CHEERS = {
+  missed:["Noticing afterward is the skill growing. Next time you'll catch it a little sooner.","Hindsight counts here. Your brain just practiced the moment anyway.","You caught it on the replay. That's how the live version gets easier.","Spotting it later is step one of spotting it sooner. Well done."],
+  helped:["Look at you, parenting from the anchor instead of the storm.","That's the stuff. Your kid felt that, even if they'd never say so.","Gold star, and the good kind that actually matters.","You did the hard, quiet thing. That moment just changed a little."],
+  okay:["Okay is a real win in a real moment. Keep going.","Not perfect, still practice. That's exactly how this works.","You tried it in the wild. That's brave and it counts."],
+  tough:["Hard moments are where the practice lives. You showed up for it.","Rough one. You still reached for the skill, and that matters.","Messy moments count double for effort. Be gentle with yourself tonight."]
+};
+function momentCheer(l){ const pool=MOMENT_CHEERS[l.missed?'missed':(l.outcome||'okay')]; return pool[Math.floor(Math.random()*pool.length)]; }
+const OUTCOME={tough:'Tough',okay:'Okay',helped:'It helped'}, CALM={low:'not very calm',some:'somewhat calm',high:'pretty calm'};
+function momentLine(l){ return l.missed ? 'Noticed afterward' : (OUTCOME[l.outcome]||'Logged'); }
 function logPractice(){
   $('#logErr').textContent='';
   if(!logSkill){ $('#logErr').textContent='Pick the skill you practiced.'; return; }
   let skillName=logSkill;
   if(logSkill==='Other'){ skillName=$('#otherIn').value.trim(); if(!skillName){ $('#logErr').textContent='Type what you practiced.'; $('#otherIn').focus(); return; } }
+  if(isMoment(skillName)){
+    const what=$('#momWhat').value.trim(), missed=$('#momMissed').checked;
+    if(!what){ $('#logErr').textContent='Write a few words about what happened.'; $('#momWhat').focus(); return; }
+    if(!missed && !mom.outcome){ $('#logErr').textContent='Pick how it went.'; return; }
+    const now=Date.now(); let ts=now;
+    if(mom.when==='earlier') ts=Math.max(midnight(now).getTime()+60000, now-2*3600*1000);
+    if(mom.when==='yesterday') ts=now-DAY;
+    const l={id:now, ts, skill:skillName, type:'moment', what, tried:$('#momTried').value.trim(), outcome:missed?'':mom.outcome, calm:mom.calm, missed};
+    S.logs.unshift(l); S.logs.sort((a,b)=>b.ts-a.ts); save();
+    $('#momWhat').value=''; $('#momTried').value=''; $('#momMissed').checked=false; mom={when:'now',outcome:'',calm:''}; renderMoment();
+    $('#logOk').textContent=momentCheer(l); setTimeout(()=>$('#logOk').textContent='',9000);
+    renderWeek(); renderLogs(); return;
+  }
   const b=+$('#before').value, a=+$('#after').value;
   S.logs.unshift({id:Date.now(), ts:Date.now(), skill:skillName, before:b, after:a, note:$('#noteIn').value.trim()});
   $('#otherIn').value='';
@@ -1017,11 +1114,11 @@ function delLog(id,btn){ if(!confirmTap(btn,'Tap again to delete')) return; S.lo
 function renderLogs(){
   const n=S.logs.filter(l=>S.week&&dayIndex(l.ts)>=0&&dayIndex(l.ts)<7).length;
   $('#logCount').textContent = n ? `${n} this week` : 'none yet';
-  $('#logList').innerHTML = S.logs.length ? S.logs.slice(0,8).map(l=>`<div class="log"><div class="top"><div style="flex:1;min-width:0"><b>${esc(l.skill)}</b><div class="n">${fmtDay(l.ts)} · stress ${l.before} → ${l.after}</div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div><button class="dots" aria-label="More options" onclick="this.closest('.log').classList.toggle('open')">⋯</button></div><div class="acts"><button class="delbtn" onclick="delLog(${l.id},this)">Delete this entry</button></div></div>`).join('') : '<p class="note" style="margin-top:0">Your practice will show up here.</p>';
+  $('#logList').innerHTML = S.logs.length ? S.logs.slice(0,8).map(l=>`<div class="log"><div class="top"><div style="flex:1;min-width:0"><b>${esc(l.skill)}</b><div class="n">${fmtDay(l.ts)} · ${l.type==='moment'?'Moment · '+momentLine(l):`stress ${l.before} → ${l.after}`}</div>${l.type==='moment'?`<div class="n">${esc(l.what)}</div>`:''}${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div><button class="dots" aria-label="More options" onclick="this.closest('.log').classList.toggle('open')">⋯</button></div><div class="acts"><button class="delbtn" onclick="delLog(${l.id},this)">Delete this entry</button></div></div>`).join('') : '<p class="note" style="margin-top:0">Your practice will show up here.</p>';
 }
 function renderWeek(){
   const today=dayIndex(Date.now());
-  const days=[...Array(7)].map((_,i)=>{ const d=new Date(S.week.start+i*DAY); const L=S.logs.filter(l=>dayIndex(l.ts)===i); const m=L.filter(isMedLog).length; return {i, label:d.toLocaleDateString(undefined,{weekday:'short'}).slice(0,2), n:L.length, kind: !L.length?'':(m===L.length?'med':(m?'both':''))}; });
+  const days=[...Array(7)].map((_,i)=>{ const d=new Date(S.week.start+i*DAY); const L=S.logs.filter(l=>dayIndex(l.ts)===i); const ks=new Set(L.map(l=>l.type==='moment'?'mom':isMedLog(l)?'med':'s')); return {i, label:d.toLocaleDateString(undefined,{weekday:'short'}).slice(0,2), n:L.length, kind: ks.size>1?'both':ks.has('med')?'med':ks.has('mom')?'mom':''}; });
   const planned=new Set(S.week.reminders.map(r=>r.day||0));
   $('#week').innerHTML=days.map(d=>`<div class="day"><div class="dot ${d.n?'on '+d.kind:(planned.has(d.i)?'plan':'')} ${d.i===today?'today':''}">${d.n?(d.n>1?d.n:'✓'):(planned.has(d.i)?'<span style="color:var(--warm);display:flex">'+ICON.bell+'</span>':'')}</div>${d.label}</div>`).join('');
   const total=days.reduce((a,d)=>a+d.n,0);
@@ -1029,12 +1126,13 @@ function renderWeek(){
   $('#goalNote').textContent = total>=GOAL ? 'You reached your goal for the week. Extra practice is a bonus.' : `${GOAL-total} to go this week.`;
   $('#weekStats').innerHTML = statsHTML(summaryData());
   const fc=$('#firstCard'); if(fc) fc.classList.toggle('hidden', total>0);
+  const lm=document.querySelector('.lgmom'); if(lm) lm.classList.toggle('hidden', !(S.week.moment||[]).length);
   $('#weekLabel').textContent = today>6 ? 'Your week is complete. Bring it to session, then start a new week.' : `Day ${Math.max(1,today+1)} of 7 · started ${fmtDay(S.week.start)}`;
   const done=Math.min(total,GOAL), d=summaryData();
   $('#ringArc').setAttribute('stroke-dashoffset', String(150.8*(1-done/GOAL)));
   $('#ringText').textContent=`${Math.min(total,99)}/${GOAL}`;
   $('#ringMain').textContent = total>=GOAL ? `Goal reached: ${total} practices` : `${total} of ${GOAL} practices`;
-  $('#ringSub').textContent = d.logs.length ? (d.avgDrop>0 ? `Stress down ${d.avgDrop.toFixed(1).replace('.0','')} points on average` : 'Showing up to practice counts.') : 'Your first practice is the hardest. You\'ve got this.';
+  $('#ringSub').textContent = d.logs.length ? (d.stressN && d.avgDrop>0 ? `Stress down ${d.avgDrop.toFixed(1).replace('.0','')} points on average` : 'Showing up to practice counts.') : 'Your first practice is the hardest. You\'ve got this.';
   $('#tileWeek').textContent = `${Math.min(total,99)} of ${GOAL} done`;
   $('#goalCard').classList.toggle('hidden', total<GOAL);
   $('#goalSub').textContent = total>GOAL ? `${total} practices so far. Anything extra is a bonus.` : 'Anything extra is a bonus. Bring this week to session.';
@@ -1063,17 +1161,19 @@ function weekNotes(){ return (S.notes||[]).filter(x=>S.week&&dayIndex(x.ts)>=0&&
 
 /* ---------- summary ---------- */
 function isMedLog(l){ return allMeds().some(m=>m.title===l.skill); }
-function fmtDrop(d){ return d.logs.length ? (d.avgDrop>0?'−':d.avgDrop<0?'+':'')+Math.abs(d.avgDrop).toFixed(1).replace('.0','') : '–'; }
+function fmtDrop(d){ return d.stressN ? (d.avgDrop>0?'−':d.avgDrop<0?'+':'')+Math.abs(d.avgDrop).toFixed(1).replace('.0','') : '–'; }
 function statsHTML(d){
-  const line = !d.logs.length ? 'Your first practice is waiting whenever you are.' : d.avgDrop>0 ? `Stress went down ${Math.abs(d.avgDrop).toFixed(1).replace('.0','')} point${Math.abs(d.avgDrop)===1?'':'s'} on average. That's your nervous system learning.` : 'Showing up to practice is the work. Keep going.';
+  const line = !d.logs.length ? 'Your first practice is waiting whenever you are.' : (!d.stressN && d.moments.length) ? `${d.moments.length} real moment${d.moments.length===1?'':'s'} logged. That's the skill showing up in real life.` : d.avgDrop>0 ? `Stress went down ${Math.abs(d.avgDrop).toFixed(1).replace('.0','')} point${Math.abs(d.avgDrop)===1?'':'s'} on average. That's your nervous system learning.` : 'Showing up to practice is the work. Keep going.';
   return `<div class="stats"><div class="stat s1"><b>${d.logs.length}/${GOAL}</b><small>practices</small></div><div class="stat s2"><b>${d.days}</b><small>days practiced</small></div><div class="stat s3"><b>${fmtDrop(d)}</b><small>avg. stress change</small></div></div><p class="statline">${line}</p>`;
 }
 function summaryData(){
   const logs=S.logs.filter(l=>dayIndex(l.ts)>=0&&dayIndex(l.ts)<7).slice().reverse();
   const days=new Set(logs.map(l=>dayIndex(l.ts))).size;
-  const avgDrop=logs.length?(logs.reduce((s,l)=>s+(l.before-l.after),0)/logs.length):0;
+  const st=logs.filter(l=>typeof l.before==='number'&&typeof l.after==='number');
+  const avgDrop=st.length?(st.reduce((s,l)=>s+(l.before-l.after),0)/st.length):0;
+  const moments=logs.filter(l=>l.type==='moment');
   const by={}; logs.forEach(l=>by[l.skill]=(by[l.skill]||0)+1);
-  return {logs,days,avgDrop,by};
+  return {logs,days,avgDrop,by,stressN:st.length,moments};
 }
 function showSummary(){
   const d=summaryData();
@@ -1082,16 +1182,16 @@ function showSummary(){
   const sk=practiceOptions(S.week.skills).map(x=>x.replace(' (meditation)',''));
   $('#sumBody').innerHTML=`
     <div class="eyebrow">This week's skills</div>
-    <div class="chips2">${sk.map(x=>`<span class="${allMeds().some(m=>m.title===x)?'m':''}">${esc(x)}${d.by[x]?` · ${d.by[x]}×`:''}</span>`).join('')}</div>
+    <div class="chips2">${sk.map(x=>`<span class="${allMeds().some(m=>m.title===x)?'m':isMoment(x)?'o':''}">${esc(x)}${d.by[x]?` · ${d.by[x]}×`:''}</span>`).join('')}</div>
     ${weekNotes().length?`<div class="hr"></div><div class="eyebrow">My reflections</div>${weekNotes().map(x=>`<div class="note-item"><div class="meta">${fmtDay(x.ts)}</div>${noteBody(x)}</div>`).join('')}`:''}
     <div class="hr"></div><div class="eyebrow">Practice log</div>
-    <div>${d.logs.length?d.logs.map(l=>`<div class="slog ${isMedLog(l)?'m':''}"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${l.before} → ${l.after}</span></div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div>`).join(''):'<p class="note">No practice logged this week yet.</p>'}</div>`;
+    <div>${d.logs.length?d.logs.map(l=>l.type==='moment' ? `<div class="slog mo"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${momentLine(l)}</span></div><div class="mrow"><span>What happened</span>${esc(l.what)}</div>${l.tried?`<div class="mrow"><span>${l.missed?"Next time I'd try":'What I tried'}</span>${esc(l.tried)}</div>`:''}${l.calm?`<div class="n">Stayed ${CALM[l.calm]}</div>`:''}</div>` : `<div class="slog ${isMedLog(l)?'m':''}"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${l.before} → ${l.after}</span></div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div>`).join(''):'<p class="note">No practice logged this week yet.</p>'}</div>`;
   show('summary');
 }
 async function copySummary(){
   const d=summaryData();
   const txt=[`My practice: week of ${fmtDay(S.week.start)}`,`Skills: ${S.week.skills.join(', ')}`,`Practices: ${d.logs.length} of ${GOAL} · Days practiced: ${d.days}`,
-    ...d.logs.map(l=>`- ${fmtDay(l.ts)}: ${l.skill}, stress ${l.before} → ${l.after}${l.note?` (${l.note})`:''}`),
+    ...d.logs.map(l=>l.type==='moment' ? `- ${fmtDay(l.ts)}: ${l.skill} (moment, ${momentLine(l).toLowerCase()}). What happened: ${l.what}${l.tried?`. ${l.missed?"Next time I'd try":'Tried'}: ${l.tried}`:''}${l.calm?`. Stayed ${CALM[l.calm]}`:''}` : `- ${fmtDay(l.ts)}: ${l.skill}, stress ${l.before} → ${l.after}${l.note?` (${l.note})`:''}`),
     ...(weekNotes().length?['','My reflections:',...weekNotes().map(x=>`- ${fmtDay(x.ts)}: ${[x.text, x.grateful?'Grateful for: '+x.grateful:''].filter(Boolean).join(' | ')}`)]:[])].join('\n');
   try{ await navigator.clipboard.writeText(txt); $('#copyOk').textContent='Copied.'; }catch(e){ $('#copyOk').textContent='Copy didn\'t work on this device. Try Print instead.'; }
 }
