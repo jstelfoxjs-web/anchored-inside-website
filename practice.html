@@ -142,6 +142,11 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
 .nextrow b{display:block;font-size:17px}
 .nextrow span{font-size:14px;color:var(--mut)}
 .btn.clay{background:var(--warm);border-color:var(--warm);color:#fff}
+.ico{width:18px;height:18px;flex:none;display:inline-block;vertical-align:-3px}
+.play .ico{width:20px;height:20px;margin-left:2px}
+.play{display:flex;align-items:center;justify-content:center}
+.dot .ico{width:15px;height:15px}
+.chip .ico{width:14px;height:14px;color:var(--warm)}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px}
 .tile{appearance:none;border:0;border-radius:18px;padding:16px;min-height:112px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;font-family:Manrope,sans-serif}
 .tile svg{width:26px;height:26px}
@@ -231,7 +236,7 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
       <div class="card nextcard">
         <div class="eyebrow">Next reminder</div>
         <div class="nextrow"><div class="nexticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><div id="nextRem"><b>—</b><span></span></div></div>
-        <button class="btn clay block" style="margin-top:12px" onclick="startPractice()">▶ Start practice</button>
+        <button class="btn clay block" style="margin-top:12px" onclick="startPractice()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg> Start practice</button>
       </div>
       <div class="tiles">
         <button class="tile t-sea" onclick="goTab('practice','sum')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span><b>Session summary</b><small id="tileSum">Listen to your recap</small></span></button>
@@ -296,7 +301,7 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
     <section class="tabpanel hidden" id="tab-meditate" role="tabpanel" aria-label="Meditate">
       <div class="card">
         <h2 id="meditate">This week's meditations</h2>
-        <p class="sub">Picked for you this week. Tap ▶ to begin.</p>
+        <p class="sub">Picked for you this week. Tap play to begin.</p>
         <div id="weekMeds"></div>
       </div>
       <div class="card" id="libDrop">
@@ -361,6 +366,11 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
 </nav>
 <script>
 const $ = s => document.querySelector(s);
+const ICON = {
+  play:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>',
+  stop:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/></svg>',
+  bell:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>'
+};
 const KEY = 'anchoredInside.practice.v1';
 const DAY = 86400000;
 const DEFAULT_REM = [{day:1,time:'08:00',anchor:'after my morning coffee'},{day:3,time:'12:30',anchor:'at lunch'},{day:5,time:'21:30',anchor:'at bedtime'}];
@@ -498,7 +508,7 @@ function medRow(m, withPlay){
   const meta=[m.length,m.topic].filter(Boolean).join(' · ');
   return `<div class="med"><button class="star ${on?'on':''}" aria-label="${on?'Remove from':'Add to'} this week" data-id="${esc(id)}" onclick="toggleStar(this.dataset.id)">${on?'★':'☆'}</button>
     <div class="t"><b>${esc(m.title)}</b><span>${esc(meta)}</span></div>
-    ${withPlay?`<button class="play" aria-label="Play ${esc(m.title)}" data-id="${esc(id)}" onclick="playMed(this.dataset.id,this)">▶</button>`:''}</div>
+    ${withPlay?`<button class="play" aria-label="Play ${esc(m.title)}" data-id="${esc(id)}" onclick="playMed(this.dataset.id,this)">${ICON.play}</button>`:''}</div>
     <div class="medslot" data-id="${esc(id)}"></div>`;
 }
 function renderMedList(sel, withPlay){
@@ -555,10 +565,10 @@ function ciSave(btn){
 function playMed(id, btn){
   const m=MEDITATIONS.find(x=>medId(x)===id); if(!m) return;
   const slot=btn.closest('.med').nextElementSibling;
-  if(slot.innerHTML){ slot.innerHTML=''; btn.textContent='▶'; return; }
+  if(slot.innerHTML){ slot.innerHTML=''; btn.innerHTML=ICON.play; return; }
   const yt=ytId(m.link);
   const canEmbed = /^https?:$/.test(location.protocol) && window.self===window.top;
-  if(yt && !canEmbed){ startPending(m); window.open('https://www.youtube.com/watch?v='+yt,'_blank','noopener'); slot.innerHTML=checkinHTML(m, S.pending.before)+`<p class="note">Opened in YouTube. Come back here when you're done.</p>`; btn.textContent='■'; return; }
+  if(yt && !canEmbed){ startPending(m); window.open('https://www.youtube.com/watch?v='+yt,'_blank','noopener'); slot.innerHTML=checkinHTML(m, S.pending.before)+`<p class="note">Opened in YouTube. Come back here when you're done.</p>`; btn.innerHTML=ICON.stop; return; }
   if(!yt && !isAudio(m.link)){ startPending(m); window.open(m.link,'_blank','noopener'); renderPending(); return; }
   startPending(m);
   const player = yt
@@ -568,7 +578,7 @@ function playMed(id, btn){
   slot.innerHTML = checkinHTML(m, S.pending.before) + player;
   const au=slot.querySelector('audio');
   if(au) au.addEventListener('ended',()=>{ const d=slot.querySelector('.checkin [data-step=before]'); if(d && !d.classList.contains('hidden')) ciDone(d.querySelector('button')); slot.querySelector('.checkin').scrollIntoView({behavior:'smooth',block:'center'}); });
-  btn.textContent='■';
+  btn.innerHTML=ICON.stop;
 }
 function startPending(m){ S.pending={title:m.title, ts:Date.now(), before:(S.pending&&S.pending.title===m.title)?S.pending.before:5}; save(); }
 function renderPending(){
@@ -631,7 +641,7 @@ function setRecUI(on){
   const b1=$('#recBtn'), b2=$('#recBtn2'), t1=$('#recTimer'), t2=$('#recTimer2');
   if(on){
     const b=recKey==='summary'?b1:b2, t=recKey==='summary'?t1:t2;
-    b.textContent='■ Stop'; b.classList.add('rec'); t.classList.remove('hidden'); t.textContent='0:00 recording';
+    b.innerHTML=ICON.stop+' Stop'; b.classList.add('rec'); t.classList.remove('hidden'); t.textContent='0:00 recording';
     (recKey==='summary'?b2:b1).disabled=true;
   } else {
     b1.disabled=b2.disabled=false; b2.classList.remove('rec'); t1.classList.add('hidden'); t2.classList.add('hidden');
@@ -713,10 +723,10 @@ function renderWeek(){
   const today=dayIndex(Date.now());
   const days=[...Array(7)].map((_,i)=>{ const d=new Date(S.week.start+i*DAY); return {i, label:d.toLocaleDateString(undefined,{weekday:'short'}).slice(0,2), n:S.logs.filter(l=>dayIndex(l.ts)===i).length}; });
   const planned=new Set(S.week.reminders.map(r=>r.day||0));
-  $('#week').innerHTML=days.map(d=>`<div class="day"><div class="dot ${d.n?'on':(planned.has(d.i)?'plan':'')} ${d.i===today?'today':''}">${d.n?(d.n>1?d.n:'✓'):(planned.has(d.i)?'<span style="color:var(--warm);font-size:14px">⏰</span>':'')}</div>${d.label}</div>`).join('');
+  $('#week').innerHTML=days.map(d=>`<div class="day"><div class="dot ${d.n?'on':(planned.has(d.i)?'plan':'')} ${d.i===today?'today':''}">${d.n?(d.n>1?d.n:'✓'):(planned.has(d.i)?'<span style="color:var(--warm);display:flex">'+ICON.bell+'</span>':'')}</div>${d.label}</div>`).join('');
   const total=days.reduce((a,d)=>a+d.n,0);
   $('#dayCount').textContent=Math.min(total,99);
-  $('#goalNote').textContent = total>=GOAL ? 'You reached your goal for the week. Extra practice is a bonus.' : `⏰ marks your reminder days. ${GOAL-total} to go.`;
+  $('#goalNote').textContent = total>=GOAL ? 'You reached your goal for the week. Extra practice is a bonus.' : `Dashed circles mark your reminder days. ${GOAL-total} to go.`;
   $('#weekLabel').textContent = today>6 ? 'Your week is complete. Bring it to session, then start a new week.' : `Day ${Math.max(1,today+1)} of 7 · started ${fmtDay(S.week.start)}`;
   const done=Math.min(total,GOAL), d=summaryData();
   $('#ringArc').setAttribute('stroke-dashoffset', String(150.8*(1-done/GOAL)));
@@ -759,7 +769,7 @@ async function copySummary(){
 /* ---------- render ---------- */
 function renderHome(){
   $('#skillChips').innerHTML=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)','')).map(s=>`<span class="chip">${esc(s)}</span>`).join('');
-  $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">⏰ ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
+  $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">${ICON.bell} ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
   renderWeek(); renderLogSkills(); renderLogs(); renderWeekMeds(); renderMedList('#library',true); renderRecordings(); renderPending();
 }
 function handleHash(){
