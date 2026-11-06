@@ -659,7 +659,7 @@ function openSetup(){
   $('#remRows').innerHTML = [0,1,2].map(i=>{
     const r = w.reminders[i] || DEFAULT_REM[i];
     const base = S.week ? S.week.start : midnight(Date.now()).getTime();
-    const dayOpts = [...Array(7)].map((_,d)=>`<option value="${d}" ${d===(r.day??i*2+1)?'selected':''}>${d===0&&!S.week?'Today':new Date(base+d*DAY).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</option>`).join('');
+    const dayOpts = [...Array(7)].map((_,d)=>`<option value="${d}" ${d===(r.day??i*2+1)?'selected':''}>${(d===0&&!S.week?'Today · ':'')+new Date(base+d*DAY).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</option>`).join('');
     return `<div class="su-rem"><div class="su-remtop"><span class="su-remnum">Reminder ${i+1}</span></div>
       <div class="row" style="margin-bottom:8px"><select id="rd${i}" aria-label="Day" style="flex:1;min-width:0;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)">${dayOpts}</select><input type="time" id="rt${i}" value="${r.time}" aria-label="Time" style="width:128px;flex:none"></div>
       <label class="su-mini" for="ra${i}">Tie it to</label><input type="text" id="ra${i}" value="${esc(r.anchor)}" placeholder="after brushing my teeth">
