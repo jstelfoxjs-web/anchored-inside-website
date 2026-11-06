@@ -310,16 +310,22 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 .more>summary::-webkit-details-marker{display:none}
 .more>summary::after{content:'▾';color:var(--mut);margin-left:auto;transition:transform .15s}
 .more[open]>summary::after{transform:rotate(180deg)}
-.weekline>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+.weekline>summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:10px}
 .weekline>summary::-webkit-details-marker{display:none}
-.weekline>summary::after{content:'▾';color:var(--mut);margin-left:auto;transition:transform .15s}
+.weekline>summary::after{content:'▾';color:var(--mut);margin-left:auto;margin-top:6px;transition:transform .15s}
 .weekline[open]>summary::after{transform:rotate(180deg)}
-.weekline .wl{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.weekline .wl{margin-top:10px}
 .weekline>summary>div{flex:1;min-width:0}
-.wchip{display:inline-flex;align-items:center;gap:5px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;font-weight:700;border-radius:999px;padding:5px 10px}
-.wchip .ico{width:13px;height:13px}
-.w-s{background:var(--soft);color:var(--ink)} .w-m{background:var(--sand);color:#7d5c36} .w-o{background:var(--blush);color:var(--blushink)}
-.w-r{background:#fff;border:1px solid var(--line);color:var(--mut)}
+.wlist{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.wrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.wrow:first-child{border-top:0}
+.wrow i{width:9px;height:9px;border-radius:50%;flex:none;background:var(--ink2)}
+.w-m i{background:#b08a5c} .w-o i{background:var(--warm)}
+.wrow .wn{flex:1;min-width:0;font-size:15px;font-weight:600;color:var(--txt);letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wrow .wt{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink2);flex:none}
+.w-m .wt{color:#9a7448} .w-o .wt{color:var(--warm)}
+.wrem{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--mut);margin-top:12px}
+.wrem .ico{width:14px;height:14px;color:var(--warm)}
 .dots{background:none;border:0;color:var(--mut);font-size:20px;line-height:1;padding:0 4px 6px;cursor:pointer;border-radius:8px}
 .log .top{align-items:flex-start}
 .log .acts{display:none;margin-top:6px}
@@ -1267,7 +1273,9 @@ function renderHome(){
   $('#skillChips').innerHTML=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)','')).map(s=>`<span class="chip">${esc(s)}</span>`).join('');
   const sk=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)',''));
   const wk=x=> allMeds().some(m=>m.title===x)?'m' : isMoment(x)?'o':'s';
-  $('#weekLine').innerHTML = sk.map(x=>`<span class="wchip w-${wk(x)}" title="${esc(x)}">${esc(x)}</span>`).join('') + `<span class="wchip w-r">${ICON.bell}${S.week.reminders.length} reminder${S.week.reminders.length===1?'':'s'}</span>`;
+  const WL={s:'Skill',m:'Meditation',o:'In the moment'};
+  const days=[...new Set(S.week.reminders.slice().sort((a,b)=>(a.day||0)-(b.day||0)).map(r=>new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})))];
+  $('#weekLine').innerHTML = `<div class="wlist">${sk.map(x=>`<div class="wrow w-${wk(x)}"><i></i><span class="wn">${esc(x)}</span><span class="wt">${WL[wk(x)]}</span></div>`).join('')}</div><div class="wrem">${ICON.bell}${S.week.reminders.length} reminder${S.week.reminders.length===1?'':'s'} · ${days.join(', ')}</div>`;
   $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">${ICON.bell} ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
   renderWeek(); renderLogSkills(); renderLogs(); renderWeekMeds(); renderMedList('#library',true); mountAddForms(); renderRecordings(); renderPending(); renderNotes();
 }
