@@ -169,6 +169,36 @@ details summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0}
 .sbox .big{color:inherit;font-size:30px;min-width:0}
 .sbox input[type=range]{accent-color:currentColor}
 .sbox .scale{color:inherit;opacity:.75}
+
+/* setup: three colored steps */
+.su-intro{background:linear-gradient(135deg,#ffffff 0%,#f3e9dc 100%)}
+.su-steps{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.su-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 10px 5px 5px;border-radius:999px;font-size:12.5px;font-weight:700}
+.su-chip i{font-style:normal;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.su-chip.c1{background:var(--soft);color:var(--ink)} .su-chip.c1 i{background:var(--ink2)}
+.su-chip.c2{background:var(--sand);color:var(--sandink)} .su-chip.c2 i{background:#b08a5c}
+.su-chip.c3{background:var(--blush);color:var(--blushink)} .su-chip.c3 i{background:var(--warm)}
+.su-card{border-top:4px solid var(--ink2)}
+.su-card.c1{border-top-color:var(--ink2);background:linear-gradient(180deg,#f1f7f6 0,#fff 90px)}
+.su-card.c2{border-top-color:#b08a5c;background:linear-gradient(180deg,#faf4ec 0,#fff 90px)}
+.su-card.c3{border-top-color:var(--warm);background:linear-gradient(180deg,#fbf1ec 0,#fff 90px)}
+.su-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.su-head h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:24px;line-height:1.1;margin:0;color:var(--ink)}
+.su-step{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--mut)}
+.su-badge{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex:none}
+.su-badge svg{width:24px;height:24px}
+.c1 .su-badge{background:var(--soft);color:var(--ink2)}
+.c2 .su-badge{background:var(--sand);color:var(--sandink)}
+.c3 .su-badge{background:var(--blush);color:var(--warm)}
+.c2 .su-step{color:var(--sandink)} .c3 .su-step{color:var(--blushink)}
+.su-skill{display:flex;align-items:center;gap:10px;margin-top:8px}
+.su-skill i{font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--soft);color:var(--ink);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.su-skill input{flex:1;min-width:0}
+.su-rem{background:#fff;border:1px solid var(--line);border-left:4px solid var(--warm);border-radius:14px;padding:12px;margin-top:10px}
+.su-remtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.su-remnum{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--blushink)}
+.su-mini{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:8px 0 4px}
+.su-save{display:flex;gap:10px;margin:4px 0 8px;position:sticky;bottom:calc(10px + env(safe-area-inset-bottom));z-index:5;background:rgba(246,244,239,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px;border-radius:999px;box-shadow:0 6px 20px rgba(21,63,72,.12)}
 /* polish */
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .tabpanel:not(.hidden),#welcome:not(.hidden),#setup:not(.hidden),#summary:not(.hidden){animation:fadeUp .28s ease both}
@@ -259,30 +289,44 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 
   <!-- ============ SETUP (done together in session) ============ -->
   <section id="setup" class="hidden">
-    <div class="card">
+    <div class="card su-intro">
       <h2>Set up my week</h2>
-      <p class="sub">Fill this in together at the end of session.</p>
+      <p class="sub">We'll fill this in together at the end of session. Three small steps.</p>
+      <div class="su-steps" aria-hidden="true">
+        <span class="su-chip c1"><i>1</i>Skills</span>
+        <span class="su-chip c2"><i>2</i>Meditations</span>
+        <span class="su-chip c3"><i>3</i>Reminders</span>
+      </div>
+    </div>
 
-      <label class="f">Skills to practice this week (up to 3)</label>
-      <p class="note" style="margin-top:0">Meditations you star below are added automatically, so there's no need to type them here.</p>
-      <input type="text" id="sk0" placeholder="Four Elements">
-      <input type="text" id="sk1" placeholder="Calm place" style="margin-top:8px">
-      <input type="text" id="sk2" placeholder="Container" style="margin-top:8px">
+    <div class="card su-card c1">
+      <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4-3-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-3 8-7 11z"/><path d="M12 7v7M9 11h6"/></svg></span>
+        <div><div class="su-step">Step 1</div><h3>Skills to practice</h3></div></div>
+      <p class="note" style="margin-top:0">Up to 3. Starred meditations in Step 2 count too, so there's no need to type them here.</p>
+      <div class="su-skill"><i>1</i><input type="text" id="sk0" placeholder="Four Elements" aria-label="Skill 1"></div>
+      <div class="su-skill"><i>2</i><input type="text" id="sk1" placeholder="Calm place" aria-label="Skill 2"></div>
+      <div class="su-skill"><i>3</i><input type="text" id="sk2" placeholder="Container" aria-label="Skill 3"></div>
       <p class="err" id="skErr"></p>
+    </div>
 
-      <label class="f">This week's meditations</label>
-      <p class="note" style="margin-top:0">Tap the star on the ones to practice. They count as skills, and show at the top of your page.</p>
+    <div class="card su-card c2">
+      <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg></span>
+        <div><div class="su-step">Step 2</div><h3>This week's meditations</h3></div></div>
+      <p class="note" style="margin-top:0">Tap the star on any to practice. They'll show at the top of your page.</p>
       <div id="setupMeds"></div>
+    </div>
 
-      <label class="f">My 3 practice reminders this week</label>
-      <p class="note" style="margin-top:0">Pick 3 days, and a time tied to something you already do.</p>
+    <div class="card su-card c3">
+      <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span>
+        <div><div class="su-step">Step 3</div><h3>My 3 practice reminders</h3></div></div>
+      <p class="note" style="margin-top:0">Pick 3 days, and tie each one to something you already do.</p>
       <div id="remRows"></div>
       <p class="err" id="remErr"></p>
+    </div>
 
-      <div class="row" style="margin-top:16px">
-        <button class="btn ghost" onclick="cancelSetup()" id="cancelBtn">Cancel</button>
-        <button class="btn solid" style="flex:1" onclick="saveSetup()">Save my week</button>
-      </div>
+    <div class="su-save">
+      <button class="btn ghost" onclick="cancelSetup()" id="cancelBtn">Cancel</button>
+      <button class="btn solid" style="flex:1" onclick="saveSetup()">Save my week</button>
     </div>
   </section>
 
@@ -559,9 +603,11 @@ function openSetup(){
   $('#remRows').innerHTML = [0,1,2].map(i=>{
     const r = w.reminders[i] || DEFAULT_REM[i];
     const base = S.week ? S.week.start : midnight(Date.now()).getTime();
-    const dayOpts = [...Array(7)].map((_,d)=>`<option value="${d}" ${d===(r.day??i*2+1)?'selected':''}>${d===0&&!S.week?'Today':new Date(base+d*DAY).toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'})}</option>`).join('');
-    return `<div style="margin-bottom:14px"><div class="row" style="margin-bottom:6px"><select id="rd${i}" style="flex:1;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)">${dayOpts}</select><input type="time" id="rt${i}" value="${r.time}" style="width:130px;flex:none"></div><input type="text" id="ra${i}" value="${esc(r.anchor)}" placeholder="after brushing my teeth">
-      <select id="rw${i}" data-cur="${esc(r.what||'')}" aria-label="What to practice" style="width:100%;margin-top:6px;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)"></select></div>`;
+    const dayOpts = [...Array(7)].map((_,d)=>`<option value="${d}" ${d===(r.day??i*2+1)?'selected':''}>${d===0&&!S.week?'Today':new Date(base+d*DAY).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</option>`).join('');
+    return `<div class="su-rem"><div class="su-remtop"><span class="su-remnum">Reminder ${i+1}</span></div>
+      <div class="row" style="margin-bottom:8px"><select id="rd${i}" aria-label="Day" style="flex:1;min-width:0;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)">${dayOpts}</select><input type="time" id="rt${i}" value="${r.time}" aria-label="Time" style="width:128px;flex:none"></div>
+      <label class="su-mini" for="ra${i}">Tie it to</label><input type="text" id="ra${i}" value="${esc(r.anchor)}" placeholder="after brushing my teeth">
+      <label class="su-mini" for="rw${i}">Practice</label><select id="rw${i}" data-cur="${esc(r.what||'')}" style="width:100%;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)"></select></div>`;
   }).join('');
   renderMedList('#setupMeds', false);
   refreshWhat();
