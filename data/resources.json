@@ -718,6 +718,42 @@
     "featured": false
   },
   {
+    "title": "Loosening the Grip: An OCD & ERP Workbook",
+    "description": "Volume 1 of the Anchored Inside Specialty Series: a 45-page client and clinician workbook on OCD and Exposure and Response Prevention. Covers the OCD cycle, thinking traps, building an exposure ladder, response prevention (including mental rituals), thought exposure scripting, mindfulness and self-compassion, family accommodation, and staying well, with worksheets, practice logs and clinician notes.",
+    "audience": [
+      "adults",
+      "teens",
+      "families"
+    ],
+    "topics": [
+      "anxiety",
+      "cbt"
+    ],
+    "type": "Workbook",
+    "file": "/assets/handouts/loosening-the-grip-ocd-erp-workbook.pdf",
+    "preview": "/assets/handouts/loosening-the-grip-ocd-erp-workbook-cover.jpg",
+    "keywords": [
+      "OCD",
+      "obsessive-compulsive disorder",
+      "ERP",
+      "exposure and response prevention",
+      "exposure hierarchy",
+      "exposure ladder",
+      "intrusive thoughts",
+      "compulsions",
+      "mental rituals",
+      "reassurance seeking",
+      "scripting",
+      "thought exposure",
+      "uncertainty",
+      "family accommodation",
+      "Specialty Series",
+      "workbook",
+      "clinician"
+    ],
+    "featured": false
+  },
+  {
     "title": "Understanding OCD: Skills & Strategies Guide",
     "description": "A psychoeducation and skills guide for teens, parents, and practitioners covering the OCD cycle, common types and myths, CBT thinking skills, mindfulness, and a step-by-step Phases of Therapy section from grounding through ERP, with a fill-in exposure hierarchy ladder worksheet.",
     "audience": [
