@@ -690,7 +690,7 @@ document.addEventListener('input',e=>{ if(/^sk\d$/.test(e.target.id)) refreshWha
 function cancelSetup(){ show(S.week?'home':'welcome'); }
 function saveSetup(){
   const skills=[0,1,2].map(i=>$('#sk'+i).value.trim()).filter(Boolean);
-  if(!skills.length){ $('#skErr').textContent='Add at least one skill.'; $('#sk0').focus(); return; }
+  if(!skills.length && !allMeds().some(m=>S.stars.includes(medId(m)))){ $('#skErr').textContent='Add at least one skill, or star a meditation in Step 2.'; $('#sk0').focus(); return; }
   const reminders=[0,1,2].map(i=>({day:+$('#rd'+i).value, time:$('#rt'+i).value, anchor:$('#ra'+i).value.trim(), what:$('#rw'+i).value})).filter(r=>r.time).sort((a,b)=>a.day-b.day||a.time.localeCompare(b.time));
   if(!reminders.length){ $('#remErr').textContent='Add at least one reminder time.'; return; }
   const isNew = !S.week;
