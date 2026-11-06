@@ -80,12 +80,21 @@ h2{font-size:24px;margin-bottom:4px}
 .legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
 .lg-s{background:var(--okbg);border:1.5px solid var(--ok)} .lg-m{background:var(--sand);border:1.5px solid #b08a5c} .lg-r{border:1.5px dashed var(--warm)}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}
-.stat{border-radius:14px;padding:12px 10px;text-align:left}
-.stat b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;line-height:1;font-weight:600}
-.stat small{display:block;font-size:12px;line-height:1.25;margin-top:6px;font-weight:600}
-.stat.s1{background:var(--soft);color:var(--ink)} .stat.s2{background:var(--sand);color:var(--sandink)} .stat.s3{background:var(--blush);color:var(--blushink)}
+.stat{position:relative;border-radius:14px;padding:14px 12px 12px;text-align:left;background:#fff;border:1px solid var(--line);overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--acc)}
+.stat b{display:block;font-family:Manrope,system-ui,sans-serif;font-variant-numeric:lining-nums tabular-nums;font-size:26px;line-height:1;font-weight:700;letter-spacing:-.02em;color:var(--acc)}
+.stat small{display:block;font-size:12px;line-height:1.25;margin-top:8px;font-weight:600;color:var(--mut)}
+.stat.s1{--acc:var(--ink2)} .stat.s2{--acc:#9a7448} .stat.s3{--acc:var(--warm)}
 .statline{margin:10px 0 0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:19px;color:var(--ink);line-height:1.3}
-.sumhead{background:linear-gradient(135deg,#dfecea 0%,#f3e9dc 100%);border:0}
+.sumhead{border:0;color:#fff;background:linear-gradient(180deg,rgba(21,63,72,.86),rgba(21,63,72,.95)),url(assets/images/practice-header.jpg) center 40%/cover,var(--ink)}
+.sumhead .eyebrow{color:rgba(255,255,255,.72)}
+.sumhead h2{color:#fff}
+.sumhead .stat{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.16)}
+.sumhead .stat b{color:#fff}
+.sumhead .stat small{color:rgba(255,255,255,.75)}
+.sumhead .stat.s1{--acc:#9fd0c8} .sumhead .stat.s2{--acc:#e3c79f} .sumhead .stat.s3{--acc:#e8b49c}
+.sumhead .statline{color:#f3e9dc}
+@media print{.sumhead{background:#fff!important;color:var(--ink)}.sumhead h2,.sumhead .stat b{color:var(--ink)}.sumhead .eyebrow,.sumhead .stat small,.sumhead .statline{color:var(--mut)}.sumhead .stat{border-color:var(--line)}}
 .sumhead h2{font-size:30px}
 .slog{border-left:4px solid var(--ok);background:#fff;border-radius:10px;padding:8px 12px;margin-top:8px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .slog.m{border-left-color:#b08a5c}
@@ -94,10 +103,12 @@ h2{font-size:24px;margin-bottom:4px}
 .chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .chips2 span{background:var(--soft);color:var(--ink);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:600}
 .chips2 span.m{background:var(--sand);color:var(--sandink)}
-.firstcard{position:relative;overflow:hidden;background:linear-gradient(135deg,#ffffff 0%,#dfecea 100%)}
-.firstcard h2{font-style:italic;font-size:25px;line-height:1.15;max-width:80%}
-.firstcard p{margin:6px 0 0;font-size:14px;max-width:72%;color:var(--ink)}
-.firstcard svg.wave{position:absolute;right:-12px;bottom:-8px;width:120px;opacity:.4}
+.introrow{display:flex;gap:14px;align-items:flex-start}
+.introicon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex:none;background:var(--soft);color:var(--ink2)}
+.introicon svg{width:24px;height:24px}
+.introrow h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:23px;line-height:1.15;margin:2px 0 4px;color:var(--ink)}
+.introrow p{margin:0;font-size:14px;color:var(--mut)}
+.firstcard{border-left:4px solid var(--ink2)}
 .tdrop{border-left:5px solid var(--tc,var(--ink2))}
 .tdrop summary .tico{width:30px;height:30px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;margin-right:10px;background:var(--tcbg,var(--soft));color:var(--tc,var(--ink2));flex:none}
 .tdrop summary .tico svg{width:17px;height:17px}
@@ -289,10 +300,8 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 .log .acts{display:none;margin-top:6px}
 .log.open .acts{display:block}
 .log .delbtn{background:none;border:1px solid var(--line);color:#a3332b;border-radius:999px;font:600 13px Manrope,sans-serif;padding:6px 12px;cursor:pointer}
-.goalcard{position:relative;overflow:hidden;background:linear-gradient(135deg,#dfecea,#f3e9dc);border:0}
-.goalcard h2{font-style:italic;font-size:26px;line-height:1.15;max-width:85%}
-.goalcard p{margin:6px 0 0;color:var(--ink);font-size:14px;max-width:68%}
-.goalcard svg.wave{position:absolute;right:-12px;bottom:-8px;width:120px;opacity:.45}
+.goalcard{border-left:4px solid #9a7448;background:#fffdf9}
+.goalcard .introicon{background:var(--sand);color:#9a7448}
 .embed{background:var(--soft)}
 .embed .ld{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink);font-size:13px;font-weight:600}
 .embed .ld img{width:34px;height:34px;opacity:.7;border-radius:9px}
@@ -314,7 +323,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
     <p class="sub" id="weekLabel">Your skills for the week, all in one place.</p>
     <p class="tagline" id="tagline">Small practices. A way back home to yourself.</p>
     <div class="ringrow hidden" id="ringRow">
-      <svg width="58" height="58" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="24" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="6"/><circle id="ringArc" cx="29" cy="29" r="24" fill="none" stroke="#e8d8c4" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" transform="rotate(-90 29 29)"/><text id="ringText" x="29" y="34" text-anchor="middle" fill="#fff" font-size="16" font-family="Cormorant Garamond, Georgia, serif" font-weight="600">0/3</text></svg>
+      <svg width="58" height="58" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="24" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="6"/><circle id="ringArc" cx="29" cy="29" r="24" fill="none" stroke="#e8d8c4" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" transform="rotate(-90 29 29)"/><text id="ringText" x="29" y="33.5" text-anchor="middle" fill="#fff" font-size="13" font-family="Manrope, system-ui, sans-serif" font-weight="700" style="font-variant-numeric:lining-nums">0/3</text></svg>
       <div><b id="ringMain">0 of 3 practices</b><span id="ringSub">Your first practice is the hardest. You've got this.</span></div>
     </div>
   </div>
@@ -396,16 +405,18 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 
     <section class="tabpanel" id="tab-today" role="tabpanel" aria-label="Today">
       <div class="card goalcard hidden" id="goalCard">
-        <div class="eyebrow" style="color:var(--ink2)">Goal reached</div>
-        <h2 style="margin-top:4px">Three times this week, you came back to yourself.</h2>
-        <p id="goalSub">Anything extra is a bonus. Bring this week to session.</p>
-        <svg class="wave" viewBox="0 0 160 60" fill="none" stroke="#2f6973" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 22c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0"/><path d="M4 38c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".6"/><path d="M4 54c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".35"/></svg>
+        <div class="introrow"><span class="introicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span><div>
+          <div class="eyebrow" style="color:#9a7448">Goal reached</div>
+          <h3>Three times this week, you came back to yourself.</h3>
+          <p id="goalSub">Anything extra is a bonus. Bring this week to session.</p>
+        </div></div>
       </div>
       <div class="card firstcard hidden" id="firstCard">
-        <div class="eyebrow">Your week begins</div>
-        <h2 style="margin-top:4px">Your first practice starts whenever you're ready.</h2>
-        <p>Even two minutes counts. When a reminder goes off, tap Start practice.</p>
-        <svg class="wave" viewBox="0 0 160 60" fill="none" stroke="#2f6973" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 22c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0"/><path d="M4 38c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".6"/><path d="M4 54c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".35"/></svg>
+        <div class="introrow"><span class="introicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M12 7v13M8 11h8M5 14a7 7 0 0 0 14 0"/></svg></span><div>
+          <div class="eyebrow">Your week begins</div>
+          <h3>Start whenever you're ready.</h3>
+          <p>Even two minutes counts. When a reminder goes off, open the app and tap Start practice.</p>
+        </div></div>
       </div>
       <div class="card nextcard">
         <div class="eyebrow">Next reminder</div>
