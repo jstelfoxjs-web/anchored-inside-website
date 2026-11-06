@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>My Practice | Anchored Inside</title>
-<meta name="theme-color" content="#1e3a3c">
+<meta name="theme-color" content="#153f48">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Anchored Inside">
@@ -38,13 +38,15 @@ const MEDITATIONS = [
   // { title: "Container practice", length: "4 min",  topic: "EMDR",      link: "/assets/audio/container.mp3" },
   // { title: "Body scan for sleep", length: "10 min", topic: "Sleep",     link: "https://insighttimer.com/..." },
 ];
+function allMeds(){ return MEDITATIONS.concat(((typeof S!=="undefined"&&S&&S.myMeds)||[]).map(m=>Object.assign({topic:"My meditations",mine:true},m))); }
 </script>
 
 <style>
 :root{--ink:#153f48;--ink2:#2f6973;--bg:#f6f4ef;--card:#fff;--line:#e3e8e6;--soft:#dfecea;--sand:#f3e9dc;--sandink:#6b4a32;--blush:#f6e7e0;--blushink:#7a3f2a;--mut:#607277;--txt:#18363d;--ok:#2f6973;--okbg:#dfecea;--warm:#9c6c4c;--warmbg:#f6e7e0;--r:18px}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Manrope,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
-body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+html{background:#153f48}
+html,body{margin:0;color:var(--txt);font-family:Manrope,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+body{background:var(--bg);min-height:100vh;min-height:100dvh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 .wrap{max-width:560px;margin:0 auto;padding:16px 16px 110px}
 h1,h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;color:var(--ink);margin:0}
 h1{font-size:32px;line-height:1.1}
@@ -71,10 +73,46 @@ h2{font-size:24px;margin-bottom:4px}
 .dot.today{border-color:var(--ink)}
 .dot.plan{border-style:dashed;border-color:var(--warm)}
 .dot.plan::after{content:'';}
+.dot.med{background:var(--sand);border-color:#b08a5c;color:var(--sandink)}
+.dot.both{background:linear-gradient(135deg,var(--okbg) 50%,var(--sand) 50%);border-color:var(--ok)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:12px;font-size:12px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.lg-s{background:var(--okbg);border:1.5px solid var(--ok)} .lg-m{background:var(--sand);border:1.5px solid #b08a5c} .lg-r{border:1.5px dashed var(--warm)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}
+.stat{border-radius:14px;padding:12px 10px;text-align:left}
+.stat b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;line-height:1;font-weight:600}
+.stat small{display:block;font-size:12px;line-height:1.25;margin-top:6px;font-weight:600}
+.stat.s1{background:var(--soft);color:var(--ink)} .stat.s2{background:var(--sand);color:var(--sandink)} .stat.s3{background:var(--blush);color:var(--blushink)}
+.statline{margin:10px 0 0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:19px;color:var(--ink);line-height:1.3}
+.sumhead{background:linear-gradient(135deg,#dfecea 0%,#f3e9dc 100%);border:0}
+.sumhead h2{font-size:30px}
+.slog{border-left:4px solid var(--ok);background:#fff;border-radius:10px;padding:8px 12px;margin-top:8px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.slog.m{border-left-color:#b08a5c}
+.slog .top{display:flex;justify-content:space-between;gap:8px}
+.slog .n{font-size:13px;color:var(--mut)}
+.chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips2 span{background:var(--soft);color:var(--ink);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:600}
+.chips2 span.m{background:var(--sand);color:var(--sandink)}
+.firstcard{position:relative;overflow:hidden;background:linear-gradient(135deg,#ffffff 0%,#dfecea 100%)}
+.firstcard h2{font-style:italic;font-size:25px;line-height:1.15;max-width:80%}
+.firstcard p{margin:6px 0 0;font-size:14px;max-width:72%;color:var(--ink)}
+.firstcard svg.wave{position:absolute;right:-12px;bottom:-8px;width:120px;opacity:.4}
+.tdrop{border-left:5px solid var(--tc,var(--ink2))}
+.tdrop summary .tico{width:30px;height:30px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;margin-right:10px;background:var(--tcbg,var(--soft));color:var(--tc,var(--ink2));flex:none}
+.tdrop summary .tico svg{width:17px;height:17px}
+.tdrop summary>span:first-child{display:flex;align-items:center}
+.tc0{--tc:#2f6973;--tcbg:#dfecea} .tc1{--tc:#9c6c4c;--tcbg:#f6e7e0} .tc2{--tc:#8a6a3f;--tcbg:#f3e9dc} .tc3{--tc:#4f6f8f;--tcbg:#e3ebf3} .tc4{--tc:#5e7a5a;--tcbg:#e6efe2}
+.medby{font-size:12px;color:var(--mut)}
+.addmed{margin-top:12px}
+.addmed>summary{font-weight:700;color:var(--ink)}
+.addmed .plus{width:24px;height:24px;border-radius:50%;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+#weekMeds .rmmine{display:none}
+.rmmine{background:none;border:1px solid var(--line);border-radius:999px;color:#a3332b;font:600 12px Manrope,sans-serif;padding:5px 10px;margin-left:6px;cursor:pointer;flex:none}
 .pick{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 14px;font:500 14px Manrope,sans-serif;margin:0 8px 8px 0;color:var(--txt);cursor:pointer}
 .pick.sel{border-color:var(--ink);background:var(--soft);color:var(--ink);font-weight:700}
 label.f{display:block;font-size:14px;font-weight:600;margin:12px 0 6px;color:var(--ink)}
-input[type=text],input[type=time],input[type=date],textarea{width:100%;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)}
+input[type=text],input[type=url],input[type=time],input[type=date],textarea{width:100%;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)}
 textarea{min-height:64px;resize:vertical}
 input[type=range]{width:100%;accent-color:var(--ink);height:32px}
 .scale{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:-4px}
@@ -314,6 +352,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
         <div><div class="su-step">Step 2</div><h3>This week's meditations</h3></div></div>
       <p class="note" style="margin-top:0">Tap the star on any to practice. They'll show at the top of your page.</p>
       <div id="setupMeds"></div>
+      <div id="addMed1"></div>
     </div>
 
     <div class="card su-card c3">
@@ -339,6 +378,12 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
         <div class="eyebrow" style="color:var(--ink2)">Goal reached</div>
         <h2 style="margin-top:4px">Three times this week, you came back to yourself.</h2>
         <p id="goalSub">Anything extra is a bonus. Bring this week to session.</p>
+        <svg class="wave" viewBox="0 0 160 60" fill="none" stroke="#2f6973" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 22c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0"/><path d="M4 38c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".6"/><path d="M4 54c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".35"/></svg>
+      </div>
+      <div class="card firstcard hidden" id="firstCard">
+        <div class="eyebrow">Your week begins</div>
+        <h2 style="margin-top:4px">Your first practice starts whenever you're ready.</h2>
+        <p>Even two minutes counts. When a reminder goes off, tap Start practice.</p>
         <svg class="wave" viewBox="0 0 160 60" fill="none" stroke="#2f6973" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 22c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0"/><path d="M4 38c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".6"/><path d="M4 54c12-10 24-10 36 0s24 10 36 0 24-10 36 0 24 10 36 0" opacity=".35"/></svg>
       </div>
       <div class="card nextcard">
@@ -411,7 +456,8 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 
     <section class="tabpanel hidden" id="tab-meditate" role="tabpanel" aria-label="Meditate">
       <div class="card">
-        <h2 id="meditate">This week's meditations</h2>
+        <div class="eyebrow">Coming home</div>
+        <h2 id="meditate" style="margin-top:2px">This week's meditations</h2>
         <p class="sub">A few quiet minutes to come home to yourself. Tap play to begin.</p>
         <div id="weekMeds"></div>
       </div>
@@ -419,6 +465,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
         <div class="sechead"><h2>All meditations</h2><span class="tcount sub" id="libCount"></span></div>
         <p class="sub">Tap a topic to open it. Tap the star to add a meditation to this week.</p>
         <div id="library"></div>
+        <div id="addMed2"></div>
       </div>
     </section>
 
@@ -448,7 +495,12 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="card">
         <div class="sechead"><h2>My week</h2><span class="sub"><b id="dayCount">0</b> of 3 practices</span></div>
         <div class="week" id="week"></div>
-        <p class="note" id="goalNote"></p>
+        <div class="legend"><span><i class="lg-s"></i>Skill</span><span><i class="lg-m"></i>Meditation</span><span><i class="lg-r"></i>Reminder day</span></div>
+        <p class="note" id="goalNote" style="text-align:center"></p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">This week so far</div>
+        <div id="weekStats"></div>
       </div>
       <div class="card" id="recentDrop">
         <div class="sechead"><h2>Recent practice</h2><span class="tcount sub" id="logCount"></span></div>
@@ -474,9 +526,12 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 
   <!-- ============ WEEK SUMMARY (show in session / print) ============ -->
   <section id="summary" class="hidden">
-    <div class="card">
-      <div class="eyebrow">Anchored Inside · Practice summary</div>
+    <div class="card sumhead">
+      <div class="eyebrow">Anchored Inside · Practice snapshot</div>
       <h2 id="sumTitle" style="margin-top:4px">My week</h2>
+      <div id="sumStats"></div>
+    </div>
+    <div class="card">
       <div id="sumBody"></div>
       <div class="row wrapr noprint" style="margin-top:14px">
         <button class="btn small ghost" onclick="show('home')">Back</button>
@@ -503,7 +558,8 @@ const $ = s => document.querySelector(s);
 const ICON = {
   play:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>',
   stop:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/></svg>',
-  bell:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>'
+  bell:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>',
+  leaf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 10c3-3 6-3 9 0s6 3 9 0"/><path d="M3 16c3-3 6-3 9 0s6 3 9 0" opacity=".6"/></svg>'
 };
 const KEY = 'anchoredInside.practice.v1';
 const DAY = 86400000;
@@ -609,7 +665,7 @@ function openSetup(){
       <label class="su-mini" for="ra${i}">Tie it to</label><input type="text" id="ra${i}" value="${esc(r.anchor)}" placeholder="after brushing my teeth">
       <label class="su-mini" for="rw${i}">Practice</label><select id="rw${i}" data-cur="${esc(r.what||'')}" style="width:100%;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)"></select></div>`;
   }).join('');
-  renderMedList('#setupMeds', false);
+  renderMedList('#setupMeds', false); mountAddForms();
   refreshWhat();
   $('#cancelBtn').classList.toggle('hidden', !S.week);
   $('#skErr').textContent=''; $('#remErr').textContent='';
@@ -617,7 +673,7 @@ function openSetup(){
 }
 function isGenericMed(s){ return /^\s*(guided\s+)?(meditation|meditations|meditate|meditating)\s*$/i.test(s); }
 function practiceOptions(skills){
-  const meds=MEDITATIONS.filter(m=>S.stars.includes(medId(m))).map(m=>m.title+' (meditation)');
+  const meds=allMeds().filter(m=>S.stars.includes(medId(m))).map(m=>m.title+' (meditation)');
   const kept = meds.length ? skills.filter(s=>!isGenericMed(s)) : skills;
   return [...kept, ...meds];
 }
@@ -655,28 +711,58 @@ function toggleStar(id){
 }
 function medRow(m, withPlay){
   const id=medId(m), on=S.stars.includes(id);
-  const meta=[m.length,m.topic].filter(Boolean).join(' · ');
+  const meta=[m.length,m.topic,m.by].filter(Boolean).join(' · ');
   return `<div class="med"><button class="star ${on?'on':''}" aria-label="${on?'Remove from':'Add to'} this week" data-id="${esc(id)}" onclick="toggleStar(this.dataset.id)">${on?'★':'☆'}</button>
     <div class="t"><b>${esc(m.title)}</b><span>${esc(meta)}</span></div>
+    ${m.mine?`<button class="rmmine" aria-label="Remove ${esc(m.title)}" data-id="${esc(id)}" onclick="removeMyMed(this.dataset.id,this)">Remove</button>`:''}
     ${withPlay?`<button class="play" aria-label="Play ${esc(m.title)}" data-id="${esc(id)}" onclick="playMed(this.dataset.id,this)">${ICON.play}</button>`:''}</div>
     <div class="medslot" data-id="${esc(id)}"></div>`;
 }
+function addMedForm(k){
+  return `<details class="more addmed"><summary><span class="plus">+</span> Add my own meditation</summary>
+    <p class="note" style="margin-top:0">Found one you like? Paste the link from YouTube, Insight Timer, Spotify or anywhere else.</p>
+    <input type="url" id="mmLink${k}" placeholder="Paste the link" inputmode="url" autocapitalize="off" autocorrect="off">
+    <input type="text" id="mmName${k}" placeholder="Name it (optional), e.g. Ocean breathing" style="margin-top:8px">
+    <button class="btn small solid" style="margin-top:10px" onclick="addMyMed('${k}')">Add to my meditations</button>
+    <p class="err" id="mmErr${k}"></p><p class="ok" id="mmOk${k}"></p></details>`;
+}
+function addMyMed(k){
+  const link=$('#mmLink'+k).value.trim(), name=$('#mmName'+k).value.trim(), err=$('#mmErr'+k); err.textContent='';
+  let u; try{ u=new URL(link); }catch(e){}
+  if(!u || !/^https?:$/.test(u.protocol)){ err.textContent='Paste the full link, starting with https://'; $('#mmLink'+k).focus(); return; }
+  if(allMeds().some(m=>m.link===link)){ err.textContent='That meditation is already in your list.'; return; }
+  const host=u.hostname.replace(/^www\./,'');
+  const title = name || (ytId(link)?'My YouTube meditation':`My meditation (${host})`);
+  S.myMeds=S.myMeds||[]; S.myMeds.push({title, link, length:''});
+  if(!S.stars.includes(link)) S.stars.push(link);
+  save(); $('#mmLink'+k).value=''; $('#mmName'+k).value='';
+  refreshMeds(); const ok=$('#mmOk'+k); if(ok){ ok.textContent='Added and starred for this week.'; setTimeout(()=>ok.textContent='',5000); }
+}
+function removeMyMed(id,btn){
+  if(!confirmTap(btn,'Tap again')) return;
+  S.myMeds=(S.myMeds||[]).filter(m=>m.link!==id); S.stars=S.stars.filter(x=>x!==id); save(); refreshMeds();
+}
+function refreshMeds(){
+  renderMedList('#setupMeds',false); renderMedList('#library',true);
+  if(S.week){ renderWeekMeds(); renderLogSkills(); } if(typeof refreshWhat==='function') refreshWhat();
+}
 function renderMedList(sel, withPlay){
-  if(!MEDITATIONS.length){ $(sel).innerHTML='<p class="note">Meditations will appear here.</p>'; return; }
-  const topics=[...new Set(MEDITATIONS.map(m=>m.topic||'Other'))];
+  if(!allMeds().length){ $(sel).innerHTML='<p class="note">Meditations will appear here.</p>'; return; }
+  const topics=[...new Set(allMeds().map(m=>m.topic||'Other'))];
   const open = new Set([...document.querySelectorAll(sel+' details[open]')].map(d=>d.dataset.t));
-  $(sel).innerHTML = topics.map(t=>{
-    const list=MEDITATIONS.filter(m=>(m.topic||'Other')===t);
+  $(sel).innerHTML = topics.map((t,ti)=>{
+    const list=allMeds().filter(m=>(m.topic||'Other')===t);
     const starred=list.filter(m=>S.stars.includes(medId(m))).length;
-    return `<details class="tdrop" data-t="${esc(t)}" ${open.has(t)?'open':''}><summary><span>${esc(t)}</span><span class="tcount">${list.length} meditation${list.length===1?'':'s'}${starred?` · ${starred} ★`:''}</span></summary>${list.map(m=>medRow(m,withPlay)).join('')}</details>`;
+    return `<details class="tdrop tc${ti%5}" data-t="${esc(t)}" ${open.has(t)?'open':''}><summary><span><span class="tico">${ICON.leaf}</span>${esc(t)}</span><span class="tcount">${list.length} meditation${list.length===1?'':'s'}${starred?` · ${starred} ★`:''}</span></summary>${list.map(m=>medRow(m,withPlay)).join('')}</details>`;
   }).join('');
 }
-function renderLibCount(){ const el=$('#libCount'); if(el) el.textContent=`${MEDITATIONS.length} meditation${MEDITATIONS.length===1?'':'s'}`; }
+function mountAddForms(){ ['1','2'].forEach(k=>{ const el=$('#addMed'+k); if(el && !el.innerHTML) el.innerHTML=addMedForm(k); }); }
+function renderLibCount(){ const el=$('#libCount'); if(el) el.textContent=`${allMeds().length} meditation${allMeds().length===1?'':'s'}`; }
 function renderWeekMeds(){
   renderLibCount();
-  const nStar=MEDITATIONS.filter(m=>S.stars.includes(medId(m))).length;
+  const nStar=allMeds().filter(m=>S.stars.includes(medId(m))).length;
   if($('#tileMed')) $('#tileMed').textContent = nStar ? `${nStar} picked for you` : 'Browse meditations';
-  const list=MEDITATIONS.filter(m=>S.stars.includes(medId(m)));
+  const list=allMeds().filter(m=>S.stars.includes(medId(m)));
   $('#weekMeds').innerHTML = list.length ? list.map(m=>medRow(m,true)).join('') : '<p class="note">No meditations picked yet. Tap a star in the list below.</p>';
 }
 function checkinHTML(m, before){
@@ -713,7 +799,7 @@ function ciSave(btn){
   renderWeek(); renderLogs(); renderPending();
 }
 function playMed(id, btn){
-  const m=MEDITATIONS.find(x=>medId(x)===id); if(!m) return;
+  const m=allMeds().find(x=>medId(x)===id); if(!m) return;
   const slot=btn.closest('.med').nextElementSibling;
   if(slot.innerHTML){ slot.innerHTML=''; btn.innerHTML=ICON.play; return; }
   const yt=ytId(m.link);
@@ -935,12 +1021,14 @@ function renderLogs(){
 }
 function renderWeek(){
   const today=dayIndex(Date.now());
-  const days=[...Array(7)].map((_,i)=>{ const d=new Date(S.week.start+i*DAY); return {i, label:d.toLocaleDateString(undefined,{weekday:'short'}).slice(0,2), n:S.logs.filter(l=>dayIndex(l.ts)===i).length}; });
+  const days=[...Array(7)].map((_,i)=>{ const d=new Date(S.week.start+i*DAY); const L=S.logs.filter(l=>dayIndex(l.ts)===i); const m=L.filter(isMedLog).length; return {i, label:d.toLocaleDateString(undefined,{weekday:'short'}).slice(0,2), n:L.length, kind: !L.length?'':(m===L.length?'med':(m?'both':''))}; });
   const planned=new Set(S.week.reminders.map(r=>r.day||0));
-  $('#week').innerHTML=days.map(d=>`<div class="day"><div class="dot ${d.n?'on':(planned.has(d.i)?'plan':'')} ${d.i===today?'today':''}">${d.n?(d.n>1?d.n:'✓'):(planned.has(d.i)?'<span style="color:var(--warm);display:flex">'+ICON.bell+'</span>':'')}</div>${d.label}</div>`).join('');
+  $('#week').innerHTML=days.map(d=>`<div class="day"><div class="dot ${d.n?'on '+d.kind:(planned.has(d.i)?'plan':'')} ${d.i===today?'today':''}">${d.n?(d.n>1?d.n:'✓'):(planned.has(d.i)?'<span style="color:var(--warm);display:flex">'+ICON.bell+'</span>':'')}</div>${d.label}</div>`).join('');
   const total=days.reduce((a,d)=>a+d.n,0);
   $('#dayCount').textContent=Math.min(total,99);
-  $('#goalNote').textContent = total>=GOAL ? 'You reached your goal for the week. Extra practice is a bonus.' : `Dashed circles mark your reminder days. ${GOAL-total} to go.`;
+  $('#goalNote').textContent = total>=GOAL ? 'You reached your goal for the week. Extra practice is a bonus.' : `${GOAL-total} to go this week.`;
+  $('#weekStats').innerHTML = statsHTML(summaryData());
+  const fc=$('#firstCard'); if(fc) fc.classList.toggle('hidden', total>0);
   $('#weekLabel').textContent = today>6 ? 'Your week is complete. Bring it to session, then start a new week.' : `Day ${Math.max(1,today+1)} of 7 · started ${fmtDay(S.week.start)}`;
   const done=Math.min(total,GOAL), d=summaryData();
   $('#ringArc').setAttribute('stroke-dashoffset', String(150.8*(1-done/GOAL)));
@@ -974,6 +1062,12 @@ function noteBody(x){ return (x.text?`<div class="txt">${esc(x.text)}</div>`:'')
 function weekNotes(){ return (S.notes||[]).filter(x=>S.week&&dayIndex(x.ts)>=0&&dayIndex(x.ts)<7).slice().reverse(); }
 
 /* ---------- summary ---------- */
+function isMedLog(l){ return allMeds().some(m=>m.title===l.skill); }
+function fmtDrop(d){ return d.logs.length ? (d.avgDrop>0?'−':d.avgDrop<0?'+':'')+Math.abs(d.avgDrop).toFixed(1).replace('.0','') : '–'; }
+function statsHTML(d){
+  const line = !d.logs.length ? 'Your first practice is waiting whenever you are.' : d.avgDrop>0 ? `Stress went down ${Math.abs(d.avgDrop).toFixed(1).replace('.0','')} point${Math.abs(d.avgDrop)===1?'':'s'} on average. That's your nervous system learning.` : 'Showing up to practice is the work. Keep going.';
+  return `<div class="stats"><div class="stat s1"><b>${d.logs.length}/${GOAL}</b><small>practices</small></div><div class="stat s2"><b>${d.days}</b><small>days practiced</small></div><div class="stat s3"><b>${fmtDrop(d)}</b><small>avg. stress change</small></div></div><p class="statline">${line}</p>`;
+}
 function summaryData(){
   const logs=S.logs.filter(l=>dayIndex(l.ts)>=0&&dayIndex(l.ts)<7).slice().reverse();
   const days=new Set(logs.map(l=>dayIndex(l.ts))).size;
@@ -984,16 +1078,14 @@ function summaryData(){
 function showSummary(){
   const d=summaryData();
   $('#sumTitle').textContent=`Week of ${fmtDay(S.week.start)}`;
+  $('#sumStats').innerHTML=statsHTML(d);
+  const sk=practiceOptions(S.week.skills).map(x=>x.replace(' (meditation)',''));
   $('#sumBody').innerHTML=`
-    <div class="row" style="gap:16px;margin:12px 0">
-      <div><div class="big" style="text-align:left">${d.logs.length}/${GOAL}</div><div class="note" style="margin:0">practices</div></div>
-      <div><div class="big" style="text-align:left">${d.days}</div><div class="note" style="margin:0">days practiced</div></div>
-      <div><div class="big" style="text-align:left">${d.logs.length?(d.avgDrop>0?'−':'')+Math.abs(d.avgDrop).toFixed(1):'–'}</div><div class="note" style="margin:0">avg. stress change</div></div>
-    </div>
-    <p><b>Skills:</b> ${esc(S.week.skills.join(', '))}</p>
-    ${Object.keys(d.by).length?`<p>${Object.entries(d.by).map(([k,v])=>`${esc(k)}: ${v}×`).join(' · ')}</p>`:''}
-    ${weekNotes().length?`<div class="hr"></div><div class="eyebrow">My reflections</div>${weekNotes().map(x=>`<div class="note-item"><div class="meta">${fmtDay(x.ts)}</div>${noteBody(x)}</div>`).join('')}<div class="hr"></div>`:''}
-    <div>${d.logs.length?d.logs.map(l=>`<div class="log"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${l.before} → ${l.after}</span></div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div>`).join(''):'<p class="note">No practice logged this week yet.</p>'}</div>`;
+    <div class="eyebrow">This week's skills</div>
+    <div class="chips2">${sk.map(x=>`<span class="${allMeds().some(m=>m.title===x)?'m':''}">${esc(x)}${d.by[x]?` · ${d.by[x]}×`:''}</span>`).join('')}</div>
+    ${weekNotes().length?`<div class="hr"></div><div class="eyebrow">My reflections</div>${weekNotes().map(x=>`<div class="note-item"><div class="meta">${fmtDay(x.ts)}</div>${noteBody(x)}</div>`).join('')}`:''}
+    <div class="hr"></div><div class="eyebrow">Practice log</div>
+    <div>${d.logs.length?d.logs.map(l=>`<div class="slog ${isMedLog(l)?'m':''}"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${l.before} → ${l.after}</span></div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div>`).join(''):'<p class="note">No practice logged this week yet.</p>'}</div>`;
   show('summary');
 }
 async function copySummary(){
@@ -1010,12 +1102,12 @@ function renderHome(){
   const sk=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)',''));
   $('#weekLine').textContent = sk.join(' · ') + ' · ' + S.week.reminders.length + ' reminder' + (S.week.reminders.length===1?'':'s');
   $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">${ICON.bell} ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
-  renderWeek(); renderLogSkills(); renderLogs(); renderWeekMeds(); renderMedList('#library',true); renderRecordings(); renderPending(); renderNotes();
+  renderWeek(); renderLogSkills(); renderLogs(); renderWeekMeds(); renderMedList('#library',true); mountAddForms(); renderRecordings(); renderPending(); renderNotes();
 }
 function handleHash(){
   if(!S.week) return;
   const h=location.hash;
-  if(h==='#meditate'){ goTab('meditate'); const m=MEDITATIONS.find(x=>S.stars.includes(medId(x))); if(m){ logSkill=m.title; renderLogSkills(); } }
+  if(h==='#meditate'){ goTab('meditate'); const m=allMeds().find(x=>S.stars.includes(medId(x))); if(m){ logSkill=m.title; renderLogSkills(); } }
   else if(h==='#practice'){ goTab('today','sum'); }
   else if(h==='#notes'){ goTab('notes'); }
 }
