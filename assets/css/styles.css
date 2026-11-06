@@ -3859,7 +3859,7 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 /* My Practice callout on the Toolbox page */
 .practice-callout{padding:26px 0 0}
 .practice-callout-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;min-height:240px;padding:28px 32px;border:0;border-radius:22px;color:var(--ink);text-decoration:none;overflow:hidden;box-shadow:0 14px 34px rgba(21,63,72,.12);transition:transform .25s ease,box-shadow .25s ease;
-  background:linear-gradient(90deg,#fbf6ef 0%,#fbf6ef 44%,rgba(251,246,239,0) 62%),url("../images/practice-card-boots.jpg") right 62%/58% auto no-repeat,#fbf6ef}
+  background:linear-gradient(90deg,#fbf6ef 0%,#fbf6ef 40%,rgba(251,246,239,0) 55%),url("../images/practice-card-boots-wide.jpg") right center/auto 100% no-repeat,#fbf6ef}
 .practice-callout-text .practice-callout-eyebrow{display:block;font:800 .72rem/1 "Manrope",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--clay,#9c6c4c);margin-bottom:8px}
 .practice-callout-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(30,55,58,.08)}
 .practice-callout-icon{display:none!important;flex:none;width:52px;height:52px;border-radius:13px;display:block;object-fit:cover;background:#fff;box-shadow:0 0 0 1px rgba(18,64,73,.14)}
