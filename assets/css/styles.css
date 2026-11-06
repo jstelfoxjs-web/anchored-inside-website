@@ -970,6 +970,121 @@ h1,h2,h3,.serif,.audience-card h3{font-family:"Cormorant Garamond",Georgia,serif
 }
 
 
+/* Same see-through header on pages that open with a photo (Toolbox, About, Philosophy, Services) */
+.photo-header .site-header{
+  position:fixed;
+  inset:0 0 auto;
+  z-index:80;
+  background:linear-gradient(180deg,rgba(8,31,37,.34),rgba(8,31,37,0));
+  border-bottom:1px solid transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  transition:background-color .42s ease,background .42s ease,border-color .42s ease,box-shadow .42s ease,backdrop-filter .42s ease;
+}
+.photo-header .nav-wrap{
+  width:min(1240px,calc(100% - 48px));
+  min-height:104px;
+  transition:min-height .42s ease;
+}
+.photo-header .home-brand{position:relative;display:flex;align-items:center;min-width:220px}
+.photo-header .logo{
+  height:78px;
+  width:auto;
+  object-fit:contain;
+  transition:opacity .32s ease,height .42s ease,transform .42s ease;
+}
+.photo-header .logo-dark{position:absolute;left:0;opacity:0;pointer-events:none}
+.photo-header .logo-light{opacity:1;filter:drop-shadow(0 2px 10px rgba(0,0,0,.18))}
+.photo-header .nav a:not(.btn){
+  color:#fff;
+  text-shadow:0 1px 10px rgba(0,0,0,.3);
+  transition:color .32s ease,opacity .2s ease,text-shadow .32s ease;
+}
+.photo-header .nav a:not(.btn):hover{color:#fff;opacity:.78}
+.photo-header .site-header.is-scrolled{
+  background:rgba(255,253,249,.91);
+  border-bottom-color:rgba(27,55,61,.09);
+  box-shadow:0 7px 24px rgba(22,42,46,.07);
+  backdrop-filter:blur(13px) saturate(115%);
+  -webkit-backdrop-filter:blur(13px) saturate(115%);
+}
+.photo-header .site-header.is-scrolled .nav-wrap{min-height:78px}
+.photo-header .site-header.is-scrolled .logo{height:58px}
+.photo-header .site-header.is-scrolled .logo-light{opacity:0;transform:translateY(-2px)}
+.photo-header .site-header.is-scrolled .logo-dark{display:block;opacity:1;transform:translateY(0)}
+.photo-header .site-header.is-scrolled .nav a:not(.btn){color:var(--ink);text-shadow:none}
+.photo-header .site-header.is-scrolled .nav a:not(.btn):hover{color:var(--ocean-deep);opacity:1}
+.photo-header .hero-editorial{min-height:100svh}
+
+@media(max-width:920px){
+  .photo-header .nav-wrap{width:min(100% - 34px,1240px);min-height:90px}
+  .photo-header .home-brand{min-width:175px}
+  .photo-header .logo{height:64px}
+  .photo-header .nav-toggle{
+    color:#fff;
+    background:rgba(10,40,47,.22);
+    border-color:rgba(255,255,255,.42);
+    backdrop-filter:blur(8px);
+  }
+  /* Opaque cream. A translucent panel inside the header's backdrop-filter lets the page show through on iOS. */
+  .photo-header .nav{top:78px;background:#fffdf9;opacity:1;isolation:isolate;-webkit-backdrop-filter:none;backdrop-filter:none;border-color:rgba(27,55,61,.1);box-shadow:0 14px 35px rgba(10,36,42,.14)}
+  .photo-header .nav a:not(.btn){color:var(--ink)!important;text-shadow:none!important}
+  .photo-header .nav a.btn-primary{color:#fffdf9!important}
+  .photo-header .site-header.is-scrolled .nav-wrap{min-height:72px}
+  .photo-header .site-header.is-scrolled .logo{height:52px}
+  .photo-header .site-header.is-scrolled .nav-toggle{color:var(--ink);background:rgba(255,255,255,.78);border-color:var(--line)}
+}
+@media(max-width:640px){
+  .photo-header .nav-wrap{width:calc(100% - 28px);min-height:82px}
+  .photo-header .home-brand{min-width:150px}
+  .photo-header .logo{height:56px}
+  .photo-header .site-header.is-scrolled .nav-wrap{min-height:68px}
+  .photo-header .site-header.is-scrolled .logo{height:48px}
+}
+@media(prefers-reduced-motion:reduce){
+  .photo-header .site-header,.photo-header .nav-wrap,.photo-header .logo,.photo-header .nav a{transition:none!important}
+}
+
+/* No seam */
+.photo-header .site-header,
+.photo-header .site-header.is-scrolled{
+  border:0 !important;
+  border-bottom:0 !important;
+  outline:0 !important;
+}
+.photo-header .site-header:not(.is-scrolled){
+  box-shadow:none !important;
+}
+.photo-header .site-header::before,
+.photo-header .site-header::after{
+  content:none !important;
+  display:none !important;
+}
+
+
+
+/* Room for the floating header over each photo hero */
+.photo-header{--hdr-h:104px}
+@media(max-width:920px){.photo-header{--hdr-h:90px}}
+@media(max-width:640px){.photo-header{--hdr-h:82px}}
+.photo-header .clean-toolkit-hero,
+.photo-header .about-hero-full,
+.photo-header #philosophy-page-hero,
+.photo-header .services-image-hero{padding-top:var(--hdr-h)}
+/* Beat page-specific header colors (About) while over the photo */
+body.photo-header .site-header:not(.is-scrolled){background:linear-gradient(180deg,rgba(8,31,37,.34),rgba(8,31,37,0));border-bottom:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+/* Locked Toolbox shows a cream page, so use the solid header there */
+.toolbox-locked body.photo-header .site-header:not(.is-scrolled),.toolbox-locked .photo-header .site-header{background:rgba(255,253,249,.94);box-shadow:0 7px 24px rgba(22,42,46,.07);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)}
+.toolbox-locked .photo-header .logo-light{opacity:0}
+.toolbox-locked .photo-header .logo-dark{opacity:1}
+.toolbox-locked .photo-header .nav a:not(.btn){color:var(--ink);text-shadow:none}
+.toolbox-locked .photo-header .nav-toggle{color:var(--ink);background:#fff;border-color:var(--line)}
+.toolbox-locked .photo-header .toolbox-access-gate{padding-top:calc(var(--hdr-h) + 40px)}
+
+/* Menu button: brand font and color everywhere (iPhone was showing default blue) */
+.nav-toggle{-webkit-appearance:none;appearance:none;font:700 .92rem/1 var(--font-sans);letter-spacing:.02em;color:var(--ink);border-radius:999px;padding:.72rem 1.1rem;cursor:pointer}
+
 /* Password gate for The Toolbox */
 .toolbox-access-gate{
   display:none;
