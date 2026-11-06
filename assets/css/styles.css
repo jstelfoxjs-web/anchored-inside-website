@@ -3871,7 +3871,7 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 .practice-callout-text span{display:block;font:400 1.05rem/1.55 "Manrope",sans-serif;color:#344e53;margin-top:4px}
 .practice-callout-btn{flex:none}
 @media(max-width:900px){.practice-callout-card{justify-content:flex-start;align-items:stretch;gap:14px;min-height:0;padding:0 0 22px;background:#fbf6ef}
-.practice-callout-card::after{content:"";position:static;display:block;order:-1;width:100%;aspect-ratio:1500/950;max-height:320px;background:linear-gradient(180deg,rgba(251,246,239,0) 40%,rgba(251,246,239,0.04) 48%,rgba(251,246,239,0.12) 56%,rgba(251,246,239,0.25) 64%,rgba(251,246,239,0.42) 72%,rgba(251,246,239,0.6) 80%,rgba(251,246,239,0.77) 87%,rgba(251,246,239,0.9) 93%,rgba(251,246,239,0.97) 97%,rgba(251,246,239,1) 100%),url("../images/practice-card-boots-d.jpg") 55% 0%/cover no-repeat}
+.practice-callout-card::after{content:"";position:static;display:block;order:-1;width:100%;aspect-ratio:1500/950;max-height:320px;background:linear-gradient(180deg,rgba(251,246,239,0) 68%,rgba(251,246,239,0.06) 74%,rgba(251,246,239,0.18) 80%,rgba(251,246,239,0.36) 85%,rgba(251,246,239,0.56) 89%,rgba(251,246,239,0.74) 93%,rgba(251,246,239,0.88) 96%,rgba(251,246,239,0.97) 98.5%,rgba(251,246,239,1) 100%),url("../images/practice-card-boots-d.jpg") 55% 0%/cover no-repeat}
 .practice-callout-card>.practice-callout-text,.practice-callout-card>.practice-callout-btn{margin:0 22px}.practice-callout-btn{width:auto!important}
 .practice-callout-icon{display:none}.practice-callout-text{flex:none;max-width:none}.practice-callout-text strong{font-size:2rem}}
 
