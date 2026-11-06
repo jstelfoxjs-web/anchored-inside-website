@@ -379,14 +379,18 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
     <section class="tabpanel hidden" id="tab-notes" role="tabpanel" aria-label="Reflection">
       <div class="card">
         <h2>Reflection</h2>
-        <p class="sub">A few quiet words for yourself. Write either one, or both. Everything stays on this phone.</p>
+        <p class="sub">A few quiet words for yourself. Everything stays on this phone.</p>
         <label class="f" for="noteText">What I'm noticing</label>
         <textarea id="noteText" rows="4" placeholder="What came up this week… what I want to bring to session…" style="min-height:100px"></textarea>
-        <label class="f" for="gratText">What I'm grateful for</label>
-        <textarea id="gratText" rows="2" placeholder="Something small counts. Morning sun, a kind text, my dog…" style="min-height:70px"></textarea>
-        <button class="btn solid block" style="margin-top:12px" onclick="saveNote()">Save reflection</button>
+        <button class="btn solid block" style="margin-top:10px" onclick="saveNote('text')">Save</button>
         <p class="err" id="noteErr"></p>
         <p class="ok" id="noteOk"></p>
+        <div class="hr"></div>
+        <label class="f" for="gratText" style="margin-top:0">What I'm grateful for</label>
+        <textarea id="gratText" rows="2" placeholder="Something small counts. Morning sun, a kind text, my dog…" style="min-height:70px"></textarea>
+        <button class="btn clay block" style="margin-top:10px" onclick="saveNote('grateful')">Save</button>
+        <p class="err" id="gratErr"></p>
+        <p class="ok" id="gratOk"></p>
       </div>
       <div class="card" id="notesCard">
         <div class="sechead"><h2>My reflections</h2><span class="tcount sub" id="noteCount"></span></div>
@@ -902,11 +906,13 @@ function renderWeek(){
 }
 
 /* ---------- notes ---------- */
-function saveNote(){
-  const t=$('#noteText').value.trim(), g=$('#gratText').value.trim(); $('#noteErr').textContent='';
-  if(!t && !g){ $('#noteErr').textContent='Write a few words in either box first.'; $('#noteText').focus(); return; }
-  S.notes=S.notes||[]; S.notes.unshift({id:Date.now(), ts:Date.now(), text:t, grateful:g}); S.notes=S.notes.slice(0,200);
-  save(); $('#noteText').value=''; $('#gratText').value=''; $('#noteOk').textContent = g ? 'Saved. Gratitude looks good on you.' : 'Saved. Thank you for listening to yourself.'; setTimeout(()=>$('#noteOk').textContent='',5000);
+function saveNote(kind){
+  const g = kind==='grateful';
+  const box=$(g?'#gratText':'#noteText'), err=$(g?'#gratErr':'#noteErr'), ok=$(g?'#gratOk':'#noteOk');
+  const v=box.value.trim(); err.textContent='';
+  if(!v){ err.textContent = g ? 'Write one thing you\'re grateful for first.' : 'Write a few words first.'; box.focus(); return; }
+  S.notes=S.notes||[]; S.notes.unshift({id:Date.now(), ts:Date.now(), text:g?'':v, grateful:g?v:''}); S.notes=S.notes.slice(0,200);
+  save(); box.value=''; ok.textContent = g ? 'Saved. Gratitude looks good on you.' : 'Saved. Thank you for listening to yourself.'; setTimeout(()=>ok.textContent='',5000);
   renderNotes();
 }
 function delNote(id,btn){ if(!confirmTap(btn,'Tap again to delete')) return; S.notes=(S.notes||[]).filter(n=>n.id!==id); save(); renderNotes(); }
