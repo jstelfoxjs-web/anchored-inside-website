@@ -608,11 +608,23 @@ async function toggleRec(key){
   rec.ondataavailable = e=>{ if(e.data && e.data.size) chunks.push(e.data); };
   rec.onstop = async ()=>{
     stream.getTracks().forEach(t=>t.stop()); clearInterval(tick);
-    const blob=new Blob(chunks,{type:rec.mimeType||mime||'audio/mp4'});
-    await putAudio(recKey,{blob, at:Date.now()}).catch(()=>{ $('#recErr').textContent='Couldn\'t save the recording on this phone.'; });
-    setRecUI(false); renderRecordings();
+    const type=(rec.mimeType||mime||'audio/mp4').split(';')[0];
+    const blob=new Blob(chunks,{type});
+    setRecUI(false);
+    if(!blob.size){ $('#recErr').textContent='That recording came out empty. Please try again.'; renderRecordings(); return; }
+    const at=Date.now();
+    try{
+      // Store raw bytes, not a Blob: Safari on iPhone can fail to save Blobs in IndexedDB.
+      const buf=await blob.arrayBuffer();
+      await putAudio(recKey,{buf, type, at});
+      delete memAudio[recKey];
+    }catch(e){
+      memAudio[recKey]={blob, at};
+      $('#recErr').textContent='This recording will play while this page is open, but your phone couldn\'t save it for later. Try again in the Anchored Inside app, or record it in your Voice Memos app.';
+    }
+    renderRecordings();
   };
-  rec.start(); recStart=Date.now(); setRecUI(true);
+  rec.start(1000); recStart=Date.now(); setRecUI(true);
   tick=setInterval(()=>{ const s=Math.floor((Date.now()-recStart)/1000); const el=recKey==='summary'?$('#recTimer'):$('#recTimer2'); el.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} recording`; if(s>=MAX_SEC) rec.stop(); },250);
 }
 function setRecUI(on){
@@ -626,19 +638,22 @@ function setRecUI(on){
   }
 }
 const urls={};
+const memAudio={};
 async function renderRecordings(){
   for(const [k,el,btn,label] of [['summary','#sumPlayer','#recBtn','Record summary'],['takeaway','#takePlayer','#recBtn2','Record my takeaway']]){
-    const a=await getAudio(k);
+    const stored=await getAudio(k);
+    const a=memAudio[k] || stored;
+    const audioBlob = a ? (a.blob || (a.buf ? new Blob([a.buf],{type:a.type||'audio/mp4'}) : null)) : null;
     if(urls[k]){ URL.revokeObjectURL(urls[k]); urls[k]=null; }
-    if(a && a.blob){
-      urls[k]=URL.createObjectURL(a.blob);
+    if(a && audioBlob){
+      urls[k]=URL.createObjectURL(audioBlob);
       $(el).innerHTML=`<audio controls preload="metadata" src="${urls[k]}"></audio><p class="note" style="margin:0">Recorded ${fmtDay(a.at)} · <button class="x" onclick="deleteRec('${k}',this)">Delete</button></p>`;
       $(btn).textContent = k==='summary' ? 'Record a new summary' : 'Record again';
       if(k==='summary' && $('#tileSum')) $('#tileSum').textContent = 'Recorded ' + new Date(a.at).toLocaleDateString(undefined,{month:'short',day:'numeric'});
     } else { $(el).innerHTML = k==='summary' ? '<p class="note" style="margin-top:0">No recording yet. Tap the button at the end of your next session.</p>' : ''; $(btn).textContent=label; }
   }
 }
-async function deleteRec(k,btn){ if(!confirmTap(btn,'Tap again to delete')) return; await delAudio(k); renderRecordings(); }
+async function deleteRec(k,btn){ if(!confirmTap(btn,'Tap again to delete')) return; delete memAudio[k]; await delAudio(k); renderRecordings(); }
 
 /* ---------- reminders (.ics) ---------- */
 function isMed(r){ return /\(meditation\)$/.test(r.what||''); }
