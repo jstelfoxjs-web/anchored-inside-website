@@ -3861,7 +3861,7 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 .practice-callout-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;min-height:240px;padding:28px 32px;border:0;border-radius:22px;color:var(--ink);text-decoration:none;overflow:hidden;box-shadow:0 14px 34px rgba(21,63,72,.12);transition:transform .25s ease,box-shadow .25s ease;
   position:relative;min-height:400px;padding:40px 44px;background:#fbf6ef}
 .practice-callout-card>*{position:relative;z-index:1}
-.practice-callout-card::after{content:"";position:absolute;top:0;right:0;bottom:0;width:75%;background:url("../images/practice-card-boots-d.jpg") 60% 25%/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 14%,#000 34%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 14%,#000 34%);pointer-events:none;z-index:0}
+.practice-callout-card::after{content:"";position:absolute;top:0;right:0;bottom:0;left:max(390px,25%);background:url("../images/practice-card-boots-d.jpg") 60% 25%/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.5) 70px,#000 150px);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.5) 70px,#000 150px);pointer-events:none;z-index:0}
 .practice-callout-text .practice-callout-eyebrow{display:block;font:800 .72rem/1 "Manrope",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--clay,#9c6c4c);margin-bottom:8px}
 .practice-callout-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(30,55,58,.08)}
 .practice-callout-icon{display:none!important;flex:none;width:52px;height:52px;border-radius:13px;display:block;object-fit:cover;background:#fff;box-shadow:0 0 0 1px rgba(18,64,73,.14)}
@@ -3870,8 +3870,8 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 .practice-callout-text strong{display:block;font:italic 500 2.3rem/1.05 'Cormorant Garamond',serif;color:var(--ocean-deep)}
 .practice-callout-text span{display:block;font:400 1.05rem/1.55 "Manrope",sans-serif;color:#344e53;margin-top:4px}
 .practice-callout-btn{flex:none}
-@media(max-width:680px){.practice-callout-card{justify-content:flex-start;align-items:stretch;gap:14px;min-height:0;padding:0 0 22px;background:#fbf6ef}
-.practice-callout-card::after{content:"";position:static;display:block;order:-1;width:100%;aspect-ratio:1500/900;background:url("../images/practice-card-boots-d.jpg") center 30%/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,#000 90%,transparent 100%);mask-image:linear-gradient(180deg,#000 90%,transparent 100%)}
+@media(max-width:900px){.practice-callout-card{justify-content:flex-start;align-items:stretch;gap:14px;min-height:0;padding:0 0 22px;background:#fbf6ef}
+.practice-callout-card::after{content:"";position:static;display:block;order:-1;width:100%;aspect-ratio:1500/900;max-height:300px;background:url("../images/practice-card-boots-d.jpg") 55% 30%/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,#000 90%,transparent 100%);mask-image:linear-gradient(180deg,#000 90%,transparent 100%)}
 .practice-callout-card>.practice-callout-text,.practice-callout-card>.practice-callout-btn{margin:0 22px}.practice-callout-btn{width:auto!important}
 .practice-callout-icon{display:none}.practice-callout-text{flex:none;max-width:none}.practice-callout-text strong{font-size:2rem}}
 
