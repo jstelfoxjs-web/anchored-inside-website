@@ -3859,7 +3859,7 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 /* My Practice callout on the Toolbox page */
 .practice-callout{padding:26px 0 0}
 .practice-callout-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;min-height:240px;padding:28px 32px;border:0;border-radius:22px;color:var(--ink);text-decoration:none;overflow:hidden;box-shadow:0 14px 34px rgba(21,63,72,.12);transition:transform .25s ease,box-shadow .25s ease;
-  background:linear-gradient(90deg,rgba(255,250,243,.97) 0%,rgba(255,250,243,.9) 42%,rgba(255,250,243,0) 72%),url("../images/practice-week-begins.jpg") right 60%/cover no-repeat,#f3e9dc}
+  background:linear-gradient(90deg,#fbf6ef 0%,#fbf6ef 44%,rgba(251,246,239,0) 62%),url("../images/practice-card-boots.jpg") right 62%/58% auto no-repeat,#fbf6ef}
 .practice-callout-text .practice-callout-eyebrow{display:block;font:800 .72rem/1 "Manrope",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--clay,#9c6c4c);margin-bottom:8px}
 .practice-callout-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(30,55,58,.08)}
 .practice-callout-icon{display:none!important;flex:none;width:52px;height:52px;border-radius:13px;display:block;object-fit:cover;background:#fff;box-shadow:0 0 0 1px rgba(18,64,73,.14)}
@@ -3868,7 +3868,7 @@ h1,h2,h3,h4,h5,h6,.serif,.quote,
 .practice-callout-text strong{display:block;font:italic 500 2.3rem/1.05 'Cormorant Garamond',serif;color:var(--ocean-deep)}
 .practice-callout-text span{display:block;font:400 .95rem/1.5 "Manrope",sans-serif;color:#344e53;margin-top:2px}
 .practice-callout-btn{flex:none}
-@media(max-width:680px){.practice-callout-card{justify-content:flex-end;align-items:stretch;gap:14px;min-height:400px;padding:22px;background:linear-gradient(180deg,rgba(255,250,243,0) 0%,rgba(255,250,243,0) 34%,rgba(255,250,243,.92) 56%,rgba(255,250,243,.98) 100%),url("../images/practice-week-begins.jpg") 70% top/auto 62% no-repeat,#fbf6ef}.practice-callout-icon{display:none}.practice-callout-text{flex:none;max-width:none}.practice-callout-text strong{font-size:2rem}.practice-callout-btn{width:100%}}
+@media(max-width:680px){.practice-callout-card{justify-content:flex-end;align-items:stretch;gap:14px;min-height:430px;padding:22px;background:linear-gradient(180deg,rgba(251,246,239,0) 0%,rgba(251,246,239,0) 40%,#fbf6ef 54%,#fbf6ef 100%),url("../images/practice-card-boots.jpg") center top/auto 54% no-repeat,#fbf6ef}.practice-callout-icon{display:none}.practice-callout-text{flex:none;max-width:none}.practice-callout-text strong{font-size:2rem}.practice-callout-btn{width:100%}}
 
 /* Phone-friendly PDF reader in the Toolbox */
 .resource-viewer.is-reader{display:block;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
