@@ -129,6 +129,12 @@ h2{font-size:24px;margin-bottom:4px}
 .mseg[aria-pressed="false"] .ms-s{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(21,63,72,.14)}
 .mseg[aria-pressed="true"] .ms-m{background:var(--blush);color:var(--blushink);box-shadow:0 1px 4px rgba(122,63,42,.14)}
 .su-hint{margin:6px 0 0;font-size:12.5px;color:var(--blushink)}
+.recmeta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mut);font-weight:600;margin:4px 0 6px}
+.newtag{background:var(--warm);color:#fff;border-radius:999px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:3px 8px}
+.welcomehero{position:relative;min-height:290px;border-radius:22px;overflow:hidden;margin:0 0 14px;display:flex;flex-direction:column;justify-content:flex-start;padding:22px;box-shadow:0 10px 30px rgba(21,63,72,.18);
+  background:linear-gradient(180deg,rgba(14,42,48,.88) 0%,rgba(14,42,48,.55) 38%,rgba(14,42,48,0) 62%),url(assets/images/practice-welcome-boots.jpg) center 60%/cover no-repeat,var(--ink)}
+.welcomehero h3{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:30px;line-height:1.05;color:#fff;margin:8px 0 6px}
+.welcomehero p{margin:0;color:rgba(255,255,255,.85);font-size:14px;font-weight:600}
 .mom-intro{background:var(--blush);color:var(--blushink);border-radius:12px;padding:10px 12px;font-size:14px;margin:4px 0 2px}
 .mom-missed{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0 0;color:var(--txt)}
 .mom-missed input{width:20px;height:20px;margin-top:1px;accent-color:var(--warm);flex:none}
@@ -370,9 +376,14 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 
   <!-- ============ WELCOME (first visit) ============ -->
   <section id="welcome" class="hidden">
+    <div class="welcomehero" role="img" aria-label="Hiking boots resting on a mountain summit">
+      <div class="fc-eyebrow" style="color:#f1d3b3">Anchored Inside</div>
+      <h3>Welcome to My Practice.</h3>
+      <p>Every way back starts with one small step.</p>
+    </div>
     <div class="card">
-      <h2>Welcome</h2>
-      <p>This is your space to practice what you learn in session, a little each day, on your way back home to yourself. We'll set it up together at the end of your session.</p>
+      <h2>How it works</h2>
+      <p>This is your space to practice what you learn in session, a little each day. We'll set up your week together at the end of your session.</p>
       <p class="note">Everything you save here stays on this phone. Nothing is sent to your therapist or anyone else.</p>
       <button class="btn solid block" onclick="openSetup()">Set up my week</button>
     </div>
@@ -981,14 +992,15 @@ async function toggleRec(key){
     const blob=new Blob(chunks,{type});
     setRecUI(false);
     if(!blob.size){ $('#recErr').textContent='That recording came out empty. Please try again.'; renderRecordings(); return; }
-    const at=Date.now();
+    const at=Date.now(), dur=Math.max(1,Math.round((at-recStart)/1000));
+    if(recKey==='summary'){ S.sumHeard=false; save(); }
     try{
       // Store raw bytes, not a Blob: Safari on iPhone can fail to save Blobs in IndexedDB.
       const buf=await blob.arrayBuffer();
-      await putAudio(recKey,{buf, type, at});
+      await putAudio(recKey,{buf, type, at, dur});
       delete memAudio[recKey];
     }catch(e){
-      memAudio[recKey]={blob, at};
+      memAudio[recKey]={blob, at, dur};
       $('#recErr').textContent='This recording will play while this page is open, but your phone couldn\'t save it for later. Try again in the Anchored Inside app, or record it in your Voice Memos app.';
     }
     renderRecordings();
@@ -1016,12 +1028,15 @@ async function renderRecordings(){
     if(urls[k]){ URL.revokeObjectURL(urls[k]); urls[k]=null; }
     if(a && audioBlob){
       urls[k]=URL.createObjectURL(audioBlob);
-      $(el).innerHTML=`<audio controls preload="metadata" src="${urls[k]}"></audio><p class="note" style="margin:0">Recorded ${fmtDay(a.at)} · <button class="x" onclick="deleteRec('${k}',this)">Delete</button></p>`;
+      const len = a.dur ? ` · ${Math.floor(a.dur/60)}:${String(a.dur%60).padStart(2,'0')}` : '';
+      const isNew = k==='summary' && !S.sumHeard;
+      $(el).innerHTML=`<div class="recmeta">${isNew?'<span class="newtag">New</span>':''}<span>Recorded ${fmtDay(a.at)}${len}</span></div><audio controls preload="metadata" src="${urls[k]}" ${k==='summary'?'onplay="markHeard()"':''}></audio><p class="note" style="margin:0"><button class="x" onclick="deleteRec('${k}',this)">Delete</button></p>`;
       $(btn).textContent = k==='summary' ? 'Record a new summary' : 'Record again';
-      if(k==='summary' && $('#tileSum')) $('#tileSum').textContent = 'Recorded ' + new Date(a.at).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+      if(k==='summary' && $('#tileSum')) $('#tileSum').textContent = (isNew?'New · ':'') + 'Recorded ' + new Date(a.at).toLocaleDateString(undefined,{month:'short',day:'numeric'});
     } else { $(el).innerHTML = k==='summary' ? '<p class="note" style="margin-top:0">No recording yet. Tap the button at the end of your next session.</p>' : ''; $(btn).textContent=label; }
   }
 }
+function markHeard(){ if(!S.sumHeard){ S.sumHeard=true; save(); const t=document.querySelector('#sumPlayer .newtag'); if(t) t.remove(); const ts=$('#tileSum'); if(ts) ts.textContent=ts.textContent.replace('New · ',''); } }
 async function deleteRec(k,btn){ if(!confirmTap(btn,'Tap again to delete')) return; delete memAudio[k]; await delAudio(k); renderRecordings(); }
 
 /* ---------- reminders (.ics) ---------- */
