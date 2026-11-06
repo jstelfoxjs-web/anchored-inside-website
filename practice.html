@@ -142,6 +142,17 @@ h2{font-size:24px;margin-bottom:4px}
 .sug-i b{font-size:15px;font-weight:600;color:var(--ink)}
 .sug-i small{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink2);flex:none}
 .sug-i:active,.sug-i:hover{background:#f4f9f8}
+.lenrow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:14px;font-weight:700;color:var(--ink)}
+.lenseg{margin-top:0;background:#fff;flex:none}
+.lenseg button{flex:none;white-space:nowrap;padding:8px 14px}
+.sumhead .wksplit{color:#e3c79f}
+.week.two{flex-wrap:wrap;row-gap:6px}
+.week.two .day{flex:0 0 calc(100%/7)}
+.wkhead{flex:0 0 100%;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-top:6px}
+.wksplit{margin:4px 0 0;font-size:13px;font-weight:700;color:var(--ink2)}
+.halfcard{border-left:4px solid var(--warm)}
+.halfcard h3{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:600;font-size:24px;margin:4px 0;color:var(--ink)}
+.halfcard p{margin:0;font-size:14px;color:var(--mut)}
 .mom-intro{background:var(--blush);color:var(--blushink);border-radius:12px;padding:10px 12px;font-size:14px;margin:4px 0 2px}
 .mom-missed{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0 0;color:var(--txt)}
 .mom-missed input{width:20px;height:20px;margin-top:1px;accent-color:var(--warm);flex:none}
@@ -410,8 +421,10 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
   <!-- ============ SETUP (done together in session) ============ -->
   <section id="setup" class="hidden">
     <div class="card su-intro">
-      <h2>Set up my week</h2>
+      <h2>Set up until next session</h2>
       <p class="sub">We'll fill this in together at the end of session. Three small steps.</p>
+      <div class="lenrow"><span>Next session in</span><div class="seg lenseg" role="radiogroup" aria-label="Next session in">
+        <button type="button" id="len7" onclick="setLen(7)">1 week</button><button type="button" id="len14" onclick="setLen(14)">2 weeks</button></div></div>
       <div class="su-steps" aria-hidden="true">
         <span class="su-chip c1"><i>1</i>Skills</span>
         <span class="su-chip c2"><i>2</i>Meditations</span>
@@ -441,6 +454,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span>
         <div><div class="su-step">Step 3</div><h3>My 3 practice reminders</h3></div></div>
       <p class="note" style="margin-top:0">Pick 3 days, and tie each one to something you already do.</p>
+      <p class="note hidden" id="lenHint" style="margin-top:0;background:var(--blush);color:var(--blushink);border-radius:12px;padding:8px 12px">These 3 reminders repeat in week 2, so you practice 3 times each week.</p>
       <div id="remRows"></div>
       <p class="err" id="remErr"></p>
     </div>
@@ -469,6 +483,11 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
           <h3>Start whenever you're ready.</h3>
           <p>Even two minutes counts.</p>
         </div>
+      </div>
+      <div class="card halfcard hidden" id="halfCard">
+        <div class="eyebrow" style="color:var(--warm)">Halfway there</div>
+        <h3>Week 2 starts today.</h3>
+        <p id="halfSub"></p>
       </div>
       <div class="card nextcard">
         <div class="eyebrow">Next reminder</div>
@@ -610,7 +629,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
         <p class="note" id="goalNote" style="text-align:center"></p>
       </div>
       <div class="card">
-        <div class="eyebrow">This week so far</div>
+        <div class="eyebrow" id="soFarLbl">This week so far</div>
         <div id="weekStats"></div>
       </div>
       <div class="card" id="recentDrop">
@@ -712,6 +731,11 @@ function confirmTap(btn, label){
 function esc(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function midnight(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
 function dayIndex(ts){ return Math.floor((midnight(ts)-midnight(S.week.start))/DAY); }
+function wlen(){ return (S.week && S.week.len===14) ? 14 : 7; }
+function nWeeks(){ return wlen()/7; }
+function curWk(){ return Math.max(0, Math.min(nWeeks()-1, Math.floor(Math.max(0,dayIndex(Date.now()))/7))); }
+function inPeriod(ts){ const d=dayIndex(ts); return d>=0 && d<wlen(); }
+function inWk(ts,k){ const d=dayIndex(ts); return d>=k*7 && d<k*7+7; }
 function fmtDay(ts){ return new Date(ts).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}); }
 function fmtTime(t){ const [h,m]=t.split(':').map(Number); const d=new Date(); d.setHours(h,m); return d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'}); }
 function medId(m){ return m.link; }
@@ -745,12 +769,12 @@ function goTab(t, focus){
 function nextReminder(){
   if(!S.week) return null;
   const now=Date.now();
-  const list=S.week.reminders.map(r=>{ const [h,m]=r.time.split(':').map(Number); const d=new Date(S.week.start+(r.day||0)*DAY); d.setHours(h,m,0,0); return {...r, at:d.getTime()}; }).sort((a,b)=>a.at-b.at);
+  const list=[]; for(let k=0;k<nWeeks();k++) S.week.reminders.forEach(r=>{ const [h,m]=r.time.split(':').map(Number); const d=new Date(S.week.start+((r.day||0)+7*k)*DAY); d.setHours(h,m,0,0); list.push({...r, at:d.getTime()}); }); list.sort((a,b)=>a.at-b.at);
   return list.find(r=>r.at>=now-30*60*1000) || null;
 }
 function renderNext(){
   const r=nextReminder(), el=$('#nextRem');
-  if(!r){ el.innerHTML='<b>No more reminders this week</b><span>Practice anytime. Every bit counts.</span>'; return; }
+  if(!r){ el.innerHTML='<b>No more reminders before your next session</b><span>Practice anytime. Every bit counts.</span>'; return; }
   const d=new Date(r.at), isToday=new Date().toDateString()===d.toDateString();
   const when=(isToday?'Today':d.toLocaleDateString(undefined,{weekday:'long'}))+' · '+fmtTime(r.time);
   const what=r.what?r.what.replace(' (meditation)',''):'Any of my skills';
@@ -782,6 +806,7 @@ function openSetup(){
       <label class="su-mini" for="rw${i}">Practice</label><select id="rw${i}" data-cur="${esc(r.what||'')}" style="width:100%;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)"></select></div>`;
   }).join('');
   renderMedList('#setupMeds', false); mountAddForms();
+  setLen(S.week && S.week.len===14 ? 14 : 7);
   refreshWhat();
   $('#cancelBtn').classList.toggle('hidden', !S.week);
   $('#skErr').textContent=''; $('#remErr').textContent='';
@@ -829,18 +854,20 @@ function refreshAnchors(){
   });
 }
 function cancelSetup(){ show(S.week?'home':'welcome'); }
+let setupLen=7;
+function setLen(n){ setupLen=n; $('#len7').classList.toggle('sel',n===7); $('#len14').classList.toggle('sel',n===14); const h=$('#lenHint'); if(h) h.classList.toggle('hidden', n!==14); }
 function saveSetup(){
   const skills=[0,1,2].map(i=>$('#sk'+i).value.trim()).filter(Boolean);
   if(!skills.length && !allMeds().some(m=>S.stars.includes(medId(m)))){ $('#skErr').textContent='Add at least one skill, or star a meditation in Step 2.'; $('#sk0').focus(); return; }
   const reminders=[0,1,2].map(i=>({day:+$('#rd'+i).value, time:$('#rt'+i).value, anchor:$('#ra'+i).value.trim(), what:$('#rw'+i).value})).filter(r=>r.time).sort((a,b)=>a.day-b.day||a.time.localeCompare(b.time));
   if(!reminders.length){ $('#remErr').textContent='Add at least one reminder time.'; return; }
   const isNew = !S.week;
-  S.week = {start: isNew ? midnight(Date.now()).getTime() : S.week.start, skills, reminders, moment: setupMoments()};
+  S.week = {start: isNew ? midnight(Date.now()).getTime() : S.week.start, skills, reminders, moment: setupMoments(), len: setupLen};
   save(); renderHome(); show('home');
 }
 function newWeek(btn){
   if(!confirmTap(btn,'Tap again to start a new week')) return;
-  if(S.week) S.history.unshift({start:S.week.start, skills:S.week.skills, logs:S.logs.filter(l=>dayIndex(l.ts)<7&&dayIndex(l.ts)>=0)});
+  if(S.week) S.history.unshift({start:S.week.start, skills:S.week.skills, len:wlen(), logs:S.logs.filter(l=>inPeriod(l.ts))});
   S.history = S.history.slice(0,12);
   S.logs = []; S.week = null; save(); openSetup();
 }
@@ -1063,11 +1090,13 @@ function downloadReminders(){
   let ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Anchored Inside//My Practice//EN\r\nCALSCALE:GREGORIAN\r\n';
   S.week.reminders.forEach((r,i)=>{
     const [h,m]=r.time.split(':').map(Number);
-    const d=new Date(start); d.setDate(d.getDate()+(r.day||0)); d.setHours(h,m,0,0);
-    if(d<Date.now()) return;
+    let d, k=0;
+    for(; k<nWeeks(); k++){ d=new Date(start); d.setDate(d.getDate()+(r.day||0)+7*k); d.setHours(h,m,0,0); if(d>=Date.now()) break; }
+    if(k>=nWeeks()) return;
+    const rrule = (nWeeks()-k)>1 ? `RRULE:FREQ=WEEKLY;COUNT=${nWeeks()-k}\r\n` : '';
     const dt=`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(h)}${pad(m)}00`;
     const now=new Date(), stamp=`${now.getUTCFullYear()}${pad(now.getUTCMonth()+1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
-    ics+=`BEGIN:VEVENT\r\nUID:ai-practice-${S.week.start}-${i}@anchoredinside.com\r\nDTSTAMP:${stamp}\r\nDTSTART:${dt}\r\nDURATION:PT5M\r\nSUMMARY:${icsText(icsSummary(r,skills))}\r\nDESCRIPTION:${icsText((r.anchor?('When: '+r.anchor+'. '):'')+(iOS?'Open the Anchored Inside app. ':'')+(remKind(r)==='intention'?'Look for one moment today to use your skill. Log it this evening.':remKind(r)==='catchup'?'Did a moment come up today? Open My Practice and log it, even if you only noticed afterward.':isMed(r)?'Tap play on your meditation, then save your check-in.':'Play your summary, practice, then tap Log.')+(iOS?'':' '+base+(isMed(r)?'#meditate':'#practice')))}\r\n${iOS?'':`URL:${base}${isMed(r)?'#meditate':'#practice'}\r\n`}BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:Time to practice\r\nTRIGGER:PT0M\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
+    ics+=`BEGIN:VEVENT\r\nUID:ai-practice-${S.week.start}-${i}@anchoredinside.com\r\nDTSTAMP:${stamp}\r\nDTSTART:${dt}\r\n${rrule}DURATION:PT5M\r\nSUMMARY:${icsText(icsSummary(r,skills))}\r\nDESCRIPTION:${icsText((r.anchor?('When: '+r.anchor+'. '):'')+(iOS?'Open the Anchored Inside app. ':'')+(remKind(r)==='intention'?'Look for one moment today to use your skill. Log it this evening.':remKind(r)==='catchup'?'Did a moment come up today? Open My Practice and log it, even if you only noticed afterward.':isMed(r)?'Tap play on your meditation, then save your check-in.':'Play your summary, practice, then tap Log.')+(iOS?'':' '+base+(isMed(r)?'#meditate':'#practice')))}\r\n${iOS?'':`URL:${base}${isMed(r)?'#meditate':'#practice'}\r\n`}BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:Time to practice\r\nTRIGGER:PT0M\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
   });
   ics+='END:VCALENDAR\r\n';
   if(!ics.includes('BEGIN:VEVENT')){ $('#icsMsg').textContent='All of this week\'s reminder times have already passed. Tap Edit my week to pick new days.'; return; }
@@ -1247,22 +1276,26 @@ function logPractice(){
 }
 function delLog(id,btn){ if(!confirmTap(btn,'Tap again to delete')) return; S.logs=S.logs.filter(l=>l.id!==id); save(); renderWeek(); renderLogs(); }
 function renderLogs(){
-  const n=S.logs.filter(l=>S.week&&dayIndex(l.ts)>=0&&dayIndex(l.ts)<7).length;
-  $('#logCount').textContent = n ? `${n} this week` : 'none yet';
+  const n=S.logs.filter(l=>S.week&&inPeriod(l.ts)).length;
+  $('#logCount').textContent = n ? `${n} ${nWeeks()>1?'since your session':'this week'}` : 'none yet';
   $('#logList').innerHTML = S.logs.length ? S.logs.slice(0,8).map(l=>`<div class="log"><div class="top"><div style="flex:1;min-width:0"><b>${esc(l.skill)}</b><div class="n">${fmtDay(l.ts)} · ${l.type==='moment'?(l.unplanned?'Unplanned moment · ':'Moment · ')+momentLine(l):`stress ${l.before} → ${l.after}`}</div>${l.type==='moment'?`<div class="n">${esc(l.what)}</div>`:''}${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div><button class="dots" aria-label="More options" onclick="this.closest('.log').classList.toggle('open')">⋯</button></div><div class="acts"><button class="delbtn" onclick="delLog(${l.id},this)">Delete this entry</button></div></div>`).join('') : '<p class="note" style="margin-top:0">Your practice will show up here.</p>';
 }
 function renderWeek(){
   const today=dayIndex(Date.now());
-  const days=[...Array(7)].map((_,i)=>{ const d=new Date(S.week.start+i*DAY); const L=S.logs.filter(l=>dayIndex(l.ts)===i); const ks=new Set(L.map(l=>l.type==='moment'?'mom':isMedLog(l)?'med':'s')); return {i, label:d.toLocaleDateString(undefined,{weekday:'short'}).slice(0,2), n:L.length, kind: ks.size>1?'both':ks.has('med')?'med':ks.has('mom')?'mom':''}; });
-  const planned=new Set(S.week.reminders.map(r=>r.day||0));
-  $('#week').innerHTML=days.map(d=>`<div class="day"><div class="dot ${d.n?'on '+d.kind:(planned.has(d.i)?'plan':'')} ${d.i===today?'today':''}">${d.n?(d.n>1?d.n:'✓'):(planned.has(d.i)?'<span style="color:var(--warm);display:flex">'+ICON.bell+'</span>':'')}</div>${d.label}</div>`).join('');
-  const total=days.reduce((a,d)=>a+d.n,0);
+  const days=[...Array(wlen())].map((_,i)=>{ const d=new Date(S.week.start+i*DAY); const L=S.logs.filter(l=>dayIndex(l.ts)===i); const ks=new Set(L.map(l=>l.type==='moment'?'mom':isMedLog(l)?'med':'s')); return {i, label:d.toLocaleDateString(undefined,{weekday:'short'}).slice(0,2), n:L.length, kind: ks.size>1?'both':ks.has('med')?'med':ks.has('mom')?'mom':''}; });
+  const planned=new Set(); for(let k=0;k<nWeeks();k++) S.week.reminders.forEach(r=>planned.add((r.day||0)+7*k));
+  const cw=curWk();
+  $('#week').innerHTML=days.map(d=>(nWeeks()>1&&d.i%7===0?`<div class="wkhead">Week ${d.i/7+1}${d.i/7===cw&&today<wlen()?' · now':''}</div>`:'')+`<div class="day"><div class="dot ${d.n?'on '+d.kind:(planned.has(d.i)?'plan':'')} ${d.i===today?'today':''}">${d.n?(d.n>1?d.n:'✓'):(planned.has(d.i)?'<span style="color:var(--warm);display:flex">'+ICON.bell+'</span>':'')}</div>${d.label}</div>`).join('');
+  const total=days.slice(cw*7,cw*7+7).reduce((a,d)=>a+d.n,0);
+  const wkTotals=[...Array(nWeeks())].map((_,k)=>days.slice(k*7,k*7+7).reduce((a,d)=>a+d.n,0));
+  $('#week').classList.toggle('two', nWeeks()>1);
+  const hc=$('#halfCard'); if(hc){ const show=nWeeks()>1 && today>=7 && today<9; hc.classList.toggle('hidden',!show); if(show) $('#halfSub').textContent = wkTotals[0]>=GOAL ? `Week 1: ${wkTotals[0]} practices. You did what you set out to do. Same plan for week 2.` : `Week 1: ${wkTotals[0]} of ${GOAL}. Fresh week, same plan. Your reminders pick up again this week.`; }
   $('#dayCount').textContent=Math.min(total,99);
   $('#goalNote').textContent = total>=GOAL ? 'You reached your goal for the week. Extra practice is a bonus.' : `${GOAL-total} to go this week.`;
-  $('#weekStats').innerHTML = statsHTML(summaryData());
-  const fc=$('#firstCard'); if(fc) fc.classList.toggle('hidden', total>0);
+  $('#weekStats').innerHTML = statsHTML(summaryData()); $('#soFarLbl').textContent = nWeeks()>1 ? 'Since your session' : 'This week so far';
+  const fc=$('#firstCard'); if(fc) fc.classList.toggle('hidden', days.some(d=>d.n>0) || today>=7);
   const lm=document.querySelector('.lgmom'); if(lm) lm.classList.toggle('hidden', !(S.week.moment||[]).length);
-  $('#weekLabel').textContent = today>6 ? 'Your week is complete. Bring it to session, then start a new week.' : `Day ${Math.max(1,today+1)} of 7 · started ${fmtDay(S.week.start)}`;
+  $('#weekLabel').textContent = today>=wlen() ? (nWeeks()>1?'Your two weeks are complete. Bring them to session, then start a new week.':'Your week is complete. Bring it to session, then start a new week.') : `Day ${Math.max(1,today+1)} of ${wlen()} · started ${fmtDay(S.week.start)}`;
   const done=Math.min(total,GOAL), d=summaryData();
   $('#ringArc').setAttribute('stroke-dashoffset', String(150.8*(1-done/GOAL)));
   $('#ringText').textContent=`${Math.min(total,99)}/${GOAL}`;
@@ -1292,7 +1325,7 @@ function renderNotes(){
   $('#noteList').innerHTML = n.map(x=>`<div class="note-item log"><div class="meta"><span>${new Date(x.ts).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})} · ${new Date(x.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})}</span><button class="dots" aria-label="More options" onclick="this.closest('.note-item').classList.toggle('open')">⋯</button></div>${noteBody(x)}<div class="acts"><button class="delbtn" onclick="delNote(${x.id},this)">Delete this reflection</button></div></div>`).join('');
 }
 function noteBody(x){ return (x.text?`<div class="txt">${esc(x.text)}</div>`:'') + (x.grateful?`<div class="grat"><span>Grateful for</span>${esc(x.grateful)}</div>`:''); }
-function weekNotes(){ return (S.notes||[]).filter(x=>S.week&&dayIndex(x.ts)>=0&&dayIndex(x.ts)<7).slice().reverse(); }
+function weekNotes(){ return (S.notes||[]).filter(x=>S.week&&inPeriod(x.ts)).slice().reverse(); }
 
 /* ---------- summary ---------- */
 function isMedLog(l){ return allMeds().some(m=>m.title===l.skill); }
@@ -1300,20 +1333,21 @@ function fmtDrop(d){ return d.stressN ? (d.avgDrop>0?'−':d.avgDrop<0?'+':'')+M
 function statsHTML(d){
   const unp=(d.moments||[]).filter(l=>l.unplanned).length;
   const line = unp ? `${unp} skill${unp===1?'':'s'} used without planning to. That's the practice becoming yours.` : !d.logs.length ? 'Your first practice is waiting whenever you are.' : (!d.stressN && d.moments.length) ? `${d.moments.length} real moment${d.moments.length===1?'':'s'} logged. That's the skill showing up in real life.` : d.avgDrop>0 ? `Stress went down ${Math.abs(d.avgDrop).toFixed(1).replace('.0','')} point${Math.abs(d.avgDrop)===1?'':'s'} on average. That's your nervous system learning.` : 'Showing up to practice is the work. Keep going.';
-  return `<div class="stats"><div class="stat s1"><b>${d.logs.length}/${GOAL}</b><small>practices</small></div><div class="stat s2"><b>${d.days}</b><small>days practiced</small></div><div class="stat s3"><b>${fmtDrop(d)}</b><small>avg. stress change</small></div></div><p class="statline">${line}</p>`;
+  return `<div class="stats"><div class="stat s1"><b>${d.logs.length}/${GOAL*(d.perWk?d.perWk.length:1)}</b><small>practices</small></div><div class="stat s2"><b>${d.days}</b><small>days practiced</small></div><div class="stat s3"><b>${fmtDrop(d)}</b><small>avg. stress change</small></div></div><p class="statline">${line}</p>${d.perWk&&d.perWk.length>1?`<p class="wksplit">${d.perWk.map((n,k)=>`Week ${k+1}: ${n}/${GOAL}`).join(' · ')}</p>`:''}`;
 }
 function summaryData(){
-  const logs=S.logs.filter(l=>dayIndex(l.ts)>=0&&dayIndex(l.ts)<7).slice().reverse();
+  const logs=S.logs.filter(l=>inPeriod(l.ts)).slice().reverse();
+  const perWk=[...Array(nWeeks())].map((_,k)=>logs.filter(l=>inWk(l.ts,k)).length);
   const days=new Set(logs.map(l=>dayIndex(l.ts))).size;
   const st=logs.filter(l=>typeof l.before==='number'&&typeof l.after==='number');
   const avgDrop=st.length?(st.reduce((s,l)=>s+(l.before-l.after),0)/st.length):0;
   const moments=logs.filter(l=>l.type==='moment');
   const by={}; logs.forEach(l=>by[l.skill]=(by[l.skill]||0)+1);
-  return {logs,days,avgDrop,by,stressN:st.length,moments};
+  return {logs,days,avgDrop,by,stressN:st.length,moments,perWk};
 }
 function showSummary(){
   const d=summaryData();
-  $('#sumTitle').textContent=`Week of ${fmtDay(S.week.start)}`;
+  $('#sumTitle').textContent=`${nWeeks()>1?'Two weeks':'Week'} of ${fmtDay(S.week.start)}`;
   $('#sumStats').innerHTML=statsHTML(d);
   const sk=practiceOptions(S.week.skills).map(x=>x.replace(' (meditation)',''));
   $('#sumBody').innerHTML=`
@@ -1326,7 +1360,7 @@ function showSummary(){
 }
 async function copySummary(){
   const d=summaryData();
-  const txt=[`My practice: week of ${fmtDay(S.week.start)}`,`Skills: ${S.week.skills.join(', ')}`,`Practices: ${d.logs.length} of ${GOAL} · Days practiced: ${d.days}`,
+  const txt=[`My practice: ${nWeeks()>1?'two weeks':'week'} of ${fmtDay(S.week.start)}`,`Skills: ${S.week.skills.join(', ')}`,`Practices: ${d.logs.length} of ${GOAL*nWeeks()}${nWeeks()>1?` (${d.perWk.map((n,k)=>`week ${k+1}: ${n}`).join(', ')})`:''} · Days practiced: ${d.days}`,
     ...d.logs.map(l=>l.type==='moment' ? `- ${fmtDay(l.ts)}: ${l.skill} (${l.unplanned?'unplanned ':''}moment, ${momentLine(l).toLowerCase()}). What happened: ${l.what}${l.tried?`. ${l.missed?"Next time I'd try":'Tried'}: ${l.tried}`:''}${l.calm?`. Stayed ${CALM[l.calm]}`:''}` : `- ${fmtDay(l.ts)}: ${l.skill}, stress ${l.before} → ${l.after}${l.note?` (${l.note})`:''}`),
     ...(weekNotes().length?['','My reflections:',...weekNotes().map(x=>`- ${fmtDay(x.ts)}: ${[x.text, x.grateful?'Grateful for: '+x.grateful:''].filter(Boolean).join(' | ')}`)]:[])].join('\n');
   try{ await navigator.clipboard.writeText(txt); $('#copyOk').textContent='Copied.'; }catch(e){ $('#copyOk').textContent='Copy didn\'t work on this device. Try Print instead.'; }
