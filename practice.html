@@ -124,10 +124,11 @@ h2{font-size:24px;margin-bottom:4px}
 .medby{font-size:12px;color:var(--mut)}
 .su-skill{flex-wrap:wrap}
 #setup .su-skill input{flex:1 1 calc(100% - 40px)}
-.mtog{flex:none;margin:6px 0 6px 38px;border:1.5px solid var(--line);background:#fff;color:var(--mut);border-radius:999px;font:700 12px Manrope,sans-serif;padding:5px 11px;cursor:pointer;white-space:nowrap}
-.mtog::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;margin-right:6px;vertical-align:-1px}
-.mtog[aria-pressed="true"]::before{background:currentColor}
-.mtog[aria-pressed="true"]{background:var(--blush);border-color:var(--warm);color:var(--blushink)}
+.mseg{display:flex;margin:6px 0 6px 38px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.mseg button{border:0;background:none;border-radius:999px;padding:6px 12px;font:700 12.5px Manrope,sans-serif;color:var(--mut);cursor:pointer;white-space:nowrap}
+.mseg[aria-pressed="false"] .ms-s{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(21,63,72,.14)}
+.mseg[aria-pressed="true"] .ms-m{background:var(--blush);color:var(--blushink);box-shadow:0 1px 4px rgba(122,63,42,.14)}
+.su-hint{margin:6px 0 0;font-size:12.5px;color:var(--blushink)}
 .mom-intro{background:var(--blush);color:var(--blushink);border-radius:12px;padding:10px 12px;font-size:14px;margin:4px 0 2px}
 .mom-missed{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0 0;color:var(--txt)}
 .mom-missed input{width:20px;height:20px;margin-top:1px;accent-color:var(--warm);flex:none}
@@ -405,10 +406,10 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="su-head"><span class="su-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4-3-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-3 8-7 11z"/><path d="M12 7v7M9 11h6"/></svg></span>
         <div><div class="su-step">Step 1</div><h3>Skills to practice</h3></div></div>
       <p class="note" style="margin-top:0">Up to 3. Starred meditations in Step 2 count too, so there's no need to type them here.</p>
-      <p class="note" style="margin-top:0">Tap <b>In the moment</b> for skills used when a situation comes up, like reflective listening with your child.</p>
-      <div class="su-skill"><i>1</i><input type="text" id="sk0" placeholder="Four Elements" aria-label="Skill 1"><button type="button" class="mtog" id="mt0" aria-pressed="false" onclick="toggleMoment(0)">In the moment</button></div>
-      <div class="su-skill"><i>2</i><input type="text" id="sk1" placeholder="Calm place" aria-label="Skill 2"><button type="button" class="mtog" id="mt1" aria-pressed="false" onclick="toggleMoment(1)">In the moment</button></div>
-      <div class="su-skill"><i>3</i><input type="text" id="sk2" placeholder="Container" aria-label="Skill 3"><button type="button" class="mtog" id="mt2" aria-pressed="false" onclick="toggleMoment(2)">In the moment</button></div>
+      <p class="note" style="margin-top:0"><b>Scheduled</b> skills are practiced when a reminder goes off. <b>In the moment</b> skills are used when a situation comes up, like reflective listening with your child.</p>
+      <div class="su-skill"><i>1</i><input type="text" id="sk0" placeholder="Four Elements" aria-label="Skill 1"><div class="mseg" id="mt0" aria-pressed="false" role="radiogroup" aria-label="When is skill 1 used?"><button type="button" class="ms-s" onclick="toggleMoment(0,false)">Scheduled</button><button type="button" class="ms-m" onclick="toggleMoment(0,true)">In the moment</button></div></div>
+      <div class="su-skill"><i>2</i><input type="text" id="sk1" placeholder="Calm place" aria-label="Skill 2"><div class="mseg" id="mt1" aria-pressed="false" role="radiogroup" aria-label="When is skill 2 used?"><button type="button" class="ms-s" onclick="toggleMoment(1,false)">Scheduled</button><button type="button" class="ms-m" onclick="toggleMoment(1,true)">In the moment</button></div></div>
+      <div class="su-skill"><i>3</i><input type="text" id="sk2" placeholder="Container" aria-label="Skill 3"><div class="mseg" id="mt2" aria-pressed="false" role="radiogroup" aria-label="When is skill 3 used?"><button type="button" class="ms-s" onclick="toggleMoment(2,false)">Scheduled</button><button type="button" class="ms-m" onclick="toggleMoment(2,true)">In the moment</button></div></div>
       <p class="err" id="skErr"></p>
     </div>
 
@@ -738,7 +739,8 @@ function renderNext(){
   const when=(isToday?'Today':d.toLocaleDateString(undefined,{weekday:'long'}))+' · '+fmtTime(r.time);
   const what=r.what?r.what.replace(' (meditation)',''):'Any of my skills';
   const k=remKind(r);
-  const line = k==='intention' ? `Intention: look for a moment to use ${what==='Any of my skills'?'your skills':what}${isToday?' today':' that day'}` : k==='catchup' ? `Catch-up: did a moment come up${isToday?' today':''}? Log it, even if you only noticed afterward.` : `${r.anchor?esc(r.anchor)+' · ':''}${esc(what)}`;
+  const sk2 = what==='Any of my skills'?'your skills':what;
+  const line = k==='intention' ? (r.anchor ? `Intention: when ${r.anchor}, use ${sk2}` : `Intention: look for a moment to use ${sk2}${isToday?' today':' that day'}`) : k==='catchup' ? `Catch-up: did a moment come up${isToday?' today':''}? Log it, even if you only noticed afterward.` : `${r.anchor?esc(r.anchor)+' · ':''}${esc(what)}`;
   el.innerHTML=`<b>${esc(when)}</b><span>${k==='practice'?line:esc(line)}</span>`;
   const sb=$('#startBtn'); if(sb) sb.innerHTML = k==='practice' ? `${ICON.play} Start practice` : `${ICON.pen} Log a moment`;
 }
@@ -760,7 +762,7 @@ function openSetup(){
     const dayOpts = [...Array(7)].map((_,d)=>`<option value="${d}" ${d===(r.day??i*2+1)?'selected':''}>${(d===0&&!S.week?'Today · ':'')+new Date(base+d*DAY).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</option>`).join('');
     return `<div class="su-rem"><div class="su-remtop"><span class="su-remnum">Reminder ${i+1}</span></div>
       <div class="row" style="margin-bottom:8px"><select id="rd${i}" aria-label="Day" style="flex:1;min-width:0;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)">${dayOpts}</select><input type="time" id="rt${i}" value="${r.time}" aria-label="Time" style="width:128px;flex:none"></div>
-      <label class="su-mini" for="ra${i}">Tie it to</label><input type="text" id="ra${i}" value="${esc(r.anchor)}" placeholder="after brushing my teeth">
+      <label class="su-mini" for="ra${i}" id="ral${i}">Tie it to</label><input type="text" id="ra${i}" value="${esc(r.anchor)}" placeholder="after brushing my teeth"><p class="su-hint" id="rah${i}"></p>
       <label class="su-mini" for="rw${i}">Practice</label><select id="rw${i}" data-cur="${esc(r.what||'')}" style="width:100%;font:16px Manrope,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)"></select></div>`;
   }).join('');
   renderMedList('#setupMeds', false); mountAddForms();
@@ -777,7 +779,7 @@ function practiceOptions(skills){
 }
 function setupSkills(){ return [0,1,2].map(i=>$('#sk'+i).value.trim()).filter(Boolean); }
 function setupMoments(){ return [0,1,2].filter(i=>$('#mt'+i).getAttribute('aria-pressed')==='true' && $('#sk'+i).value.trim()).map(i=>$('#sk'+i).value.trim()); }
-function toggleMoment(i){ const b=$('#mt'+i); b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); refreshWhat(); }
+function toggleMoment(i,v){ const b=$('#mt'+i); b.setAttribute('aria-pressed', String(v===undefined ? b.getAttribute('aria-pressed')!=='true' : !!v)); refreshWhat(); }
 function isMoment(name){ return !!(S.week && (S.week.moment||[]).includes(name)); }
 function remKind(r, moments){
   moments = moments || (S.week&&S.week.moment) || [];
@@ -795,8 +797,23 @@ function refreshWhat(){
     el.innerHTML='<option value="">Any of my skills</option>'+opts.map(o=>`<option ${o===cur?'selected':''}>${esc(o)}</option>`).join('');
   });
   const mn=$('#momentRemNote'); if(mn) mn.classList.toggle('hidden', !setupMoments().length);
+  refreshAnchors();
 }
-document.addEventListener('input',e=>{ if(/^sk\d$/.test(e.target.id)) refreshWhat(); });
+document.addEventListener('input',e=>{ if(/^sk\d$/.test(e.target.id)) refreshWhat(); if(/^r[tw]\d$/.test(e.target.id)) refreshAnchors(); });
+document.addEventListener('change',e=>{ if(/^r[tw]\d$/.test(e.target.id)) refreshAnchors(); });
+function refreshAnchors(){
+  const moms=setupMoments(), sk=practiceOptions(setupSkills()).map(x=>x.replace(' (meditation)',''));
+  [0,1,2].forEach(i=>{
+    const rt=$('#rt'+i), rw=$('#rw'+i), lab=$('#ral'+i), inp=$('#ra'+i), hint=$('#rah'+i); if(!rt||!lab) return;
+    const what=(rw.value||'').replace(' (meditation)','');
+    const mom = what ? moms.includes(what) : (sk.length && sk.every(x=>moms.includes(x)));
+    const k = !mom ? 'practice' : (+String(rt.value||'12:00').split(':')[0]) < 15 ? 'intention' : 'catchup';
+    if(k==='intention'){ lab.textContent='When this happens…'; inp.placeholder='my son melts down after school'; hint.textContent='Morning intention: "When this happens, I\'ll use the skill."'; }
+    else if(k==='catchup'){ lab.textContent='Tie it to'; inp.placeholder='after the kids are in bed'; hint.textContent='Evening catch-up: a calm moment to log what happened today.'; }
+    else { lab.textContent='Tie it to'; inp.placeholder='after brushing my teeth'; hint.textContent=''; }
+    hint.classList.toggle('hidden', !hint.textContent);
+  });
+}
 function cancelSetup(){ show(S.week?'home':'welcome'); }
 function saveSetup(){
   const skills=[0,1,2].map(i=>$('#sk'+i).value.trim()).filter(Boolean);
@@ -1016,7 +1033,7 @@ function isMed(r){ return /\(meditation\)$/.test(r.what||''); }
 function icsText(t){ return String(t).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,' '); }
 function icsSummary(r,skills){
   const w=r.what?r.what.replace(' (meditation)',''):skills, k=remKind(r);
-  return k==='intention' ? 'Intention: look for a moment to use '+w : k==='catchup' ? 'Catch-up: log a moment ('+w+')' : 'Practice: '+w;
+  return k==='intention' ? (r.anchor ? 'Intention: when '+r.anchor+', use '+w : 'Intention: look for a moment to use '+w) : k==='catchup' ? 'Catch-up: log a moment ('+w+')' : 'Practice: '+w;
 }
 function downloadReminders(){
   if(!S.week) return;
@@ -1115,7 +1132,7 @@ function renderLogSkills(){
     o:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg>',
     x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>'};
   const kind=o=> o==='Other'?'x' : allMeds().some(m=>m.title===o)?'m' : isMoment(o)?'o':'s';
-  const SUB={s:'Skill',m:'Meditation',o:'In the moment',x:'A skill you used that isn\'t listed'};
+  const SUB={s:'Scheduled',m:'Meditation',o:'In the moment',x:'A skill you used that isn\'t listed'};
   $('#logSkills').innerHTML=opts.map(o=>{ const k=kind(o), on=o===logSkill;
     return `<button type="button" class="srow k-${k} ${on?'sel':''}" role="radio" aria-checked="${on}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}"><span class="sic">${IC[k]}</span><span class="stx"><b>${o==='Other'?'Something else':esc(o)}</b><small>${SUB[k]}</small></span><span class="sck" aria-hidden="true"></span></button>`; }).join('');
   $('#otherIn').classList.toggle('hidden', logSkill!=='Other');
@@ -1273,7 +1290,7 @@ function renderHome(){
   $('#skillChips').innerHTML=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)','')).map(s=>`<span class="chip">${esc(s)}</span>`).join('');
   const sk=practiceOptions(S.week.skills).map(s=>s.replace(' (meditation)',''));
   const wk=x=> allMeds().some(m=>m.title===x)?'m' : isMoment(x)?'o':'s';
-  const WL={s:'Skill',m:'Meditation',o:'In the moment'};
+  const WL={s:'Scheduled',m:'Meditation',o:'In the moment'};
   const days=[...new Set(S.week.reminders.slice().sort((a,b)=>(a.day||0)-(b.day||0)).map(r=>new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})))];
   $('#weekLine').innerHTML = `<div class="wlist">${sk.map(x=>`<div class="wrow w-${wk(x)}"><i></i><span class="wn">${esc(x)}</span><span class="wt">${WL[wk(x)]}</span></div>`).join('')}</div><div class="wrem">${ICON.bell}${S.week.reminders.length} reminder${S.week.reminders.length===1?'':'s'} · ${days.join(', ')}</div>`;
   $('#remChips').innerHTML=S.week.reminders.map(r=>`<span class="chip">${ICON.bell} ${new Date(S.week.start+(r.day||0)*DAY).toLocaleDateString(undefined,{weekday:'short'})} ${fmtTime(r.time)}${r.anchor?` · ${esc(r.anchor)}`:''}${r.what?` · ${esc(r.what.replace(' (meditation)',''))}`:''}</span>`).join('');
