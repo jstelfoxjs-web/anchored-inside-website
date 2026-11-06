@@ -1,0 +1,32 @@
+{
+  "name": "Anchored Inside",
+  "short_name": "Anchored Inside",
+  "description": "My Practice, The Toolbox and counseling resources from Anchored Inside.",
+  "start_url": "/practice.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f1e9",
+  "theme_color": "#153f48",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "/practice.html"
+}

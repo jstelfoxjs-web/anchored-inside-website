@@ -4,7 +4,7 @@
    shows up on the next visit while the visitor is online. Handouts and
    resources.json are stored the first time they are opened. */
 
-const CACHE_VERSION = 'anchored-v11';
+const CACHE_VERSION = 'anchored-v12';
 const SHELL_CACHE = `anchored-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `anchored-runtime-${CACHE_VERSION}`;
 
@@ -21,6 +21,7 @@ const SHELL_ASSETS = [
   '/privacy.html',
   '/disclaimer.html',
   '/manifest.webmanifest',
+  '/manifest-practice.webmanifest',
   '/assets/css/styles.css',
   '/assets/app.js',
   '/assets/icons/icon-192.png',
@@ -152,7 +153,7 @@ function isPage(request, url) {
 }
 
 function isStaticAsset(url) {
-  return url.pathname.startsWith('/assets/') || url.pathname === '/manifest.webmanifest';
+  return url.pathname.startsWith('/assets/') || url.pathname === '/manifest.webmanifest' || url.pathname === '/manifest-practice.webmanifest';
 }
 
 function isFontHost(url) {
