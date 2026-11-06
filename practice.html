@@ -210,6 +210,8 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
 .note-item{border-top:1px solid var(--line);padding:12px 0}
 .note-item:first-child{border-top:0}
 .note-item .txt{white-space:pre-wrap;font-size:15px;margin-top:2px}
+.note-item .grat{white-space:pre-wrap;font-size:15px;margin-top:8px;background:var(--sand);color:var(--sandink);border-radius:12px;padding:8px 12px}
+.note-item .grat span{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;opacity:.8;margin-bottom:2px}
 .note-item .meta{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--mut)}
 @media(min-width:700px){.topband h1{font-size:40px}}
 @media print{.tabbar,.topband{display:none!important}.noprint{display:none!important}body{background:#fff}.card{border:0;padding:0}}
@@ -374,17 +376,20 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       </div>
     </section>
 
-    <section class="tabpanel hidden" id="tab-notes" role="tabpanel" aria-label="Notes">
+    <section class="tabpanel hidden" id="tab-notes" role="tabpanel" aria-label="Reflection">
       <div class="card">
-        <h2>My notes</h2>
-        <p class="sub">Anything you notice this week, or want to bring to session. Your notes stay on this phone.</p>
-        <textarea id="noteText" rows="4" placeholder="What I noticed… what I want to talk about…" style="margin-top:12px;min-height:110px"></textarea>
-        <button class="btn solid block" style="margin-top:10px" onclick="saveNote()">Save note</button>
+        <h2>Reflection</h2>
+        <p class="sub">A few quiet words for yourself. Write either one, or both. Everything stays on this phone.</p>
+        <label class="f" for="noteText">What I'm noticing</label>
+        <textarea id="noteText" rows="4" placeholder="What came up this week… what I want to bring to session…" style="min-height:100px"></textarea>
+        <label class="f" for="gratText">What am I grateful for?</label>
+        <textarea id="gratText" rows="2" placeholder="Something small counts. Morning sun, a kind text, my dog…" style="min-height:70px"></textarea>
+        <button class="btn solid block" style="margin-top:12px" onclick="saveNote()">Save reflection</button>
         <p class="err" id="noteErr"></p>
         <p class="ok" id="noteOk"></p>
       </div>
       <div class="card" id="notesCard">
-        <div class="sechead"><h2>Saved notes</h2><span class="tcount sub" id="noteCount"></span></div>
+        <div class="sechead"><h2>My reflections</h2><span class="tcount sub" id="noteCount"></span></div>
         <div id="noteList"></div>
       </div>
     </section>
@@ -439,7 +444,7 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
     <button class="tab on" data-tab="today" role="tab" aria-selected="true" onclick="goTab('today')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></span>Today</button>
     <button class="tab" data-tab="practice" role="tab" aria-selected="false" onclick="goTab('practice')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span>Log</button>
     <button class="tab" data-tab="meditate" role="tab" aria-selected="false" onclick="goTab('meditate')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg></span>Meditate</button>
-    <button class="tab" data-tab="notes" role="tab" aria-selected="false" onclick="goTab('notes')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h10l4 4v12H5z"/><path d="M15 4v4h4M8.5 12h7M8.5 16h5"/></svg></span>Notes</button>
+    <button class="tab" data-tab="notes" role="tab" aria-selected="false" onclick="goTab('notes')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h10l4 4v12H5z"/><path d="M15 4v4h4M8.5 12h7M8.5 16h5"/></svg></span>Reflect</button>
     <button class="tab" data-tab="week" role="tab" aria-selected="false" onclick="goTab('week')"><span class="tabpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></span>My week</button>
   </div>
 </nav>
@@ -509,7 +514,7 @@ function tagline(){ const d=new Date(); const n=Math.floor((midnight(d)-new Date
 const lastSeen = (()=>{ try{ return +localStorage.getItem(KEY+'.seen')||0; }catch(e){ return 0; } })();
 const welcomeBack = lastSeen && Date.now()-lastSeen > 6*3600*1000;
 try{ localStorage.setItem(KEY+'.seen', String(Date.now())); }catch(e){}
-function setGreeting(){ const h=new Date().getHours(); $('#greet').textContent = curTab==='today' ? (welcomeBack?'Welcome back':(h<12?'Good morning':h<17?'Good afternoon':'Good evening')) : ({practice:'Log a practice',meditate:'Meditate',notes:'My notes',week:'My week'})[curTab]; $('#tagline').textContent=tagline(); $('#tagline').classList.toggle('hidden', curTab!=='today'); }
+function setGreeting(){ const h=new Date().getHours(); $('#greet').textContent = curTab==='today' ? (welcomeBack?'Welcome back':(h<12?'Good morning':h<17?'Good afternoon':'Good evening')) : ({practice:'Log a practice',meditate:'Meditate',notes:'Reflection',week:'My week'})[curTab]; $('#tagline').textContent=tagline(); $('#tagline').classList.toggle('hidden', curTab!=='today'); }
 function goTab(t, focus){
   curTab=t;
   ['today','practice','meditate','notes','week'].forEach(x=>$('#tab-'+x).classList.toggle('hidden', x!==t));
@@ -898,19 +903,20 @@ function renderWeek(){
 
 /* ---------- notes ---------- */
 function saveNote(){
-  const t=$('#noteText').value.trim(); $('#noteErr').textContent='';
-  if(!t){ $('#noteErr').textContent='Write something first.'; $('#noteText').focus(); return; }
-  S.notes=S.notes||[]; S.notes.unshift({id:Date.now(), ts:Date.now(), text:t}); S.notes=S.notes.slice(0,200);
-  save(); $('#noteText').value=''; $('#noteOk').textContent='Saved. Thank you for listening to yourself.'; setTimeout(()=>$('#noteOk').textContent='',5000);
+  const t=$('#noteText').value.trim(), g=$('#gratText').value.trim(); $('#noteErr').textContent='';
+  if(!t && !g){ $('#noteErr').textContent='Write a few words in either box first.'; $('#noteText').focus(); return; }
+  S.notes=S.notes||[]; S.notes.unshift({id:Date.now(), ts:Date.now(), text:t, grateful:g}); S.notes=S.notes.slice(0,200);
+  save(); $('#noteText').value=''; $('#gratText').value=''; $('#noteOk').textContent = g ? 'Saved. Gratitude looks good on you.' : 'Saved. Thank you for listening to yourself.'; setTimeout(()=>$('#noteOk').textContent='',5000);
   renderNotes();
 }
 function delNote(id,btn){ if(!confirmTap(btn,'Tap again to delete')) return; S.notes=(S.notes||[]).filter(n=>n.id!==id); save(); renderNotes(); }
 function renderNotes(){
   const n=S.notes||[];
-  $('#noteCount').textContent = n.length ? `${n.length} note${n.length===1?'':'s'}` : '';
+  $('#noteCount').textContent = n.length ? `${n.length} saved` : '';
   $('#notesCard').classList.toggle('hidden', !n.length);
-  $('#noteList').innerHTML = n.map(x=>`<div class="note-item log"><div class="meta"><span>${new Date(x.ts).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})} · ${new Date(x.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})}</span><button class="dots" aria-label="More options" onclick="this.closest('.note-item').classList.toggle('open')">⋯</button></div><div class="txt">${esc(x.text)}</div><div class="acts"><button class="delbtn" onclick="delNote(${x.id},this)">Delete this note</button></div></div>`).join('');
+  $('#noteList').innerHTML = n.map(x=>`<div class="note-item log"><div class="meta"><span>${new Date(x.ts).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})} · ${new Date(x.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})}</span><button class="dots" aria-label="More options" onclick="this.closest('.note-item').classList.toggle('open')">⋯</button></div>${noteBody(x)}<div class="acts"><button class="delbtn" onclick="delNote(${x.id},this)">Delete this reflection</button></div></div>`).join('');
 }
+function noteBody(x){ return (x.text?`<div class="txt">${esc(x.text)}</div>`:'') + (x.grateful?`<div class="grat"><span>Grateful for</span>${esc(x.grateful)}</div>`:''); }
 function weekNotes(){ return (S.notes||[]).filter(x=>S.week&&dayIndex(x.ts)>=0&&dayIndex(x.ts)<7).slice().reverse(); }
 
 /* ---------- summary ---------- */
@@ -932,7 +938,7 @@ function showSummary(){
     </div>
     <p><b>Skills:</b> ${esc(S.week.skills.join(', '))}</p>
     ${Object.keys(d.by).length?`<p>${Object.entries(d.by).map(([k,v])=>`${esc(k)}: ${v}×`).join(' · ')}</p>`:''}
-    ${weekNotes().length?`<div class="hr"></div><div class="eyebrow">My notes</div>${weekNotes().map(x=>`<div class="note-item"><div class="meta">${fmtDay(x.ts)}</div><div class="txt">${esc(x.text)}</div></div>`).join('')}<div class="hr"></div>`:''}
+    ${weekNotes().length?`<div class="hr"></div><div class="eyebrow">My reflections</div>${weekNotes().map(x=>`<div class="note-item"><div class="meta">${fmtDay(x.ts)}</div>${noteBody(x)}</div>`).join('')}<div class="hr"></div>`:''}
     <div>${d.logs.length?d.logs.map(l=>`<div class="log"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${l.before} → ${l.after}</span></div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div>`).join(''):'<p class="note">No practice logged this week yet.</p>'}</div>`;
   show('summary');
 }
@@ -940,7 +946,7 @@ async function copySummary(){
   const d=summaryData();
   const txt=[`My practice: week of ${fmtDay(S.week.start)}`,`Skills: ${S.week.skills.join(', ')}`,`Practices: ${d.logs.length} of ${GOAL} · Days practiced: ${d.days}`,
     ...d.logs.map(l=>`- ${fmtDay(l.ts)}: ${l.skill}, stress ${l.before} → ${l.after}${l.note?` (${l.note})`:''}`),
-    ...(weekNotes().length?['','My notes:',...weekNotes().map(x=>`- ${fmtDay(x.ts)}: ${x.text}`)]:[])].join('\n');
+    ...(weekNotes().length?['','My reflections:',...weekNotes().map(x=>`- ${fmtDay(x.ts)}: ${[x.text, x.grateful?'Grateful for: '+x.grateful:''].filter(Boolean).join(' | ')}`)]:[])].join('\n');
   try{ await navigator.clipboard.writeText(txt); $('#copyOk').textContent='Copied.'; }catch(e){ $('#copyOk').textContent='Copy didn\'t work on this device. Try Print instead.'; }
 }
 
