@@ -119,6 +119,10 @@ h2{font-size:24px;margin-bottom:4px}
 .slog .mrow{font-size:14px;margin-top:4px}
 .slog .mrow span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--blushink)}
 .chips2 span.o{background:var(--blush);color:var(--blushink)}
+.seg{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px;margin-top:8px}
+.seg button{flex:1;border:0;background:none;border-radius:999px;padding:9px 8px;font:700 13px Manrope,sans-serif;color:var(--mut);cursor:pointer}
+.seg button.sel{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(21,63,72,.15)}
+.unpl{font-style:normal;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--warm);color:#fff;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
 .addmed{margin-top:12px}
 .addmed>summary{font-weight:700;color:var(--ink)}
 .addmed .plus{width:24px;height:24px;border-radius:50%;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-weight:800}
@@ -455,7 +459,14 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
       <div class="card" id="logCard">
       <h2>What did you practice?</h2>
       <div id="logSkills" style="margin-top:10px"></div>
-      <input type="text" id="otherIn" class="hidden" placeholder="What did you practice?" aria-label="What did you practice?" oninput="$('#logErr').textContent=''">
+      <input type="text" id="otherIn" class="hidden" placeholder="Which skill? e.g. Opposite action" aria-label="What did you practice?" oninput="$('#logErr').textContent=''">
+      <div id="otherMode" class="hidden">
+        <div class="seg" role="radiogroup" aria-label="How did you use it?">
+          <button type="button" id="omPractice" class="sel" onclick="setOtherMoment(false)">I practiced it</button>
+          <button type="button" id="omMoment" onclick="setOtherMoment(true)">It came up in a moment</button>
+        </div>
+        <p class="note" id="omNote" style="margin-top:6px">Used a skill you didn't plan on? That's a big deal. It means the skill is becoming yours.</p>
+      </div>
 
       <div id="momentPart" class="hidden">
         <div class="mom-intro">Log a real moment. It counts whether it went well, went sideways, or you only noticed afterward.</div>
@@ -1051,15 +1062,18 @@ let logSkill=null;
 function renderLogSkills(){
   const opts=[...practiceOptions(S.week.skills).map(o=>o.replace(' (meditation)','')), 'Other'];
   if(!opts.includes(logSkill)) logSkill=opts[0];
-  $('#logSkills').innerHTML=opts.map(o=>`<button class="pick ${o===logSkill?'sel':''}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}">${esc(o)}</button>`).join('');
+  $('#logSkills').innerHTML=opts.map(o=>`<button class="pick ${o===logSkill?'sel':''}" onclick="logSkill=this.dataset.v;renderLogSkills();if(logSkill==='Other')$('#otherIn').focus()" data-v="${esc(o)}">${o==='Other'?'+ Something else':esc(o)}</button>`).join('');
   $('#otherIn').classList.toggle('hidden', logSkill!=='Other');
-  const mo=isMoment(logSkill);
+  $('#otherMode').classList.toggle('hidden', logSkill!=='Other');
+  $('#omPractice').classList.toggle('sel', !otherMoment); $('#omMoment').classList.toggle('sel', otherMoment);
+  const mo=isMoment(logSkill) || (logSkill==='Other' && otherMoment);
   $('#momentPart').classList.toggle('hidden', !mo); $('#stressPart').classList.toggle('hidden', mo);
   $('#logBtn').textContent = mo ? '✓ Save this moment' : '✓ Save practice';
   $('#logCard h2').textContent = mo ? 'Log a moment' : 'What did you practice?';
   if(mo) renderMoment();
 }
-let mom={when:'now', outcome:'', calm:''};
+let mom={when:'now', outcome:'', calm:''}, otherMoment=false;
+function setOtherMoment(v){ otherMoment=v; renderLogSkills(); }
 function pickRow(sel, key, opts){
   $(sel).innerHTML=opts.map(([v,l])=>`<button type="button" class="pick ${mom[key]===v?'sel':''}" onclick="mom['${key}']='${v}';$('#logErr').textContent='';renderMoment()">${l}</button>`).join('');
 }
@@ -1075,12 +1089,13 @@ function renderMoment(){
   $('#momTried').placeholder = missed ? 'Pause, breathe, then ask what he needs' : "Told myself he's exhausted, not defiant";
 }
 const MOMENT_CHEERS = {
+  unplanned:["Nobody assigned that one. You reached for it on your own. That's the whole goal.","Off-script and on point. Your skills are starting to show up without being asked.","You used a skill you didn't plan on. Your nervous system is taking notes.","Surprise skill unlocked. Bring this one to session, it's a good one."],
   missed:["Noticing afterward is the skill growing. Next time you'll catch it a little sooner.","Hindsight counts here. Your brain just practiced the moment anyway.","You caught it on the replay. That's how the live version gets easier.","Spotting it later is step one of spotting it sooner. Well done."],
   helped:["Look at you, parenting from the anchor instead of the storm.","That's the stuff. Your kid felt that, even if they'd never say so.","Gold star, and the good kind that actually matters.","You did the hard, quiet thing. That moment just changed a little."],
   okay:["Okay is a real win in a real moment. Keep going.","Not perfect, still practice. That's exactly how this works.","You tried it in the wild. That's brave and it counts."],
   tough:["Hard moments are where the practice lives. You showed up for it.","Rough one. You still reached for the skill, and that matters.","Messy moments count double for effort. Be gentle with yourself tonight."]
 };
-function momentCheer(l){ const pool=MOMENT_CHEERS[l.missed?'missed':(l.outcome||'okay')]; return pool[Math.floor(Math.random()*pool.length)]; }
+function momentCheer(l){ const pool=(l.unplanned&&!l.missed)?MOMENT_CHEERS.unplanned:MOMENT_CHEERS[l.missed?'missed':(l.outcome||'okay')]; return pool[Math.floor(Math.random()*pool.length)]; }
 const OUTCOME={tough:'Tough',okay:'Okay',helped:'It helped'}, CALM={low:'not very calm',some:'somewhat calm',high:'pretty calm'};
 function momentLine(l){ return l.missed ? 'Noticed afterward' : (OUTCOME[l.outcome]||'Logged'); }
 function logPractice(){
@@ -1088,16 +1103,17 @@ function logPractice(){
   if(!logSkill){ $('#logErr').textContent='Pick the skill you practiced.'; return; }
   let skillName=logSkill;
   if(logSkill==='Other'){ skillName=$('#otherIn').value.trim(); if(!skillName){ $('#logErr').textContent='Type what you practiced.'; $('#otherIn').focus(); return; } }
-  if(isMoment(skillName)){
+  const unplanned = logSkill==='Other' && otherMoment;
+  if(isMoment(skillName) || unplanned){
     const what=$('#momWhat').value.trim(), missed=$('#momMissed').checked;
     if(!what){ $('#logErr').textContent='Write a few words about what happened.'; $('#momWhat').focus(); return; }
     if(!missed && !mom.outcome){ $('#logErr').textContent='Pick how it went.'; return; }
     const now=Date.now(); let ts=now;
     if(mom.when==='earlier') ts=Math.max(midnight(now).getTime()+60000, now-2*3600*1000);
     if(mom.when==='yesterday') ts=now-DAY;
-    const l={id:now, ts, skill:skillName, type:'moment', what, tried:$('#momTried').value.trim(), outcome:missed?'':mom.outcome, calm:mom.calm, missed};
+    const l={id:now, ts, skill:skillName, type:'moment', unplanned, what, tried:$('#momTried').value.trim(), outcome:missed?'':mom.outcome, calm:mom.calm, missed};
     S.logs.unshift(l); S.logs.sort((a,b)=>b.ts-a.ts); save();
-    $('#momWhat').value=''; $('#momTried').value=''; $('#momMissed').checked=false; mom={when:'now',outcome:'',calm:''}; renderMoment();
+    $('#otherIn').value=''; $('#momWhat').value=''; $('#momTried').value=''; $('#momMissed').checked=false; mom={when:'now',outcome:'',calm:''}; renderMoment();
     $('#logOk').textContent=momentCheer(l); setTimeout(()=>$('#logOk').textContent='',9000);
     renderWeek(); renderLogs(); return;
   }
@@ -1114,7 +1130,7 @@ function delLog(id,btn){ if(!confirmTap(btn,'Tap again to delete')) return; S.lo
 function renderLogs(){
   const n=S.logs.filter(l=>S.week&&dayIndex(l.ts)>=0&&dayIndex(l.ts)<7).length;
   $('#logCount').textContent = n ? `${n} this week` : 'none yet';
-  $('#logList').innerHTML = S.logs.length ? S.logs.slice(0,8).map(l=>`<div class="log"><div class="top"><div style="flex:1;min-width:0"><b>${esc(l.skill)}</b><div class="n">${fmtDay(l.ts)} · ${l.type==='moment'?'Moment · '+momentLine(l):`stress ${l.before} → ${l.after}`}</div>${l.type==='moment'?`<div class="n">${esc(l.what)}</div>`:''}${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div><button class="dots" aria-label="More options" onclick="this.closest('.log').classList.toggle('open')">⋯</button></div><div class="acts"><button class="delbtn" onclick="delLog(${l.id},this)">Delete this entry</button></div></div>`).join('') : '<p class="note" style="margin-top:0">Your practice will show up here.</p>';
+  $('#logList').innerHTML = S.logs.length ? S.logs.slice(0,8).map(l=>`<div class="log"><div class="top"><div style="flex:1;min-width:0"><b>${esc(l.skill)}</b><div class="n">${fmtDay(l.ts)} · ${l.type==='moment'?(l.unplanned?'Unplanned moment · ':'Moment · ')+momentLine(l):`stress ${l.before} → ${l.after}`}</div>${l.type==='moment'?`<div class="n">${esc(l.what)}</div>`:''}${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div><button class="dots" aria-label="More options" onclick="this.closest('.log').classList.toggle('open')">⋯</button></div><div class="acts"><button class="delbtn" onclick="delLog(${l.id},this)">Delete this entry</button></div></div>`).join('') : '<p class="note" style="margin-top:0">Your practice will show up here.</p>';
 }
 function renderWeek(){
   const today=dayIndex(Date.now());
@@ -1163,7 +1179,8 @@ function weekNotes(){ return (S.notes||[]).filter(x=>S.week&&dayIndex(x.ts)>=0&&
 function isMedLog(l){ return allMeds().some(m=>m.title===l.skill); }
 function fmtDrop(d){ return d.stressN ? (d.avgDrop>0?'−':d.avgDrop<0?'+':'')+Math.abs(d.avgDrop).toFixed(1).replace('.0','') : '–'; }
 function statsHTML(d){
-  const line = !d.logs.length ? 'Your first practice is waiting whenever you are.' : (!d.stressN && d.moments.length) ? `${d.moments.length} real moment${d.moments.length===1?'':'s'} logged. That's the skill showing up in real life.` : d.avgDrop>0 ? `Stress went down ${Math.abs(d.avgDrop).toFixed(1).replace('.0','')} point${Math.abs(d.avgDrop)===1?'':'s'} on average. That's your nervous system learning.` : 'Showing up to practice is the work. Keep going.';
+  const unp=(d.moments||[]).filter(l=>l.unplanned).length;
+  const line = unp ? `${unp} skill${unp===1?'':'s'} used without planning to. That's the practice becoming yours.` : !d.logs.length ? 'Your first practice is waiting whenever you are.' : (!d.stressN && d.moments.length) ? `${d.moments.length} real moment${d.moments.length===1?'':'s'} logged. That's the skill showing up in real life.` : d.avgDrop>0 ? `Stress went down ${Math.abs(d.avgDrop).toFixed(1).replace('.0','')} point${Math.abs(d.avgDrop)===1?'':'s'} on average. That's your nervous system learning.` : 'Showing up to practice is the work. Keep going.';
   return `<div class="stats"><div class="stat s1"><b>${d.logs.length}/${GOAL}</b><small>practices</small></div><div class="stat s2"><b>${d.days}</b><small>days practiced</small></div><div class="stat s3"><b>${fmtDrop(d)}</b><small>avg. stress change</small></div></div><p class="statline">${line}</p>`;
 }
 function summaryData(){
@@ -1185,13 +1202,13 @@ function showSummary(){
     <div class="chips2">${sk.map(x=>`<span class="${allMeds().some(m=>m.title===x)?'m':isMoment(x)?'o':''}">${esc(x)}${d.by[x]?` · ${d.by[x]}×`:''}</span>`).join('')}</div>
     ${weekNotes().length?`<div class="hr"></div><div class="eyebrow">My reflections</div>${weekNotes().map(x=>`<div class="note-item"><div class="meta">${fmtDay(x.ts)}</div>${noteBody(x)}</div>`).join('')}`:''}
     <div class="hr"></div><div class="eyebrow">Practice log</div>
-    <div>${d.logs.length?d.logs.map(l=>l.type==='moment' ? `<div class="slog mo"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${momentLine(l)}</span></div><div class="mrow"><span>What happened</span>${esc(l.what)}</div>${l.tried?`<div class="mrow"><span>${l.missed?"Next time I'd try":'What I tried'}</span>${esc(l.tried)}</div>`:''}${l.calm?`<div class="n">Stayed ${CALM[l.calm]}</div>`:''}</div>` : `<div class="slog ${isMedLog(l)?'m':''}"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${l.before} → ${l.after}</span></div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div>`).join(''):'<p class="note">No practice logged this week yet.</p>'}</div>`;
+    <div>${d.logs.length?d.logs.map(l=>l.type==='moment' ? `<div class="slog mo"><div class="top"><b>${esc(l.skill)}${l.unplanned?' <em class="unpl">Unplanned</em>':''}</b><span class="n">${fmtDay(l.ts)} · ${momentLine(l)}</span></div><div class="mrow"><span>What happened</span>${esc(l.what)}</div>${l.tried?`<div class="mrow"><span>${l.missed?"Next time I'd try":'What I tried'}</span>${esc(l.tried)}</div>`:''}${l.calm?`<div class="n">Stayed ${CALM[l.calm]}</div>`:''}</div>` : `<div class="slog ${isMedLog(l)?'m':''}"><div class="top"><b>${esc(l.skill)}</b><span class="n">${fmtDay(l.ts)} · ${l.before} → ${l.after}</span></div>${l.note?`<div class="n">${esc(l.note)}</div>`:''}</div>`).join(''):'<p class="note">No practice logged this week yet.</p>'}</div>`;
   show('summary');
 }
 async function copySummary(){
   const d=summaryData();
   const txt=[`My practice: week of ${fmtDay(S.week.start)}`,`Skills: ${S.week.skills.join(', ')}`,`Practices: ${d.logs.length} of ${GOAL} · Days practiced: ${d.days}`,
-    ...d.logs.map(l=>l.type==='moment' ? `- ${fmtDay(l.ts)}: ${l.skill} (moment, ${momentLine(l).toLowerCase()}). What happened: ${l.what}${l.tried?`. ${l.missed?"Next time I'd try":'Tried'}: ${l.tried}`:''}${l.calm?`. Stayed ${CALM[l.calm]}`:''}` : `- ${fmtDay(l.ts)}: ${l.skill}, stress ${l.before} → ${l.after}${l.note?` (${l.note})`:''}`),
+    ...d.logs.map(l=>l.type==='moment' ? `- ${fmtDay(l.ts)}: ${l.skill} (${l.unplanned?'unplanned ':''}moment, ${momentLine(l).toLowerCase()}). What happened: ${l.what}${l.tried?`. ${l.missed?"Next time I'd try":'Tried'}: ${l.tried}`:''}${l.calm?`. Stayed ${CALM[l.calm]}`:''}` : `- ${fmtDay(l.ts)}: ${l.skill}, stress ${l.before} → ${l.after}${l.note?` (${l.note})`:''}`),
     ...(weekNotes().length?['','My reflections:',...weekNotes().map(x=>`- ${fmtDay(x.ts)}: ${[x.text, x.grateful?'Grateful for: '+x.grateful:''].filter(Boolean).join(' | ')}`)]:[])].join('\n');
   try{ await navigator.clipboard.writeText(txt); $('#copyOk').textContent='Copied.'; }catch(e){ $('#copyOk').textContent='Copy didn\'t work on this device. Try Print instead.'; }
 }
