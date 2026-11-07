@@ -131,10 +131,11 @@ h2{font-size:24px;margin-bottom:4px}
 .su-hint{margin:6px 0 0;font-size:12.5px;color:var(--blushink)}
 .recmeta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mut);font-weight:600;margin:4px 0 6px}
 .newtag{background:var(--warm);color:#fff;border-radius:999px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:3px 8px}
-.welcomehero{position:relative;min-height:380px;border-radius:22px;overflow:hidden;margin:0 0 14px;display:flex;flex-direction:column;justify-content:flex-start;padding:22px;box-shadow:0 10px 30px rgba(21,63,72,.18);
-  background:linear-gradient(180deg,rgba(14,42,48,.9) 0%,rgba(14,42,48,.72) 34%,rgba(14,42,48,0) 56%),url(assets/images/practice-welcome-boots.jpg) center 85%/cover no-repeat,var(--ink)}
+.welcomehero{position:relative;min-height:330px;border-radius:22px;overflow:hidden;margin:0 0 14px;display:flex;flex-direction:column;justify-content:flex-start;padding:22px;box-shadow:0 10px 30px rgba(21,63,72,.18);
+  background:linear-gradient(180deg,rgba(14,42,48,.9) 0%,rgba(14,42,48,.6) 34%,rgba(14,42,48,0) 56%),url(assets/images/practice-welcome-boots.jpg) center 70%/cover no-repeat,var(--ink)}
 .welcomehero h3{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:30px;line-height:1.05;color:#fff;margin:8px 0 6px}
 .topband h1 .gold{color:#e8c98a}
+.topband h1 .hq{display:block;font-style:italic;font-weight:500;font-size:28px;line-height:1.15;max-width:100%}
 .welcomehero .wh-title{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:31px;line-height:1.08;color:#fff;margin:0 0 8px;letter-spacing:-.01em}
 .welcomehero .wh-quote{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:26px!important;line-height:1.2;color:#fff!important;max-width:94%}
 .welcomehero p{margin:0;color:rgba(255,255,255,.85);font-size:14px;font-weight:600}
@@ -398,7 +399,9 @@ input[type=range].rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%
   <!-- ============ WELCOME (first visit) ============ -->
   <section id="welcome" class="hidden">
     <div class="welcomehero" role="img" aria-label="Hiking boots resting on a mountain summit">
-      <p class="wh-quote">Healing isn't one big leap. It's one small step, taken again and again.</p>
+      <div class="fc-eyebrow" style="color:#f1d3b3">Anchored Inside</div>
+      <h3>Welcome to My Practice.</h3>
+      <p>Where your skills live between sessions.</p>
     </div>
     <div class="card">
       <h2>How it works</h2>
@@ -743,7 +746,7 @@ function fmtTime(t){ const [h,m]=t.split(':').map(Number); const d=new Date(); d
 function medId(m){ return m.link; }
 function ytId(url){ const m=String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/); return m?m[1]:null; }
 function isAudio(url){ return /\.(mp3|m4a|wav|ogg|aac)(\?|$)/i.test(url); }
-function show(id){ ['welcome','setup','home','summary'].forEach(s=>$('#'+s).classList.toggle('hidden', s!==id)); $('#tagline').textContent = id==='welcome' ? 'Small practices. A way back home to yourself.' : tagline(); $('#tagline').classList.toggle('hidden', !(id==='home' && curTab==='today')); $('header').classList.toggle('hidden', id==='summary'); $('#tabbar').classList.toggle('hidden', id!=='home'); $('#ringRow').classList.toggle('hidden', !(id==='home' && (curTab==='today'||curTab==='week'))); if(id!=='home'){ if(id==='welcome') $('#greet').innerHTML='<span class="gold">Welcome</span> to My Practice'; else $('#greet').textContent='My Practice'; } else { setGreeting(); } window.scrollTo(0,0); }
+function show(id){ ['welcome','setup','home','summary'].forEach(s=>$('#'+s).classList.toggle('hidden', s!==id)); $('#tagline').textContent = id==='welcome' ? 'Small practices. A way back home to yourself.' : tagline(); $('#tagline').classList.toggle('hidden', !(id==='home' && curTab==='today')); $('#weekLabel').classList.toggle('hidden', id==='welcome'); $('header').classList.toggle('hidden', id==='summary'); $('#tabbar').classList.toggle('hidden', id!=='home'); $('#ringRow').classList.toggle('hidden', !(id==='home' && (curTab==='today'||curTab==='week'))); if(id!=='home'){ if(id==='welcome') $('#greet').innerHTML='<span class="hq">Small changes, practiced often, become who you are.</span>'; else $('#greet').textContent='My Practice'; } else { setGreeting(); } window.scrollTo(0,0); }
 let curTab='today';
 const TAGLINES = [
   "The body remembers. It also knows the way home.",
