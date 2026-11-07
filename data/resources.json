@@ -718,6 +718,44 @@
     "featured": false
   },
   {
+    "title": "Six Anchors: Anchored Parenting Series, Book 1",
+    "description": "Book 1 of the Anchored Parenting Series: a 26-page parent workbook on why children behave the way they do and how to respond with calm confidence. Covers the ABCs and four reasons behind behavior, connection and praise, clear expectations, teaching replacement behaviors, calm follow-through, big feelings and repair, consequences that teach, everyday situations, reward systems, and a personal parenting plan, with worksheets and scripts.",
+    "audience": [
+      "parents",
+      "families"
+    ],
+    "topics": [
+      "parenting",
+      "regulation"
+    ],
+    "type": "Workbook",
+    "file": "/assets/handouts/anchored-parenting-book-1-six-anchors.pdf",
+    "preview": "/assets/handouts/anchored-parenting-book-1-six-anchors-cover.jpg",
+    "keywords": [
+      "Anchored Parenting",
+      "ABA",
+      "applied behavior analysis",
+      "behavior",
+      "ABCs",
+      "functions of behavior",
+      "positive reinforcement",
+      "praise",
+      "expectations",
+      "replacement behavior",
+      "follow through",
+      "transitions",
+      "tantrums",
+      "big feelings",
+      "consequences",
+      "reward chart",
+      "token system",
+      "routines",
+      "bedtime",
+      "workbook"
+    ],
+    "featured": false
+  },
+  {
     "title": "Loosening the Grip: An OCD & ERP Workbook",
     "description": "Volume 1 of the Anchored Inside Specialty Series: a 45-page client and clinician workbook on OCD and Exposure and Response Prevention. Covers the OCD cycle, thinking traps, building an exposure ladder, response prevention (including mental rituals), thought exposure scripting, mindfulness and self-compassion, family accommodation, and staying well, with worksheets, practice logs and clinician notes.",
     "audience": [
